@@ -15,7 +15,7 @@ import {
   Upload,
   Progress,
   Descriptions,
-  Image,
+
 } from 'antd';
 import {
   SearchOutlined,
