@@ -22,6 +22,7 @@ import {
   LogoutOutlined,
   DatabaseOutlined,
   RadarChartOutlined,
+  HomeOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 
@@ -35,19 +36,9 @@ const MainLayout: React.FC = () => {
 
   const menuItems: MenuProps['items'] = [
     {
-      key: 'data-reporting',
-      icon: <DashboardOutlined />,
-      label: '数据上报',
-    },
-    {
-      key: 'monitoring-data',
-      icon: <BarChartOutlined />,
-      label: '监测数据',
-    },
-    {
-      key: 'alarm-records',
-      icon: <AlertOutlined />,
-      label: '告警记录',
+      key: 'home',
+      icon: <HomeOutlined />,
+      label: '首页',
     },
     {
       key: 'device-management',
@@ -63,6 +54,61 @@ const MainLayout: React.FC = () => {
       key: 'threshold-settings',
       icon: <SettingOutlined />,
       label: '阈值设置',
+    },
+    {
+      key: 'monitoring-data',
+      icon: <BarChartOutlined />,
+      label: '监测数据',
+      children: [
+        {
+          key: 'monitoring-data/surface-displacement',
+          label: '表面位移',
+        },
+        {
+          key: 'monitoring-data/crack-gauge',
+          label: '裂缝计',
+        },
+        {
+          key: 'monitoring-data/earth-pressure',
+          label: '土压力',
+        },
+        {
+          key: 'monitoring-data/groundwater',
+          label: '地下水',
+        },
+        {
+          key: 'monitoring-data/blast-vibration',
+          label: '爆破振动',
+        },
+        {
+          key: 'monitoring-data/rain-gauge',
+          label: '雨量计',
+        },
+        {
+          key: 'monitoring-data/radar',
+          label: '雷达',
+        },
+      ],
+    },
+    {
+      key: 'alarm-records',
+      icon: <AlertOutlined />,
+      label: '告警记录',
+    },
+    {
+      key: 'data-reporting',
+      icon: <DashboardOutlined />,
+      label: '数据上报',
+    },
+    {
+      key: 'account-management',
+      icon: <UserOutlined />,
+      label: '账号管理',
+    },
+    {
+      key: 'system-config',
+      icon: <SettingOutlined />,
+      label: '系统配置',
     },
   ];
 
@@ -92,7 +138,7 @@ const MainLayout: React.FC = () => {
 
   const getCurrentKey = () => {
     const path = location.pathname.slice(1);
-    return path || 'data-reporting';
+    return path || 'home';
   };
 
   return (
