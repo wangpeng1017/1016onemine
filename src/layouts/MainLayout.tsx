@@ -102,7 +102,8 @@ const MainLayout: React.FC = () => {
         collapsible
         collapsed={collapsed}
         style={{
-          background: '#001529',
+          background: '#ffffff',
+          borderRight: '1px solid #f0f0f0',
         }}
       >
         <div
@@ -111,16 +112,16 @@ const MainLayout: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'white',
+            color: '#262626',
             fontSize: collapsed ? 16 : 18,
             fontWeight: 'bold',
-            borderBottom: '1px solid #1f1f1f',
+            borderBottom: '1px solid #f0f0f0',
           }}
         >
           {collapsed ? '矿山' : '矿山监测系统'}
         </div>
         <Menu
-          theme="dark"
+          theme="light"
           mode="inline"
           selectedKeys={[getCurrentKey()]}
           items={menuItems}
