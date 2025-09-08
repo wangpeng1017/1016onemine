@@ -13,16 +13,16 @@ import {
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  DashboardOutlined,
+  UserOutlined,
+  HomeOutlined,
+  DatabaseOutlined,
   BarChartOutlined,
   AlertOutlined,
   SettingOutlined,
-  UserOutlined,
-  BellOutlined,
   LogoutOutlined,
-  DatabaseOutlined,
+  CloudUploadOutlined,
   RadarChartOutlined,
-  HomeOutlined,
+  BellOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 
@@ -97,8 +97,18 @@ const MainLayout: React.FC = () => {
     },
     {
       key: 'data-reporting',
-      icon: <DashboardOutlined />,
+      icon: <CloudUploadOutlined />,
       label: '数据上报',
+      children: [
+        {
+          key: 'data-reporting/console',
+          label: '控制台',
+        },
+        {
+          key: 'data-reporting/history-query',
+          label: '历史查询',
+        },
+      ],
     },
     {
       key: 'account-management',

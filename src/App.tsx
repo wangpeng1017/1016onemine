@@ -11,6 +11,12 @@ import DeviceManagement from './pages/DeviceManagement';
 import ModelManagement from './pages/ModelManagement';
 import ThresholdSettings from './pages/ThresholdSettings';
 import SurfaceDisplacement from './pages/monitoring/SurfaceDisplacement';
+import CrackGauge from './pages/monitoring/CrackGauge';
+import EarthPressure from './pages/monitoring/EarthPressure';
+import Console from './pages/reporting/Console';
+import HistoryQuery from './pages/reporting/HistoryQuery';
+import AccountManagement from './pages/AccountManagement';
+import SystemConfig from './pages/SystemConfig';
 import './App.css';
 
 const App: React.FC = () => {
@@ -27,8 +33,14 @@ const App: React.FC = () => {
               <Route path="threshold-settings" element={<ThresholdSettings />} />
               <Route path="monitoring-data" element={<MonitoringData />} />
               <Route path="monitoring-data/surface-displacement" element={<SurfaceDisplacement />} />
+              <Route path="monitoring-data/crack-gauge" element={<CrackGauge />} />
+              <Route path="monitoring-data/earth-pressure" element={<EarthPressure />} />
               <Route path="alarm-records" element={<AlarmRecords />} />
               <Route path="data-reporting" element={<DataReporting />} />
+              <Route path="data-reporting/console" element={<Console />} />
+              <Route path="data-reporting/history-query" element={<HistoryQuery />} />
+              <Route path="account-management" element={<AccountManagement />} />
+              <Route path="system-config" element={<SystemConfig />} />
             </Route>
           </Routes>
         </div>

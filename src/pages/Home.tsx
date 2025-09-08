@@ -13,7 +13,7 @@ const Home: React.FC = () => {
           overflow: 'hidden'
         }}>
           <img 
-            src="/首页.png" 
+            src="./首页.png" 
             alt="矿山监测系统首页" 
             style={{ 
               width: '100%',
@@ -21,6 +21,10 @@ const Home: React.FC = () => {
               maxWidth: '100%',
               display: 'block'
             }} 
+            onError={(e) => {
+              console.error('图片加载失败:', e);
+              (e.target as HTMLImageElement).style.display = 'none';
+            }}
           />
         </div>
       </Card>
