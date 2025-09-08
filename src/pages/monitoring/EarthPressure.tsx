@@ -11,6 +11,7 @@ import {
   Statistic,
   Tag,
   message,
+  Modal,
 } from 'antd';
 import {
   ReloadOutlined,
@@ -19,6 +20,7 @@ import {
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
+import * as echarts from 'echarts';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -41,6 +43,8 @@ const EarthPressure: React.FC = () => {
   const [data, setData] = useState<EarthPressureData[]>([]);
   const [selectedDevice, setSelectedDevice] = useState<string>('all');
   const [dateRange, setDateRange] = useState<[dayjs.Dayjs | null, dayjs.Dayjs | null] | null>(null);
+  const [chartVisible, setChartVisible] = useState(false);
+  const [chartContainer, setChartContainer] = useState<HTMLDivElement | null>(null);
 
   // 模拟土压力数据
   const mockData: EarthPressureData[] = [
@@ -205,15 +209,96 @@ const EarthPressure: React.FC = () => {
   };
 
   const handleViewChart = () => {
-    const chartData = filteredData.map(item => ({
+    setChartVisible(true);
+  };
+
+  const generateTimeSeriesData = () => {
+    const timePoints: string[] = [];
+    const now = dayjs();
+    for (let i = 23; i >= 0; i--) {
+      timePoints.push(now.subtract(i, 'hour').format('HH:mm'));
+    }
+
+    const currentFilteredData = data.filter(item => {
+      if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+        return false;
+      }
+      if (dateRange && dateRange[0] && dateRange[1]) {
+        const itemDate = dayjs(item.timestamp);
+        return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
+      }
+      return true;
+    });
+
+    return currentFilteredData.map(item => ({
       name: item.deviceName,
-      pressure: item.pressure,
-      depth: item.depth,
-      temperature: item.temperature
+      data: timePoints.map((_, index) => {
+        const basePressure = item.pressure;
+        const variation = (Math.random() - 0.5) * 10;
+        return {
+          time: timePoints[index],
+          pressure: Math.max(0, basePressure + variation)
+        };
+      })
     }));
+  };
+
+  const renderChart = () => {
+    if (!chartContainer) return;
+
+    const chart = echarts.init(chartContainer);
+    const timeSeriesData = generateTimeSeriesData();
+    const timePoints = timeSeriesData[0]?.data.map(d => d.time) || [];
+
+    const option = {
+      title: {
+        text: '土压力监测趋势图',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        }
+      },
+      legend: {
+        data: timeSeriesData.map(item => item.name),
+        top: 30
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: timePoints,
+        name: '时间'
+      },
+      yAxis: {
+        type: 'value',
+        name: '土压力 (kPa)'
+      },
+      series: timeSeriesData.map(item => ({
+        name: item.name,
+        type: 'line',
+        data: item.data.map(d => d.pressure.toFixed(1)),
+        smooth: true,
+        lineStyle: {
+          width: 2
+        },
+        symbol: 'circle',
+        symbolSize: 4
+      }))
+    };
+
+    chart.setOption(option);
     
-    console.log('土压力图表数据:', chartData);
-    message.success(`已生成${chartData.length}个设备的图表数据，请查看控制台`);
+    return () => {
+      chart.dispose();
+    };
   };
 
   const filteredData = data.filter(item => {
@@ -226,6 +311,13 @@ const EarthPressure: React.FC = () => {
     }
     return true;
   });
+
+  useEffect(() => {
+    if (chartVisible && chartContainer) {
+      const cleanup = renderChart();
+      return cleanup;
+    }
+  }, [chartVisible, chartContainer, filteredData]);
 
   const statistics = {
     total: filteredData.length,
@@ -345,6 +437,19 @@ const EarthPressure: React.FC = () => {
           className="custom-table"
         />
       </Card>
+
+      <Modal
+        title="土压力监测趋势图"
+        open={chartVisible}
+        onCancel={() => setChartVisible(false)}
+        width={1000}
+        footer={null}
+      >
+        <div 
+          ref={setChartContainer}
+          style={{ width: '100%', height: '500px' }}
+        />
+      </Modal>
     </div>
   );
 };

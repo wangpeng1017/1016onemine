@@ -11,6 +11,7 @@ import {
   Statistic,
   Tag,
   message,
+  Modal,
 } from 'antd';
 import {
   ReloadOutlined,
@@ -19,6 +20,7 @@ import {
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
+import * as echarts from 'echarts';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -45,6 +47,8 @@ const BlastVibration: React.FC = () => {
   const [data, setData] = useState<BlastVibrationData[]>([]);
   const [selectedDevice, setSelectedDevice] = useState<string>('all');
   const [dateRange, setDateRange] = useState<[dayjs.Dayjs | null, dayjs.Dayjs | null] | null>(null);
+  const [chartVisible, setChartVisible] = useState(false);
+  const [chartContainer, setChartContainer] = useState<HTMLDivElement | null>(null);
 
   // 模拟爆破振动数据
   const mockData: BlastVibrationData[] = [
@@ -257,16 +261,96 @@ const BlastVibration: React.FC = () => {
   };
 
   const handleViewChart = () => {
-    const chartData = filteredData.map(item => ({
+    setChartVisible(true);
+  };
+
+  const generateTimeSeriesData = () => {
+    const timePoints: string[] = [];
+    const now = dayjs();
+    for (let i = 23; i >= 0; i--) {
+      timePoints.push(now.subtract(i, 'hour').format('HH:mm'));
+    }
+
+    const currentFilteredData = data.filter(item => {
+      if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+        return false;
+      }
+      if (dateRange && dateRange[0] && dateRange[1]) {
+        const itemDate = dayjs(item.timestamp);
+        return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
+      }
+      return true;
+    });
+
+    return currentFilteredData.map(item => ({
       name: item.deviceName,
-      peakVelocity: item.peakVelocity,
-      frequency: item.frequency,
-      duration: item.duration,
-      blastDistance: item.blastDistance
+      data: timePoints.map((_, index) => {
+        const basePeakVelocity = item.peakVelocity;
+        const variation = (Math.random() - 0.5) * 2;
+        return {
+          time: timePoints[index],
+          peakVelocity: Math.max(0, basePeakVelocity + variation)
+        };
+      })
     }));
+  };
+
+  const renderChart = () => {
+    if (!chartContainer) return;
+
+    const chart = echarts.init(chartContainer);
+    const timeSeriesData = generateTimeSeriesData();
+    const timePoints = timeSeriesData[0]?.data.map(d => d.time) || [];
+
+    const option = {
+      title: {
+        text: '爆破振动监测趋势图',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        }
+      },
+      legend: {
+        data: timeSeriesData.map(item => item.name),
+        top: 30
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: timePoints,
+        name: '时间'
+      },
+      yAxis: {
+        type: 'value',
+        name: '峰值速度 (mm/s)'
+      },
+      series: timeSeriesData.map(item => ({
+        name: item.name,
+        type: 'line',
+        data: item.data.map(d => d.peakVelocity.toFixed(1)),
+        smooth: true,
+        lineStyle: {
+          width: 2
+        },
+        symbol: 'circle',
+        symbolSize: 4
+      }))
+    };
+
+    chart.setOption(option);
     
-    console.log('爆破振动图表数据:', chartData);
-    message.success(`已生成${chartData.length}个设备的图表数据，请查看控制台`);
+    return () => {
+      chart.dispose();
+    };
   };
 
   const filteredData = data.filter(item => {
@@ -279,6 +363,13 @@ const BlastVibration: React.FC = () => {
     }
     return true;
   });
+
+  useEffect(() => {
+    if (chartVisible && chartContainer) {
+      const cleanup = renderChart();
+      return cleanup;
+    }
+  }, [chartVisible, chartContainer, filteredData]);
 
   const statistics = {
     total: filteredData.length,
@@ -398,6 +489,19 @@ const BlastVibration: React.FC = () => {
           className="custom-table"
         />
       </Card>
+
+      <Modal
+        title="爆破振动监测趋势图"
+        open={chartVisible}
+        onCancel={() => setChartVisible(false)}
+        width={1000}
+        footer={null}
+      >
+        <div 
+          ref={setChartContainer}
+          style={{ width: '100%', height: '500px' }}
+        />
+      </Modal>
     </div>
   );
 };
