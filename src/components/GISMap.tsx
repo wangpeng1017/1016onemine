@@ -47,16 +47,34 @@ const GISMap: React.FC = () => {
   ];
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!chartRef.current) return;
 
-    // 初始化ECharts地图
-    const chart = echarts.init(mapRef.current);
-    chartRef.current = chart;
+    const chart = echarts.init(chartRef.current as unknown as HTMLElement);
 
-    // 配置地图选项
+    // 注册一个简单的矩形地图区域
+    echarts.registerMap('custom', {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: { name: '矿区' },
+          geometry: {
+            type: 'Polygon',
+            coordinates: [[
+              [87.5, 43.7],
+              [87.7, 43.7],
+              [87.7, 43.8],
+              [87.5, 43.8],
+              [87.5, 43.7]
+            ]]
+          }
+        }
+      ]
+    });
+
     const option = {
       title: {
-        text: '矿山监测GIS地图',
+        text: '矿山监测点分布图',
         left: 'center',
         textStyle: {
           color: '#333',
@@ -82,9 +100,9 @@ const GISMap: React.FC = () => {
         }
       },
       geo: {
-        map: 'china',
-        center: [87.6177, 43.7928], // 乌鲁木齐附近坐标
-        zoom: 12,
+        map: 'custom',
+        center: [87.6177, 43.7928],
+        zoom: 1,
         roam: true,
         itemStyle: {
           areaColor: '#f0f0f0',
