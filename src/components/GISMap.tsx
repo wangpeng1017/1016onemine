@@ -51,27 +51,6 @@ const GISMap: React.FC = () => {
 
     const chart = echarts.init(chartRef.current as unknown as HTMLElement);
 
-    // 注册一个简单的矩形地图区域
-    echarts.registerMap('custom', {
-      type: 'FeatureCollection',
-      features: [
-        {
-          type: 'Feature',
-          properties: { name: '矿区' },
-          geometry: {
-            type: 'Polygon',
-            coordinates: [[
-              [87.5, 43.7],
-              [87.7, 43.7],
-              [87.7, 43.8],
-              [87.5, 43.8],
-              [87.5, 43.7]
-            ]]
-          }
-        }
-      ]
-    });
-
     const option = {
       title: {
         text: '矿山监测点分布图',
@@ -99,27 +78,34 @@ const GISMap: React.FC = () => {
           return params.name;
         }
       },
-      geo: {
-        map: 'custom',
-        center: [87.6177, 43.7928],
-        zoom: 1,
-        roam: true,
-        itemStyle: {
-          areaColor: '#f0f0f0',
-          borderColor: '#999',
-          borderWidth: 1
-        },
-        emphasis: {
-          itemStyle: {
-            areaColor: '#e0e0e0'
-          }
+      grid: {
+        left: '10%',
+        right: '10%',
+        top: '15%',
+        bottom: '10%'
+      },
+      xAxis: {
+        type: 'value',
+        name: '经度',
+        min: 87.5,
+        max: 87.7,
+        axisLabel: {
+          formatter: '{value}°'
+        }
+      },
+      yAxis: {
+        type: 'value',
+        name: '纬度',
+        min: 43.75,
+        max: 43.85,
+        axisLabel: {
+          formatter: '{value}°'
         }
       },
       series: [
         {
           name: '监测点位',
           type: 'scatter',
-          coordinateSystem: 'geo',
           data: monitoringPoints.map(point => ({
             name: point.name,
             value: [...point.coordinates, point.value],
