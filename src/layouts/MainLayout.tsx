@@ -88,6 +88,10 @@ const MainLayout: React.FC = () => {
           key: 'monitoring-data/radar',
           label: '雷达',
         },
+        {
+          key: 'monitoring-data/aerospace-risk',
+          label: '空天风险监测',
+        },
       ],
     },
     {

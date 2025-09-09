@@ -17,6 +17,7 @@ import Groundwater from './pages/monitoring/Groundwater';
 import BlastVibration from './pages/monitoring/BlastVibration';
 import RainGauge from './pages/monitoring/RainGauge';
 import Radar from './pages/monitoring/Radar';
+import AerospaceRisk from './pages/monitoring/AerospaceRisk';
 import Console from './pages/reporting/Console';
 import HistoryQuery from './pages/reporting/HistoryQuery';
 import AccountManagement from './pages/AccountManagement';
@@ -43,6 +44,7 @@ const App: React.FC = () => {
               <Route path="monitoring-data/blast-vibration" element={<BlastVibration />} />
               <Route path="monitoring-data/rain-gauge" element={<RainGauge />} />
               <Route path="monitoring-data/radar" element={<Radar />} />
+              <Route path="monitoring-data/aerospace-risk" element={<AerospaceRisk />} />
               <Route path="alarm-records" element={<AlarmRecords />} />
               <Route path="data-reporting" element={<DataReporting />} />
               <Route path="data-reporting/console" element={<Console />} />
