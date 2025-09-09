@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Card, 
   Table, 
@@ -16,7 +16,10 @@ import {
   Tabs,
   Progress,
   Timeline,
-  Badge
+  Badge,
+  Checkbox,
+  Slider,
+  Switch
 } from 'antd';
 import { 
   SearchOutlined, 
@@ -28,15 +31,60 @@ import {
   ThunderboltOutlined,
   RadarChartOutlined,
   EnvironmentOutlined,
-  ExclamationCircleOutlined
+  ExclamationCircleOutlined,
+  BarsOutlined,
+  FullscreenOutlined,
+  ZoomInOutlined,
+  ZoomOutOutlined
 } from '@ant-design/icons';
 import * as echarts from 'echarts';
 import type { ColumnsType } from 'antd/es/table';
+import RiskGISMap from '../../components/RiskGISMap';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const { TabPane } = Tabs;
 
+// 边坡卫星形变风险数据结构
+interface DeformationRiskData {
+  id: string;
+  risk_level: 1 | 2 | 3 | 4; // 1=红色, 2=橙色, 3=黄色, 4=蓝色
+  risk_boundary: string; // WKT字符串
+  risk_values: {
+    coordinates: [number, number];
+    value: number; // 形变值
+  }[];
+  detection_time: string;
+}
+
+// 超层越界风险数据结构
+interface OverstepRiskData {
+  id: string;
+  type: 'horizontal' | 'vertical'; // 越界或超层
+  overborder_bry?: string; // 越界边界WKT
+  croborder_acr?: number; // 越界面积
+  over_layer_points?: {
+    coordinates: [number, number];
+    value: number; // 超限值
+    elevation: number;
+  }[];
+  detection_time: string;
+}
+
+// 边坡形态超限风险数据结构
+interface MorphologyRiskData {
+  id: string;
+  risk_level: 1 | 2 | 3 | 4;
+  risk_range: string; // WKT字符串
+  risk_values: {
+    coordinates: [number, number];
+    value: number; // 实际值
+    design_value: number; // 设计值
+  }[];
+  detection_time: string;
+}
+
+// 兼容旧接口
 interface AerospaceRiskData {
   id: string;
   riskType: string;
@@ -63,10 +111,189 @@ interface WeatherData {
 
 const AerospaceRisk: React.FC = () => {
   const [data, setData] = useState<AerospaceRiskData[]>([]);
+  const [deformationData, setDeformationData] = useState<DeformationRiskData[]>([]);
+  const [overstepData, setOverstepData] = useState<OverstepRiskData[]>([]);
+  const [morphologyData, setMorphologyData] = useState<MorphologyRiskData[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [chartVisible, setChartVisible] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [riskTypeFilter, setRiskTypeFilter] = useState<string>('');
+  const [riskLevelFilter, setRiskLevelFilter] = useState<string>('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState<AerospaceRiskData | null>(null);
+  const [activeTab, setActiveTab] = useState('deformation');
+  const [layerVisible, setLayerVisible] = useState({
+    deformation: true,
+    overstep: true,
+    morphology: true
+  });
+  const [layerOpacity, setLayerOpacity] = useState({
+    deformation: 0.7,
+    overstep: 0.7,
+    morphology: 0.7
+  });
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [chartVisible, setChartVisible] = useState(false);
+  const gisMapRef = useRef<HTMLDivElement>(null);
+
+  // 模拟空天风险数据
+  const mockDeformationData: DeformationRiskData[] = [
+    {
+      id: 'DEF-001',
+      risk_level: 1,
+      risk_boundary: 'POLYGON ((87.6100 43.7800, 87.6200 43.7800, 87.6200 43.7900, 87.6100 43.7900, 87.6100 43.7800))',
+      risk_values: [
+        { coordinates: [87.6150, 43.7850], value: 15.2 },
+        { coordinates: [87.6170, 43.7860], value: 12.8 },
+        { coordinates: [87.6180, 43.7840], value: 18.5 }
+      ],
+      detection_time: '2025-09-09 20:00:00'
+    },
+    {
+      id: 'DEF-002',
+      risk_level: 2,
+      risk_boundary: 'POLYGON ((87.6250 43.7750, 87.6350 43.7750, 87.6350 43.7850, 87.6250 43.7850, 87.6250 43.7750))',
+      risk_values: [
+        { coordinates: [87.6300, 43.7800], value: 8.5 },
+        { coordinates: [87.6320, 43.7810], value: 9.2 }
+      ],
+      detection_time: '2025-09-09 20:00:00'
+    }
+  ];
+
+  const mockOverstepData: OverstepRiskData[] = [
+    {
+      id: 'OVS-001',
+      type: 'horizontal',
+      overborder_bry: 'POLYGON ((87.6400 43.7700, 87.6500 43.7700, 87.6500 43.7800, 87.6400 43.7800, 87.6400 43.7700))',
+      croborder_acr: 2500.5,
+      detection_time: '2025-09-09 19:30:00'
+    },
+    {
+      id: 'OVS-002',
+      type: 'vertical',
+      over_layer_points: [
+        { coordinates: [87.6450, 43.7750], value: 5.2, elevation: 1250.5 },
+        { coordinates: [87.6470, 43.7760], value: 3.8, elevation: 1248.2 }
+      ],
+      detection_time: '2025-09-09 19:30:00'
+    }
+  ];
+
+  const mockMorphologyData: MorphologyRiskData[] = [
+    {
+      id: 'MOR-001',
+      risk_level: 3,
+      risk_range: 'POLYGON ((87.6550 43.7650, 87.6650 43.7650, 87.6650 43.7750, 87.6550 43.7750, 87.6550 43.7650))',
+      risk_values: [
+        { coordinates: [87.6600, 43.7700], value: 45.2, design_value: 40.0 },
+        { coordinates: [87.6620, 43.7710], value: 38.5, design_value: 40.0 },
+        { coordinates: [87.6580, 43.7680], value: 42.8, design_value: 40.0 }
+      ],
+      detection_time: '2025-09-09 19:00:00'
+    }
+  ];
+
+  // 初始化空天风险数据
+  useEffect(() => {
+    setDeformationData(mockDeformationData);
+    setOverstepData(mockOverstepData);
+    setMorphologyData(mockMorphologyData);
+  }, []);
+
+  // 生成GIS图层数据
+  const generateGISLayers = () => {
+    const layers: any[] = [];
+
+    // 边坡卫星形变风险图层
+    deformationData.forEach(item => {
+      layers.push({
+        id: item.id,
+        name: `卫星形变风险-${item.id}`,
+        type: 'deformation',
+        risk_level: item.risk_level,
+        boundary: item.risk_boundary,
+        points: item.risk_values,
+        visible: layerVisible.deformation,
+        opacity: layerOpacity.deformation
+      });
+    });
+
+    // 超层越界风险图层
+    overstepData.forEach(item => {
+      layers.push({
+        id: item.id,
+        name: `${item.type === 'horizontal' ? '越界' : '超层'}风险-${item.id}`,
+        type: 'overstep',
+        risk_level: 2, // 默认橙色
+        boundary: item.overborder_bry,
+        points: item.over_layer_points || [],
+        visible: layerVisible.overstep,
+        opacity: layerOpacity.overstep
+      });
+    });
+
+    // 边坡形态超限风险图层
+    morphologyData.forEach(item => {
+      layers.push({
+        id: item.id,
+        name: `形态超限风险-${item.id}`,
+        type: 'morphology',
+        risk_level: item.risk_level,
+        boundary: item.risk_range,
+        points: item.risk_values,
+        visible: layerVisible.morphology,
+        opacity: layerOpacity.morphology
+      });
+    });
+
+    return layers;
+  };
+
+  // 处理图层可见性变化
+  const handleLayerVisibilityChange = (layerId: string, visible: boolean) => {
+    const layer = generateGISLayers().find(l => l.id === layerId);
+    if (layer) {
+      setLayerVisible(prev => ({
+        ...prev,
+        [layer.type]: visible
+      }));
+    }
+  };
+
+  // 处理图层透明度变化
+  const handleLayerOpacityChange = (layerId: string, opacity: number) => {
+    const layer = generateGISLayers().find(l => l.id === layerId);
+    if (layer) {
+      setLayerOpacity(prev => ({
+        ...prev,
+        [layer.type]: opacity
+      }));
+    }
+  };
+
+  // 处理点位点击
+  const handlePointClick = (point: any, layer: any) => {
+    Modal.info({
+      title: `${layer.name} - 详细信息`,
+      content: (
+        <div>
+          <p><strong>坐标:</strong> {point.coordinates.join(', ')}</p>
+          <p><strong>数值:</strong> {point.value}</p>
+          {point.design_value && (
+            <>
+              <p><strong>设计值:</strong> {point.design_value}</p>
+              {point.value > point.design_value && (
+                <p style={{ color: 'red' }}><strong>状态:</strong> ⚠️ 超限</p>
+              )}
+            </>
+          )}
+          {point.elevation && <p><strong>高程:</strong> {point.elevation}m</p>}
+        </div>
+      ),
+      width: 400
+    });
+  };
 
   // 模拟数据
   useEffect(() => {
@@ -433,44 +660,181 @@ const AerospaceRisk: React.FC = () => {
         <Col xs={24} sm={12} md={6}>
           <Card>
             <Statistic
-              title="总风险数"
-              value={stats.total}
-              prefix={<WarningOutlined />}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="活跃风险"
-              value={stats.active}
-              prefix={<ThunderboltOutlined />}
-              valueStyle={{ color: '#ff4d4f' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="极高风险"
-              value={stats.critical}
+              title="红色风险(1级)"
+              value={deformationData.filter(d => d.risk_level === 1).length + morphologyData.filter(d => d.risk_level === 1).length}
               prefix={<ExclamationCircleOutlined />}
-              valueStyle={{ color: '#722ed1' }}
+              valueStyle={{ color: '#ff0000' }}
             />
           </Card>
         </Col>
         <Col xs={24} sm={12} md={6}>
           <Card>
             <Statistic
-              title="高风险"
-              value={stats.high}
+              title="橙色风险(2级)"
+              value={deformationData.filter(d => d.risk_level === 2).length + morphologyData.filter(d => d.risk_level === 2).length + overstepData.length}
+              prefix={<WarningOutlined />}
+              valueStyle={{ color: '#ffa500' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Statistic
+              title="黄色风险(3级)"
+              value={deformationData.filter(d => d.risk_level === 3).length + morphologyData.filter(d => d.risk_level === 3).length}
+              prefix={<ThunderboltOutlined />}
+              valueStyle={{ color: '#ffff00' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Statistic
+              title="蓝色风险(4级)"
+              value={deformationData.filter(d => d.risk_level === 4).length + morphologyData.filter(d => d.risk_level === 4).length}
               prefix={<EnvironmentOutlined />}
-              valueStyle={{ color: '#faad14' }}
+              valueStyle={{ color: '#0000ff' }}
             />
           </Card>
         </Col>
       </Row>
+
+      {/* 核心GIS分析模块 */}
+      <Card title="空天风险GIS分析视图" style={{ marginBottom: 16 }}>
+        <RiskGISMap
+          layers={generateGISLayers()}
+          onLayerVisibilityChange={handleLayerVisibilityChange}
+          onLayerOpacityChange={handleLayerOpacityChange}
+          onPointClick={handlePointClick}
+        />
+      </Card>
+
+      {/* 风险数据详情标签页 */}
+      <Card title="风险数据详情">
+        <Tabs activeKey={activeTab} onChange={setActiveTab}>
+          <TabPane tab="边坡卫星形变风险" key="deformation">
+            <Table
+              dataSource={deformationData}
+              rowKey="id"
+              columns={[
+                {
+                  title: '风险ID',
+                  dataIndex: 'id',
+                  key: 'id'
+                },
+                {
+                  title: '风险等级',
+                  dataIndex: 'risk_level',
+                  key: 'risk_level',
+                  render: (level: number) => {
+                    const colors = { 1: 'red', 2: 'orange', 3: 'yellow', 4: 'blue' };
+                    const labels = { 1: '红色(1级)', 2: '橙色(2级)', 3: '黄色(3级)', 4: '蓝色(4级)' };
+                    return <Tag color={colors[level as keyof typeof colors]}>{labels[level as keyof typeof labels]}</Tag>;
+                  }
+                },
+                {
+                  title: '监测点数量',
+                  dataIndex: 'risk_values',
+                  key: 'points_count',
+                  render: (values: any[]) => values.length
+                },
+                {
+                  title: '最大形变值',
+                  dataIndex: 'risk_values',
+                  key: 'max_value',
+                  render: (values: any[]) => Math.max(...values.map(v => v.value)).toFixed(2) + ' mm'
+                },
+                {
+                  title: '检测时间',
+                  dataIndex: 'detection_time',
+                  key: 'detection_time'
+                }
+              ]}
+              pagination={{ pageSize: 5 }}
+            />
+          </TabPane>
+          
+          <TabPane tab="超层越界风险" key="overstep">
+            <Table
+              dataSource={overstepData}
+              rowKey="id"
+              columns={[
+                {
+                  title: '风险ID',
+                  dataIndex: 'id',
+                  key: 'id'
+                },
+                {
+                  title: '风险类型',
+                  dataIndex: 'type',
+                  key: 'type',
+                  render: (type: string) => type === 'horizontal' ? '越界开采' : '超层开采'
+                },
+                {
+                  title: '越界面积',
+                  dataIndex: 'croborder_acr',
+                  key: 'area',
+                  render: (area: number) => area ? area.toFixed(2) + ' m²' : '-'
+                },
+                {
+                  title: '超层点数量',
+                  dataIndex: 'over_layer_points',
+                  key: 'points_count',
+                  render: (points: any[]) => points ? points.length : 0
+                },
+                {
+                  title: '检测时间',
+                  dataIndex: 'detection_time',
+                  key: 'detection_time'
+                }
+              ]}
+              pagination={{ pageSize: 5 }}
+            />
+          </TabPane>
+          
+          <TabPane tab="边坡形态超限风险" key="morphology">
+            <Table
+              dataSource={morphologyData}
+              rowKey="id"
+              columns={[
+                {
+                  title: '风险ID',
+                  dataIndex: 'id',
+                  key: 'id'
+                },
+                {
+                  title: '风险等级',
+                  dataIndex: 'risk_level',
+                  key: 'risk_level',
+                  render: (level: number) => {
+                    const colors = { 1: 'red', 2: 'orange', 3: 'yellow', 4: 'blue' };
+                    const labels = { 1: '红色(1级)', 2: '橙色(2级)', 3: '黄色(3级)', 4: '蓝色(4级)' };
+                    return <Tag color={colors[level as keyof typeof colors]}>{labels[level as keyof typeof labels]}</Tag>;
+                  }
+                },
+                {
+                  title: '监测点数量',
+                  dataIndex: 'risk_values',
+                  key: 'points_count',
+                  render: (values: any[]) => values.length
+                },
+                {
+                  title: '超限点数量',
+                  dataIndex: 'risk_values',
+                  key: 'exceed_count',
+                  render: (values: any[]) => values.filter(v => v.value > v.design_value).length
+                },
+                {
+                  title: '检测时间',
+                  dataIndex: 'detection_time',
+                  key: 'detection_time'
+                }
+              ]}
+              pagination={{ pageSize: 5 }}
+            />
+          </TabPane>
+        </Tabs>
+      </Card>
 
       <Card className="custom-card">
         <Tabs defaultActiveKey="1">
