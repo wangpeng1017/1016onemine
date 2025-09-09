@@ -321,7 +321,7 @@ const AerospaceRisk: React.FC = () => {
     return { categories, data };
   };
 
-  const renderChart = () => {
+  const ChartComponent: React.FC = () => {
     const chartRef = React.useRef<HTMLDivElement>(null);
     
     React.useEffect(() => {
@@ -624,7 +624,7 @@ const AerospaceRisk: React.FC = () => {
             <Row gutter={16}>
               <Col span={24}>
                 <Card title="风险趋势分析">
-                  {renderChart()}
+                  <ChartComponent />
                 </Card>
               </Col>
             </Row>
@@ -641,7 +641,7 @@ const AerospaceRisk: React.FC = () => {
         width={800}
         destroyOnClose
       >
-        {renderChart()}
+        <ChartComponent />
       </Modal>
     </div>
   );
