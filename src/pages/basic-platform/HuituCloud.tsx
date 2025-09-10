@@ -11,21 +11,16 @@ const HuituCloud: React.FC = () => {
         <Paragraph>
           慧图云平台是基于云计算技术的地理信息服务平台，提供地图服务、空间分析、数据管理等功能。
         </Paragraph>
-        <div style={{ 
-          height: '600px', 
-          border: '1px solid #d9d9d9', 
-          borderRadius: '6px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#fafafa',
-          fontSize: '16px',
-          color: '#666'
-        }}>
-          慧图云平台嵌入区域
-          <br />
-          （此处将嵌入外部网页）
-        </div>
+        <iframe
+          src="https://imap.iimake.com/business/#/firmMyProduct?type=LUCIAD"
+          style={{
+            width: '100%',
+            height: '600px',
+            border: '1px solid #d9d9d9',
+            borderRadius: '6px'
+          }}
+          title="慧图云平台"
+        />
       </Card>
     </div>
   );

@@ -11,27 +11,16 @@ const Home: React.FC = () => {
         <Paragraph>
           欢迎使用矿山安全监测平台，这里将展示矿山监测的综合地图视图。
         </Paragraph>
-        <div style={{ 
-          height: '600px', 
-          border: '2px solid #1890ff', 
-          borderRadius: '8px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#f0f8ff',
-          fontSize: '18px',
-          color: '#1890ff',
-          fontWeight: 'bold',
-          flexDirection: 'column',
-          gap: '16px'
-        }}>
-          <div>🗺️ 模拟地图区域</div>
-          <div style={{ fontSize: '14px', fontWeight: 'normal', textAlign: 'center' }}>
-            此处将嵌入外部地图网页
-            <br />
-            用于显示矿山监测点分布和实时状态
-          </div>
-        </div>
+        <iframe
+          src="http://123.235.0.227:8089/ria/editor/edit?id=1912037892906917890&luciad_token=yqoPVWVqEq6mbV1XEGYOOb3UipgVKUXg"
+          style={{
+            width: '100%',
+            height: '600px',
+            border: '2px solid #1890ff',
+            borderRadius: '8px'
+          }}
+          title="Luciad地图编辑器"
+        />
       </Card>
     </div>
   );
