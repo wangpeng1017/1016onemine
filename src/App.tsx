@@ -22,6 +22,9 @@ import HistoryQuery from './pages/reporting/HistoryQuery';
 import ReportCenter from './pages/ReportCenter';
 import BasicInfoManagement from './pages/BasicInfoManagement';
 import ModelManagement from './pages/ModelManagement';
+import HuituCloud from './pages/basic-platform/HuituCloud';
+import IotPlatform from './pages/basic-platform/IotPlatform';
+import DataIntegration from './pages/basic-platform/DataIntegration';
 import AccountManagement from './pages/AccountManagement';
 import SystemConfig from './pages/SystemConfig';
 import './App.css';
@@ -53,6 +56,9 @@ const App: React.FC = () => {
               <Route path="data-reporting/history-query" element={<HistoryQuery />} />
               <Route path="report-center" element={<ReportCenter />} />
               <Route path="basic-info-management" element={<BasicInfoManagement />} />
+              <Route path="basic-platform/huitu-cloud" element={<HuituCloud />} />
+              <Route path="basic-platform/iot-platform" element={<IotPlatform />} />
+              <Route path="basic-platform/data-integration" element={<DataIntegration />} />
               <Route path="account-management" element={<AccountManagement />} />
               <Route path="system-config" element={<SystemConfig />} />
             </Route>

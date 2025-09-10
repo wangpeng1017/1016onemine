@@ -21,6 +21,7 @@ import {
   SettingOutlined,
   LogoutOutlined,
   CloudUploadOutlined,
+  CloudOutlined,
   RadarChartOutlined,
   BellOutlined,
   UploadOutlined,
@@ -125,6 +126,25 @@ const MainLayout: React.FC = () => {
       label: '报告与文档中心',
     },
     {
+      key: 'basic-platform',
+      icon: <CloudOutlined />,
+      label: '基础平台',
+      children: [
+        {
+          key: 'basic-platform/huitu-cloud',
+          label: '慧图云平台',
+        },
+        {
+          key: 'basic-platform/iot-platform',
+          label: '物联网平台',
+        },
+        {
+          key: 'basic-platform/data-integration',
+          label: '数据集成平台',
+        },
+      ],
+    },
+    {
       key: 'account-management',
       icon: <UserOutlined />,
       label: '账号管理',
@@ -188,7 +208,7 @@ const MainLayout: React.FC = () => {
             borderBottom: '1px solid #f0f0f0',
           }}
         >
-          {collapsed ? '矿山' : '矿山监测系统'}
+          {collapsed ? '矿山' : '矿山安全监测平台'}
         </div>
         <Menu
           theme="light"
