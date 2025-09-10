@@ -23,6 +23,11 @@ import {
   CloudUploadOutlined,
   RadarChartOutlined,
   BellOutlined,
+  UploadOutlined,
+  AppstoreOutlined,
+  MonitorOutlined,
+  FileTextOutlined,
+  InfoCircleOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 
@@ -113,6 +118,26 @@ const MainLayout: React.FC = () => {
           label: '历史查询',
         },
       ],
+    },
+    {
+      key: 'data-reporting-monitor',
+      icon: <MonitorOutlined />,
+      label: '数据上报监控',
+    },
+    {
+      key: 'report-center',
+      icon: <FileTextOutlined />,
+      label: '报告与文档中心',
+    },
+    {
+      key: 'basic-info-management',
+      icon: <InfoCircleOutlined />,
+      label: '基础信息管理',
+    },
+    {
+      key: 'layer-management',
+      icon: <AppstoreOutlined />,
+      label: '图层管理',
     },
     {
       key: 'account-management',
@@ -212,7 +237,7 @@ const MainLayout: React.FC = () => {
           />
           <Space size="middle">
             <Badge count={5} size="small">
-              <Button type="text" icon={<BellOutlined />} />
+              <BellOutlined style={{ fontSize: '18px' }} />
             </Badge>
             <Dropdown
               menu={{

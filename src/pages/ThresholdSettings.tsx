@@ -31,6 +31,11 @@ interface ThresholdRule {
   id: string;
   deviceType: string;
   parameter: string;
+  // 四级阈值：正常、注意、预警、危险
+  normalMin?: number;
+  normalMax?: number;
+  attentionMin?: number;
+  attentionMax?: number;
   warningMin?: number;
   warningMax?: number;
   dangerMin?: number;
@@ -55,10 +60,14 @@ const ThresholdSettings: React.FC = () => {
       id: 'RULE001',
       deviceType: '雷达传感器',
       parameter: '位移速率',
-      warningMin: undefined,
-      warningMax: 10,
-      dangerMin: undefined,
-      dangerMax: 15,
+      normalMin: 0,
+      normalMax: 5,
+      attentionMin: 5,
+      attentionMax: 8,
+      warningMin: 8,
+      warningMax: 12,
+      dangerMin: 12,
+      dangerMax: undefined,
       unit: 'mm/h',
       status: 'active',
       updateTime: '2024-01-15 10:30:00',
@@ -68,8 +77,12 @@ const ThresholdSettings: React.FC = () => {
       id: 'RULE002',
       deviceType: '土压力传感器',
       parameter: '压力值',
-      warningMin: 80,
-      warningMax: 120,
+      normalMin: 90,
+      normalMax: 110,
+      attentionMin: 80,
+      attentionMax: 120,
+      warningMin: 70,
+      warningMax: 130,
       dangerMin: 60,
       dangerMax: 150,
       unit: 'kPa',
@@ -81,10 +94,14 @@ const ThresholdSettings: React.FC = () => {
       id: 'RULE003',
       deviceType: '裂缝计',
       parameter: '裂缝宽度',
-      warningMin: undefined,
-      warningMax: 3,
-      dangerMin: undefined,
-      dangerMax: 5,
+      normalMin: 0,
+      normalMax: 1,
+      attentionMin: 1,
+      attentionMax: 2,
+      warningMin: 2,
+      warningMax: 4,
+      dangerMin: 4,
+      dangerMax: undefined,
       unit: 'mm',
       status: 'active',
       updateTime: '2024-01-13 09:45:00',
@@ -111,23 +128,59 @@ const ThresholdSettings: React.FC = () => {
       width: 120,
     },
     {
-      title: '预警阈值',
-      key: 'warning',
-      width: 150,
+      title: '正常范围',
+      key: 'normal',
+      width: 120,
       render: (_, record) => {
-        const min = record.warningMin !== undefined ? record.warningMin : '-';
-        const max = record.warningMax !== undefined ? record.warningMax : '-';
-        return `${min} ~ ${max} ${record.unit}`;
+        const min = record.normalMin !== undefined ? record.normalMin : '-';
+        const max = record.normalMax !== undefined ? record.normalMax : '-';
+        return (
+          <span style={{ color: '#52c41a' }}>
+            {min} ~ {max} {record.unit}
+          </span>
+        );
       },
     },
     {
-      title: '危险阈值',
+      title: '注意范围',
+      key: 'attention',
+      width: 120,
+      render: (_, record) => {
+        const min = record.attentionMin !== undefined ? record.attentionMin : '-';
+        const max = record.attentionMax !== undefined ? record.attentionMax : '-';
+        return (
+          <span style={{ color: '#1890ff' }}>
+            {min} ~ {max} {record.unit}
+          </span>
+        );
+      },
+    },
+    {
+      title: '预警范围',
+      key: 'warning',
+      width: 120,
+      render: (_, record) => {
+        const min = record.warningMin !== undefined ? record.warningMin : '-';
+        const max = record.warningMax !== undefined ? record.warningMax : '-';
+        return (
+          <span style={{ color: '#faad14' }}>
+            {min} ~ {max} {record.unit}
+          </span>
+        );
+      },
+    },
+    {
+      title: '危险范围',
       key: 'danger',
-      width: 150,
+      width: 120,
       render: (_, record) => {
         const min = record.dangerMin !== undefined ? record.dangerMin : '-';
         const max = record.dangerMax !== undefined ? record.dangerMax : '-';
-        return `${min} ~ ${max} ${record.unit}`;
+        return (
+          <span style={{ color: '#ff4d4f' }}>
+            {min} ~ {max} {record.unit}
+          </span>
+        );
       },
     },
     {
@@ -224,42 +277,70 @@ const ThresholdSettings: React.FC = () => {
       switch (type) {
         case 'displacement':
           return {
-            warningThreshold: 10,
-            dangerThreshold: 15,
+            normalMin: 0,
+            normalMax: 5,
+            attentionMin: 5,
+            attentionMax: 8,
+            warningMin: 8,
+            warningMax: 12,
+            dangerMin: 12,
             unit: 'mm/h',
           };
         case 'pressure':
           return {
-            warningMin: 80,
-            warningMax: 120,
+            normalMin: 90,
+            normalMax: 110,
+            attentionMin: 80,
+            attentionMax: 120,
+            warningMin: 70,
+            warningMax: 130,
             dangerMin: 60,
             dangerMax: 150,
             unit: 'kPa',
           };
         case 'crack':
           return {
-            warningThreshold: 3,
-            dangerThreshold: 5,
+            normalMin: 0,
+            normalMax: 1,
+            attentionMin: 1,
+            attentionMax: 2,
+            warningMin: 2,
+            warningMax: 4,
+            dangerMin: 4,
             unit: 'mm',
           };
         case 'water':
           return {
-            warningMin: 8,
-            warningMax: 15,
-            dangerMin: 5,
-            dangerMax: 18,
+            normalMin: 10,
+            normalMax: 12,
+            attentionMin: 8,
+            attentionMax: 15,
+            warningMin: 5,
+            warningMax: 18,
+            dangerMin: 3,
+            dangerMax: 20,
             unit: 'm',
           };
         case 'rainfall':
           return {
-            warningThreshold: 25,
-            dangerThreshold: 50,
+            normalMin: 0,
+            normalMax: 10,
+            attentionMin: 10,
+            attentionMax: 20,
+            warningMin: 20,
+            warningMax: 40,
+            dangerMin: 40,
             unit: 'mm/h',
           };
         case 'vibration':
           return {
-            warningThreshold: 2.0,
-            dangerThreshold: 5.0,
+            normalMin: 0,
+            normalMax: 1.0,
+            attentionMin: 1.0,
+            attentionMax: 2.0,
+            warningMin: 2.0,
+            warningMax: 4.0,
+            dangerMin: 4.0,
             unit: 'mm/s',
           };
         default:
@@ -273,89 +354,111 @@ const ThresholdSettings: React.FC = () => {
         layout="vertical"
         initialValues={getInitialValues()}
       >
-        <Row gutter={24}>
+        <Row gutter={16}>
           <Col span={12}>
-            <Card title="预警阈值设置" size="small">
-              {type === 'pressure' || type === 'water' ? (
-                <>
-                  <Form.Item
-                    name="warningMin"
-                    label="预警下限"
-                    rules={[{ required: true, message: '请输入预警下限' }]}
-                  >
-                    <InputNumber
-                      style={{ width: '100%' }}
-                      placeholder="请输入预警下限"
-                      addonAfter={getInitialValues().unit}
-                    />
-                  </Form.Item>
-                  <Form.Item
-                    name="warningMax"
-                    label="预警上限"
-                    rules={[{ required: true, message: '请输入预警上限' }]}
-                  >
-                    <InputNumber
-                      style={{ width: '100%' }}
-                      placeholder="请输入预警上限"
-                      addonAfter={getInitialValues().unit}
-                    />
-                  </Form.Item>
-                </>
-              ) : (
-                <Form.Item
-                  name="warningThreshold"
-                  label="预警阈值"
-                  rules={[{ required: true, message: '请输入预警阈值' }]}
-                >
-                  <InputNumber
-                    style={{ width: '100%' }}
-                    placeholder="请输入预警阈值"
-                    addonAfter={getInitialValues().unit}
-                  />
-                </Form.Item>
-              )}
+            <Card title="正常范围" size="small" style={{ borderColor: '#52c41a' }}>
+              <Form.Item
+                name="normalMin"
+                label="正常下限"
+                rules={[{ required: true, message: '请输入正常下限' }]}
+              >
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入正常下限"
+                  addonAfter={getInitialValues().unit}
+                />
+              </Form.Item>
+              <Form.Item
+                name="normalMax"
+                label="正常上限"
+                rules={[{ required: true, message: '请输入正常上限' }]}
+              >
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入正常上限"
+                  addonAfter={getInitialValues().unit}
+                />
+              </Form.Item>
             </Card>
           </Col>
           <Col span={12}>
-            <Card title="危险阈值设置" size="small">
-              {type === 'pressure' || type === 'water' ? (
-                <>
-                  <Form.Item
-                    name="dangerMin"
-                    label="危险下限"
-                    rules={[{ required: true, message: '请输入危险下限' }]}
-                  >
-                    <InputNumber
-                      style={{ width: '100%' }}
-                      placeholder="请输入危险下限"
-                      addonAfter={getInitialValues().unit}
-                    />
-                  </Form.Item>
-                  <Form.Item
-                    name="dangerMax"
-                    label="危险上限"
-                    rules={[{ required: true, message: '请输入危险上限' }]}
-                  >
-                    <InputNumber
-                      style={{ width: '100%' }}
-                      placeholder="请输入危险上限"
-                      addonAfter={getInitialValues().unit}
-                    />
-                  </Form.Item>
-                </>
-              ) : (
-                <Form.Item
-                  name="dangerThreshold"
-                  label="危险阈值"
-                  rules={[{ required: true, message: '请输入危险阈值' }]}
-                >
-                  <InputNumber
-                    style={{ width: '100%' }}
-                    placeholder="请输入危险阈值"
-                    addonAfter={getInitialValues().unit}
-                  />
-                </Form.Item>
-              )}
+            <Card title="注意范围" size="small" style={{ borderColor: '#1890ff' }}>
+              <Form.Item
+                name="attentionMin"
+                label="注意下限"
+                rules={[{ required: true, message: '请输入注意下限' }]}
+              >
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入注意下限"
+                  addonAfter={getInitialValues().unit}
+                />
+              </Form.Item>
+              <Form.Item
+                name="attentionMax"
+                label="注意上限"
+                rules={[{ required: true, message: '请输入注意上限' }]}
+              >
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入注意上限"
+                  addonAfter={getInitialValues().unit}
+                />
+              </Form.Item>
+            </Card>
+          </Col>
+        </Row>
+        
+        <Row gutter={16} style={{ marginTop: 16 }}>
+          <Col span={12}>
+            <Card title="预警范围" size="small" style={{ borderColor: '#faad14' }}>
+              <Form.Item
+                name="warningMin"
+                label="预警下限"
+                rules={[{ required: true, message: '请输入预警下限' }]}
+              >
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入预警下限"
+                  addonAfter={getInitialValues().unit}
+                />
+              </Form.Item>
+              <Form.Item
+                name="warningMax"
+                label="预警上限"
+                rules={[{ required: true, message: '请输入预警上限' }]}
+              >
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入预警上限"
+                  addonAfter={getInitialValues().unit}
+                />
+              </Form.Item>
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Card title="危险范围" size="small" style={{ borderColor: '#ff4d4f' }}>
+              <Form.Item
+                name="dangerMin"
+                label="危险下限"
+                rules={[{ required: true, message: '请输入危险下限' }]}
+              >
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入危险下限"
+                  addonAfter={getInitialValues().unit}
+                />
+              </Form.Item>
+              <Form.Item
+                name="dangerMax"
+                label="危险上限"
+              >
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入危险上限(可选)"
+                  addonAfter={getInitialValues().unit}
+                />
+              </Form.Item>
             </Card>
           </Col>
         </Row>
@@ -461,13 +564,13 @@ const ThresholdSettings: React.FC = () => {
           </Row>
           <Row gutter={16}>
             <Col span={8}>
-              <Form.Item name="warningMin" label="预警下限">
-                <InputNumber style={{ width: '100%' }} placeholder="预警下限" />
+              <Form.Item name="normalMin" label="正常下限">
+                <InputNumber style={{ width: '100%' }} placeholder="正常下限" />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item name="warningMax" label="预警上限">
-                <InputNumber style={{ width: '100%' }} placeholder="预警上限" />
+              <Form.Item name="normalMax" label="正常上限">
+                <InputNumber style={{ width: '100%' }} placeholder="正常上限" />
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -477,6 +580,30 @@ const ThresholdSettings: React.FC = () => {
                 rules={[{ required: true, message: '请输入单位' }]}
               >
                 <Input placeholder="请输入单位" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="attentionMin" label="注意下限">
+                <InputNumber style={{ width: '100%' }} placeholder="注意下限" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="attentionMax" label="注意上限">
+                <InputNumber style={{ width: '100%' }} placeholder="注意上限" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="warningMin" label="预警下限">
+                <InputNumber style={{ width: '100%' }} placeholder="预警下限" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="warningMax" label="预警上限">
+                <InputNumber style={{ width: '100%' }} placeholder="预警上限" />
               </Form.Item>
             </Col>
           </Row>

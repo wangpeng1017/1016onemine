@@ -14,6 +14,8 @@ import {
   Modal,
   Descriptions,
   Alert,
+  Form,
+  message,
 } from 'antd';
 import {
   SearchOutlined,
@@ -21,6 +23,10 @@ import {
   ReloadOutlined,
   ExclamationCircleOutlined,
   CheckCircleOutlined,
+  EnvironmentOutlined,
+  PlayCircleOutlined,
+  PauseCircleOutlined,
+  CloseCircleOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
@@ -31,6 +37,7 @@ interface AlarmRecord {
   key: string;
   id: string;
   deviceName: string;
+  deviceId: string;
   alarmType: string;
   level: 'low' | 'medium' | 'high' | 'critical';
   alarmTime: string;
@@ -39,58 +46,82 @@ interface AlarmRecord {
   currentValue: number;
   thresholdValue: number;
   unit: string;
+  location: string;
+  coordinates: string;
+  handler?: string;
+  handleTime?: string;
+  handleNote?: string;
 }
 
 const AlarmRecords: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [detailVisible, setDetailVisible] = useState(false);
+  const [handleVisible, setHandleVisible] = useState(false);
+  const [gisVisible, setGisVisible] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<AlarmRecord | null>(null);
+  const [handleForm] = Form.useForm();
 
   // 模拟数据
   const mockData: AlarmRecord[] = [
     {
       key: '1',
-      id: 'AL001',
+      id: 'ALM001',
       deviceName: '雷达监测点-01',
-      alarmType: '位移超限',
+      deviceId: 'DEV001',
+      alarmType: '位移速率超限',
       level: 'high',
       alarmTime: '2024-01-15 14:30:25',
       status: 'pending',
-      description: '边坡位移速率超过预警阈值',
-      currentValue: 15.8,
-      thresholdValue: 15.0,
+      description: '监测点位移速率超过预警阈值',
+      currentValue: 12.5,
+      thresholdValue: 10.0,
       unit: 'mm/h',
+      location: '边坡A区-上部',
+      coordinates: '116.123456, 39.654321',
     },
     {
       key: '2',
-      id: 'AL002',
+      id: 'ALM002',
       deviceName: '土压力传感器-03',
+      deviceId: 'DEV002',
       alarmType: '压力异常',
       level: 'medium',
       alarmTime: '2024-01-15 13:45:18',
       status: 'processing',
-      description: '土体压力值异常波动',
-      currentValue: 125.6,
+      description: '土压力值超出正常范围',
+      currentValue: 135.2,
       thresholdValue: 120.0,
       unit: 'kPa',
+      location: '边坡B区-中部',
+      coordinates: '116.234567, 39.765432',
+      handler: '张工程师',
+      handleTime: '2024-01-15 14:00:00',
+      handleNote: '正在现场检查设备状态',
     },
     {
       key: '3',
-      id: 'AL003',
+      id: 'ALM003',
       deviceName: '裂缝计-05',
-      alarmType: '裂缝扩展',
+      deviceId: 'DEV003',
+      alarmType: '设备离线',
       level: 'critical',
       alarmTime: '2024-01-15 12:20:12',
       status: 'resolved',
-      description: '岩体裂缝宽度急剧增加',
-      currentValue: 8.2,
-      thresholdValue: 5.0,
-      unit: 'mm',
+      description: '设备通信中断，无法获取数据',
+      currentValue: 0,
+      thresholdValue: 0,
+      unit: '',
+      location: '岩体C区-底部',
+      coordinates: '116.345678, 39.876543',
+      handler: '李技术员',
+      handleTime: '2024-01-15 13:30:00',
+      handleNote: '已更换通信模块，设备恢复正常',
     },
     {
       key: '4',
       id: 'AL004',
       deviceName: '雨量计-02',
+      deviceId: 'DEV004',
       alarmType: '降雨预警',
       level: 'low',
       alarmTime: '2024-01-15 11:15:08',
@@ -99,11 +130,14 @@ const AlarmRecords: React.FC = () => {
       currentValue: 25.5,
       thresholdValue: 25.0,
       unit: 'mm/h',
+      location: '边坡D区-下部',
+      coordinates: '116.456789, 39.987654',
     },
     {
       key: '5',
       id: 'AL005',
       deviceName: '地下水位计-04',
+      deviceId: 'DEV005',
       alarmType: '水位异常',
       level: 'medium',
       alarmTime: '2024-01-15 10:10:05',
@@ -112,6 +146,8 @@ const AlarmRecords: React.FC = () => {
       currentValue: 12.8,
       thresholdValue: 12.0,
       unit: 'm',
+      location: '岩体E区-中部',
+      coordinates: '116.567890, 40.098765',
     },
   ];
 
@@ -186,11 +222,18 @@ const AlarmRecords: React.FC = () => {
           >
             查看
           </Button>
+          <Button
+            type="link"
+            icon={<EnvironmentOutlined />}
+            onClick={() => handleGISLocation(record)}
+          >
+            定位
+          </Button>
           {record.status === 'pending' && (
             <Button
               type="link"
-              icon={<ExclamationCircleOutlined />}
-              onClick={() => handleProcess(record)}
+              icon={<PlayCircleOutlined />}
+              onClick={() => handleAlarmProcess(record)}
             >
               处理
             </Button>
@@ -212,6 +255,35 @@ const AlarmRecords: React.FC = () => {
   const handleViewDetail = (record: AlarmRecord) => {
     setSelectedRecord(record);
     setDetailVisible(true);
+  };
+
+  const handleAlarmProcess = (record: AlarmRecord) => {
+    setSelectedRecord(record);
+    handleForm.resetFields();
+    setHandleVisible(true);
+  };
+
+  const handleGISLocation = (record: AlarmRecord) => {
+    setSelectedRecord(record);
+    setGisVisible(true);
+  };
+
+  const handleAlarmAction = (action: 'accept' | 'reject' | 'resolve') => {
+    if (!selectedRecord) return;
+    
+    handleForm.validateFields().then((values: any) => {
+      console.log('处理告警:', {
+        alarmId: selectedRecord.id,
+        action,
+        ...values
+      });
+      
+      // 更新告警状态
+      const newStatus = action === 'accept' ? 'processing' : action === 'resolve' ? 'resolved' : 'pending';
+      message.success(`告警${action === 'accept' ? '已接受' : action === 'resolve' ? '已解决' : '已拒绝'}`);
+      
+      setHandleVisible(false);
+    });
   };
 
   const handleProcess = (record: AlarmRecord) => {

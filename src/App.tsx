@@ -20,8 +20,12 @@ import Radar from './pages/monitoring/Radar';
 import AerospaceRisk from './pages/monitoring/AerospaceRisk';
 import Console from './pages/reporting/Console';
 import HistoryQuery from './pages/reporting/HistoryQuery';
+import DataReportingMonitor from './pages/DataReportingMonitor';
+import ReportCenter from './pages/ReportCenter';
+import BasicInfoManagement from './pages/BasicInfoManagement';
 import AccountManagement from './pages/AccountManagement';
 import SystemConfig from './pages/SystemConfig';
+import LayerManagement from './pages/LayerManagement';
 import './App.css';
 
 const App: React.FC = () => {
@@ -49,6 +53,10 @@ const App: React.FC = () => {
               <Route path="data-reporting" element={<DataReporting />} />
               <Route path="data-reporting/console" element={<Console />} />
               <Route path="data-reporting/history-query" element={<HistoryQuery />} />
+              <Route path="data-reporting-monitor" element={<DataReportingMonitor />} />
+              <Route path="report-center" element={<ReportCenter />} />
+              <Route path="basic-info-management" element={<BasicInfoManagement />} />
+              <Route path="layer-management" element={<LayerManagement />} />
               <Route path="account-management" element={<AccountManagement />} />
               <Route path="system-config" element={<SystemConfig />} />
             </Route>

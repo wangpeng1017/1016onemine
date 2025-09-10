@@ -14,6 +14,11 @@ import {
   Form,
   Descriptions,
   Tabs,
+  DatePicker,
+  Timeline,
+  Badge,
+  Progress,
+  Divider,
 } from 'antd';
 import {
   SearchOutlined,
@@ -22,6 +27,10 @@ import {
   DeleteOutlined,
   PlusOutlined,
   ReloadOutlined,
+  ToolOutlined,
+  WarningOutlined,
+  CheckCircleOutlined,
+  ClockCircleOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
@@ -39,15 +48,43 @@ interface Device {
   batteryLevel?: number;
   signalStrength?: number;
   installDate: string;
+  maintenanceRecords?: MaintenanceRecord[];
+  faultRecords?: FaultRecord[];
+}
+
+interface MaintenanceRecord {
+  id: string;
+  date: string;
+  type: 'routine' | 'repair' | 'upgrade';
+  description: string;
+  technician: string;
+  status: 'completed' | 'pending' | 'cancelled';
+  cost?: number;
+}
+
+interface FaultRecord {
+  id: string;
+  reportTime: string;
+  faultType: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  description: string;
+  status: 'open' | 'in_progress' | 'resolved';
+  resolveTime?: string;
+  solution?: string;
 }
 
 const DeviceManagement: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [detailVisible, setDetailVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
+  const [maintenanceVisible, setMaintenanceVisible] = useState(false);
+  const [faultVisible, setFaultVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
   const [activeTab, setActiveTab] = useState('all');
+  const [detailTab, setDetailTab] = useState('info');
   const [form] = Form.useForm();
+  const [maintenanceForm] = Form.useForm();
+  const [faultForm] = Form.useForm();
 
   // 模拟数据
   const mockData: Device[] = [
@@ -62,6 +99,38 @@ const DeviceManagement: React.FC = () => {
       batteryLevel: 85,
       signalStrength: 92,
       installDate: '2023-06-15',
+      maintenanceRecords: [
+        {
+          id: 'M001',
+          date: '2025-01-10',
+          type: 'routine',
+          description: '定期检查雷达天线和信号质量',
+          technician: '张维修',
+          status: 'completed',
+          cost: 200
+        },
+        {
+          id: 'M002',
+          date: '2024-12-15',
+          type: 'repair',
+          description: '更换电池模块',
+          technician: '李技师',
+          status: 'completed',
+          cost: 800
+        }
+      ],
+      faultRecords: [
+        {
+          id: 'F001',
+          reportTime: '2024-11-20 14:30:00',
+          faultType: '信号异常',
+          severity: 'medium',
+          description: '雷达信号强度下降，可能是天线松动',
+          status: 'resolved',
+          resolveTime: '2024-11-21 10:00:00',
+          solution: '重新固定天线，调整角度'
+        }
+      ]
     },
     {
       key: '2',
@@ -204,6 +273,13 @@ const DeviceManagement: React.FC = () => {
           </Button>
           <Button
             type="link"
+            icon={<ToolOutlined />}
+            onClick={() => handleMaintenance(record)}
+          >
+            维护
+          </Button>
+          <Button
+            type="link"
             danger
             icon={<DeleteOutlined />}
             onClick={() => handleDelete(record)}
@@ -234,6 +310,18 @@ const DeviceManagement: React.FC = () => {
         console.log('删除设备:', device.id);
       },
     });
+  };
+
+  const handleMaintenance = (device: Device) => {
+    setSelectedDevice(device);
+    maintenanceForm.resetFields();
+    setMaintenanceVisible(true);
+  };
+
+  const handleFault = (device: Device) => {
+    setSelectedDevice(device);
+    faultForm.resetFields();
+    setFaultVisible(true);
   };
 
   const handleAdd = () => {
@@ -389,44 +477,168 @@ const DeviceManagement: React.FC = () => {
             关闭
           </Button>,
         ]}
-        width={700}
+        width={900}
       >
         {selectedDevice && (
-          <Descriptions column={2} bordered>
-            <Descriptions.Item label="设备ID">
-              {selectedDevice.id}
-            </Descriptions.Item>
-            <Descriptions.Item label="设备名称">
-              {selectedDevice.name}
-            </Descriptions.Item>
-            <Descriptions.Item label="设备类型">
-              {selectedDevice.type}
-            </Descriptions.Item>
-            <Descriptions.Item label="安装位置">
-              {selectedDevice.location}
-            </Descriptions.Item>
-            <Descriptions.Item label="设备状态">
-              <Tag color={statusConfig[selectedDevice.status].color}>
-                {statusConfig[selectedDevice.status].text}
-              </Tag>
-            </Descriptions.Item>
-            <Descriptions.Item label="安装日期">
-              {selectedDevice.installDate}
-            </Descriptions.Item>
-            <Descriptions.Item label="最后更新">
-              {selectedDevice.lastUpdate}
-            </Descriptions.Item>
-            {selectedDevice.batteryLevel && (
-              <Descriptions.Item label="电池电量">
-                {selectedDevice.batteryLevel}%
-              </Descriptions.Item>
-            )}
-            {selectedDevice.signalStrength && (
-              <Descriptions.Item label="信号强度">
-                {selectedDevice.signalStrength}%
-              </Descriptions.Item>
-            )}
-          </Descriptions>
+          <Tabs activeKey={detailTab} onChange={setDetailTab}>
+            <TabPane tab="基本信息" key="info">
+              <Descriptions column={2} bordered>
+                <Descriptions.Item label="设备ID">
+                  {selectedDevice.id}
+                </Descriptions.Item>
+                <Descriptions.Item label="设备名称">
+                  {selectedDevice.name}
+                </Descriptions.Item>
+                <Descriptions.Item label="设备类型">
+                  {selectedDevice.type}
+                </Descriptions.Item>
+                <Descriptions.Item label="安装位置">
+                  {selectedDevice.location}
+                </Descriptions.Item>
+                <Descriptions.Item label="设备状态">
+                  <Tag color={statusConfig[selectedDevice.status].color}>
+                    {statusConfig[selectedDevice.status].text}
+                  </Tag>
+                </Descriptions.Item>
+                <Descriptions.Item label="安装日期">
+                  {selectedDevice.installDate}
+                </Descriptions.Item>
+                <Descriptions.Item label="最后更新">
+                  {selectedDevice.lastUpdate}
+                </Descriptions.Item>
+                {selectedDevice.batteryLevel && (
+                  <Descriptions.Item label="电池电量">
+                    <Progress 
+                      percent={selectedDevice.batteryLevel} 
+                      size="small"
+                      status={selectedDevice.batteryLevel > 20 ? 'active' : 'exception'}
+                    />
+                  </Descriptions.Item>
+                )}
+                {selectedDevice.signalStrength && (
+                  <Descriptions.Item label="信号强度">
+                    <Progress 
+                      percent={selectedDevice.signalStrength} 
+                      size="small"
+                      strokeColor="#52c41a"
+                    />
+                  </Descriptions.Item>
+                )}
+              </Descriptions>
+            </TabPane>
+            
+            <TabPane tab="维护记录" key="maintenance">
+              <div style={{ marginBottom: 16 }}>
+                <Button 
+                  type="primary" 
+                  icon={<PlusOutlined />}
+                  onClick={() => handleMaintenance(selectedDevice)}
+                >
+                  新增维护记录
+                </Button>
+              </div>
+              <Timeline>
+                {selectedDevice.maintenanceRecords?.map(record => (
+                  <Timeline.Item
+                    key={record.id}
+                    dot={
+                      record.status === 'completed' ? 
+                        <CheckCircleOutlined style={{ color: '#52c41a' }} /> :
+                        record.status === 'pending' ?
+                          <ClockCircleOutlined style={{ color: '#1890ff' }} /> :
+                          <WarningOutlined style={{ color: '#faad14' }} />
+                    }
+                  >
+                    <div>
+                      <div style={{ fontWeight: 'bold' }}>
+                        {record.type === 'routine' ? '例行维护' : 
+                         record.type === 'repair' ? '故障维修' : '设备升级'}
+                        <Tag 
+                          color={
+                            record.status === 'completed' ? 'green' :
+                            record.status === 'pending' ? 'blue' : 'orange'
+                          }
+                          style={{ marginLeft: 8 }}
+                        >
+                          {record.status === 'completed' ? '已完成' :
+                           record.status === 'pending' ? '进行中' : '已取消'}
+                        </Tag>
+                      </div>
+                      <div style={{ color: '#666', fontSize: '12px' }}>
+                        {record.date} | 技术员: {record.technician}
+                        {record.cost && ` | 费用: ¥${record.cost}`}
+                      </div>
+                      <div style={{ marginTop: 4 }}>{record.description}</div>
+                    </div>
+                  </Timeline.Item>
+                )) || <div style={{ textAlign: 'center', color: '#999' }}>暂无维护记录</div>}
+              </Timeline>
+            </TabPane>
+            
+            <TabPane tab="故障记录" key="fault">
+              <div style={{ marginBottom: 16 }}>
+                <Button 
+                  type="primary" 
+                  icon={<PlusOutlined />}
+                  onClick={() => handleFault(selectedDevice)}
+                >
+                  报告故障
+                </Button>
+              </div>
+              <Timeline>
+                {selectedDevice.faultRecords?.map(record => (
+                  <Timeline.Item
+                    key={record.id}
+                    dot={
+                      record.status === 'resolved' ? 
+                        <CheckCircleOutlined style={{ color: '#52c41a' }} /> :
+                        record.status === 'in_progress' ?
+                          <ClockCircleOutlined style={{ color: '#1890ff' }} /> :
+                          <WarningOutlined style={{ color: '#ff4d4f' }} />
+                    }
+                  >
+                    <div>
+                      <div style={{ fontWeight: 'bold' }}>
+                        {record.faultType}
+                        <Tag 
+                          color={
+                            record.severity === 'critical' ? 'red' :
+                            record.severity === 'high' ? 'orange' :
+                            record.severity === 'medium' ? 'yellow' : 'blue'
+                          }
+                          style={{ marginLeft: 8 }}
+                        >
+                          {record.severity === 'critical' ? '严重' :
+                           record.severity === 'high' ? '高' :
+                           record.severity === 'medium' ? '中' : '低'}
+                        </Tag>
+                        <Tag 
+                          color={
+                            record.status === 'resolved' ? 'green' :
+                            record.status === 'in_progress' ? 'blue' : 'red'
+                          }
+                          style={{ marginLeft: 4 }}
+                        >
+                          {record.status === 'resolved' ? '已解决' :
+                           record.status === 'in_progress' ? '处理中' : '待处理'}
+                        </Tag>
+                      </div>
+                      <div style={{ color: '#666', fontSize: '12px' }}>
+                        报告时间: {record.reportTime}
+                        {record.resolveTime && ` | 解决时间: ${record.resolveTime}`}
+                      </div>
+                      <div style={{ marginTop: 4 }}>{record.description}</div>
+                      {record.solution && (
+                        <div style={{ marginTop: 4, padding: 8, backgroundColor: '#f6ffed', border: '1px solid #b7eb8f', borderRadius: 4 }}>
+                          <strong>解决方案:</strong> {record.solution}
+                        </div>
+                      )}
+                    </div>
+                  </Timeline.Item>
+                )) || <div style={{ textAlign: 'center', color: '#999' }}>暂无故障记录</div>}
+              </Timeline>
+            </TabPane>
+          </Tabs>
         )}
       </Modal>
 
@@ -489,6 +701,136 @@ const DeviceManagement: React.FC = () => {
               </Form.Item>
             </Col>
           </Row>
+        </Form>
+      </Modal>
+
+      {/* 维护记录弹窗 */}
+      <Modal
+        title="新增维护记录"
+        open={maintenanceVisible}
+        onCancel={() => setMaintenanceVisible(false)}
+        onOk={() => {
+          maintenanceForm.validateFields().then(values => {
+            console.log('新增维护记录:', values);
+            setMaintenanceVisible(false);
+          });
+        }}
+        width={600}
+      >
+        <Form form={maintenanceForm} layout="vertical">
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="type"
+                label="维护类型"
+                rules={[{ required: true, message: '请选择维护类型' }]}
+              >
+                <Select placeholder="请选择维护类型">
+                  <Option value="routine">例行维护</Option>
+                  <Option value="repair">故障维修</Option>
+                  <Option value="upgrade">设备升级</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="date"
+                label="维护日期"
+                rules={[{ required: true, message: '请选择维护日期' }]}
+              >
+                <DatePicker style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item
+            name="description"
+            label="维护描述"
+            rules={[{ required: true, message: '请输入维护描述' }]}
+          >
+            <Input.TextArea rows={3} placeholder="请详细描述维护内容" />
+          </Form.Item>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="technician"
+                label="技术员"
+                rules={[{ required: true, message: '请输入技术员姓名' }]}
+              >
+                <Input placeholder="请输入技术员姓名" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="cost" label="维护费用">
+                <Input placeholder="请输入维护费用" addonAfter="元" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item name="status" label="维护状态" initialValue="pending">
+            <Select>
+              <Option value="pending">进行中</Option>
+              <Option value="completed">已完成</Option>
+              <Option value="cancelled">已取消</Option>
+            </Select>
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* 故障记录弹窗 */}
+      <Modal
+        title="报告故障"
+        open={faultVisible}
+        onCancel={() => setFaultVisible(false)}
+        onOk={() => {
+          faultForm.validateFields().then(values => {
+            console.log('新增故障记录:', values);
+            setFaultVisible(false);
+          });
+        }}
+        width={600}
+      >
+        <Form form={faultForm} layout="vertical">
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="faultType"
+                label="故障类型"
+                rules={[{ required: true, message: '请输入故障类型' }]}
+              >
+                <Input placeholder="请输入故障类型" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="severity"
+                label="严重程度"
+                rules={[{ required: true, message: '请选择严重程度' }]}
+              >
+                <Select placeholder="请选择严重程度">
+                  <Option value="low">低</Option>
+                  <Option value="medium">中</Option>
+                  <Option value="high">高</Option>
+                  <Option value="critical">严重</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item
+            name="description"
+            label="故障描述"
+            rules={[{ required: true, message: '请输入故障描述' }]}
+          >
+            <Input.TextArea rows={3} placeholder="请详细描述故障现象和可能原因" />
+          </Form.Item>
+          <Form.Item name="status" label="处理状态" initialValue="open">
+            <Select>
+              <Option value="open">待处理</Option>
+              <Option value="in_progress">处理中</Option>
+              <Option value="resolved">已解决</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item name="solution" label="解决方案">
+            <Input.TextArea rows={2} placeholder="如已解决，请输入解决方案" />
+          </Form.Item>
         </Form>
       </Modal>
     </div>
