@@ -25,7 +25,6 @@ import ReportCenter from './pages/ReportCenter';
 import BasicInfoManagement from './pages/BasicInfoManagement';
 import AccountManagement from './pages/AccountManagement';
 import SystemConfig from './pages/SystemConfig';
-import LayerManagement from './pages/LayerManagement';
 import './App.css';
 
 const App: React.FC = () => {
@@ -56,7 +55,6 @@ const App: React.FC = () => {
               <Route path="data-reporting-monitor" element={<DataReportingMonitor />} />
               <Route path="report-center" element={<ReportCenter />} />
               <Route path="basic-info-management" element={<BasicInfoManagement />} />
-              <Route path="layer-management" element={<LayerManagement />} />
               <Route path="account-management" element={<AccountManagement />} />
               <Route path="system-config" element={<SystemConfig />} />
             </Route>

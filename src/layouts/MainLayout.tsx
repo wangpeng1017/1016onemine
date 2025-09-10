@@ -130,16 +130,6 @@ const MainLayout: React.FC = () => {
       label: '报告与文档中心',
     },
     {
-      key: 'basic-info-management',
-      icon: <InfoCircleOutlined />,
-      label: '基础信息管理',
-    },
-    {
-      key: 'layer-management',
-      icon: <AppstoreOutlined />,
-      label: '图层管理',
-    },
-    {
       key: 'account-management',
       icon: <UserOutlined />,
       label: '账号管理',
