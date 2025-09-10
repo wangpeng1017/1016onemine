@@ -120,11 +120,6 @@ const MainLayout: React.FC = () => {
       ],
     },
     {
-      key: 'data-reporting-monitor',
-      icon: <MonitorOutlined />,
-      label: '数据上报监控',
-    },
-    {
       key: 'report-center',
       icon: <FileTextOutlined />,
       label: '报告与文档中心',

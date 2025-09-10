@@ -12,12 +12,17 @@ import {
   message,
   Select,
   DatePicker,
+  Modal,
+  Form,
+  Input,
+  InputNumber,
 } from 'antd';
 import {
   ReloadOutlined,
   PlayCircleOutlined,
   PauseCircleOutlined,
   SettingOutlined,
+  PlusOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
@@ -41,6 +46,8 @@ const Console: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<ConsoleData[]>([]);
   const [selectedType, setSelectedType] = useState<string>('all');
+  const [createModalVisible, setCreateModalVisible] = useState(false);
+  const [form] = Form.useForm();
 
   // 模拟控制台数据
   const mockData: ConsoleData[] = [
@@ -238,6 +245,28 @@ const Console: React.FC = () => {
     message.info('推送设置功能开发中...');
   };
 
+  const handleCreateTask = () => {
+    setCreateModalVisible(true);
+  };
+
+  const handleCreateSubmit = async () => {
+    try {
+      const values = await form.validateFields();
+      console.log('新建任务数据:', values);
+      message.success('任务创建成功！');
+      setCreateModalVisible(false);
+      form.resetFields();
+      loadData(); // 刷新数据
+    } catch (error) {
+      console.error('表单验证失败:', error);
+    }
+  };
+
+  const handleCreateCancel = () => {
+    setCreateModalVisible(false);
+    form.resetFields();
+  };
+
   const filteredData = data.filter(item => {
     if (selectedType !== 'all' && item.pushFrequency !== selectedType) {
       return false;
@@ -317,6 +346,12 @@ const Console: React.FC = () => {
             <Space>
               <Button
                 type="primary"
+                icon={<PlusOutlined />}
+                onClick={handleCreateTask}
+              >
+                新建任务
+              </Button>
+              <Button
                 icon={<PlayCircleOutlined />}
                 onClick={handleStartUpload}
               >
@@ -361,6 +396,260 @@ const Console: React.FC = () => {
           className="custom-table"
         />
       </Card>
+
+      {/* 新建任务弹窗 */}
+      <Modal
+        title="新建推送任务"
+        open={createModalVisible}
+        onOk={handleCreateSubmit}
+        onCancel={handleCreateCancel}
+        width={800}
+        okText="创建任务"
+        cancelText="取消"
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={{
+            frequency: '频率/月',
+          }}
+        >
+          {/* 基本信息 */}
+          <Card title="基本信息" size="small" style={{ marginBottom: 16 }}>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="taskName"
+                  label="任务名称"
+                  rules={[{ required: true, message: '请输入任务名称' }]}
+                >
+                  <Input placeholder="请输入任务名称" />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="serverPath"
+                  label="前置服务器"
+                  rules={[{ required: true, message: '请输入前置服务器地址' }]}
+                >
+                  <Input placeholder="ftp://172.41.90.16" />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col span={8}>
+                <Form.Item
+                  name="startTime"
+                  label="开始时间"
+                  rules={[{ required: true, message: '请选择开始时间' }]}
+                >
+                  <DatePicker
+                    style={{ width: '100%' }}
+                    showTime
+                    placeholder="选择开始时间"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  name="endTime"
+                  label="结束时间"
+                  rules={[{ required: true, message: '请选择结束时间' }]}
+                >
+                  <DatePicker
+                    style={{ width: '100%' }}
+                    showTime
+                    placeholder="选择结束时间"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  name="frequency"
+                  label="频率"
+                  rules={[{ required: true, message: '请选择推送频率' }]}
+                >
+                  <Select placeholder="选择推送频率">
+                    <Option value="频率/月">频率/月</Option>
+                    <Option value="频率/半年">频率/半年</Option>
+                    <Option value="频率/年">频率/年</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+          </Card>
+
+          {/* 监测字段配置 */}
+          <Card title="监测字段配置" size="small">
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="deviceCode"
+                  label="设备编号"
+                  rules={[{ required: true, message: '请输入设备编号' }]}
+                >
+                  <Input placeholder="请输入设备编号" />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="alertLevel"
+                  label="警报级别"
+                  rules={[{ required: true, message: '请选择警报级别' }]}
+                >
+                  <Select placeholder="选择警报级别">
+                    <Option value="正常">正常</Option>
+                    <Option value="注意">注意</Option>
+                    <Option value="预警">预警</Option>
+                    <Option value="危险">危险</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+            
+            <Row gutter={16}>
+              <Col span={8}>
+                <Form.Item
+                  name="horizontalDisplacement"
+                  label="水平位移 (mm)"
+                  rules={[{ required: true, message: '请输入水平位移值' }]}
+                >
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    placeholder="0.00"
+                    precision={2}
+                    min={0}
+                    addonAfter="mm"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  name="settlementDisplacement"
+                  label="沉降位移 (mm)"
+                  rules={[{ required: true, message: '请输入沉降位移值' }]}
+                >
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    placeholder="0.00"
+                    precision={2}
+                    min={0}
+                    addonAfter="mm"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  name="horizontalVelocity"
+                  label="水平速度 (mm/h)"
+                  rules={[{ required: true, message: '请输入水平速度值' }]}
+                >
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    placeholder="0.00"
+                    precision={2}
+                    min={0}
+                    addonAfter="mm/h"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={16}>
+              <Col span={8}>
+                <Form.Item
+                  name="settlementVelocity"
+                  label="沉降速度 (mm/h)"
+                  rules={[{ required: true, message: '请输入沉降速度值' }]}
+                >
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    placeholder="0.00"
+                    precision={2}
+                    min={0}
+                    addonAfter="mm/h"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  name="horizontalAcceleration"
+                  label="水平加速度 (mm/h²)"
+                  rules={[{ required: true, message: '请输入水平加速度值' }]}
+                >
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    placeholder="0.00"
+                    precision={2}
+                    min={0}
+                    addonAfter="mm/h²"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  name="settlementAcceleration"
+                  label="沉降加速度 (mm/h²)"
+                  rules={[{ required: true, message: '请输入沉降加速度值' }]}
+                >
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    placeholder="0.00"
+                    precision={2}
+                    min={0}
+                    addonAfter="mm/h²"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={16}>
+              <Col span={8}>
+                <Form.Item
+                  name="duration"
+                  label="持续时间 (小时)"
+                  rules={[{ required: true, message: '请输入持续时间' }]}
+                >
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    placeholder="0"
+                    min={0}
+                    addonAfter="小时"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  name="createTime"
+                  label="创建时间"
+                >
+                  <DatePicker
+                    style={{ width: '100%' }}
+                    showTime
+                    placeholder="选择创建时间"
+                    disabled
+                    value={dayjs()}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  name="modifyTime"
+                  label="修改时间"
+                >
+                  <DatePicker
+                    style={{ width: '100%' }}
+                    showTime
+                    placeholder="选择修改时间"
+                    disabled
+                    value={dayjs()}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Card>
+        </Form>
+      </Modal>
     </div>
   );
 };
