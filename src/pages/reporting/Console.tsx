@@ -27,16 +27,14 @@ const { RangePicker } = DatePicker;
 
 interface ConsoleData {
   id: string;
-  deviceType: string;
-  deviceId: string;
-  deviceName: string;
-  dataType: string;
-  uploadStatus: 'success' | 'failed' | 'uploading';
-  lastUpload: string;
-  nextUpload: string;
-  uploadCount: number;
-  failCount: number;
-  successRate: number;
+  taskName: string;
+  serverPath: string;
+  pushFrequency: string;
+  nextPushTime: string;
+  remainingDays: string;
+  latestPushTime: string;
+  latestPushStatus: 'success' | 'failed' | 'uploading';
+  taskDescription: string;
 }
 
 const Console: React.FC = () => {
@@ -48,165 +46,165 @@ const Console: React.FC = () => {
   const mockData: ConsoleData[] = [
     {
       id: '1',
-      deviceType: 'GNSS',
-      deviceId: 'GP-29',
-      deviceName: 'GNSS监测点29号',
-      dataType: '表面位移数据',
-      uploadStatus: 'success',
-      lastUpload: '2025-09-08 11:30:00',
-      nextUpload: '2025-09-08 11:35:00',
-      uploadCount: 1440,
-      failCount: 2,
-      successRate: 99.86,
+      taskName: '矿山基础信息',
+      serverPath: 'ftp://172.41.90.16\n路径: /home/yingjiting/652222053708',
+      pushFrequency: '频率/月',
+      nextPushTime: '2025-10-07',
+      remainingDays: '剩余26天',
+      latestPushTime: '2025-09-07',
+      latestPushStatus: 'success',
+      taskDescription: '矿山基础信息包括露天矿山名称、露天矿山编号、露天矿山类型、露天矿山地址、矿区范围、监管主体编号等。',
     },
     {
       id: '2',
-      deviceType: '裂缝计',
-      deviceId: 'CG-001',
-      deviceName: '裂缝计1号',
-      dataType: '裂缝监测数据',
-      uploadStatus: 'uploading',
-      lastUpload: '2025-09-08 11:25:00',
-      nextUpload: '2025-09-08 11:30:00',
-      uploadCount: 720,
-      failCount: 5,
-      successRate: 99.31,
+      taskName: '边坡基础信息',
+      serverPath: 'ftp://172.41.90.16\n路径: /home/yingjiting/652222053708',
+      pushFrequency: '频率/月',
+      nextPushTime: '2025-10-07',
+      remainingDays: '剩余26天',
+      latestPushTime: '2025-09-07',
+      latestPushStatus: 'success',
+      taskDescription: '边坡基础信息包括露天矿山编号、边坡名称、边坡编号、边坡范围、边坡地质信息、边坡设计参数和现状参数等组成。',
     },
     {
       id: '3',
-      deviceType: '土压力计',
-      deviceId: 'EP-001',
-      deviceName: '土压力计1号',
-      dataType: '土压力数据',
-      uploadStatus: 'failed',
-      lastUpload: '2025-09-08 11:20:00',
-      nextUpload: '2025-09-08 11:25:00',
-      uploadCount: 360,
-      failCount: 15,
-      successRate: 95.83,
+      taskName: '台阶基础信息',
+      serverPath: 'ftp://172.41.90.16\n路径: /home/yingjiting/652222053708',
+      pushFrequency: '频率/月',
+      nextPushTime: '2025-10-07',
+      remainingDays: '剩余26天',
+      latestPushTime: '2025-09-07',
+      latestPushStatus: 'success',
+      taskDescription: '采场台阶基础信息包括露天矿山编号、边坡名称、采场边坡编号、台阶名称、台阶编号、台阶范围、各台阶设计参数等组成。',
     },
     {
       id: '4',
-      deviceType: '地下水',
-      deviceId: 'GW-001',
-      deviceName: '地下水监测点1号',
-      dataType: '地下水数据',
-      uploadStatus: 'success',
-      lastUpload: '2025-09-08 11:28:00',
-      nextUpload: '2025-09-08 11:33:00',
-      uploadCount: 288,
-      failCount: 1,
-      successRate: 99.65,
+      taskName: '边坡卫星形变风险信息',
+      serverPath: 'ftp://172.41.90.16\n路径: /home/yingjiting/652222053708',
+      pushFrequency: '频率/半年',
+      nextPushTime: '2026-01-04',
+      remainingDays: '剩余115天',
+      latestPushTime: '2025-07-04',
+      latestPushStatus: 'success',
+      taskDescription: '边坡卫星形变信息包括边坡编号、地质信息、风险级别、风险范围、风险参数等。',
     },
     {
       id: '5',
-      deviceType: '雨量计',
-      deviceId: 'RG-001',
-      deviceName: '雨量计1号',
-      dataType: '降雨数据',
-      uploadStatus: 'success',
-      lastUpload: '2025-09-08 11:32:00',
-      nextUpload: '2025-09-08 11:37:00',
-      uploadCount: 144,
-      failCount: 0,
-      successRate: 100.00,
+      taskName: '越界开采风险',
+      serverPath: 'ftp://172.41.90.16\n路径: /home/yingjiting/652222053708',
+      pushFrequency: '频率/半年',
+      nextPushTime: '2026-01-04',
+      remainingDays: '剩余115天',
+      latestPushTime: '2025-07-04',
+      latestPushStatus: 'success',
+      taskDescription: '超层越界风险包括越界开采风险和超层开采风险。',
     },
     {
       id: '6',
-      deviceType: '雷达',
-      deviceId: 'RD-001',
-      deviceName: '雷达监测仪1号',
-      dataType: '雷达监测数据',
-      uploadStatus: 'uploading',
-      lastUpload: '2025-09-08 11:29:00',
-      nextUpload: '2025-09-08 11:34:00',
-      uploadCount: 480,
-      failCount: 8,
-      successRate: 98.33,
+      taskName: '超层开采风险信息',
+      serverPath: 'ftp://172.41.90.16\n路径: /home/yingjiting/652222053708',
+      pushFrequency: '频率/半年',
+      nextPushTime: '2026-01-04',
+      remainingDays: '剩余115天',
+      latestPushTime: '2025-07-04',
+      latestPushStatus: 'success',
+      taskDescription: '超层越界风险包括越界开采风险和超层开采风险。',
     },
   ];
 
   const columns: ColumnsType<ConsoleData> = [
     {
-      title: '设备类型',
-      dataIndex: 'deviceType',
-      key: 'deviceType',
-      width: 100,
+      title: '序号',
+      key: 'index',
+      width: 60,
+      render: (_, __, index) => index + 1,
     },
     {
-      title: '设备编号',
-      dataIndex: 'deviceId',
-      key: 'deviceId',
-      width: 100,
-    },
-    {
-      title: '设备名称',
-      dataIndex: 'deviceName',
-      key: 'deviceName',
+      title: '任务名称',
+      dataIndex: 'taskName',
+      key: 'taskName',
       width: 150,
     },
     {
-      title: '数据类型',
-      dataIndex: 'dataType',
-      key: 'dataType',
+      title: '前置服务器',
+      dataIndex: 'serverPath',
+      key: 'serverPath',
+      width: 200,
+      render: (text: string) => (
+        <div style={{ whiteSpace: 'pre-line', fontSize: '12px' }}>
+          {text}
+        </div>
+      ),
+    },
+    {
+      title: '推送频率',
+      dataIndex: 'pushFrequency',
+      key: 'pushFrequency',
+      width: 100,
+    },
+    {
+      title: '下次推送时间',
+      dataIndex: 'nextPushTime',
+      key: 'nextPushTime',
       width: 120,
     },
     {
-      title: '上报状态',
-      dataIndex: 'uploadStatus',
-      key: 'uploadStatus',
-      width: 100,
+      title: '距离下次剩余天数',
+      dataIndex: 'remainingDays',
+      key: 'remainingDays',
+      width: 130,
+      render: (text: string) => (
+        <span style={{ color: '#1890ff' }}>{text}</span>
+      ),
+    },
+    {
+      title: '最新推送时间',
+      dataIndex: 'latestPushTime',
+      key: 'latestPushTime',
+      width: 120,
+    },
+    {
+      title: '最新推送状态',
+      dataIndex: 'latestPushStatus',
+      key: 'latestPushStatus',
+      width: 120,
       render: (status: string) => {
         const statusConfig = {
           success: { color: 'green', text: '成功' },
           failed: { color: 'red', text: '失败' },
-          uploading: { color: 'blue', text: '上报中' },
+          uploading: { color: 'blue', text: '推送中' },
         };
         const config = statusConfig[status as keyof typeof statusConfig];
         return <Tag color={config.color}>{config.text}</Tag>;
       },
     },
     {
-      title: '最后上报时间',
-      dataIndex: 'lastUpload',
-      key: 'lastUpload',
-      width: 150,
-    },
-    {
-      title: '下次上报时间',
-      dataIndex: 'nextUpload',
-      key: 'nextUpload',
-      width: 150,
-    },
-    {
-      title: '上报次数',
-      dataIndex: 'uploadCount',
-      key: 'uploadCount',
-      width: 100,
-    },
-    {
-      title: '失败次数',
-      dataIndex: 'failCount',
-      key: 'failCount',
-      width: 100,
-      render: (value: number) => (
-        <span style={{ color: value > 10 ? '#ff4d4f' : value > 5 ? '#faad14' : '#52c41a' }}>
-          {value}
-        </span>
+      title: '任务简介',
+      dataIndex: 'taskDescription',
+      key: 'taskDescription',
+      width: 300,
+      render: (text: string) => (
+        <div style={{ 
+          maxWidth: '280px', 
+          overflow: 'hidden', 
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          fontSize: '12px'
+        }} title={text}>
+          {text}
+        </div>
       ),
     },
     {
-      title: '成功率',
-      dataIndex: 'successRate',
-      key: 'successRate',
+      title: '操作',
+      key: 'action',
       width: 120,
-      render: (value: number) => (
-        <Progress
-          percent={value}
-          size="small"
-          status={value < 95 ? 'exception' : value < 99 ? 'active' : 'success'}
-          format={(percent) => `${percent?.toFixed(1)}%`}
-        />
+      render: (_, record) => (
+        <Space size="small">
+          <Button type="link" size="small">
+            历史查询
+          </Button>
+        </Space>
       ),
     },
   ];
@@ -229,19 +227,19 @@ const Console: React.FC = () => {
   }, []);
 
   const handleStartUpload = () => {
-    message.success('开始数据上报');
+    message.success('开始数据推送');
   };
 
   const handleStopUpload = () => {
-    message.warning('暂停数据上报');
+    message.warning('暂停数据推送');
   };
 
   const handleSettings = () => {
-    message.info('上报设置功能开发中...');
+    message.info('推送设置功能开发中...');
   };
 
   const filteredData = data.filter(item => {
-    if (selectedType !== 'all' && item.deviceType !== selectedType) {
+    if (selectedType !== 'all' && item.pushFrequency !== selectedType) {
       return false;
     }
     return true;
@@ -249,10 +247,10 @@ const Console: React.FC = () => {
 
   const statistics = {
     total: filteredData.length,
-    success: filteredData.filter(item => item.uploadStatus === 'success').length,
-    failed: filteredData.filter(item => item.uploadStatus === 'failed').length,
-    uploading: filteredData.filter(item => item.uploadStatus === 'uploading').length,
-    avgSuccessRate: filteredData.reduce((sum, item) => sum + item.successRate, 0) / filteredData.length,
+    success: filteredData.filter(item => item.latestPushStatus === 'success').length,
+    failed: filteredData.filter(item => item.latestPushStatus === 'failed').length,
+    uploading: filteredData.filter(item => item.latestPushStatus === 'uploading').length,
+    monthly: filteredData.filter(item => item.pushFrequency === '频率/月').length,
   };
 
   return (
@@ -264,7 +262,7 @@ const Console: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="设备总数"
+              title="任务总数"
               value={statistics.total}
               valueStyle={{ color: '#1890ff' }}
             />
@@ -273,7 +271,16 @@ const Console: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="上报成功"
+              title="月度任务"
+              value={statistics.monthly}
+              valueStyle={{ color: '#52c41a' }}
+            />
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card>
+            <Statistic
+              title="推送成功"
               value={statistics.success}
               valueStyle={{ color: '#52c41a' }}
             />
@@ -282,20 +289,9 @@ const Console: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="上报失败"
+              title="推送失败"
               value={statistics.failed}
               valueStyle={{ color: '#ff4d4f' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="平均成功率"
-              value={statistics.avgSuccessRate}
-              precision={1}
-              suffix="%"
-              valueStyle={{ color: statistics.avgSuccessRate > 95 ? '#52c41a' : '#faad14' }}
             />
           </Card>
         </Col>
@@ -307,17 +303,14 @@ const Console: React.FC = () => {
           <Col span={6}>
             <Select
               style={{ width: '100%' }}
-              placeholder="选择设备类型"
+              placeholder="选择推送频率"
               value={selectedType}
               onChange={setSelectedType}
             >
-              <Option value="all">全部设备</Option>
-              <Option value="GNSS">GNSS</Option>
-              <Option value="裂缝计">裂缝计</Option>
-              <Option value="土压力计">土压力计</Option>
-              <Option value="地下水">地下水</Option>
-              <Option value="雨量计">雨量计</Option>
-              <Option value="雷达">雷达</Option>
+              <Option value="all">全部频率</Option>
+              <Option value="频率/月">频率/月</Option>
+              <Option value="频率/半年">频率/半年</Option>
+              <Option value="频率/年">频率/年</Option>
             </Select>
           </Col>
           <Col span={18}>
@@ -327,19 +320,19 @@ const Console: React.FC = () => {
                 icon={<PlayCircleOutlined />}
                 onClick={handleStartUpload}
               >
-                开始上报
+                开始推送
               </Button>
               <Button
                 icon={<PauseCircleOutlined />}
                 onClick={handleStopUpload}
               >
-                暂停上报
+                暂停推送
               </Button>
               <Button
                 icon={<SettingOutlined />}
                 onClick={handleSettings}
               >
-                上报设置
+                推送设置
               </Button>
               <Button
                 icon={<ReloadOutlined />}
