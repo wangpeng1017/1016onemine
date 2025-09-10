@@ -209,37 +209,37 @@ const ReportCenter: React.FC = () => {
   };
 
   // 预览文档
-  const handlePreview = (document: DocumentInfo) => {
-    setSelectedDocument(document);
+  const handlePreview = (doc: DocumentInfo) => {
+    setSelectedDocument(doc);
     setPreviewModalVisible(true);
   };
 
   // 下载文档
-  const handleDownload = (document: DocumentInfo) => {
+  const handleDownload = (doc: DocumentInfo) => {
     // 模拟下载
     const link = document.createElement('a');
-    link.href = document.url;
-    link.download = document.name;
+    link.href = doc.url;
+    link.download = doc.name;
     link.click();
     
     // 更新下载次数
-    setDocuments(prev => prev.map(doc => 
-      doc.id === document.id 
-        ? { ...doc, downloadCount: doc.downloadCount + 1 }
-        : doc
+    setDocuments(prev => prev.map(d => 
+      d.id === doc.id 
+        ? { ...d, downloadCount: d.downloadCount + 1 }
+        : d
     ));
     
-    message.success(`开始下载 ${document.name}`);
+    message.success(`开始下载 ${doc.name}`);
   };
 
   // 删除文档
-  const handleDelete = (document: DocumentInfo) => {
+  const handleDelete = (doc: DocumentInfo) => {
     Modal.confirm({
       title: '确认删除',
-      content: `确定要删除文档 "${document.name}" 吗？`,
+      content: `确定要删除文档 "${doc.name}" 吗？`,
       onOk: () => {
-        setDocuments(prev => prev.filter(doc => doc.id !== document.id));
-        setFilteredDocuments(prev => prev.filter(doc => doc.id !== document.id));
+        setDocuments(prev => prev.filter(d => d.id !== doc.id));
+        setFilteredDocuments(prev => prev.filter(d => d.id !== doc.id));
         message.success('文档删除成功');
       }
     });
