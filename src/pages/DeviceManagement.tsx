@@ -21,6 +21,7 @@ import {
   Progress,
   Divider,
   Switch,
+  Popover,
 } from 'antd';
 import {
   SearchOutlined,
@@ -33,6 +34,7 @@ import {
   WarningOutlined,
   CheckCircleOutlined,
   ClockCircleOutlined,
+  ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
@@ -426,7 +428,12 @@ radarForm.setFieldsValue({
 
   return (
     <div>
-      <div className="page-title">设备管理</div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="page-title">设备管理</div>
+        <Popover content="新增设备来源于数据集成平台，部分业务字段可通过编辑功能维护" trigger="click">
+          <ExclamationCircleOutlined style={{ color: '#faad14', fontSize: 16, cursor: 'pointer' }} />
+        </Popover>
+      </div>
       
       {/* 设备统计 */}
       <Row gutter={16} style={{ marginBottom: 16 }}>
@@ -491,9 +498,6 @@ radarForm.setFieldsValue({
               </Button>
               <Button icon={<ReloadOutlined />} onClick={handleRefresh}>
                 刷新
-              </Button>
-              <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-                新增设备
               </Button>
             </Space>
           </Col>

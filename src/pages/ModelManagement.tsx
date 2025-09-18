@@ -162,6 +162,10 @@ const initialData: ModelRow[] = [
 
 const ModelManagement: React.FC = () => {
   const [data, setData] = useState<ModelRow[]>(initialData);
+  const [addVisible, setAddVisible] = useState(false);
+  const [editVisible, setEditVisible] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<ModelRow | null>(null);
+  const [form] = (Form as any).useForm?.() || ([] as any);
 
   const toggleBasemap = (record: ModelRow, checked: boolean) => {
     setData(prev => prev.map(item => (item.key === record.key ? { ...item, isBasemap: checked } : item)));
@@ -197,12 +201,18 @@ const ModelManagement: React.FC = () => {
       title: '操作', key: 'action', width: 160,
       render: (_: any, record) => (
         <Space size="small">
-          <Button type="link" icon={<EditOutlined />}>编辑</Button>
+          <Button type="link" icon={<EditOutlined />} onClick={() => onEdit(record)}>编辑</Button>
           <Button type="link" icon={<EyeOutlined />}>查看</Button>
         </Space>
       ),
     },
   ];
+
+  const onEdit = (row: ModelRow) => {
+    setSelectedRow(row);
+    if (form?.setFieldsValue) form.setFieldsValue(row);
+    setEditVisible(true);
+  };
 
   const handleModelNameClick = (row: ModelRow) => {
     Modal.info({
@@ -243,6 +253,7 @@ const ModelManagement: React.FC = () => {
             <Space>
               <Input placeholder="输入关键词" prefix={<SearchOutlined />} allowClear />
               <Button type="primary" icon={<SearchOutlined />}>查询</Button>
+              <Button type="primary" onClick={() => setAddVisible(true)}>新增模型</Button>
             </Space>
           </Col>
         </Row>
@@ -256,6 +267,102 @@ const ModelManagement: React.FC = () => {
           pagination={{ pageSize: 20, total: data.length, showTotal: (total) => `共 ${total} 条` }}
         />
       </Card>
+
+      {/* 新增/编辑 模型弹窗 */}
+      <Modal
+        title={selectedRow ? '编辑模型' : '新增模型'}
+        open={addVisible || editVisible}
+        onCancel={() => { setAddVisible(false); setEditVisible(false); setSelectedRow(null); }}
+        onOk={() => {
+          if (form?.validateFields) {
+            form.validateFields().then(values => {
+              if (selectedRow) {
+                setData(prev => prev.map(r => r.key === selectedRow.key ? { ...selectedRow, ...values } : r));
+              } else {
+                const newKey = String(Date.now());
+                setData(prev => [{ key: newKey, index: prev.length + 1, ...values }, ...prev]);
+              }
+              setAddVisible(false);
+              setEditVisible(false);
+              setSelectedRow(null);
+            });
+          } else {
+            setAddVisible(false);
+            setEditVisible(false);
+            setSelectedRow(null);
+          }
+        }}
+        width={700}
+      >
+        <Form form={form} layout="vertical" initialValues={{ category: '倾斜三维', region: '采场', dataType: '3DTILES', serviceType: 'OGC3DTILES', isBasemap: false, serviceStatus: '服务正常' }}>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="name" label="模型名称" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="category" label="数据类别" rules={[{ required: true }]}>
+                <Select>
+                  <Option value="倾斜三维">倾斜三维</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="region" label="所属区域" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="collectTime" label="采集时间" rules={[{ required: true }]}>
+                <Input placeholder="YYYY-MM-DD HH:mm:ss" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="dataType" label="数据类型" rules={[{ required: true }]}>
+                <Select>
+                  <Option value="3DTILES">3DTILES</Option>
+                  <Option value="PTS">PTS</Option>
+                  <Option value="DXF">DXF</Option>
+                  <Option value="DWG">DWG</Option>
+                  <Option value="GEOTIFF">GEOTIFF</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="serviceType" label="服务类型" rules={[{ required: true }]}>
+                <Select>
+                  <Option value="OGC3DTILES">OGC3DTILES</Option>
+                  <Option value="HSPC">HSPC</Option>
+                  <Option value="WMS">WMS</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="isBasemap" label="模型服务" valuePropName="checked">
+                <Switch checkedChildren="服务" unCheckedChildren="无服务" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="serviceStatus" label="服务状态" rules={[{ required: true }]}>
+                <Select>
+                  <Option value="服务正常">服务正常</Option>
+                  <Option value="服务异常">服务异常</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item name="serviceZip" label="服务ZIP压缩包">
+            <Input placeholder="请上传服务zip（示例占位：表单里可集成上传控件）" />
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };

@@ -499,27 +499,8 @@ const ThresholdSettings: React.FC = () => {
     <div>
       <div className="page-title">阈值设置</div>
       
-      <Card className="custom-card">
-        <Tabs
-          activeKey={activeTab}
-          onChange={setActiveTab}
-          items={tabItems.map(item => ({
-            key: item.key,
-            label: item.label,
-            children: (
-              <div>
-                <div style={{ marginBottom: 16 }}>
-                  <h3>{item.title}</h3>
-                </div>
-                {renderThresholdForm(item.key)}
-              </div>
-            )
-          }))}
-        />
-      </Card>
-
-      {/* 阈值规则管理 */}
-      <Card title="阈值规则管理" style={{ marginTop: 16 }} className="custom-card">
+      {/* 仅保留阈值规则管理 */}
+      <Card title="阈值规则管理" className="custom-card">
         <div style={{ marginBottom: 16 }}>
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAddRule}>
             新增规则
