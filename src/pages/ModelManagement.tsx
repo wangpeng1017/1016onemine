@@ -12,11 +12,14 @@ import {
   DatePicker,
   Switch,
   Modal,
+  Form,
+  Upload,
 } from 'antd';
 import {
   SearchOutlined,
   EyeOutlined,
   EditOutlined,
+  InboxOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
@@ -165,7 +168,9 @@ const ModelManagement: React.FC = () => {
   const [addVisible, setAddVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [selectedRow, setSelectedRow] = useState<ModelRow | null>(null);
-  const [form] = (Form as any).useForm?.() || ([] as any);
+  const [form] = Form.useForm();
+
+  const normFile = (e: any) => Array.isArray(e) ? e : e?.fileList;
 
   const toggleBasemap = (record: ModelRow, checked: boolean) => {
     setData(prev => prev.map(item => (item.key === record.key ? { ...item, isBasemap: checked } : item)));
@@ -358,8 +363,11 @@ const ModelManagement: React.FC = () => {
               </Form.Item>
             </Col>
           </Row>
-          <Form.Item name="serviceZip" label="服务ZIP压缩包">
-            <Input placeholder="请上传服务zip（示例占位：表单里可集成上传控件）" />
+          <Form.Item name="serviceZip" label="服务ZIP压缩包" valuePropName="fileList" getValueFromEvent={normFile}>
+            <Upload.Dragger name="files" multiple={false} beforeUpload={() => false} accept=".zip">
+              <p className="ant-upload-drag-icon"><InboxOutlined /></p>
+              <p className="ant-upload-text">点击或拖拽ZIP文件到此处（仅前端预览，不会实际上传）</p>
+            </Upload.Dragger>
           </Form.Item>
         </Form>
       </Modal>

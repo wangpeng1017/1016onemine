@@ -121,11 +121,6 @@ const MainLayout: React.FC = () => {
       ],
     },
     {
-      key: 'report-center',
-      icon: <FileTextOutlined />,
-      label: '报告与文档中心',
-    },
-    {
       key: 'basic-platform',
       icon: <CloudOutlined />,
       label: '基础平台',
