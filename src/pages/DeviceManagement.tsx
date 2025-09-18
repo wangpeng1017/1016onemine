@@ -6,6 +6,7 @@ import {
   Space,
   Tag,
   Input,
+  InputNumber,
   Select,
   Row,
   Col,
@@ -19,6 +20,7 @@ import {
   Badge,
   Progress,
   Divider,
+  Switch,
 } from 'antd';
 import {
   SearchOutlined,
@@ -104,6 +106,11 @@ const DeviceManagement: React.FC = () => {
   const [form] = Form.useForm();
   const [maintenanceForm] = Form.useForm();
   const [faultForm] = Form.useForm();
+  // 雷达编辑/查看状态
+  const [radarDetailVisible, setRadarDetailVisible] = useState(false);
+  const [radarEditVisible, setRadarEditVisible] = useState(false);
+  const [selectedRadar, setSelectedRadar] = useState<RadarRow | null>(null);
+  const [radarForm] = Form.useForm();
 
   // 模拟数据
   const mockData: Device[] = [
@@ -234,9 +241,18 @@ const DeviceManagement: React.FC = () => {
     { title: '东', dataIndex: 'east', key: 'east', width: 130 },
     { title: '北', dataIndex: 'north', key: 'north', width: 130 },
     { title: '高度', dataIndex: 'height', key: 'height', width: 100 },
+    {
+      title: '操作', key: 'action', width: 160,
+      render: (_: any, record) => (
+        <Space size="small">
+          <Button type="link" onClick={() => handleRadarEdit(record)}>编辑</Button>
+          <Button type="link" onClick={() => handleRadarView(record)}>查看</Button>
+        </Space>
+      ),
+    },
   ];
 
-  const radarData: RadarRow[] = [
+  const [radarData, setRadarData] = useState<RadarRow[]>([
     {
       key: 'r1',
       index: 1,
@@ -254,7 +270,7 @@ const DeviceManagement: React.FC = () => {
       north: 4928818.942,
       height: 825,
     },
-  ];
+  ]);
 
   const columns: ColumnsType<Device> = [
     {
@@ -311,38 +327,11 @@ const DeviceManagement: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      width: 200,
+      width: 180,
       render: (_, record) => (
         <Space size="small">
-          <Button
-            type="link"
-            icon={<EyeOutlined />}
-            onClick={() => handleViewDetail(record)}
-          >
-            查看
-          </Button>
-          <Button
-            type="link"
-            icon={<EditOutlined />}
-            onClick={() => handleEdit(record)}
-          >
-            编辑
-          </Button>
-          <Button
-            type="link"
-            icon={<ToolOutlined />}
-            onClick={() => handleMaintenance(record)}
-          >
-            维护
-          </Button>
-          <Button
-            type="link"
-            danger
-            icon={<DeleteOutlined />}
-            onClick={() => handleDelete(record)}
-          >
-            删除
-          </Button>
+          <Button type="link" icon={<EyeOutlined />} onClick={() => handleViewDetail(record)}>查看</Button>
+          <Button type="link" icon={<EditOutlined />} onClick={() => handleEdit(record)}>编辑</Button>
         </Space>
       ),
     },
@@ -415,6 +404,31 @@ const DeviceManagement: React.FC = () => {
           return true;
       }
     });
+  };
+
+  // 雷达编辑/查看操作
+  const handleRadarView = (row: RadarRow) => {
+    setSelectedRadar(row);
+    setRadarDetailVisible(true);
+  };
+  const handleRadarEdit = (row: RadarRow) => {
+    setSelectedRadar(row);
+    radarForm.setFieldsValue({
+      projectName: row.projectName,
+      radarName: row.radarName,
+      manufacturer: row.manufacturer,
+      serialNo: row.serialNo,
+      location: row.location,
+      owner: row.owner,
+      online: row.online,
+      lon: row.lon,
+      lat: row.lat,
+      ellipsoidH: row.ellipsoidH,
+      east: row.east,
+      north: row.north,
+      height: row.height,
+    });
+    setRadarEditVisible(true);
   };
 
   return (
@@ -517,10 +531,11 @@ const DeviceManagement: React.FC = () => {
             columns={radarColumns}
             dataSource={radarData}
             pagination={{ pageSize: 10, total: radarData.length, showTotal: (t)=>`共 ${t} 条` }}
-            scroll={{ x: 1600 }}
+            scroll={{ x: 1800 }}
           />
         ) : (
           <Table
+            rowKey="key"
             columns={columns}
             dataSource={getFilteredData()}
             loading={loading}
@@ -536,6 +551,128 @@ const DeviceManagement: React.FC = () => {
           />
         )}
       </Card>
+
+      {/* 雷达-查看弹窗 */}
+      <Modal
+        title="雷达设备详情"
+        open={radarDetailVisible}
+        onCancel={() => setRadarDetailVisible(false)}
+        footer={<Button onClick={() => setRadarDetailVisible(false)}>关闭</Button>}
+        width={900}
+      >
+        {selectedRadar && (
+          <Descriptions bordered column={2}>
+            <Descriptions.Item label="项目名称">{selectedRadar.projectName}</Descriptions.Item>
+            <Descriptions.Item label="雷达名称">{selectedRadar.radarName}</Descriptions.Item>
+            <Descriptions.Item label="雷达制造商">{selectedRadar.manufacturer}</Descriptions.Item>
+            <Descriptions.Item label="雷达序列号">{selectedRadar.serialNo}</Descriptions.Item>
+            <Descriptions.Item label="位置">{selectedRadar.location}</Descriptions.Item>
+            <Descriptions.Item label="负责人">{selectedRadar.owner}</Descriptions.Item>
+            <Descriptions.Item label="在线状态">
+              <Tag color={selectedRadar.online ? 'green' : undefined}>{selectedRadar.online ? '在线' : '离线'}</Tag>
+            </Descriptions.Item>
+            <Descriptions.Item label="大地高">{selectedRadar.ellipsoidH}</Descriptions.Item>
+            <Descriptions.Item label="经度(°)">{selectedRadar.lon}</Descriptions.Item>
+            <Descriptions.Item label="纬度(°)">{selectedRadar.lat}</Descriptions.Item>
+            <Descriptions.Item label="东">{selectedRadar.east}</Descriptions.Item>
+            <Descriptions.Item label="北">{selectedRadar.north}</Descriptions.Item>
+            <Descriptions.Item label="高度">{selectedRadar.height}</Descriptions.Item>
+          </Descriptions>
+        )}
+      </Modal>
+
+      {/* 雷达-编辑弹窗 */}
+      <Modal
+        title="编辑雷达设备"
+        open={radarEditVisible}
+        onCancel={() => setRadarEditVisible(false)}
+        onOk={() => {
+          radarForm.validateFields().then(values => {
+            if (!selectedRadar) return;
+            setRadarData(prev => prev.map(r => r.key === selectedRadar.key ? { ...selectedRadar, ...values } as RadarRow : r));
+            setRadarEditVisible(false);
+          });
+        }}
+        width={700}
+      >
+        <Form form={radarForm} layout="vertical">
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="projectName" label="项目名称" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="radarName" label="雷达名称" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="manufacturer" label="雷达制造商" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="serialNo" label="雷达序列号" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item name="location" label="位置" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="owner" label="负责人" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="online" label="在线状态" valuePropName="checked">
+                <Switch />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={6}>
+              <Form.Item name="lon" label="经度(°)" rules={[{ required: true }]}>
+                <InputNumber style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item name="lat" label="纬度(°)" rules={[{ required: true }]}>
+                <InputNumber style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item name="ellipsoidH" label="大地高" rules={[{ required: true }]}>
+                <InputNumber style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item name="height" label="高度" rules={[{ required: true }]}>
+                <InputNumber style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="east" label="东" rules={[{ required: true }]}>
+                <InputNumber style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="north" label="北" rules={[{ required: true }]}>
+                <InputNumber style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </Modal>
 
       {/* 设备详情弹窗 */}
       <Modal
