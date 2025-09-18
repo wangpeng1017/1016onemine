@@ -292,7 +292,7 @@ const DeviceManagement: React.FC = () => {
       width: 120,
     },
     {
-      title: '安装位置',
+      title: '位置',
       dataIndex: 'location',
       key: 'location',
       width: 150,
@@ -312,17 +312,6 @@ const DeviceManagement: React.FC = () => {
       dataIndex: 'lastUpdate',
       key: 'lastUpdate',
       width: 160,
-    },
-    {
-      title: '电池电量',
-      dataIndex: 'batteryLevel',
-      key: 'batteryLevel',
-      width: 100,
-      render: (level?: number) => {
-        if (level === undefined) return '-';
-        const color = level > 50 ? '#52c41a' : level > 20 ? '#faad14' : '#ff4d4f';
-        return <span style={{ color }}>{level}%</span>;
-      },
     },
     {
       title: '操作',
@@ -437,7 +426,7 @@ const DeviceManagement: React.FC = () => {
       
       {/* 设备统计 */}
       <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col span={6}>
+        <Col span={8}>
           <Card>
             <Statistic
               title="设备总数"
@@ -446,7 +435,7 @@ const DeviceManagement: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <Card>
             <Statistic
               title="在线设备"
@@ -455,21 +444,12 @@ const DeviceManagement: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <Card>
             <Statistic
               title="离线设备"
               value={2}
               valueStyle={{ color: '#ff4d4f' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="维护中"
-              value={2}
-              valueStyle={{ color: '#faad14' }}
             />
           </Card>
         </Col>
@@ -498,7 +478,6 @@ const DeviceManagement: React.FC = () => {
             <Select placeholder="设备状态" style={{ width: '100%' }}>
               <Option value="online">在线</Option>
               <Option value="offline">离线</Option>
-              <Option value="maintenance">维护中</Option>
             </Select>
           </Col>
           <Col span={6}>
