@@ -10,10 +10,10 @@ import {
   Row,
   Col,
   DatePicker,
-  Switch,
   Modal,
   Form,
   Upload,
+  message,
 } from 'antd';
 import {
   SearchOutlined,
@@ -36,7 +36,8 @@ interface ModelRow {
   collectTime: string; // 采集时间
   dataType: '3DTILES' | 'PTS' | 'DXF' | 'DWG' | 'GEOTIFF'; // 数据类型
   serviceType: 'OGC3DTILES' | 'HSPC' | 'WMS'; // 服务类型
-  isBasemap: boolean; // 是否底图
+  isBasemap: boolean; // 是否有模型服务（true: 已上传）
+  serviceZipName?: string; // 已上传服务包名称（可选）
   serviceStatus: '服务正常' | '服务异常' | '维护中'; // 服务状态
 }
 
@@ -172,9 +173,6 @@ const ModelManagement: React.FC = () => {
 
   const normFile = (e: any) => Array.isArray(e) ? e : e?.fileList;
 
-  const toggleBasemap = (record: ModelRow, checked: boolean) => {
-    setData(prev => prev.map(item => (item.key === record.key ? { ...item, isBasemap: checked } : item)));
-  };
 
   const columns: ColumnsType<ModelRow> = [
     { title: '序号', dataIndex: 'index', key: 'index', width: 70 },
@@ -190,12 +188,11 @@ const ModelManagement: React.FC = () => {
     { title: '数据类型', dataIndex: 'dataType', key: 'dataType', width: 110 },
     { title: '服务类型', dataIndex: 'serviceType', key: 'serviceType', width: 130 },
     {
-      title: '是否底图', dataIndex: 'isBasemap', key: 'isBasemap', width: 140,
+      title: '模型服务', dataIndex: 'isBasemap', key: 'isBasemap', width: 140,
       render: (_: any, record) => (
-        <Space>
-          <Switch size="small" checked={record.isBasemap} onChange={(checked) => toggleBasemap(record, checked)} />
-          <span>{record.isBasemap ? '底图' : '非底图'}</span>
-        </Space>
+        <Tag color={record.isBasemap ? 'blue' : 'default'}>
+          {record.isBasemap ? (record.serviceZipName ? `已上传(${record.serviceZipName})` : '已上传') : '未上传'}
+        </Tag>
       ),
     },
     {
@@ -279,23 +276,32 @@ const ModelManagement: React.FC = () => {
         open={addVisible || editVisible}
         onCancel={() => { setAddVisible(false); setEditVisible(false); setSelectedRow(null); }}
         onOk={() => {
-          if (form?.validateFields) {
-            form.validateFields().then(values => {
-              if (selectedRow) {
-                setData(prev => prev.map(r => r.key === selectedRow.key ? { ...selectedRow, ...values } : r));
-              } else {
-                const newKey = String(Date.now());
-                setData(prev => [{ key: newKey, index: prev.length + 1, ...values }, ...prev]);
-              }
-              setAddVisible(false);
-              setEditVisible(false);
-              setSelectedRow(null);
-            });
-          } else {
+          if (!form?.validateFields) {
+            setAddVisible(false); setEditVisible(false); setSelectedRow(null); return;
+          }
+          form.validateFields().then(values => {
+            const fileList = values.serviceZip as any[] | undefined;
+            // 新增时必须上传zip
+            if (!selectedRow && (!fileList || fileList.length === 0)) {
+              message.error('请上传模型服务zip压缩包');
+              return;
+            }
+            const zipName = fileList && fileList.length > 0 ? fileList[0].name : selectedRow?.serviceZipName;
+            const patch = {
+              ...values,
+              isBasemap: !!zipName,
+              serviceZipName: zipName,
+            } as Partial<ModelRow>;
+            if (selectedRow) {
+              setData(prev => prev.map(r => r.key === selectedRow.key ? { ...selectedRow, ...patch } as ModelRow : r));
+            } else {
+              const newKey = String(Date.now());
+              setData(prev => [{ key: newKey, index: prev.length + 1, ...patch } as ModelRow, ...prev]);
+            }
             setAddVisible(false);
             setEditVisible(false);
             setSelectedRow(null);
-          }
+          });
         }}
         width={700}
       >
@@ -349,11 +355,6 @@ const ModelManagement: React.FC = () => {
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="isBasemap" label="模型服务" valuePropName="checked">
-                <Switch checkedChildren="服务" unCheckedChildren="无服务" />
-              </Form.Item>
-            </Col>
             <Col span={12}>
               <Form.Item name="serviceStatus" label="服务状态" rules={[{ required: true }]}>
                 <Select>
