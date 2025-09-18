@@ -11,6 +11,9 @@ interface DeviceTypeRow {
   remark?: string;     // 备注
 }
 
+// 表单使用的类型，不包含 key，避免与新增时的 key 冲突
+type DeviceTypeForm = Omit<DeviceTypeRow, 'key'>;
+
 const initialRows: DeviceTypeRow[] = [
   { key: '1', name: '雷达传感器', code: 'RADAR', enabled: true },
   { key: '2', name: '压力传感器', code: 'PRESSURE', enabled: true },
@@ -24,7 +27,7 @@ const DeviceTypes: React.FC = () => {
   const [rows, setRows] = useState<DeviceTypeRow[]>(initialRows);
   const [visible, setVisible] = useState(false);
   const [editing, setEditing] = useState<DeviceTypeRow | null>(null);
-  const [form] = Form.useForm<DeviceTypeRow>();
+  const [form] = Form.useForm<DeviceTypeForm>();
 
   const columns: ColumnsType<DeviceTypeRow> = useMemo(() => [
     { title: '序号', dataIndex: 'index', key: 'index', width: 80, render: (_: any, __: DeviceTypeRow, idx: number) => idx + 1 },
@@ -49,9 +52,10 @@ const DeviceTypes: React.FC = () => {
     setVisible(true);
   };
 
-  const onEdit = (row: DeviceTypeRow) => {
+const onEdit = (row: DeviceTypeRow) => {
     setEditing(row);
-    form.setFieldsValue(row);
+    const { key, ...payload } = row;
+    form.setFieldsValue(payload);
     setVisible(true);
   };
 
@@ -63,8 +67,8 @@ const DeviceTypes: React.FC = () => {
     });
   };
 
-  const onSave = async () => {
-    const values = await form.validateFields();
+const onSave = async () => {
+    const values = (await form.validateFields()) as DeviceTypeForm;
     if (editing) {
       setRows(prev => prev.map(i => i.key === editing.key ? { ...editing, ...values } : i));
     } else {
