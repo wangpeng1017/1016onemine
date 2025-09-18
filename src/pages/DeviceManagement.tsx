@@ -80,7 +80,8 @@ interface RadarRow {
   key: string;
   index: number;         // 序号
   projectName: string;   // 项目名称
-  radarName: string;     // 雷达名称
+  deviceId: string;      // 设备ID
+  radarName: string;     // 设备名称（原雷达名称）
   manufacturer: string;  // 雷达制造商
   serialNo: string;      // 雷达序列号
   location: string;      // 位置
@@ -226,10 +227,11 @@ const DeviceManagement: React.FC = () => {
   };
 
   // 雷达设备列定义与测试数据
-  const radarColumns: ColumnsType<RadarRow> = [
+const radarColumns: ColumnsType<RadarRow> = [
     { title: '序号', dataIndex: 'index', key: 'index', width: 70 },
     { title: '项目名称', dataIndex: 'projectName', key: 'projectName', width: 200 },
-    { title: '雷达名称', dataIndex: 'radarName', key: 'radarName', width: 120 },
+    { title: '设备ID', dataIndex: 'deviceId', key: 'deviceId', width: 140 },
+    { title: '设备名称', dataIndex: 'radarName', key: 'radarName', width: 120 },
     { title: '雷达制造商', dataIndex: 'manufacturer', key: 'manufacturer', width: 140 },
     { title: '雷达序列号', dataIndex: 'serialNo', key: 'serialNo', width: 200 },
     { title: '位置', dataIndex: 'location', key: 'location', width: 100 },
@@ -252,11 +254,12 @@ const DeviceManagement: React.FC = () => {
     },
   ];
 
-  const [radarData, setRadarData] = useState<RadarRow[]>([
+const [radarData, setRadarData] = useState<RadarRow[]>([
     {
       key: 'r1',
       index: 1,
       projectName: '石头梅一号露天煤矿',
+      deviceId: 'RD-0001',
       radarName: 'S_SAR',
       manufacturer: '中安国泰',
       serialNo: '65222205370801000001',
@@ -402,8 +405,9 @@ const DeviceManagement: React.FC = () => {
   };
   const handleRadarEdit = (row: RadarRow) => {
     setSelectedRadar(row);
-    radarForm.setFieldsValue({
+radarForm.setFieldsValue({
       projectName: row.projectName,
+      deviceId: row.deviceId,
       radarName: row.radarName,
       manufacturer: row.manufacturer,
       serialNo: row.serialNo,
@@ -541,8 +545,9 @@ const DeviceManagement: React.FC = () => {
       >
         {selectedRadar && (
           <Descriptions bordered column={2}>
-            <Descriptions.Item label="项目名称">{selectedRadar.projectName}</Descriptions.Item>
-            <Descriptions.Item label="雷达名称">{selectedRadar.radarName}</Descriptions.Item>
+<Descriptions.Item label="项目名称">{selectedRadar.projectName}</Descriptions.Item>
+            <Descriptions.Item label="设备ID">{selectedRadar.deviceId}</Descriptions.Item>
+            <Descriptions.Item label="设备名称">{selectedRadar.radarName}</Descriptions.Item>
             <Descriptions.Item label="雷达制造商">{selectedRadar.manufacturer}</Descriptions.Item>
             <Descriptions.Item label="雷达序列号">{selectedRadar.serialNo}</Descriptions.Item>
             <Descriptions.Item label="位置">{selectedRadar.location}</Descriptions.Item>
@@ -581,13 +586,18 @@ const DeviceManagement: React.FC = () => {
                 <Input />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item name="radarName" label="雷达名称" rules={[{ required: true }]}>
+<Col span={12}>
+              <Form.Item name="radarName" label="设备名称" rules={[{ required: true }]}>
                 <Input />
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={16}>
+<Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="deviceId" label="设备ID" rules={[{ required: true }]}> 
+                <Input />
+              </Form.Item>
+            </Col>
             <Col span={12}>
               <Form.Item name="manufacturer" label="雷达制造商" rules={[{ required: true }]}>
                 <Input />
