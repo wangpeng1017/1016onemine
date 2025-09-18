@@ -50,6 +50,10 @@ const MainLayout: React.FC = () => {
       key: 'device-management',
       icon: <DatabaseOutlined />,
       label: '设备管理',
+      children: [
+        { key: 'device-management/all', label: '全部设备' },
+        { key: 'device-management/radar', label: '雷达设备' },
+      ],
     },
     {
       key: 'model-management',
@@ -145,6 +149,17 @@ const MainLayout: React.FC = () => {
       ],
     },
     {
+      key: 'data-dictionary',
+      icon: <AppstoreOutlined />,
+      label: '数据字典',
+      children: [
+        {
+          key: 'data-dictionary/device-types',
+          label: '设备类型',
+        },
+      ],
+    },
+    {
       key: 'account-management',
       icon: <UserOutlined />,
       label: '账号管理',
@@ -182,6 +197,7 @@ const MainLayout: React.FC = () => {
 
   const getCurrentKey = () => {
     const path = location.pathname.slice(1);
+    if (path === 'device-management') return 'device-management/all';
     return path || 'home';
   };
 
