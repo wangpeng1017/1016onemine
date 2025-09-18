@@ -267,6 +267,7 @@ const ModelManagement: React.FC = () => {
           columns={columns}
           dataSource={data}
           pagination={{ pageSize: 20, total: data.length, showTotal: (total) => `共 ${total} 条` }}
+          scroll={{ x: 1600 }}
         />
       </Card>
 
@@ -364,10 +365,10 @@ const ModelManagement: React.FC = () => {
               </Form.Item>
             </Col>
           </Row>
-          <Form.Item name="serviceZip" label="服务ZIP压缩包" valuePropName="fileList" getValueFromEvent={normFile}>
+          <Form.Item name="serviceZip" label="模型服务" valuePropName="fileList" getValueFromEvent={normFile}>
             <Upload.Dragger name="files" multiple={false} beforeUpload={() => false} accept=".zip">
               <p className="ant-upload-drag-icon"><InboxOutlined /></p>
-              <p className="ant-upload-text">点击或拖拽ZIP文件到此处（仅前端预览，不会实际上传）</p>
+              <p className="ant-upload-text">点击或拖拽ZIP文件到此处</p>
             </Upload.Dragger>
           </Form.Item>
         </Form>
