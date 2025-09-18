@@ -11,6 +11,7 @@ import {
   Col,
   DatePicker,
   Switch,
+  Modal,
 } from 'antd';
 import {
   SearchOutlined,
@@ -168,7 +169,9 @@ const ModelManagement: React.FC = () => {
 
   const columns: ColumnsType<ModelRow> = [
     { title: '序号', dataIndex: 'index', key: 'index', width: 70 },
-    { title: '模型名称', dataIndex: 'name', key: 'name', width: 220 },
+    { title: '模型名称', dataIndex: 'name', key: 'name', width: 220, render: (text: string, record) => (
+      <Button type="link" onClick={() => handleModelNameClick(record)}>{text}</Button>
+    ) },
     {
       title: '数据类别', dataIndex: 'category', key: 'category', width: 120,
       render: (text: string) => <Tag color="green">{text}</Tag>,
@@ -200,6 +203,14 @@ const ModelManagement: React.FC = () => {
       ),
     },
   ];
+
+  const handleModelNameClick = (row: ModelRow) => {
+    Modal.info({
+      title: '慧图云地图服务',
+      content: '显示慧图云发布的地图服务',
+      okText: '知道了',
+    });
+  };
 
   return (
     <div>
