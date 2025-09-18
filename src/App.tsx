@@ -28,7 +28,6 @@ import DataIntegration from './pages/basic-platform/DataIntegration';
 import AccountManagement from './pages/AccountManagement';
 import SystemConfig from './pages/SystemConfig';
 import DeviceTypes from './pages/data-dictionary/DeviceTypes';
-import RadarDevices from './pages/device/RadarDevices';
 import './App.css';
 
 const App: React.FC = () => {
@@ -41,8 +40,6 @@ const App: React.FC = () => {
               <Route index element={<Navigate to="/home" replace />} />
               <Route path="home" element={<Home />} />
               <Route path="device-management" element={<DeviceManagement />} />
-              <Route path="device-management/all" element={<DeviceManagement />} />
-              <Route path="device-management/radar" element={<RadarDevices />} />
               <Route path="model-management" element={<ModelManagement />} />
               <Route path="threshold-settings" element={<ThresholdSettings />} />
               <Route path="monitoring-data" element={<MonitoringData />} />

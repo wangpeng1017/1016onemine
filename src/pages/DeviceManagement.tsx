@@ -348,8 +348,10 @@ const DeviceManagement: React.FC = () => {
     if (activeTab === 'all') return mockData;
     return mockData.filter(device => {
       switch (activeTab) {
+        case 'radar':
+          return device.type === '雷达传感器';
         case 'sensor':
-          return ['雷达传感器', '压力传感器', '裂缝监测仪', '气象传感器', '水位传感器'].includes(device.type);
+          return ['压力传感器', '裂缝监测仪', '气象传感器', '水位传感器'].includes(device.type);
         case 'camera':
           return device.type === '监控设备';
         default:
@@ -448,6 +450,7 @@ const DeviceManagement: React.FC = () => {
       <Card className="custom-card">
         <Tabs activeKey={activeTab} onChange={setActiveTab}>
           <TabPane tab="全部设备" key="all" />
+          <TabPane tab="雷达设备" key="radar" />
           <TabPane tab="传感器设备" key="sensor" />
           <TabPane tab="监控设备" key="camera" />
         </Tabs>

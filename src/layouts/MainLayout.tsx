@@ -50,10 +50,6 @@ const MainLayout: React.FC = () => {
       key: 'device-management',
       icon: <DatabaseOutlined />,
       label: '设备管理',
-      children: [
-        { key: 'device-management/all', label: '全部设备' },
-        { key: 'device-management/radar', label: '雷达设备' },
-      ],
     },
     {
       key: 'model-management',
@@ -197,7 +193,6 @@ const MainLayout: React.FC = () => {
 
   const getCurrentKey = () => {
     const path = location.pathname.slice(1);
-    if (path === 'device-management') return 'device-management/all';
     return path || 'home';
   };
 
