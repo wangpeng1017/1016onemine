@@ -8,18 +8,22 @@ interface ThresholdItem {
   name: string; // 测点名称
   type: string; // 告警值类型，如：Y方向小时位移量/压力值/裂缝宽度/水位深度/振动速度
   unit?: string; // 单位（可选）；页面会根据 type 自动计算，若提供则作为回退
-  blue: number;   // 蓝色告警
-  yellow: number; // 黄色告警
-  orange: number; // 橙色告警
-  red: number;    // 红色告警
+  blueMin: number;  // 蓝色下限
+  blueMax: number;  // 蓝色上限
+  yellowMin: number;
+  yellowMax: number;
+  orangeMin: number;
+  orangeMax: number;
+  redMin: number;
+  redMax: number;
 }
 
 const initialData: ThresholdItem[] = [
-  { id: '1', name: 'GP-96', type: 'Y方向小时位移量', unit: 'mm', blue: 8, yellow: 10, orange: 12, red: 15 },
-  { id: '2', name: 'GP-95', type: 'Y方向小时位移量', unit: 'mm', blue: 8, yellow: 10, orange: 12, red: 15 },
-  { id: '3', name: 'GP-105', type: 'Y方向小时位移量', unit: 'mm', blue: 8, yellow: 10, orange: 12, red: 15 },
-  { id: '8', name: 'GP-96', type: 'Z方向小时位移量', unit: 'mm', blue: 10, yellow: 12.5, orange: 15, red: 17.5 },
-  { id: '9', name: 'GP-95', type: 'Z方向小时位移量', unit: 'mm', blue: 10, yellow: 12.5, orange: 15, red: 17.5 },
+  { id: '1', name: 'GP-96', type: 'Y方向小时位移量', unit: 'mm', blueMin: 6, blueMax: 8, yellowMin: 8, yellowMax: 10, orangeMin: 10, orangeMax: 12, redMin: 12, redMax: 15 },
+  { id: '2', name: 'GP-95', type: 'Y方向小时位移量', unit: 'mm', blueMin: 6, blueMax: 8, yellowMin: 8, yellowMax: 10, orangeMin: 10, orangeMax: 12, redMin: 12, redMax: 15 },
+  { id: '3', name: 'GP-105', type: 'Y方向小时位移量', unit: 'mm', blueMin: 6, blueMax: 8, yellowMin: 8, yellowMax: 10, orangeMin: 10, orangeMax: 12, redMin: 12, redMax: 15 },
+  { id: '8', name: 'GP-96', type: 'Z方向小时位移量', unit: 'mm', blueMin: 9, blueMax: 10, yellowMin: 10, yellowMax: 12.5, orangeMin: 12.5, orangeMax: 15, redMin: 15, redMax: 17.5 },
+  { id: '9', name: 'GP-95', type: 'Z方向小时位移量', unit: 'mm', blueMin: 9, blueMax: 10, yellowMin: 10, yellowMax: 12.5, orangeMin: 12.5, orangeMax: 15, redMin: 15, redMax: 17.5 },
 ];
 
 const typeUnitMap: Record<string, string> = {
@@ -54,11 +58,17 @@ const measurementCatalog: { name: string; type: string; group: string }[] = [
   ...['爆破振动','爆破振动1','爆破振动2'].map(n => ({ name: n, type: '振动速度', group: '爆破振动' })),
 ];
 
-const validateOrder = (v: { blue?: number; yellow?: number; orange?: number; red?: number }) => {
-  const { blue, yellow, orange, red } = v;
-  if ([blue, yellow, orange, red].some(x => x === undefined || x === null)) return '阈值不能为空';
-  if (!(Number(blue) < Number(yellow) && Number(yellow) < Number(orange) && Number(orange) < Number(red))) {
-    return '阈值需递增：蓝 < 黄 < 橙 < 红';
+const validateOrder = (v: Partial<ThresholdItem>) => {
+  const required = ['blueMin','blueMax','yellowMin','yellowMax','orangeMin','orangeMax','redMin','redMax'] as const;
+  if (required.some(k => (v as any)[k] === undefined || (v as any)[k] === null)) return '阈值范围不能为空';
+  const {
+    blueMin, blueMax, yellowMin, yellowMax, orangeMin, orangeMax, redMin, redMax
+  } = v as ThresholdItem;
+  if (!(blueMin < blueMax && yellowMin < yellowMax && orangeMin < orangeMax && redMin < redMax)) {
+    return '每个颜色的下限需小于上限';
+  }
+  if (!(blueMax <= yellowMin && yellowMax <= orangeMin && orangeMax <= redMin)) {
+    return '范围需有序且不重叠：蓝≤黄≤橙≤红（相邻可接壤）';
   }
   return '';
 };
@@ -107,7 +117,7 @@ const ThresholdSettingsSimple: React.FC = () => {
       return;
     }
     const nextId = (Math.max(0, ...data.map(d => Number(d.id))) + 1).toString();
-    setData(prev => [...prev, { id: nextId, name: values.name, type: values.type, blue: values.blue, yellow: values.yellow, orange: values.orange, red: values.red }]);
+    setData(prev => [...prev, { id: nextId, name: values.name, type: values.type, blueMin: values.blueMin, blueMax: values.blueMax, yellowMin: values.yellowMin, yellowMax: values.yellowMax, orangeMin: values.orangeMin, orangeMax: values.orangeMax, redMin: values.redMin, redMax: values.redMax }]);
     setAddOpen(false);
     message.success('已新增阈值规则');
     addForm.resetFields();
@@ -118,28 +128,44 @@ const ThresholdSettingsSimple: React.FC = () => {
     { title: '测点名称', dataIndex: 'name', width: 120 },
     { title: '告警值类型', dataIndex: 'type', width: 160 },
     {
-      title: '蓝色告警', dataIndex: 'blue', width: 110,
+      title: '蓝色告警', key: 'blue', width: 150,
       render: (_, r) => editingId === r.id ? (
-        <InputNumber value={rowDraft.blue} onChange={v => setRowDraft(s => ({ ...s, blue: Number(v) }))} style={{ width: '100%' }} />
-      ) : (<span>{r.blue}{getUnitByType(r.type, r.unit)}</span>)
+        <Space size={4}>
+          <InputNumber value={rowDraft.blueMin} onChange={v => setRowDraft(s => ({ ...s, blueMin: Number(v) }))} style={{ width: 60 }} />
+          <span>-</span>
+          <InputNumber value={rowDraft.blueMax} onChange={v => setRowDraft(s => ({ ...s, blueMax: Number(v) }))} style={{ width: 60 }} />
+        </Space>
+      ) : (<span>{r.blueMin}-{r.blueMax}{getUnitByType(r.type, r.unit)}</span>)
     },
     {
-      title: '黄色告警', dataIndex: 'yellow', width: 110,
+      title: '黄色告警', key: 'yellow', width: 150,
       render: (_, r) => editingId === r.id ? (
-        <InputNumber value={rowDraft.yellow} onChange={v => setRowDraft(s => ({ ...s, yellow: Number(v) }))} style={{ width: '100%' }} />
-      ) : (<span>{r.yellow}{getUnitByType(r.type, r.unit)}</span>)
+        <Space size={4}>
+          <InputNumber value={rowDraft.yellowMin} onChange={v => setRowDraft(s => ({ ...s, yellowMin: Number(v) }))} style={{ width: 60 }} />
+          <span>-</span>
+          <InputNumber value={rowDraft.yellowMax} onChange={v => setRowDraft(s => ({ ...s, yellowMax: Number(v) }))} style={{ width: 60 }} />
+        </Space>
+      ) : (<span>{r.yellowMin}-{r.yellowMax}{getUnitByType(r.type, r.unit)}</span>)
     },
     {
-      title: '橙色告警', dataIndex: 'orange', width: 110,
+      title: '橙色告警', key: 'orange', width: 150,
       render: (_, r) => editingId === r.id ? (
-        <InputNumber value={rowDraft.orange} onChange={v => setRowDraft(s => ({ ...s, orange: Number(v) }))} style={{ width: '100%' }} />
-      ) : (<span>{r.orange}{getUnitByType(r.type, r.unit)}</span>)
+        <Space size={4}>
+          <InputNumber value={rowDraft.orangeMin} onChange={v => setRowDraft(s => ({ ...s, orangeMin: Number(v) }))} style={{ width: 60 }} />
+          <span>-</span>
+          <InputNumber value={rowDraft.orangeMax} onChange={v => setRowDraft(s => ({ ...s, orangeMax: Number(v) }))} style={{ width: 60 }} />
+        </Space>
+      ) : (<span>{r.orangeMin}-{r.orangeMax}{getUnitByType(r.type, r.unit)}</span>)
     },
     {
-      title: '红色告警', dataIndex: 'red', width: 110,
+      title: '红色告警', key: 'red', width: 150,
       render: (_, r) => editingId === r.id ? (
-        <InputNumber value={rowDraft.red} onChange={v => setRowDraft(s => ({ ...s, red: Number(v) }))} style={{ width: '100%' }} />
-      ) : (<span>{r.red}{getUnitByType(r.type, r.unit)}</span>)
+        <Space size={4}>
+          <InputNumber value={rowDraft.redMin} onChange={v => setRowDraft(s => ({ ...s, redMin: Number(v) }))} style={{ width: 60 }} />
+          <span>-</span>
+          <InputNumber value={rowDraft.redMax} onChange={v => setRowDraft(s => ({ ...s, redMax: Number(v) }))} style={{ width: 60 }} />
+        </Space>
+      ) : (<span>{r.redMin}-{r.redMax}{getUnitByType(r.type, r.unit)}</span>)
     },
     {
       title: '操作', key: 'action', fixed: 'right', width: 160,
@@ -216,19 +242,51 @@ const ThresholdSettingsSimple: React.FC = () => {
               ))}
             </Select>
           </Form.Item>
-          <Form.Item name="blue" label="蓝色告警" rules={[{ required: true, message: '请输入' }]}>
-            <InputNumber style={{ width: '100%' }} />
+          <Form.Item label="蓝色告警（范围）" required>
+            <Space>
+              <Form.Item name="blueMin" noStyle rules={[{ required: true, message: '请输入下限' }]}>
+                <InputNumber style={{ width: 120 }} placeholder="下限" />
+              </Form.Item>
+              <span>-</span>
+              <Form.Item name="blueMax" noStyle rules={[{ required: true, message: '请输入上限' }]}>
+                <InputNumber style={{ width: 120 }} placeholder="上限" />
+              </Form.Item>
+            </Space>
           </Form.Item>
-          <Form.Item name="yellow" label="黄色告警" rules={[{ required: true, message: '请输入' }]}>
-            <InputNumber style={{ width: '100%' }} />
+          <Form.Item label="黄色告警（范围）" required>
+            <Space>
+              <Form.Item name="yellowMin" noStyle rules={[{ required: true, message: '请输入下限' }]}>
+                <InputNumber style={{ width: 120 }} placeholder="下限" />
+              </Form.Item>
+              <span>-</span>
+              <Form.Item name="yellowMax" noStyle rules={[{ required: true, message: '请输入上限' }]}>
+                <InputNumber style={{ width: 120 }} placeholder="上限" />
+              </Form.Item>
+            </Space>
           </Form.Item>
-          <Form.Item name="orange" label="橙色告警" rules={[{ required: true, message: '请输入' }]}>
-            <InputNumber style={{ width: '100%' }} />
+          <Form.Item label="橙色告警（范围）" required>
+            <Space>
+              <Form.Item name="orangeMin" noStyle rules={[{ required: true, message: '请输入下限' }]}>
+                <InputNumber style={{ width: 120 }} placeholder="下限" />
+              </Form.Item>
+              <span>-</span>
+              <Form.Item name="orangeMax" noStyle rules={[{ required: true, message: '请输入上限' }]}>
+                <InputNumber style={{ width: 120 }} placeholder="上限" />
+              </Form.Item>
+            </Space>
           </Form.Item>
-          <Form.Item name="red" label="红色告警" rules={[{ required: true, message: '请输入' }]}>
-            <InputNumber style={{ width: '100%' }} />
+          <Form.Item label="红色告警（范围）" required>
+            <Space>
+              <Form.Item name="redMin" noStyle rules={[{ required: true, message: '请输入下限' }]}>
+                <InputNumber style={{ width: 120 }} placeholder="下限" />
+              </Form.Item>
+              <span>-</span>
+              <Form.Item name="redMax" noStyle rules={[{ required: true, message: '请输入上限' }]}>
+                <InputNumber style={{ width: 120 }} placeholder="上限" />
+              </Form.Item>
+            </Space>
           </Form.Item>
-          <div style={{ color: '#999' }}>校验：蓝 &lt; 黄 &lt; 橙 &lt; 红</div>
+          <div style={{ color: '#999' }}>校验：每个颜色为范围且有序：蓝Max ≤ 黄Min ≤ 橙Min ≤ 红Min</div>
         </Form>
       </Modal>
     </Card>
