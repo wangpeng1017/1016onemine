@@ -27,6 +27,9 @@ interface ServerConfigItem {
   isGlobal: boolean;
 }
 
+// 表单不包含 key 字段，避免对象展开时重复 key 导致 TS 编译错误
+type FormValues = Omit<ServerConfigItem, 'key'>;
+
 const UploadSystemConfig: React.FC = () => {
   const [data, setData] = useState<ServerConfigItem[]>([
     {
@@ -60,7 +63,7 @@ const UploadSystemConfig: React.FC = () => {
 
   const [editOpen, setEditOpen] = useState(false);
   const [editing, setEditing] = useState<ServerConfigItem | null>(null);
-  const [form] = Form.useForm<ServerConfigItem>();
+  const [form] = Form.useForm<FormValues>();
 
   const columns: ColumnsType<ServerConfigItem> = [
     {
@@ -104,7 +107,10 @@ const UploadSystemConfig: React.FC = () => {
     setEditing(target);
     setEditOpen(true);
     form.resetFields();
-    if (target) form.setFieldsValue(target);
+    if (target) {
+      const { key, ...rest } = target;
+      form.setFieldsValue(rest as FormValues);
+    }
   };
 
   const onDelete = (key: string) => {
@@ -113,12 +119,13 @@ const UploadSystemConfig: React.FC = () => {
   };
 
   const handleOk = async () => {
-    const values = await form.validateFields();
+    const values = await form.validateFields(); // FormValues
     if (editing) {
-      setData(prev => prev.map(it => (it.key === editing.key ? { ...editing, ...values } : it)));
+      setData(prev => prev.map(it => (it.key === editing.key ? { ...editing, ...(values as FormValues) } : it)));
       message.success('已更新配置');
     } else {
-      setData(prev => [{ key: Date.now().toString(), ...values }, ...prev]);
+      const newItem: ServerConfigItem = { key: Date.now().toString(), ...(values as FormValues) };
+      setData(prev => [newItem, ...prev]);
       message.success('已新增配置');
     }
     setEditOpen(false);
