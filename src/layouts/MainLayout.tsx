@@ -100,10 +100,14 @@ const MainLayout: React.FC = () => {
         },
       ],
     },
-    {
+  {
       key: 'alarm-records',
       icon: <AlertOutlined />,
       label: '告警记录',
+      children: [
+        { key: 'alarm-records/point-alarms', label: '测点告警' },
+        { key: 'alarm-records/radar-alarms', label: '雷达告警' },
+      ],
     },
     {
       key: 'data-reporting',

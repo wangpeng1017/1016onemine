@@ -6,7 +6,10 @@ import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import DataReporting from './pages/DataReporting';
 import MonitoringData from './pages/MonitoringData';
+import { Navigate } from 'react-router-dom';
 import AlarmRecords from './pages/AlarmRecords';
+import PointAlarms from './pages/alarm/PointAlarms';
+import RadarAlarms from './pages/alarm/RadarAlarms';
 import DeviceManagement from './pages/DeviceManagement';
 import ThresholdSettingsSimple from './pages/ThresholdSettingsSimple';
 import SurfaceDisplacement from './pages/monitoring/SurfaceDisplacement';
@@ -54,7 +57,9 @@ const App: React.FC = () => {
               <Route path="monitoring-data/rain-gauge" element={<RainGauge />} />
               <Route path="monitoring-data/radar" element={<Radar />} />
               <Route path="monitoring-data/aerospace-risk" element={<AerospaceRisk />} />
-              <Route path="alarm-records" element={<AlarmRecords />} />
+<Route path="alarm-records" element={<Navigate to="/alarm-records/point-alarms" replace />} />
+              <Route path="alarm-records/point-alarms" element={<PointAlarms />} />
+              <Route path="alarm-records/radar-alarms" element={<RadarAlarms />} />
               <Route path="data-reporting" element={<DataReporting />} />
               <Route path="data-reporting/console" element={<Console />} />
               <Route path="data-reporting/history-query" element={<HistoryQuery />} />
