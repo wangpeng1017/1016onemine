@@ -1,0 +1,96 @@
+{
+  "send_time": "2025-07-04 19:47:04",
+  "data": [
+    {
+      "slope_no": "0101",
+      "rock_type": 1,
+      "risk_level": 4,
+      "risk_boundary": "0",
+      "red_th": 10,
+      "orange_th": 8,
+      "yellow_th": 5,
+      "blue_th": 2,
+      "risk_values": null,
+      "create_time": "2024-06-30 00:01:01",
+      "update_time": "2025-04-30 00:01:01"
+    },
+    {
+      "slope_no": "0102",
+      "rock_type": 1,
+      "risk_level": 4,
+      "risk_boundary": "0",
+      "red_th": 10,
+      "orange_th": 8,
+      "yellow_th": 5,
+      "blue_th": 2,
+      "risk_values": null,
+      "create_time": "2024-06-30 00:01:01",
+      "update_time": "2025-04-30 00:01:01"
+    },
+    {
+      "slope_no": "0103",
+      "rock_type": 1,
+      "risk_level": 4,
+      "risk_boundary": "0",
+      "red_th": 10,
+      "orange_th": 8,
+      "yellow_th": 5,
+      "blue_th": 2,
+      "risk_values": null,
+      "create_time": "2024-06-30 00:01:01",
+      "update_time": "2025-04-30 00:01:01"
+    },
+    {
+      "slope_no": "0104",
+      "rock_type": 1,
+      "risk_level": 4,
+      "risk_boundary": "0",
+      "red_th": 10,
+      "orange_th": 8,
+      "yellow_th": 5,
+      "blue_th": 2,
+      "risk_values": null,
+      "create_time": "2024-06-30 00:01:01",
+      "update_time": "2025-04-30 00:01:01"
+    },
+    {
+      "slope_no": "0203",
+      "rock_type": 2,
+      "risk_level": 4,
+      "risk_boundary": "0",
+      "red_th": 25,
+      "orange_th": 20,
+      "yellow_th": 13,
+      "blue_th": 5,
+      "risk_values": null,
+      "create_time": "2024-06-30 00:01:01",
+      "update_time": "2025-04-30 00:01:01"
+    },
+    {
+      "slope_no": "0201",
+      "rock_type": 2,
+      "risk_level": 4,
+      "risk_boundary": "0",
+      "red_th": 25,
+      "orange_th": 20,
+      "yellow_th": 13,
+      "blue_th": 5,
+      "risk_values": null,
+      "create_time": "2024-06-30 00:01:01",
+      "update_time": "2025-04-30 00:01:01"
+    },
+    {
+      "slope_no": "0202",
+      "rock_type": 2,
+      "risk_level": 4,
+      "risk_boundary": "0",
+      "red_th": 25,
+      "orange_th": 20,
+      "yellow_th": 13,
+      "blue_th": 5,
+      "risk_values": null,
+      "create_time": "2024-06-30 00:01:01",
+      "update_time": "2025-04-30 00:01:01"
+    }
+  ]
+}

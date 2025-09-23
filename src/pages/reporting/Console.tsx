@@ -498,6 +498,7 @@ const Console: React.FC = () => {
                     <Option value="土压力">土压力</Option>
                     <Option value="地下水">地下水</Option>
                     <Option value="雷达告警">雷达告警</Option>
+                    <Option value="边坡基础信息">边坡基础信息</Option>
                   </Select>
                 </Form.Item>
               </Col>
@@ -518,6 +519,13 @@ const Console: React.FC = () => {
                 <Col span={8} key={name}>
                   <Form.Item name={name} label={label} rules={[{ required: true, message: `请输入${label}` }]}> 
                     <Input />
+                  </Form.Item>
+                </Col>
+              );
+              const TextAreaItem = (name: string, label: string) => (
+                <Col span={24} key={name}>
+                  <Form.Item name={name} label={label} rules={[{ required: true, message: `请输入${label}` }]}>
+                    <Input.TextArea rows={3} />
                   </Form.Item>
                 </Col>
               );
@@ -569,6 +577,21 @@ const Console: React.FC = () => {
                   TextItem('经度', '经度(°)'),
                   TextItem('纬度', '纬度(°)'),
                   TextItem('高程', '高程'),
+                ],
+                '边坡基础信息': [
+                  TextItem('open_pit_no', '露天矿山编号'),
+                  TimeItem('create_time', '创建时间'),
+                  TimeItem('update_time', '更新时间'),
+                  TextItem('slope_no', '边坡编号'),
+                  TextItem('slope_name', '边坡名称'),
+                  TextAreaItem('slope_boundary', '边坡范围坐标'),
+                  NumberItem('rock_type', '岩性类型'),
+                  NumberItem('design_plate_width', '设计平台宽度', 'm'),
+                  NumberItem('design_slope_height', '设计坡高', 'm'),
+                  NumberItem('design_slope_angle', '设计坡角', '°'),
+                  NumberItem('current_slope_height', '现状坡高', 'm'),
+                  NumberItem('current_slope_angel', '现状坡角', '°'),
+                  TextItem('analysis_conclusion', '稳定性结论'),
                 ],
               };
 

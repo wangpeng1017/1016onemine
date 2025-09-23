@@ -1,0 +1,109 @@
+{
+  "send_time": "2025-09-07 12:25:16",
+  "data": [
+    {
+      "open_pit_no": "652222053708",
+      "create_time": "2024-06-30 00:01:01",
+      "update_time": "2025-08-31 00:01:01",
+      "radar_no": "652222053708010000002",
+      "alarm_level": 1,
+      "deformation": null,
+      "velocity": 12,
+      "acceleration": null,
+      "tangent_angle": null,
+      "area": 150,
+      "duration": null
+    },
+    {
+      "open_pit_no": "652222053708",
+      "create_time": "2024-06-30 00:01:02",
+      "update_time": "2025-08-31 00:01:01",
+      "radar_no": "652222053708010000002",
+      "alarm_level": 2,
+      "deformation": null,
+      "velocity": 8,
+      "acceleration": null,
+      "tangent_angle": null,
+      "area": 150,
+      "duration": null
+    },
+    {
+      "open_pit_no": "652222053708",
+      "create_time": "2024-06-30 00:01:03",
+      "update_time": "2025-08-31 00:01:01",
+      "radar_no": "652222053708010000002",
+      "alarm_level": 3,
+      "deformation": null,
+      "velocity": 5,
+      "acceleration": null,
+      "tangent_angle": null,
+      "area": 150,
+      "duration": null
+    },
+    {
+      "open_pit_no": "652222053708",
+      "create_time": "2024-06-30 00:01:04",
+      "update_time": "2025-08-31 00:01:01",
+      "radar_no": "652222053708010000002",
+      "alarm_level": 4,
+      "deformation": null,
+      "velocity": 3,
+      "acceleration": null,
+      "tangent_angle": null,
+      "area": 150,
+      "duration": null
+    },
+    {
+      "open_pit_no": "652222053708",
+      "create_time": "2024-06-30 00:01:05",
+      "update_time": "2025-08-31 00:01:01",
+      "radar_no": "652222053708010000001",
+      "alarm_level": 1,
+      "deformation": null,
+      "velocity": 12,
+      "acceleration": null,
+      "tangent_angle": null,
+      "area": 150,
+      "duration": null
+    },
+    {
+      "open_pit_no": "652222053708",
+      "create_time": "2024-06-30 00:01:06",
+      "update_time": "2025-08-31 00:01:01",
+      "radar_no": "652222053708010000001",
+      "alarm_level": 2,
+      "deformation": null,
+      "velocity": 8,
+      "acceleration": null,
+      "tangent_angle": null,
+      "area": 150,
+      "duration": null
+    },
+    {
+      "open_pit_no": "652222053708",
+      "create_time": "2024-06-30 00:01:07",
+      "update_time": "2025-08-31 00:01:01",
+      "radar_no": "652222053708010000001",
+      "alarm_level": 3,
+      "deformation": null,
+      "velocity": 5,
+      "acceleration": null,
+      "tangent_angle": null,
+      "area": 150,
+      "duration": null
+    },
+    {
+      "open_pit_no": "652222053708",
+      "create_time": "2024-06-30 00:01:08",
+      "update_time": "2025-08-31 00:01:01",
+      "radar_no": "652222053708010000001",
+      "alarm_level": 4,
+      "deformation": null,
+      "velocity": 3,
+      "acceleration": null,
+      "tangent_angle": null,
+      "area": 150,
+      "duration": null
+    }
+  ]
+}
