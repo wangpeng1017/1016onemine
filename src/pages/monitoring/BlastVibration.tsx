@@ -26,20 +26,17 @@ const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 interface BlastVibrationData {
-  id: string;
-  deviceId: string;
-  deviceName: string;
-  location: string;
-  peakVelocity: number;
-  frequency: number;
-  duration: number;
-  xVelocity: number;
-  yVelocity: number;
-  zVelocity: number;
-  blastDistance: number;
-  batteryLevel: number;
-  status: 'normal' | 'warning' | 'alarm';
-  timestamp: string;
+  序号: number;
+  测点名称: string;
+  接收时间: string;
+  振动时长: number;
+  X方向主振频率: number;
+  Y方向主振频率: number;
+  Z方向主振频率: number;
+  X方向峰值振动速度: number;
+  Y方向峰值振动速度: number;
+  Z方向峰值振动速度: number;
+  status?: 'normal' | 'warning' | 'alarm';
 }
 
 const BlastVibration: React.FC = () => {
@@ -50,88 +47,18 @@ const BlastVibration: React.FC = () => {
   const [chartVisible, setChartVisible] = useState(false);
   const [chartContainer, setChartContainer] = useState<HTMLDivElement | null>(null);
 
-  // 模拟爆破振动数据
+  // 最新爆破振动测试数据
   const mockData: BlastVibrationData[] = [
-    {
-      id: '1',
-      deviceId: 'BV-001',
-      deviceName: '爆破振动仪1号',
-      location: 'A区爆破点',
-      peakVelocity: 2.5,
-      frequency: 15.6,
-      duration: 0.8,
-      xVelocity: 1.2,
-      yVelocity: 1.8,
-      zVelocity: 2.1,
-      blastDistance: 150.0,
-      batteryLevel: 85,
-      status: 'normal',
-      timestamp: '2025-09-08 10:30:00',
-    },
-    {
-      id: '2',
-      deviceId: 'BV-002',
-      deviceName: '爆破振动仪2号',
-      location: 'B区监测点',
-      peakVelocity: 4.8,
-      frequency: 22.3,
-      duration: 1.2,
-      xVelocity: 2.1,
-      yVelocity: 3.2,
-      zVelocity: 4.5,
-      blastDistance: 80.0,
-      batteryLevel: 72,
-      status: 'warning',
-      timestamp: '2025-09-08 10:30:00',
-    },
-    {
-      id: '3',
-      deviceId: 'BV-003',
-      deviceName: '爆破振动仪3号',
-      location: 'C区居民区',
-      peakVelocity: 8.2,
-      frequency: 35.7,
-      duration: 2.1,
-      xVelocity: 4.5,
-      yVelocity: 6.8,
-      zVelocity: 7.9,
-      blastDistance: 45.0,
-      batteryLevel: 58,
-      status: 'alarm',
-      timestamp: '2025-09-08 10:30:00',
-    },
-    {
-      id: '4',
-      deviceId: 'BV-004',
-      deviceName: '爆破振动仪4号',
-      location: 'D区设备区',
-      peakVelocity: 1.8,
-      frequency: 12.4,
-      duration: 0.6,
-      xVelocity: 0.8,
-      yVelocity: 1.2,
-      zVelocity: 1.5,
-      blastDistance: 200.0,
-      batteryLevel: 91,
-      status: 'normal',
-      timestamp: '2025-09-08 10:30:00',
-    },
-    {
-      id: '5',
-      deviceId: 'BV-005',
-      deviceName: '爆破振动仪5号',
-      location: 'E区办公区',
-      peakVelocity: 6.5,
-      frequency: 28.9,
-      duration: 1.8,
-      xVelocity: 3.2,
-      yVelocity: 4.8,
-      zVelocity: 6.1,
-      blastDistance: 60.0,
-      batteryLevel: 43,
-      status: 'alarm',
-      timestamp: '2025-09-08 10:30:00',
-    },
+    { 序号: 1, 测点名称: '爆破振动2', 接收时间: '2025-09-23 09:08:33', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' },
+    { 序号: 2, 测点名称: '爆破振动1', 接收时间: '2025-09-23 08:30:50', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' },
+    { 序号: 3, 测点名称: '爆破振动', 接收时间: '2025-09-23 08:28:50', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' },
+    { 序号: 4, 测点名称: '爆破振动2', 接收时间: '2025-09-23 07:08:32', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' },
+    { 序号: 5, 测点名称: '爆破振动1', 接收时间: '2025-09-23 06:30:49', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' },
+    { 序号: 6, 测点名称: '爆破振动', 接收时间: '2025-09-23 06:28:51', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' },
+    { 序号: 7, 测点名称: '爆破振动2', 接收时间: '2025-09-23 05:08:32', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' },
+    { 序号: 8, 测点名称: '爆破振动1', 接收时间: '2025-09-23 04:30:49', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' },
+    { 序号: 9, 测点名称: '爆破振动', 接收时间: '2025-09-23 04:28:50', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' },
+    { 序号: 10, 测点名称: '爆破振动2', 接收时间: '2025-09-23 03:08:32', 振动时长: 0, X方向主振频率: 0, Y方向主振频率: 0, Z方向主振频率: 0, X方向峰值振动速度: 0, Y方向峰值振动速度: 0, Z方向峰值振动速度: 0, status: 'normal' }
   ];
 
   const columns: ColumnsType<BlastVibrationData> = [

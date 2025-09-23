@@ -26,20 +26,17 @@ const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 interface RadarData {
-  id: string;
-  deviceId: string;
-  deviceName: string;
-  location: string;
-  displacement: number;
-  velocity: number;
-  acceleration: number;
-  distance: number;
-  angle: number;
-  signalStrength: number;
-  temperature: number;
-  batteryLevel: number;
-  status: 'normal' | 'warning' | 'alarm';
-  timestamp: string;
+  序号: number;
+  设备名称: string;
+  设备编号: string;
+  是否告警: string;
+  中心点经度?: string;
+  中心点纬度?: string;
+  中心点海拔?: string;
+  告警状态?: string;
+  推送时间: string;
+  操作?: string;
+  status?: 'normal' | 'warning' | 'alarm';
 }
 
 const Radar: React.FC = () => {
@@ -50,88 +47,18 @@ const Radar: React.FC = () => {
   const [chartVisible, setChartVisible] = useState(false);
   const [chartContainer, setChartContainer] = useState<HTMLDivElement | null>(null);
 
-  // 模拟雷达数据
+  // 最新雷达测试数据
   const mockData: RadarData[] = [
-    {
-      id: '1',
-      deviceId: 'RD-001',
-      deviceName: '雷达监测仪1号',
-      location: 'A区边坡',
-      displacement: 3.2,
-      velocity: 0.8,
-      acceleration: 0.15,
-      distance: 125.6,
-      angle: 45.2,
-      signalStrength: -65.8,
-      temperature: 28.5,
-      batteryLevel: 88,
-      status: 'normal',
-      timestamp: '2025-09-08 11:00:00',
-    },
-    {
-      id: '2',
-      deviceId: 'RD-002',
-      deviceName: '雷达监测仪2号',
-      location: 'B区高边坡',
-      displacement: 8.5,
-      velocity: 2.1,
-      acceleration: 0.45,
-      distance: 89.3,
-      angle: 52.7,
-      signalStrength: -72.3,
-      temperature: 26.8,
-      batteryLevel: 72,
-      status: 'warning',
-      timestamp: '2025-09-08 11:00:00',
-    },
-    {
-      id: '3',
-      deviceId: 'RD-003',
-      deviceName: '雷达监测仪3号',
-      location: 'C区危险区域',
-      displacement: 15.8,
-      velocity: 4.2,
-      acceleration: 0.85,
-      distance: 67.9,
-      angle: 38.5,
-      signalStrength: -78.9,
-      temperature: 31.2,
-      batteryLevel: 45,
-      status: 'alarm',
-      timestamp: '2025-09-08 11:00:00',
-    },
-    {
-      id: '4',
-      deviceId: 'RD-004',
-      deviceName: '雷达监测仪4号',
-      location: 'D区稳定区',
-      displacement: 1.5,
-      velocity: 0.3,
-      acceleration: 0.08,
-      distance: 156.8,
-      angle: 42.1,
-      signalStrength: -62.5,
-      temperature: 27.3,
-      batteryLevel: 91,
-      status: 'normal',
-      timestamp: '2025-09-08 11:00:00',
-    },
-    {
-      id: '5',
-      deviceId: 'RD-005',
-      deviceName: '雷达监测仪5号',
-      location: 'E区监测点',
-      displacement: 12.3,
-      velocity: 3.1,
-      acceleration: 0.62,
-      distance: 78.4,
-      angle: 48.9,
-      signalStrength: -75.6,
-      temperature: 29.7,
-      batteryLevel: 38,
-      status: 'alarm',
-      timestamp: '2025-09-08 11:00:00',
-    },
+    { 序号: 1, 设备名称: 'IDS_PIER', 设备编号: '65222205370801000002', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 09:41:00', 操作: '', status: 'normal' },
+    { 序号: 2, 设备名称: 'IDS_PIER', 设备编号: '65222205370801000002', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 08:40:00', 操作: '', status: 'normal' },
+    { 序号: 3, 设备名称: 'S_SAR', 设备编号: '65222205370801000001', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 08:00:00', 操作: '', status: 'normal' },
+    { 序号: 4, 设备名称: 'IDS_PIER', 设备编号: '65222205370801000002', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 07:38:00', 操作: '', status: 'normal' },
+    { 序号: 5, 设备名称: 'S_SAR', 设备编号: '65222205370801000001', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 07:00:00', 操作: '', status: 'normal' },
+    { 序号: 6, 设备名称: 'IDS_PIER', 设备编号: '65222205370801000002', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 06:38:00', 操作: '', status: 'normal' },
+    { 序号: 7, 设备名称: 'S_SAR', 设备编号: '65222205370801000001', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 06:00:00', 操作: '', status: 'normal' },
+    { 序号: 8, 设备名称: 'IDS_PIER', 设备编号: '65222205370801000002', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 05:36:00', 操作: '', status: 'normal' },
+    { 序号: 9, 设备名称: 'S_SAR', 设备编号: '65222205370801000001', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 05:00:00', 操作: '', status: 'normal' },
+    { 序号: 10, 设备名称: 'IDS_PIER', 设备编号: '65222205370801000002', 是否告警: '未发生告警', 中心点经度: '', 中心点纬度: '', 中心点海拔: '', 告警状态: '', 推送时间: '2025-09-23 04:36:00', 操作: '', status: 'normal' }
   ];
 
   const columns: ColumnsType<RadarData> = [
