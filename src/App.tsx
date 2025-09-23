@@ -26,6 +26,9 @@ import IotPlatform from './pages/basic-platform/IotPlatform';
 import DataIntegration from './pages/basic-platform/DataIntegration';
 import AccountManagement from './pages/AccountManagement';
 import SystemConfig from './pages/SystemConfig';
+import ProjectInfo from './pages/system-config/ProjectInfo';
+import RegionManagement from './pages/system-config/RegionManagement';
+import AlarmSettings from './pages/system-config/AlarmSettings';
 import DeviceTypes from './pages/data-dictionary/DeviceTypes';
 import './App.css';
 
@@ -60,7 +63,10 @@ const App: React.FC = () => {
               <Route path="basic-platform/data-integration" element={<DataIntegration />} />
               <Route path="data-dictionary/device-types" element={<DeviceTypes />} />
               <Route path="account-management" element={<AccountManagement />} />
-              <Route path="system-config" element={<SystemConfig />} />
+              <Route path="system-config" element={<Navigate to="/system-config/project-info" replace />} />
+              <Route path="system-config/project-info" element={<ProjectInfo />} />
+              <Route path="system-config/region-management" element={<RegionManagement />} />
+              <Route path="system-config/alarm-settings" element={<AlarmSettings />} />
             </Route>
           </Routes>
         </div>

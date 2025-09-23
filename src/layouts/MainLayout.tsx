@@ -155,10 +155,15 @@ const MainLayout: React.FC = () => {
       icon: <UserOutlined />,
       label: '账号管理',
     },
-    {
+  {
       key: 'system-config',
       icon: <SettingOutlined />,
       label: '系统配置',
+      children: [
+        { key: 'system-config/project-info', label: '项目信息' },
+        { key: 'system-config/region-management', label: '区域管理' },
+        { key: 'system-config/alarm-settings', label: '告警设置' },
+      ],
     },
   ];
 
