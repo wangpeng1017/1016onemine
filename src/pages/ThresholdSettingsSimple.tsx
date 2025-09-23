@@ -27,12 +27,32 @@ const typeUnitMap: Record<string, string> = {
   'Z方向小时位移量': 'mm',
   '位移速率': 'mm/h',
   '压力值': 'kPa',
+  '土压力': 'kPa',
   '裂缝宽度': 'mm',
+  '裂缝值': 'mm',
   '水位深度': 'm',
+  '水面高程': 'm',
   '振动速度': 'mm/s',
+  'X方向峰值振动速度': 'mm/s',
+  'Y方向峰值振动速度': 'mm/s',
+  'Z方向峰值振动速度': 'mm/s',
 };
 
 const getUnitByType = (type: string, fallback?: string) => typeUnitMap[type] || fallback || '';
+
+// 从“监测数据”页面的样例数据汇总得到的测点->默认告警值类型映射
+const measurementCatalog: { name: string; type: string; group: string }[] = [
+  // 表面位移（默认：Y方向小时位移量）
+  ...['GP-29','GP-28','GP-27','GP-26','GP-25','GP-24','GP-22','GP-21','GP-17','GP-40'].map(n => ({ name: n, type: 'Y方向小时位移量', group: '表面位移' })),
+  // 裂缝计
+  ...['裂缝计01','裂缝计02','裂缝计03','裂缝计04'].map(n => ({ name: n, type: '裂缝值', group: '裂缝计' })),
+  // 土压力
+  ...['土压力计','土压力计2'].map(n => ({ name: n, type: '土压力', group: '土压力' })),
+  // 地下水
+  ...['A1','A2','A4','SK001'].map(n => ({ name: n, type: '水面高程', group: '地下水' })),
+  // 爆破振动
+  ...['爆破振动','爆破振动1','爆破振动2'].map(n => ({ name: n, type: '振动速度', group: '爆破振动' })),
+];
 
 const validateOrder = (v: { blue?: number; yellow?: number; orange?: number; red?: number }) => {
   const { blue, yellow, orange, red } = v;
@@ -168,11 +188,29 @@ const ThresholdSettingsSimple: React.FC = () => {
         destroyOnClose
       >
         <Form layout="vertical" form={addForm}>
-          <Form.Item name="name" label="测点名称" rules={[{ required: true, message: '请输入测点名称' }]}>
-            <Input placeholder="例如：GP-001" />
+          <Form.Item name="name" label="测点名称" rules={[{ required: true, message: '请选择测点名称' }]}>
+            <Select
+              placeholder="请选择监测数据中的测点"
+              showSearch
+              optionFilterProp="label"
+              onChange={(val: string) => {
+                const hit = measurementCatalog.find(m => m.name === val);
+                if (hit) {
+                  addForm.setFieldsValue({ type: hit.type });
+                }
+              }}
+            >
+              {Array.from(new Map(measurementCatalog.map(m => [m.group, m.group])).keys()).map(group => (
+                <Select.OptGroup key={group} label={group}>
+                  {measurementCatalog.filter(m => m.group === group).map(m => (
+                    <Select.Option key={m.name} value={m.name} label={`${group}-${m.name}`}>{m.name}</Select.Option>
+                  ))}
+                </Select.OptGroup>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item name="type" label="告警值类型" rules={[{ required: true, message: '请选择类型' }]}>
-            <Select placeholder="请选择">
+            <Select placeholder="自动根据测点带出，可手动调整">
               {Object.keys(typeUnitMap).map(k => (
                 <Select.Option key={k} value={k}>{k}（单位：{typeUnitMap[k]}）</Select.Option>
               ))}

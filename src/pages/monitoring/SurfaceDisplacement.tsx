@@ -72,7 +72,7 @@ const SurfaceDisplacement: React.FC = () => {
       width: 80,
     },
     {
-      title: '监测点',
+      title: '测点名称',
       dataIndex: '点名',
       key: '点名',
       width: 100,
