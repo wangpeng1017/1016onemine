@@ -6,7 +6,6 @@ import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import DataReporting from './pages/DataReporting';
 import MonitoringData from './pages/MonitoringData';
-import { Navigate } from 'react-router-dom';
 import AlarmRecords from './pages/AlarmRecords';
 import PointAlarms from './pages/alarm/PointAlarms';
 import RadarAlarms from './pages/alarm/RadarAlarms';

@@ -499,6 +499,15 @@ const Console: React.FC = () => {
                     <Option value="地下水">地下水</Option>
                     <Option value="雷达告警">雷达告警</Option>
                     <Option value="边坡基础信息">边坡基础信息</Option>
+                    <Option value="台阶基础信息">台阶基础信息</Option>
+                    <Option value="矿山基础信息">矿山基础信息</Option>
+                    <Option value="矿山运营-GNSS预警阈值">矿山运营-GNSS预警阈值</Option>
+                    <Option value="边坡形态超限信息">边坡形态超限信息</Option>
+                    <Option value="图层信息">图层信息</Option>
+                    <Option value="矿山运营-边坡雷达预警阈值">矿山运营-边坡雷达预警阈值</Option>
+                    <Option value="超层开采风险">超层开采风险</Option>
+                    <Option value="越界开采风险">越界开采风险</Option>
+                    <Option value="边坡卫星形变风险">边坡卫星形变风险</Option>
                   </Select>
                 </Form.Item>
               </Col>
@@ -508,31 +517,31 @@ const Console: React.FC = () => {
           {/* 监测字段配置（根据上传信息类型自动带出） */}
           <Card title="监测字段配置" size="small">
             {(() => {
-              const NumberItem = (name: string, label: string, unit?: string) => (
+              const NumberItem = (name: string, label: string, unit?: string, required: boolean = true) => (
                 <Col span={8} key={name}>
-                  <Form.Item name={name} label={label} rules={[{ required: true, message: `请输入${label}` }]}> 
+                  <Form.Item name={name} label={label} rules={required ? [{ required: true, message: `请输入${label}` }] : []}> 
                     <InputNumber style={{ width: '100%' }} precision={2} placeholder="0" addonAfter={unit} />
                   </Form.Item>
                 </Col>
               );
-              const TextItem = (name: string, label: string) => (
+              const TextItem = (name: string, label: string, required: boolean = true) => (
                 <Col span={8} key={name}>
-                  <Form.Item name={name} label={label} rules={[{ required: true, message: `请输入${label}` }]}> 
+                  <Form.Item name={name} label={label} rules={required ? [{ required: true, message: `请输入${label}` }] : []}> 
                     <Input />
                   </Form.Item>
                 </Col>
               );
-              const TextAreaItem = (name: string, label: string) => (
-                <Col span={24} key={name}>
-                  <Form.Item name={name} label={label} rules={[{ required: true, message: `请输入${label}` }]}>
-                    <Input.TextArea rows={3} />
+              const TimeItem = (name: string, label: string, required: boolean = true) => (
+                <Col span={8} key={name}>
+                  <Form.Item name={name} label={label} rules={required ? [{ required: true, message: `请选择${label}` }] : []}> 
+                    <DatePicker style={{ width: '100%' }} showTime />
                   </Form.Item>
                 </Col>
               );
-              const TimeItem = (name: string, label: string) => (
-                <Col span={8} key={name}>
-                  <Form.Item name={name} label={label} rules={[{ required: true, message: `请选择${label}` }]}> 
-                    <DatePicker style={{ width: '100%' }} showTime />
+              const TextAreaItem = (name: string, label: string, required: boolean = true) => (
+                <Col span={24} key={name}>
+                  <Form.Item name={name} label={label} rules={required ? [{ required: true, message: `请输入${label}` }] : []}> 
+                    <Input.TextArea rows={3} />
                   </Form.Item>
                 </Col>
               );
@@ -578,7 +587,7 @@ const Console: React.FC = () => {
                   TextItem('纬度', '纬度(°)'),
                   TextItem('高程', '高程'),
                 ],
-                '边坡基础信息': [
+'边坡基础信息': [
                   TextItem('open_pit_no', '露天矿山编号'),
                   TimeItem('create_time', '创建时间'),
                   TimeItem('update_time', '更新时间'),
@@ -592,6 +601,112 @@ const Console: React.FC = () => {
                   NumberItem('current_slope_height', '现状坡高', 'm'),
                   NumberItem('current_slope_angel', '现状坡角', '°'),
                   TextItem('analysis_conclusion', '稳定性结论'),
+                ],
+                '台阶基础信息': [
+                  TextItem('open_pit_no', '露天矿山编号'),
+                  TimeItem('create_time', '创建时间'),
+                  TimeItem('update_time', '更新时间'),
+                  TextItem('slope_no', '边坡编号'),
+                  TextItem('step_no', '台阶编号'),
+                  TextItem('step_name', '台阶名称'),
+                  TextAreaItem('step_boundary', '台阶范围坐标'),
+                  NumberItem('design_plate_width', '设计平台宽度', 'm'),
+                  NumberItem('design_step_height', '设计台阶高', 'm'),
+                  NumberItem('design_step_angle', '设计台阶角', '°'),
+                ],
+                '矿山基础信息': [
+                  TextItem('open_pit_no', '露天矿山编号'),
+                  TimeItem('create_time', '创建时间'),
+                  TimeItem('update_time', '更新时间'),
+                  TextItem('open_pit_name', '露天矿山名称'),
+                  NumberItem('classification', '矿山分类'),
+                  TextItem('address', '地址'),
+                  TextAreaItem('open_pit_boundary', '矿区范围坐标'),
+                  TextItem('supervising_subject', '监管主体编号'),
+                  TextItem('enterprise_legalperson', '企业法人'),
+                  TextItem('legal_person_phone', '法人电话'),
+                  TextItem('control_center_landline_phone', '控制中心座机'),
+                  NumberItem('enterprise_state', '企业状态'),
+                  TextItem('filler', '填报人'),
+                  TextItem('filler_phone', '填报人电话'),
+                ],
+                '矿山运营-GNSS预警阈值': [
+                  TextItem('open_pit_no', '露天矿山编号'),
+                  TimeItem('create_time', '创建时间'),
+                  TimeItem('update_time', '更新时间'),
+                  TextItem('equip_no', '设备编号'),
+                  NumberItem('alarm_level', '告警级别'),
+                  NumberItem('horizontal_displacement', '水平位移阈值', 'mm'),
+                  NumberItem('settlement_displacement', '沉降位移阈值', 'mm'),
+                  NumberItem('horizontal_velocity', '水平速度阈值', 'mm/h'),
+                  NumberItem('sedimentation_velocity', '沉降速度阈值', 'mm/h'),
+                  NumberItem('horizontal_acceleration', '水平加速度阈值', 'mm/h²'),
+                  NumberItem('sedimentation_acceleration', '沉降加速度阈值', 'mm/h²'),
+                  NumberItem('duration', '持续时间(小时)', 'h'),
+                ],
+                '边坡形态超限信息': [
+                  TextItem('slope_no', '边坡编号'),
+                  TextItem('step_no', '台阶编号'),
+                  NumberItem('risk_type', '风险类型'),
+                  NumberItem('risk_level', '风险等级'),
+                  TextAreaItem('risk_range', '风险范围', false),
+                  NumberItem('red_th', '红阈值'),
+                  NumberItem('orange_th', '橙阈值'),
+                  NumberItem('yellow_th', '黄阈值'),
+                  NumberItem('blue_th', '蓝阈值'),
+                  TextAreaItem('risk_values', '风险取值', false),
+                  TimeItem('create_time', '创建时间'),
+                  TimeItem('update_time', '更新时间'),
+                ],
+                '图层信息': [
+                  TextItem('open_pit_no', '露天矿山编号'),
+                  TextItem('layer_no', '图层编号'),
+                  TextItem('layer_name', '图层名称'),
+                  TextItem('layer_type', '图层类型'),
+                  TextItem('file_type', '文件类型'),
+                  TextAreaItem('files', '文件列表(一行一个)'),
+                  TextItem('uuid', '数据UUID'),
+                ],
+                '矿山运营-边坡雷达预警阈值': [
+                  TextItem('open_pit_no', '露天矿山编号'),
+                  TimeItem('create_time', '创建时间'),
+                  TimeItem('update_time', '更新时间'),
+                  TextItem('radar_no', '雷达编号'),
+                  NumberItem('alarm_level', '告警级别'),
+                  NumberItem('deformation', '形变量', undefined, false),
+                  NumberItem('velocity', '速度阈值'),
+                  NumberItem('acceleration', '加速度阈值', undefined, false),
+                  NumberItem('tangent_angle', '切线角', '°', false),
+                  NumberItem('area', '面积阈值', '㎡'),
+                  NumberItem('duration', '持续时间(小时)', 'h', false),
+                ],
+                '超层开采风险': [
+                  TextItem('open_pit_no', '露天矿山编号'),
+                  TimeItem('create_time', '创建时间'),
+                  TimeItem('update_time', '更新时间'),
+                  NumberItem('elevation', '标高'),
+                  NumberItem('over_layer_area', '超层面积'),
+                  TextAreaItem('over_layer_points', '超层点集', false),
+                ],
+                '越界开采风险': [
+                  TextItem('open_pit_no', '露天矿山编号'),
+                  TimeItem('create_time', '创建时间'),
+                  TimeItem('update_time', '更新时间'),
+                  TextItem('overborder_bry', '越界标识'),
+                  NumberItem('croborder_acr', '越界面积'),
+                ],
+                '边坡卫星形变风险': [
+                  TextItem('slope_no', '边坡编号'),
+                  NumberItem('rock_type', '岩性类型'),
+                  NumberItem('risk_level', '风险等级'),
+                  TextItem('risk_boundary', '风险范围'),
+                  NumberItem('red_th', '红阈值'),
+                  NumberItem('orange_th', '橙阈值'),
+                  NumberItem('yellow_th', '黄阈值'),
+                  NumberItem('blue_th', '蓝阈值'),
+                  TextAreaItem('risk_values', '风险取值', false),
+                  TimeItem('create_time', '创建时间'),
+                  TimeItem('update_time', '更新时间'),
                 ],
               };
 
