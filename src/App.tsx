@@ -8,7 +8,7 @@ import DataReporting from './pages/DataReporting';
 import MonitoringData from './pages/MonitoringData';
 import AlarmRecords from './pages/AlarmRecords';
 import DeviceManagement from './pages/DeviceManagement';
-import ThresholdSettings from './pages/ThresholdSettings';
+import ThresholdSettingsSimple from './pages/ThresholdSettingsSimple';
 import SurfaceDisplacement from './pages/monitoring/SurfaceDisplacement';
 import CrackGauge from './pages/monitoring/CrackGauge';
 import EarthPressure from './pages/monitoring/EarthPressure';
@@ -44,7 +44,7 @@ const App: React.FC = () => {
               <Route path="home" element={<Home />} />
               <Route path="device-management" element={<DeviceManagement />} />
               <Route path="model-management" element={<ModelManagement />} />
-              <Route path="threshold-settings" element={<ThresholdSettings />} />
+<Route path="threshold-settings" element={<ThresholdSettingsSimple />} />
               <Route path="monitoring-data" element={<MonitoringData />} />
               <Route path="monitoring-data/surface-displacement" element={<SurfaceDisplacement />} />
               <Route path="monitoring-data/crack-gauge" element={<CrackGauge />} />
