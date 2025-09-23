@@ -118,6 +118,14 @@ const MainLayout: React.FC = () => {
           key: 'data-reporting/history-query',
           label: '历史查询',
         },
+        {
+          key: 'data-reporting/system-config',
+          label: '系统配置',
+        },
+        {
+          key: 'data-reporting/mine-topology',
+          label: '矿山拓扑',
+        },
       ],
     },
     {

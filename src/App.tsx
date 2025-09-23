@@ -19,6 +19,8 @@ import Radar from './pages/monitoring/Radar';
 import AerospaceRisk from './pages/monitoring/AerospaceRisk';
 import Console from './pages/reporting/Console';
 import HistoryQuery from './pages/reporting/HistoryQuery';
+import UploadSystemConfig from './pages/reporting/UploadSystemConfig';
+import MineTopology from './pages/reporting/MineTopology';
 import BasicInfoManagement from './pages/BasicInfoManagement';
 import ModelManagement from './pages/ModelManagement';
 import HuituCloud from './pages/basic-platform/HuituCloud';
@@ -56,6 +58,8 @@ const App: React.FC = () => {
               <Route path="data-reporting" element={<DataReporting />} />
               <Route path="data-reporting/console" element={<Console />} />
               <Route path="data-reporting/history-query" element={<HistoryQuery />} />
+              <Route path="data-reporting/system-config" element={<UploadSystemConfig />} />
+              <Route path="data-reporting/mine-topology" element={<MineTopology />} />
               <Route path="basic-info-management" element={<BasicInfoManagement />} />
               <Route path="basic-platform/huitu-cloud" element={<HuituCloud />} />
               <Route path="basic-platform/iot-platform" element={<IotPlatform />} />
