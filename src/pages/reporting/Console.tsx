@@ -48,6 +48,7 @@ const Console: React.FC = () => {
   const [selectedType, setSelectedType] = useState<string>('all');
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const [form] = Form.useForm();
+  const [uploadType, setUploadType] = useState<string | undefined>(undefined);
 
   // 模拟控制台数据
   const mockData: ConsoleData[] = [
@@ -477,176 +478,110 @@ const Console: React.FC = () => {
                 </Form.Item>
               </Col>
             </Row>
-          </Card>
-
-          {/* 监测字段配置 */}
-          <Card title="监测字段配置" size="small">
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
-                  name="deviceCode"
-                  label="设备编号"
-                  rules={[{ required: true, message: '请输入设备编号' }]}
+                  name="uploadType"
+                  label="上传信息类型"
+                  rules={[{ required: true, message: '请选择上传信息类型' }]}
                 >
-                  <Input placeholder="请输入设备编号" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="alertLevel"
-                  label="警报级别"
-                  rules={[{ required: true, message: '请选择警报级别' }]}
-                >
-                  <Select placeholder="选择警报级别">
-                    <Option value="正常">正常</Option>
-                    <Option value="注意">注意</Option>
-                    <Option value="预警">预警</Option>
-                    <Option value="危险">危险</Option>
+                  <Select
+                    placeholder="请选择上传信息类型"
+                    onChange={(val) => {
+                      setUploadType(val);
+                      // 重置监测字段区域
+                      form.setFieldsValue({});
+                    }}
+                  >
+                    <Option value="表面位移（GNSS）">表面位移（GNSS）</Option>
+                    <Option value="裂缝计">裂缝计</Option>
+                    <Option value="土压力">土压力</Option>
+                    <Option value="地下水">地下水</Option>
+                    <Option value="雷达告警">雷达告警</Option>
                   </Select>
                 </Form.Item>
               </Col>
             </Row>
-            
-            <Row gutter={16}>
-              <Col span={8}>
-                <Form.Item
-                  name="horizontalDisplacement"
-                  label="水平位移 (mm)"
-                  rules={[{ required: true, message: '请输入水平位移值' }]}
-                >
-                  <InputNumber
-                    style={{ width: '100%' }}
-                    placeholder="0.00"
-                    precision={2}
-                    min={0}
-                    addonAfter="mm"
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  name="settlementDisplacement"
-                  label="沉降位移 (mm)"
-                  rules={[{ required: true, message: '请输入沉降位移值' }]}
-                >
-                  <InputNumber
-                    style={{ width: '100%' }}
-                    placeholder="0.00"
-                    precision={2}
-                    min={0}
-                    addonAfter="mm"
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  name="horizontalVelocity"
-                  label="水平速度 (mm/h)"
-                  rules={[{ required: true, message: '请输入水平速度值' }]}
-                >
-                  <InputNumber
-                    style={{ width: '100%' }}
-                    placeholder="0.00"
-                    precision={2}
-                    min={0}
-                    addonAfter="mm/h"
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
+          </Card>
 
-            <Row gutter={16}>
-              <Col span={8}>
-                <Form.Item
-                  name="settlementVelocity"
-                  label="沉降速度 (mm/h)"
-                  rules={[{ required: true, message: '请输入沉降速度值' }]}
-                >
-                  <InputNumber
-                    style={{ width: '100%' }}
-                    placeholder="0.00"
-                    precision={2}
-                    min={0}
-                    addonAfter="mm/h"
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  name="horizontalAcceleration"
-                  label="水平加速度 (mm/h²)"
-                  rules={[{ required: true, message: '请输入水平加速度值' }]}
-                >
-                  <InputNumber
-                    style={{ width: '100%' }}
-                    placeholder="0.00"
-                    precision={2}
-                    min={0}
-                    addonAfter="mm/h²"
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  name="settlementAcceleration"
-                  label="沉降加速度 (mm/h²)"
-                  rules={[{ required: true, message: '请输入沉降加速度值' }]}
-                >
-                  <InputNumber
-                    style={{ width: '100%' }}
-                    placeholder="0.00"
-                    precision={2}
-                    min={0}
-                    addonAfter="mm/h²"
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
+          {/* 监测字段配置（根据上传信息类型自动带出） */}
+          <Card title="监测字段配置" size="small">
+            {(() => {
+              const NumberItem = (name: string, label: string, unit?: string) => (
+                <Col span={8} key={name}>
+                  <Form.Item name={name} label={label} rules={[{ required: true, message: `请输入${label}` }]}> 
+                    <InputNumber style={{ width: '100%' }} precision={2} placeholder="0" addonAfter={unit} />
+                  </Form.Item>
+                </Col>
+              );
+              const TextItem = (name: string, label: string) => (
+                <Col span={8} key={name}>
+                  <Form.Item name={name} label={label} rules={[{ required: true, message: `请输入${label}` }]}> 
+                    <Input />
+                  </Form.Item>
+                </Col>
+              );
+              const TimeItem = (name: string, label: string) => (
+                <Col span={8} key={name}>
+                  <Form.Item name={name} label={label} rules={[{ required: true, message: `请选择${label}` }]}> 
+                    <DatePicker style={{ width: '100%' }} showTime />
+                  </Form.Item>
+                </Col>
+              );
 
-            <Row gutter={16}>
-              <Col span={8}>
-                <Form.Item
-                  name="duration"
-                  label="持续时间 (小时)"
-                  rules={[{ required: true, message: '请输入持续时间' }]}
-                >
-                  <InputNumber
-                    style={{ width: '100%' }}
-                    placeholder="0"
-                    min={0}
-                    addonAfter="小时"
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  name="createTime"
-                  label="创建时间"
-                >
-                  <DatePicker
-                    style={{ width: '100%' }}
-                    showTime
-                    placeholder="选择创建时间"
-                    disabled
-                    value={dayjs()}
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  name="modifyTime"
-                  label="修改时间"
-                >
-                  <DatePicker
-                    style={{ width: '100%' }}
-                    showTime
-                    placeholder="选择修改时间"
-                    disabled
-                    value={dayjs()}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
+              const templates: Record<string, React.ReactNode[]> = {
+                '表面位移（GNSS）': [
+                  TextItem('点名', '测点名称'),
+                  TimeItem('接收时间', '接收时间'),
+                  NumberItem('累计位移量X', '累计位移量X', 'mm'),
+                  NumberItem('累计位移量Y', '累计位移量Y', 'mm'),
+                  NumberItem('累计位移量Z', '累计位移量Z', 'mm'),
+                  NumberItem('小时位移量X', '小时位移量X', 'mm'),
+                  NumberItem('小时位移量Y', '小时位移量Y', 'mm'),
+                  NumberItem('小时位移量Z', '小时位移量Z', 'mm'),
+                  NumberItem('小时位移加速度X', '小时位移加速度X', 'mm/h²'),
+                  NumberItem('小时位移加速度Y', '小时位移加速度Y', 'mm/h²'),
+                  NumberItem('小时位移加速度Z', '小时位移加速度Z', 'mm/h²'),
+                ],
+                '裂缝计': [
+                  TextItem('测点名称', '测点名称'),
+                  TimeItem('接收时间', '接收时间'),
+                  NumberItem('裂缝值', '裂缝值', 'mm'),
+                ],
+                '土压力': [
+                  TextItem('测点名称', '测点名称'),
+                  TimeItem('接收时间', '接收时间'),
+                  NumberItem('土压力', '土压力', 'kPa'),
+                ],
+                '地下水': [
+                  TextItem('测点名称', '测点名称'),
+                  TimeItem('接收时间', '接收时间'),
+                  NumberItem('水面高程', '水面高程', 'm'),
+                  NumberItem('温度', '温度', '℃'),
+                  NumberItem('埋深', '埋深', 'm'),
+                  NumberItem('速率', '速率', 'm/s'),
+                ],
+                '雷达告警': [
+                  TextItem('点名', '点名'),
+                  TimeItem('告警时间', '告警时间'),
+                  NumberItem('高达警戒面积', '高达警戒面积', '㎡'),
+                  NumberItem('离自由形变', '离自由形变', 'm'),
+                  TextItem('经度', '经度(°)'),
+                  TextItem('纬度', '纬度(°)'),
+                  TextItem('高程', '高程'),
+                ],
+              };
+
+              const content = uploadType ? templates[uploadType] : undefined;
+              if (!content) {
+                return (
+                  <div style={{ color: '#999' }}>
+                    请选择“上传信息类型”，系统将自动带出对应的上传字段（示例依据提供的样例表头预设，可按需再调整）。
+                  </div>
+                );
+              }
+              return <Row gutter={16}>{content}</Row>;
+            })()}
           </Card>
         </Form>
       </Modal>
