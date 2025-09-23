@@ -49,7 +49,7 @@ const RadarAlarms: React.FC = () => {
     { title: '点名', dataIndex: '点名', width: 140 },
     { title: '监测类型', dataIndex: '监测类型', width: 120 },
     { title: '告警时间', dataIndex: '告警时间', width: 160 },
-    { title: '告警等级', dataIndex: '告警等级', width: 110, render: (v) => <Tag color={levelColor[v]}>{v}</Tag> },
+    { title: '告警等级', dataIndex: '告警等级', width: 110, render: (v: RadarAlarmItem['告警等级']) => <Tag color={levelColor[v]}>{v}</Tag> },
     { title: '告警状态', dataIndex: '告警状态', width: 140 },
     { title: '告警描述', dataIndex: '告警描述', width: 420 },
     { title: '经度(°)', dataIndex: '经度', width: 120 },
