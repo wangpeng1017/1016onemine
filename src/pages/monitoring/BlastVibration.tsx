@@ -63,96 +63,71 @@ const BlastVibration: React.FC = () => {
 
   const columns: ColumnsType<BlastVibrationData> = [
     {
-      title: '设备编号',
-      dataIndex: 'deviceId',
-      key: 'deviceId',
-      width: 100,
+      title: '序号',
+      dataIndex: '序号',
+      key: '序号',
+      width: 80,
     },
     {
-      title: '设备名称',
-      dataIndex: 'deviceName',
-      key: 'deviceName',
-      width: 130,
-    },
-    {
-      title: '安装位置',
-      dataIndex: 'location',
-      key: 'location',
+      title: '测点名称',
+      dataIndex: '测点名称',
+      key: '测点名称',
       width: 120,
     },
     {
-      title: '峰值速度 (mm/s)',
-      dataIndex: 'peakVelocity',
-      key: 'peakVelocity',
-      width: 130,
-      render: (value: number) => (
-        <span style={{ 
-          color: value > 5 ? '#ff4d4f' : value > 3 ? '#faad14' : '#52c41a' 
-        }}>
-          {value.toFixed(1)}
-        </span>
-      ),
-    },
-    {
-      title: '频率 (Hz)',
-      dataIndex: 'frequency',
-      key: 'frequency',
-      width: 100,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '持续时间 (s)',
-      dataIndex: 'duration',
-      key: 'duration',
-      width: 120,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: 'X方向速度 (mm/s)',
-      dataIndex: 'xVelocity',
-      key: 'xVelocity',
-      width: 140,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: 'Y方向速度 (mm/s)',
-      dataIndex: 'yVelocity',
-      key: 'yVelocity',
-      width: 140,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: 'Z方向速度 (mm/s)',
-      dataIndex: 'zVelocity',
-      key: 'zVelocity',
-      width: 140,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '爆破距离 (m)',
-      dataIndex: 'blastDistance',
-      key: 'blastDistance',
-      width: 120,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '电池电量 (%)',
-      dataIndex: 'batteryLevel',
-      key: 'batteryLevel',
-      width: 120,
-      render: (value: number) => (
-        <span style={{ 
-          color: value < 20 ? '#ff4d4f' : value < 50 ? '#faad14' : '#52c41a' 
-        }}>
-          {value}%
-        </span>
-      ),
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'timestamp',
-      key: 'timestamp',
+      title: '接收时间',
+      dataIndex: '接收时间',
+      key: '接收时间',
       width: 150,
+    },
+    {
+      title: '振动时长 (ms)',
+      dataIndex: '振动时长',
+      key: '振动时长',
+      width: 120,
+      render: (value: number) => value.toFixed(0),
+    },
+    {
+      title: 'X方向主振频率 (Hz)',
+      dataIndex: 'X方向主振频率',
+      key: 'X方向主振频率',
+      width: 160,
+      render: (value: number) => value.toFixed(0),
+    },
+    {
+      title: 'Y方向主振频率 (Hz)',
+      dataIndex: 'Y方向主振频率',
+      key: 'Y方向主振频率',
+      width: 160,
+      render: (value: number) => value.toFixed(0),
+    },
+    {
+      title: 'Z方向主振频率 (Hz)',
+      dataIndex: 'Z方向主振频率',
+      key: 'Z方向主振频率',
+      width: 160,
+      render: (value: number) => value.toFixed(0),
+    },
+    {
+      title: 'X方向峰值振动速度 (cm/s)',
+      dataIndex: 'X方向峰值振动速度',
+      key: 'X方向峰值振动速度',
+      width: 200,
+      render: (value: number) => value.toFixed(0),
+    },
+    {
+      title: 'Y方向峰值振动速度 (cm/s)',
+      dataIndex: 'Y方向峰值振动速度',
+      key: 'Y方向峰值振动速度',
+      width: 200,
+      render: (value: number) => value.toFixed(0),
+    },
+    {
+      title: 'Z方向峰值振动速度 (cm/s)',
+      dataIndex: 'Z方向峰值振动速度',
+      key: 'Z方向峰值振动速度',
+      width: 200,
+      render: (value: number) => value.toFixed(0),
     },
     {
       title: '状态',
@@ -199,20 +174,20 @@ const BlastVibration: React.FC = () => {
     }
 
     const currentFilteredData = data.filter(item => {
-      if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+      if (selectedDevice !== 'all' && item.测点名称 !== selectedDevice) {
         return false;
       }
       if (dateRange && dateRange[0] && dateRange[1]) {
-        const itemDate = dayjs(item.timestamp);
+        const itemDate = dayjs(item.接收时间);
         return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
       }
       return true;
     });
 
     return currentFilteredData.map(item => ({
-      name: item.deviceName,
+      name: item.测点名称,
       data: timePoints.map((_, index) => {
-        const basePeakVelocity = item.peakVelocity;
+        const basePeakVelocity = item.X方向峰值振动速度;
         const variation = (Math.random() - 0.5) * 2;
         return {
           time: timePoints[index],
@@ -281,11 +256,11 @@ const BlastVibration: React.FC = () => {
   };
 
   const filteredData = data.filter(item => {
-    if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+    if (selectedDevice !== 'all' && item.测点名称 !== selectedDevice) {
       return false;
     }
     if (dateRange && dateRange[0] && dateRange[1]) {
-      const itemDate = dayjs(item.timestamp);
+      const itemDate = dayjs(item.接收时间);
       return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
     }
     return true;
@@ -308,46 +283,6 @@ const BlastVibration: React.FC = () => {
   return (
     <div>
       <div className="page-title">爆破振动监测</div>
-      
-      {/* 统计卡片 */}
-      <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="设备总数"
-              value={statistics.total}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="正常状态"
-              value={statistics.normal}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="预警状态"
-              value={statistics.warning}
-              valueStyle={{ color: '#faad14' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="告警状态"
-              value={statistics.alarm}
-              valueStyle={{ color: '#ff4d4f' }}
-            />
-          </Card>
-        </Col>
-      </Row>
 
       <Card className="custom-card">
         {/* 筛选条件 */}
@@ -360,8 +295,8 @@ const BlastVibration: React.FC = () => {
               onChange={setSelectedDevice}
             >
               <Option value="all">全部设备</Option>
-              {mockData.map(item => (
-                <Option key={item.deviceId} value={item.deviceId}>{item.deviceName}</Option>
+              {Array.from(new Set(mockData.map(item => item.测点名称))).map(name => (
+                <Option key={name} value={name}>{name}</Option>
               ))}
             </Select>
           </Col>
@@ -404,7 +339,7 @@ const BlastVibration: React.FC = () => {
         <Table
           columns={columns}
           dataSource={filteredData}
-          rowKey="id"
+          rowKey="序号"
           loading={loading}
           pagination={{
             showSizeChanger: true,

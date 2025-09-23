@@ -156,20 +156,20 @@ const Groundwater: React.FC = () => {
     }
 
     const currentFilteredData = data.filter(item => {
-      if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+      if (selectedDevice !== 'all' && item.测点名称 !== selectedDevice) {
         return false;
       }
       if (dateRange && dateRange[0] && dateRange[1]) {
-        const itemDate = dayjs(item.timestamp);
+        const itemDate = dayjs(item.接收时间);
         return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
       }
       return true;
     });
 
     return currentFilteredData.map(item => ({
-      name: item.deviceName,
+      name: item.测点名称,
       data: timePoints.map((_, index) => {
-        const baseWaterLevel = item.waterLevel;
+        const baseWaterLevel = item.水面高程;
         const variation = (Math.random() - 0.5) * 0.5;
         return {
           time: timePoints[index],
@@ -238,11 +238,11 @@ const Groundwater: React.FC = () => {
   };
 
   const filteredData = data.filter(item => {
-    if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+    if (selectedDevice !== 'all' && item.测点名称 !== selectedDevice) {
       return false;
     }
     if (dateRange && dateRange[0] && dateRange[1]) {
-      const itemDate = dayjs(item.timestamp);
+      const itemDate = dayjs(item.接收时间);
       return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
     }
     return true;
@@ -265,46 +265,6 @@ const Groundwater: React.FC = () => {
   return (
     <div>
       <div className="page-title">地下水监测</div>
-      
-      {/* 统计卡片 */}
-      <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="监测点总数"
-              value={statistics.total}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="正常状态"
-              value={statistics.normal}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="预警状态"
-              value={statistics.warning}
-              valueStyle={{ color: '#faad14' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="告警状态"
-              value={statistics.alarm}
-              valueStyle={{ color: '#ff4d4f' }}
-            />
-          </Card>
-        </Col>
-      </Row>
 
       <Card className="custom-card">
         {/* 筛选条件 */}
@@ -317,8 +277,8 @@ const Groundwater: React.FC = () => {
               onChange={setSelectedDevice}
             >
               <Option value="all">全部监测点</Option>
-              {mockData.map(item => (
-                <Option key={item.deviceId} value={item.deviceId}>{item.deviceName}</Option>
+              {Array.from(new Set(mockData.map(item => item.测点名称))).map(name => (
+                <Option key={name} value={name}>{name}</Option>
               ))}
             </Select>
           </Col>
@@ -361,7 +321,7 @@ const Groundwater: React.FC = () => {
         <Table
           columns={columns}
           dataSource={filteredData}
-          rowKey="id"
+          rowKey="序号"
           loading={loading}
           pagination={{
             showSizeChanger: true,

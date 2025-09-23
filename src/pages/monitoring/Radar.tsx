@@ -63,113 +63,33 @@ const Radar: React.FC = () => {
 
   const columns: ColumnsType<RadarData> = [
     {
-      title: '设备编号',
-      dataIndex: 'deviceId',
-      key: 'deviceId',
-      width: 100,
+      title: '序号',
+      dataIndex: '序号',
+      key: '序号',
+      width: 80,
     },
     {
       title: '设备名称',
-      dataIndex: 'deviceName',
-      key: 'deviceName',
-      width: 130,
-    },
-    {
-      title: '安装位置',
-      dataIndex: 'location',
-      key: 'location',
+      dataIndex: '设备名称',
+      key: '设备名称',
       width: 120,
     },
     {
-      title: '位移 (mm)',
-      dataIndex: 'displacement',
-      key: 'displacement',
-      width: 100,
-      render: (value: number) => (
-        <span style={{ 
-          color: value > 10 ? '#ff4d4f' : value > 5 ? '#faad14' : '#52c41a' 
-        }}>
-          {value.toFixed(1)}
-        </span>
-      ),
+      title: '设备编号',
+      dataIndex: '设备编号',
+      key: '设备编号',
+      width: 180,
     },
     {
-      title: '速度 (mm/h)',
-      dataIndex: 'velocity',
-      key: 'velocity',
-      width: 110,
-      render: (value: number) => (
-        <span style={{ 
-          color: value > 3 ? '#ff4d4f' : value > 1.5 ? '#faad14' : '#52c41a' 
-        }}>
-          {value.toFixed(1)}
-        </span>
-      ),
-    },
-    {
-      title: '加速度 (mm/h²)',
-      dataIndex: 'acceleration',
-      key: 'acceleration',
+      title: '是否告警',
+      dataIndex: '是否告警',
+      key: '是否告警',
       width: 120,
-      render: (value: number) => (
-        <span style={{ 
-          color: value > 0.5 ? '#ff4d4f' : value > 0.3 ? '#faad14' : '#52c41a' 
-        }}>
-          {value.toFixed(2)}
-        </span>
-      ),
     },
     {
-      title: '距离 (m)',
-      dataIndex: 'distance',
-      key: 'distance',
-      width: 100,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '角度 (°)',
-      dataIndex: 'angle',
-      key: 'angle',
-      width: 100,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '信号强度 (dBm)',
-      dataIndex: 'signalStrength',
-      key: 'signalStrength',
-      width: 130,
-      render: (value: number) => (
-        <span style={{ 
-          color: value < -80 ? '#ff4d4f' : value < -70 ? '#faad14' : '#52c41a' 
-        }}>
-          {value.toFixed(1)}
-        </span>
-      ),
-    },
-    {
-      title: '温度 (°C)',
-      dataIndex: 'temperature',
-      key: 'temperature',
-      width: 100,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '电池电量 (%)',
-      dataIndex: 'batteryLevel',
-      key: 'batteryLevel',
-      width: 120,
-      render: (value: number) => (
-        <span style={{ 
-          color: value < 20 ? '#ff4d4f' : value < 50 ? '#faad14' : '#52c41a' 
-        }}>
-          {value}%
-        </span>
-      ),
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'timestamp',
-      key: 'timestamp',
+      title: '推送时间',
+      dataIndex: '推送时间',
+      key: '推送时间',
       width: 150,
     },
     {
@@ -217,24 +137,24 @@ const Radar: React.FC = () => {
     }
 
     const currentFilteredData = data.filter(item => {
-      if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+      if (selectedDevice !== 'all' && item.设备名称 !== selectedDevice) {
         return false;
       }
       if (dateRange && dateRange[0] && dateRange[1]) {
-        const itemDate = dayjs(item.timestamp);
+        const itemDate = dayjs(item.推送时间);
         return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
       }
       return true;
     });
 
     return currentFilteredData.map(item => ({
-      name: item.deviceName,
+      name: item.设备名称,
       data: timePoints.map((_, index) => {
-        const baseDisplacement = item.displacement;
+        const baseValue = Math.random() * 10;
         const variation = (Math.random() - 0.5) * 1;
         return {
           time: timePoints[index],
-          displacement: Math.max(0, baseDisplacement + variation)
+          value: Math.max(0, baseValue + variation)
         };
       })
     }));
@@ -281,7 +201,7 @@ const Radar: React.FC = () => {
       series: timeSeriesData.map(item => ({
         name: item.name,
         type: 'line',
-        data: item.data.map(d => d.displacement.toFixed(1)),
+        data: item.data.map(d => d.value.toFixed(1)),
         smooth: true,
         lineStyle: {
           width: 2
@@ -299,11 +219,11 @@ const Radar: React.FC = () => {
   };
 
   const filteredData = data.filter(item => {
-    if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+    if (selectedDevice !== 'all' && item.设备名称 !== selectedDevice) {
       return false;
     }
     if (dateRange && dateRange[0] && dateRange[1]) {
-      const itemDate = dayjs(item.timestamp);
+      const itemDate = dayjs(item.推送时间);
       return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
     }
     return true;
@@ -316,56 +236,9 @@ const Radar: React.FC = () => {
     }
   }, [chartVisible, chartContainer, filteredData]);
 
-  const statistics = {
-    total: filteredData.length,
-    normal: filteredData.filter(item => item.status === 'normal').length,
-    warning: filteredData.filter(item => item.status === 'warning').length,
-    alarm: filteredData.filter(item => item.status === 'alarm').length,
-  };
-
   return (
     <div>
       <div className="page-title">雷达监测</div>
-      
-      {/* 统计卡片 */}
-      <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="设备总数"
-              value={statistics.total}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="正常状态"
-              value={statistics.normal}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="预警状态"
-              value={statistics.warning}
-              valueStyle={{ color: '#faad14' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="告警状态"
-              value={statistics.alarm}
-              valueStyle={{ color: '#ff4d4f' }}
-            />
-          </Card>
-        </Col>
-      </Row>
 
       <Card className="custom-card">
         {/* 筛选条件 */}
@@ -378,8 +251,8 @@ const Radar: React.FC = () => {
               onChange={setSelectedDevice}
             >
               <Option value="all">全部设备</Option>
-              {mockData.map(item => (
-                <Option key={item.deviceId} value={item.deviceId}>{item.deviceName}</Option>
+              {Array.from(new Set(mockData.map(item => item.设备名称))).map(name => (
+                <Option key={name} value={name}>{name}</Option>
               ))}
             </Select>
           </Col>
@@ -422,7 +295,7 @@ const Radar: React.FC = () => {
         <Table
           columns={columns}
           dataSource={filteredData}
-          rowKey="id"
+          rowKey="序号"
           loading={loading}
           pagination={{
             showSizeChanger: true,

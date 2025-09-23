@@ -132,20 +132,20 @@ const CrackGauge: React.FC = () => {
     }
 
     const currentFilteredData = data.filter(item => {
-      if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+      if (selectedDevice !== 'all' && item.测点名称 !== selectedDevice) {
         return false;
       }
       if (dateRange && dateRange[0] && dateRange[1]) {
-        const itemDate = dayjs(item.timestamp);
+        const itemDate = dayjs(item.接收时间);
         return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
       }
       return true;
     });
 
     return currentFilteredData.map(item => ({
-      name: item.deviceName,
+      name: item.测点名称,
       data: timePoints.map((_, index) => {
-        const baseCrackWidth = item.crackWidth;
+        const baseCrackWidth = item.裂缝值;
         const variation = (Math.random() - 0.5) * 0.5;
         return {
           time: timePoints[index],
