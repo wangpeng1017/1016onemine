@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { Card, Table, Button, Space, Input, InputNumber, Modal, Form, Tag, message } from 'antd';
+import { Card, Table, Button, Space, Input, InputNumber, Modal, Form, Select, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { EditOutlined, SaveOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons';
+import { EditOutlined, SaveOutlined, CloseOutlined, SettingOutlined, PlusOutlined } from '@ant-design/icons';
 
 interface ThresholdItem {
   id: string;
@@ -48,9 +48,8 @@ const ThresholdSettingsSimple: React.FC = () => {
   const [keyword, setKeyword] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [rowDraft, setRowDraft] = useState<Partial<ThresholdItem>>({});
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [batchOpen, setBatchOpen] = useState(false);
-  const [batchForm] = Form.useForm();
+  const [addOpen, setAddOpen] = useState(false);
+  const [addForm] = Form.useForm();
 
   const filtered = useMemo(() => {
     if (!keyword) return data;
@@ -80,16 +79,18 @@ const ThresholdSettingsSimple: React.FC = () => {
     message.success('已保存');
   };
 
-  const onBatchApply = async () => {
-    const values = await batchForm.validateFields();
+  const onAddSubmit = async () => {
+    const values = await addForm.validateFields();
     const err = validateOrder(values);
     if (err) {
       message.error(err);
       return;
     }
-    setData(prev => prev.map(it => (selectedRowKeys.includes(it.id) ? { ...it, ...values } : it)));
-    setBatchOpen(false);
-    message.success('批量设置已应用');
+    const nextId = (Math.max(0, ...data.map(d => Number(d.id))) + 1).toString();
+    setData(prev => [...prev, { id: nextId, name: values.name, type: values.type, blue: values.blue, yellow: values.yellow, orange: values.orange, red: values.red }]);
+    setAddOpen(false);
+    message.success('已新增阈值规则');
+    addForm.resetFields();
   };
 
   const columns: ColumnsType<ThresholdItem> = [
@@ -138,7 +139,7 @@ const ThresholdSettingsSimple: React.FC = () => {
   ];
 
   return (
-    <Card className="custom-card" title={<span><SettingOutlined /> 简化阈值设置</span>}>
+    <Card className="custom-card" title={<span><SettingOutlined /> 阈值设置</span>}>
       <Space style={{ marginBottom: 12, width: '100%', justifyContent: 'space-between' }}>
         <Input.Search
           placeholder="按测点名称搜索"
@@ -147,13 +148,7 @@ const ThresholdSettingsSimple: React.FC = () => {
           onChange={e => setKeyword(e.target.value)}
           style={{ maxWidth: 260 }}
         />
-        <Space>
-          <Button
-            disabled={!selectedRowKeys.length}
-            onClick={() => { batchForm.resetFields(); setBatchOpen(true); }}
-          >批量设置</Button>
-          <Tag color="blue">仅保留表格+编辑，去除图表/统计</Tag>
-        </Space>
+        <Button type="primary" icon={<PlusOutlined />} onClick={() => { addForm.resetFields(); setAddOpen(true); }}>新增</Button>
       </Space>
 
       <Table
@@ -162,17 +157,27 @@ const ThresholdSettingsSimple: React.FC = () => {
         dataSource={filtered}
         pagination={{ pageSize: 10 }}
         scroll={{ x: 1000 }}
-        rowSelection={{ selectedRowKeys, onChange: setSelectedRowKeys }}
         size="middle"
       />
 
       <Modal
-        title="批量设置阈值"
-        open={batchOpen}
-        onCancel={() => setBatchOpen(false)}
-        onOk={onBatchApply}
+        title="新增阈值"
+        open={addOpen}
+        onCancel={() => setAddOpen(false)}
+        onOk={onAddSubmit}
+        destroyOnClose
       >
-        <Form form={batchForm} layout="vertical">
+        <Form layout="vertical" form={addForm}>
+          <Form.Item name="name" label="测点名称" rules={[{ required: true, message: '请输入测点名称' }]}>
+            <Input placeholder="例如：GP-001" />
+          </Form.Item>
+          <Form.Item name="type" label="告警值类型" rules={[{ required: true, message: '请选择类型' }]}>
+            <Select placeholder="请选择">
+              {Object.keys(typeUnitMap).map(k => (
+                <Select.Option key={k} value={k}>{k}（单位：{typeUnitMap[k]}）</Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
           <Form.Item name="blue" label="蓝色告警" rules={[{ required: true, message: '请输入' }]}>
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
