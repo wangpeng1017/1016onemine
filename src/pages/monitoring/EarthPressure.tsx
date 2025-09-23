@@ -26,16 +26,11 @@ const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 interface EarthPressureData {
-  id: string;
-  deviceId: string;
-  deviceName: string;
-  location: string;
-  pressure: number;
-  depth: number;
-  temperature: number;
-  batteryLevel: number;
-  status: 'normal' | 'warning' | 'alarm';
-  timestamp: string;
+  序号: number;
+  测点名称: string;
+  接收时间: string;
+  土压力: number;
+  status?: 'normal' | 'warning' | 'alarm';
 }
 
 const EarthPressure: React.FC = () => {
@@ -46,134 +41,51 @@ const EarthPressure: React.FC = () => {
   const [chartVisible, setChartVisible] = useState(false);
   const [chartContainer, setChartContainer] = useState<HTMLDivElement | null>(null);
 
-  // 模拟土压力数据
+  // 最新土压力测试数据
   const mockData: EarthPressureData[] = [
-    {
-      id: '1',
-      deviceId: 'EP-001',
-      deviceName: '土压力计1号',
-      location: 'A区深度5m',
-      pressure: 125.6,
-      depth: 5.0,
-      temperature: 18.5,
-      batteryLevel: 88,
-      status: 'normal',
-      timestamp: '2025-09-06 16:00:00',
-    },
-    {
-      id: '2',
-      deviceId: 'EP-002',
-      deviceName: '土压力计2号',
-      location: 'B区深度8m',
-      pressure: 285.3,
-      depth: 8.0,
-      temperature: 16.2,
-      batteryLevel: 76,
-      status: 'warning',
-      timestamp: '2025-09-06 16:00:00',
-    },
-    {
-      id: '3',
-      deviceId: 'EP-003',
-      deviceName: '土压力计3号',
-      location: 'C区深度12m',
-      pressure: 456.8,
-      depth: 12.0,
-      temperature: 14.8,
-      batteryLevel: 52,
-      status: 'alarm',
-      timestamp: '2025-09-06 16:00:00',
-    },
-    {
-      id: '4',
-      deviceId: 'EP-004',
-      deviceName: '土压力计4号',
-      location: 'D区深度3m',
-      pressure: 98.2,
-      depth: 3.0,
-      temperature: 19.1,
-      batteryLevel: 92,
-      status: 'normal',
-      timestamp: '2025-09-06 16:00:00',
-    },
-    {
-      id: '5',
-      deviceId: 'EP-005',
-      deviceName: '土压力计5号',
-      location: 'E区深度15m',
-      pressure: 612.4,
-      depth: 15.0,
-      temperature: 13.5,
-      batteryLevel: 38,
-      status: 'alarm',
-      timestamp: '2025-09-06 16:00:00',
-    },
+    { 序号: 1, 测点名称: '土压力计2', 接收时间: '2025-09-23 09:00:00', 土压力: 0.64, status: 'normal' },
+    { 序号: 2, 测点名称: '土压力计', 接收时间: '2025-09-23 09:00:00', 土压力: 4.17, status: 'normal' },
+    { 序号: 3, 测点名称: '土压力计', 接收时间: '2025-09-23 08:30:00', 土压力: 4.17, status: 'normal' },
+    { 序号: 4, 测点名称: '土压力计2', 接收时间: '2025-09-23 08:00:00', 土压力: 0.62, status: 'normal' },
+    { 序号: 5, 测点名称: '土压力计', 接收时间: '2025-09-23 08:00:00', 土压力: 4.12, status: 'normal' },
+    { 序号: 6, 测点名称: '土压力计', 接收时间: '2025-09-23 07:30:00', 土压力: 4.1, status: 'normal' },
+    { 序号: 7, 测点名称: '土压力计2', 接收时间: '2025-09-23 07:00:00', 土压力: 0.6, status: 'normal' },
+    { 序号: 8, 测点名称: '土压力计', 接收时间: '2025-09-23 07:00:00', 土压力: 4.03, status: 'normal' },
+    { 序号: 9, 测点名称: '土压力计', 接收时间: '2025-09-23 06:30:00', 土压力: 4.12, status: 'normal' },
+    { 序号: 10, 测点名称: '土压力计2', 接收时间: '2025-09-23 06:00:00', 土压力: 0.62, status: 'normal' }
   ];
 
   const columns: ColumnsType<EarthPressureData> = [
     {
-      title: '设备编号',
-      dataIndex: 'deviceId',
-      key: 'deviceId',
-      width: 100,
+      title: '序号',
+      dataIndex: '序号',
+      key: '序号',
+      width: 80,
     },
     {
-      title: '设备名称',
-      dataIndex: 'deviceName',
-      key: 'deviceName',
+      title: '测点名称',
+      dataIndex: '测点名称',
+      key: '测点名称',
       width: 120,
     },
     {
-      title: '安装位置',
-      dataIndex: 'location',
-      key: 'location',
-      width: 120,
-    },
-    {
-      title: '土压力 (kPa)',
-      dataIndex: 'pressure',
-      key: 'pressure',
-      width: 120,
-      render: (value: number) => (
-        <span style={{ 
-          color: value > 400 ? '#ff4d4f' : value > 200 ? '#faad14' : '#52c41a' 
-        }}>
-          {value.toFixed(1)}
-        </span>
-      ),
-    },
-    {
-      title: '埋设深度 (m)',
-      dataIndex: 'depth',
-      key: 'depth',
-      width: 120,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '温度 (°C)',
-      dataIndex: 'temperature',
-      key: 'temperature',
-      width: 100,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '电池电量 (%)',
-      dataIndex: 'batteryLevel',
-      key: 'batteryLevel',
-      width: 120,
-      render: (value: number) => (
-        <span style={{ 
-          color: value < 20 ? '#ff4d4f' : value < 50 ? '#faad14' : '#52c41a' 
-        }}>
-          {value}%
-        </span>
-      ),
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'timestamp',
-      key: 'timestamp',
+      title: '接收时间',
+      dataIndex: '接收时间',
+      key: '接收时间',
       width: 150,
+    },
+    {
+      title: '土压力 (Kpa)',
+      dataIndex: '土压力',
+      key: '土压力',
+      width: 120,
+      render: (value: number) => (
+        <span style={{ 
+          color: value > 10 ? '#ff4d4f' : value > 5 ? '#faad14' : '#52c41a' 
+        }}>
+          {value.toFixed(2)}
+        </span>
+      ),
     },
     {
       title: '状态',
@@ -302,11 +214,11 @@ const EarthPressure: React.FC = () => {
   };
 
   const filteredData = data.filter(item => {
-    if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+    if (selectedDevice !== 'all' && item.测点名称 !== selectedDevice) {
       return false;
     }
     if (dateRange && dateRange[0] && dateRange[1]) {
-      const itemDate = dayjs(item.timestamp);
+      const itemDate = dayjs(item.接收时间);
       return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
     }
     return true;
@@ -329,46 +241,6 @@ const EarthPressure: React.FC = () => {
   return (
     <div>
       <div className="page-title">土压力监测</div>
-      
-      {/* 统计卡片 */}
-      <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="设备总数"
-              value={statistics.total}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="正常状态"
-              value={statistics.normal}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="预警状态"
-              value={statistics.warning}
-              valueStyle={{ color: '#faad14' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="告警状态"
-              value={statistics.alarm}
-              valueStyle={{ color: '#ff4d4f' }}
-            />
-          </Card>
-        </Col>
-      </Row>
 
       <Card className="custom-card">
         {/* 筛选条件 */}
@@ -381,8 +253,8 @@ const EarthPressure: React.FC = () => {
               onChange={setSelectedDevice}
             >
               <Option value="all">全部设备</Option>
-              {mockData.map(item => (
-                <Option key={item.deviceId} value={item.deviceId}>{item.deviceName}</Option>
+              {Array.from(new Set(mockData.map(item => item.测点名称))).map(name => (
+                <Option key={name} value={name}>{name}</Option>
               ))}
             </Select>
           </Col>
@@ -425,7 +297,7 @@ const EarthPressure: React.FC = () => {
         <Table
           columns={columns}
           dataSource={filteredData}
-          rowKey="id"
+          rowKey="序号"
           loading={loading}
           pagination={{
             showSizeChanger: true,

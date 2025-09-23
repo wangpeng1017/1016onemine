@@ -26,19 +26,14 @@ const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 interface GroundwaterData {
-  id: string;
-  deviceId: string;
-  deviceName: string;
-  location: string;
-  waterLevel: number;
-  waterPressure: number;
-  temperature: number;
-  ph: number;
-  conductivity: number;
-  turbidity: number;
-  batteryLevel: number;
-  status: 'normal' | 'warning' | 'alarm';
-  timestamp: string;
+  序号: number;
+  测点名称: string;
+  接收时间: string;
+  水面高程: number;
+  温度: number;
+  埋深: number;
+  速率: number;
+  status?: 'normal' | 'warning' | 'alarm';
 }
 
 const Groundwater: React.FC = () => {
@@ -49,182 +44,72 @@ const Groundwater: React.FC = () => {
   const [chartVisible, setChartVisible] = useState(false);
   const [chartContainer, setChartContainer] = useState<HTMLDivElement | null>(null);
 
-  // 模拟地下水数据
+  // 最新地下水测试数据
   const mockData: GroundwaterData[] = [
-    {
-      id: '1',
-      deviceId: 'GW-001',
-      deviceName: '地下水监测点1号',
-      location: 'A区深井',
-      waterLevel: 15.6,
-      waterPressure: 2.3,
-      temperature: 12.5,
-      ph: 7.2,
-      conductivity: 450.8,
-      turbidity: 2.1,
-      batteryLevel: 88,
-      status: 'normal',
-      timestamp: '2025-09-08 11:00:00',
-    },
-    {
-      id: '2',
-      deviceId: 'GW-002',
-      deviceName: '地下水监测点2号',
-      location: 'B区观测井',
-      waterLevel: 8.9,
-      waterPressure: 1.8,
-      temperature: 14.2,
-      ph: 6.8,
-      conductivity: 520.3,
-      turbidity: 3.5,
-      batteryLevel: 72,
-      status: 'warning',
-      timestamp: '2025-09-08 11:00:00',
-    },
-    {
-      id: '3',
-      deviceId: 'GW-003',
-      deviceName: '地下水监测点3号',
-      location: 'C区监测井',
-      waterLevel: 22.1,
-      waterPressure: 3.1,
-      temperature: 11.8,
-      ph: 8.5,
-      conductivity: 680.7,
-      turbidity: 8.2,
-      batteryLevel: 45,
-      status: 'alarm',
-      timestamp: '2025-09-08 11:00:00',
-    },
-    {
-      id: '4',
-      deviceId: 'GW-004',
-      deviceName: '地下水监测点4号',
-      location: 'D区浅井',
-      waterLevel: 6.3,
-      waterPressure: 1.2,
-      temperature: 13.7,
-      ph: 7.0,
-      conductivity: 380.5,
-      turbidity: 1.8,
-      batteryLevel: 91,
-      status: 'normal',
-      timestamp: '2025-09-08 11:00:00',
-    },
-    {
-      id: '5',
-      deviceId: 'GW-005',
-      deviceName: '地下水监测点5号',
-      location: 'E区排水井',
-      waterLevel: 18.7,
-      waterPressure: 2.7,
-      temperature: 15.1,
-      ph: 6.5,
-      conductivity: 750.2,
-      turbidity: 12.5,
-      batteryLevel: 38,
-      status: 'alarm',
-      timestamp: '2025-09-08 11:00:00',
-    },
+    { 序号: 1, 测点名称: 'A4', 接收时间: '2025-09-23 09:19:43', 水面高程: 719.997, 温度: 9.317, 埋深: 0.003, 速率: 0, status: 'normal' },
+    { 序号: 2, 测点名称: 'A2', 接收时间: '2025-09-23 09:19:42', 水面高程: 700.448, 温度: 12.929, 埋深: 51.552, 速率: 0, status: 'normal' },
+    { 序号: 3, 测点名称: 'A1', 接收时间: '2025-09-23 09:19:41', 水面高程: 731.036, 温度: 13.763, 埋深: 28.964, 速率: 0, status: 'normal' },
+    { 序号: 4, 测点名称: 'A4', 接收时间: '2025-09-23 09:09:43', 水面高程: 719.997, 温度: 9.317, 埋深: 0.003, 速率: 0, status: 'normal' },
+    { 序号: 5, 测点名称: 'A2', 接收时间: '2025-09-23 09:09:42', 水面高程: 700.448, 温度: 12.929, 埋深: 51.552, 速率: 0, status: 'normal' },
+    { 序号: 6, 测点名称: 'A1', 接收时间: '2025-09-23 09:09:41', 水面高程: 731.036, 温度: 13.763, 埋深: 28.964, 速率: 0, status: 'normal' },
+    { 序号: 7, 测点名称: 'A4', 接收时间: '2025-09-23 09:04:43', 水面高程: 719.997, 温度: 9.317, 埋深: 0.003, 速率: 0, status: 'normal' },
+    { 序号: 8, 测点名称: 'A2', 接收时间: '2025-09-23 09:04:42', 水面高程: 700.448, 温度: 12.929, 埋深: 51.552, 速率: 0, status: 'normal' },
+    { 序号: 9, 测点名称: 'A1', 接收时间: '2025-09-23 09:04:41', 水面高程: 731.036, 温度: 13.763, 埋深: 28.964, 速率: -0.036, status: 'warning' },
+    { 序号: 10, 测点名称: 'SK001', 接收时间: '2025-09-23 09:00:00', 水面高程: 699.42, 温度: 13.39, 埋深: 102.58, 速率: -0.01, status: 'normal' }
   ];
 
   const columns: ColumnsType<GroundwaterData> = [
     {
-      title: '设备编号',
-      dataIndex: 'deviceId',
-      key: 'deviceId',
-      width: 100,
-    },
-    {
-      title: '设备名称',
-      dataIndex: 'deviceName',
-      key: 'deviceName',
-      width: 140,
-    },
-    {
-      title: '安装位置',
-      dataIndex: 'location',
-      key: 'location',
-      width: 120,
-    },
-    {
-      title: '水位 (m)',
-      dataIndex: 'waterLevel',
-      key: 'waterLevel',
-      width: 100,
-      render: (value: number) => (
-        <span style={{ 
-          color: value > 20 ? '#ff4d4f' : value > 10 ? '#faad14' : '#52c41a' 
-        }}>
-          {value.toFixed(1)}
-        </span>
-      ),
-    },
-    {
-      title: '水压 (MPa)',
-      dataIndex: 'waterPressure',
-      key: 'waterPressure',
-      width: 100,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '温度 (°C)',
-      dataIndex: 'temperature',
-      key: 'temperature',
-      width: 100,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: 'pH值',
-      dataIndex: 'ph',
-      key: 'ph',
+      title: '序号',
+      dataIndex: '序号',
+      key: '序号',
       width: 80,
-      render: (value: number) => (
-        <span style={{ 
-          color: value < 6.5 || value > 8.5 ? '#ff4d4f' : value < 7 || value > 8 ? '#faad14' : '#52c41a' 
-        }}>
-          {value.toFixed(1)}
-        </span>
-      ),
     },
     {
-      title: '电导率 (μS/cm)',
-      dataIndex: 'conductivity',
-      key: 'conductivity',
+      title: '测点名称',
+      dataIndex: '测点名称',
+      key: '测点名称',
+      width: 120,
+    },
+    {
+      title: '接收时间',
+      dataIndex: '接收时间',
+      key: '接收时间',
+      width: 150,
+    },
+    {
+      title: '水面高程 (m)',
+      dataIndex: '水面高程',
+      key: '水面高程',
       width: 130,
-      render: (value: number) => value.toFixed(1),
+      render: (value: number) => value.toFixed(3),
     },
     {
-      title: '浊度 (NTU)',
-      dataIndex: 'turbidity',
-      key: 'turbidity',
+      title: '温度 (℃)',
+      dataIndex: '温度',
+      key: '温度',
+      width: 100,
+      render: (value: number) => value.toFixed(3),
+    },
+    {
+      title: '埋深 (m)',
+      dataIndex: '埋深',
+      key: '埋深',
+      width: 100,
+      render: (value: number) => value.toFixed(3),
+    },
+    {
+      title: '速率 (m/s)',
+      dataIndex: '速率',
+      key: '速率',
       width: 100,
       render: (value: number) => (
         <span style={{ 
-          color: value > 10 ? '#ff4d4f' : value > 5 ? '#faad14' : '#52c41a' 
+          color: value < 0 ? '#ff4d4f' : '#52c41a' 
         }}>
-          {value.toFixed(1)}
+          {value.toFixed(3)}
         </span>
       ),
-    },
-    {
-      title: '电池电量 (%)',
-      dataIndex: 'batteryLevel',
-      key: 'batteryLevel',
-      width: 120,
-      render: (value: number) => (
-        <span style={{ 
-          color: value < 20 ? '#ff4d4f' : value < 50 ? '#faad14' : '#52c41a' 
-        }}>
-          {value}%
-        </span>
-      ),
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'timestamp',
-      key: 'timestamp',
-      width: 150,
     },
     {
       title: '状态',

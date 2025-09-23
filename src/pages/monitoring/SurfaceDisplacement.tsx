@@ -28,17 +28,16 @@ const { Option } = Select;
 interface GNSSData {
   序号: number;
   点名: string;
-  类型: string;
   累计位移量X: number;
   累计位移量Y: number;
   累计位移量Z: number;
-  小时位移速度X: number;
-  小时位移速度Y: number;
-  小时位移速度Z: number;
+  小时位移量X: number;
+  小时位移量Y: number;
+  小时位移量Z: number;
   小时位移加速度X: number;
   小时位移加速度Y: number;
   小时位移加速度Z: number;
-  更新时间: string;
+  接收时间: string;
   status?: 'normal' | 'warning' | 'alarm';
   totalDisplacement?: number;
 }
@@ -51,28 +50,18 @@ const SurfaceDisplacement: React.FC = () => {
   const [chartVisible, setChartVisible] = useState(false);
   const [chartContainer, setChartContainer] = useState<HTMLDivElement | null>(null);
 
-  // 基于gnss.md的完整GNSS数据
+  // 基于最新测试数据的表面位移监测数据
   const mockData: GNSSData[] = [
-    { 序号: 1, 点名: 'GP-29', 类型: '表面位移监测', 累计位移量X: -28.0, 累计位移量Y: -20.7, 累计位移量Z: 5.7, 小时位移速度X: 1.6, 小时位移速度Y: 1.2, 小时位移速度Z: -6.2, 小时位移加速度X: 0.3, 小时位移加速度Y: 2.4, 小时位移加速度Z: 0.0, 更新时间: '2025-09-06 16:00:00', status: 'normal', totalDisplacement: 35.1 },
-    { 序号: 2, 点名: 'GP-28', 类型: '表面位移监测', 累计位移量X: 155.6, 累计位移量Y: 103.2, 累计位移量Z: -235.6, 小时位移速度X: 1.4, 小时位移速度Y: 1.3, 小时位移速度Z: -5.7, 小时位移加速度X: 0.1, 小时位移加速度Y: 1.5, 小时位移加速度Z: 2.8, 更新时间: '2025-09-06 16:00:00', status: 'alarm', totalDisplacement: 295.1 },
-    { 序号: 3, 点名: 'GP-27', 类型: '表面位移监测', 累计位移量X: 99.5, 累计位移量Y: 48.6, 累计位移量Z: -60.7, 小时位移速度X: 0.1, 小时位移速度Y: 0.8, 小时位移速度Z: -1.2, 小时位移加速度X: -0.2, 小时位移加速度Y: 1.4, 小时位移加速度Z: -2.3, 更新时间: '2025-09-06 16:00:00', status: 'warning', totalDisplacement: 125.4 },
-    { 序号: 4, 点名: 'GP-26', 类型: '表面位移监测', 累计位移量X: 39.7, 累计位移量Y: 32.7, 累计位移量Z: -426.5, 小时位移速度X: 0.9, 小时位移速度Y: 1.1, 小时位移速度Z: 0.9, 小时位移加速度X: 0.5, 小时位移加速度Y: 1.7, 小时位移加速度Z: -5.6, 更新时间: '2025-09-06 16:00:00', status: 'alarm', totalDisplacement: 433.0 },
-    { 序号: 5, 点名: 'GP-25', 类型: '表面位移监测', 累计位移量X: 22.5, 累计位移量Y: -7.7, 累计位移量Z: -19.4, 小时位移速度X: 0.8, 小时位移速度Y: 0.7, 小时位移速度Z: -2.5, 小时位移加速度X: 0.5, 小时位移加速度Y: 1.2, 小时位移加速度Z: -5.0, 更新时间: '2025-09-06 16:00:00', status: 'normal', totalDisplacement: 31.2 },
-    { 序号: 6, 点名: 'GP-24', 类型: '表面位移监测', 累计位移量X: 74.8, 累计位移量Y: 11.7, 累计位移量Z: -62.1, 小时位移速度X: 0.4, 小时位移速度Y: 0.7, 小时位移速度Z: 0.7, 小时位移加速度X: 1.5, 小时位移加速度Y: 1.1, 小时位移加速度Z: 0.4, 更新时间: '2025-09-06 16:00:00', status: 'warning', totalDisplacement: 97.8 },
-    { 序号: 7, 点名: 'GP-22', 类型: '表面位移监测', 累计位移量X: 75.4, 累计位移量Y: 26.4, 累计位移量Z: -75.5, 小时位移速度X: 0.3, 小时位移速度Y: 0.9, 小时位移速度Z: -1.0, 小时位移加速度X: 1.3, 小时位移加速度Y: 1.5, 小时位移加速度Z: -2.0, 更新时间: '2025-09-06 16:00:00', status: 'warning', totalDisplacement: 107.1 },
-    { 序号: 8, 点名: 'GP-21', 类型: '表面位移监测', 累计位移量X: 177.4, 累计位移量Y: -1.4, 累计位移量Z: -94.8, 小时位移速度X: -0.4, 小时位移速度Y: 0.2, 小时位移速度Z: 2.4, 小时位移加速度X: 0.3, 小时位移加速度Y: 0.3, 小时位移加速度Z: 3.0, 更新时间: '2025-09-06 16:00:00', status: 'alarm', totalDisplacement: 201.3 },
-    { 序号: 9, 点名: 'GP-17', 类型: '表面位移监测', 累计位移量X: -101.6, 累计位移量Y: 16.5, 累计位移量Z: -289.1, 小时位移速度X: 0.8, 小时位移速度Y: 0.6, 小时位移速度Z: 0.1, 小时位移加速度X: 2.3, 小时位移加速度Y: 0.2, 小时位移加速度Z: -2.3, 更新时间: '2025-09-06 16:00:00', status: 'alarm', totalDisplacement: 308.3 },
-    { 序号: 10, 点名: 'GP-40', 类型: '表面位移监测', 累计位移量X: -19.9, 累计位移量Y: -5.2, 累计位移量Z: -30.0, 小时位移速度X: -0.2, 小时位移速度Y: 1.5, 小时位移速度Z: -9.8, 小时位移加速度X: 0.5, 小时位移加速度Y: 3.4, 小时位移加速度Z: -6.5, 更新时间: '2025-09-06 16:00:00', status: 'normal', totalDisplacement: 37.2 },
-    { 序号: 11, 点名: 'GP-38', 类型: '表面位移监测', 累计位移量X: 132.9, 累计位移量Y: 88.7, 累计位移量Z: -248.5, 小时位移速度X: 1.2, 小时位移速度Y: 1.4, 小时位移速度Z: -5.0, 小时位移加速度X: 1.5, 小时位移加速度Y: 2.0, 小时位移加速度Z: -2.7, 更新时间: '2025-09-06 16:00:00', status: 'alarm', totalDisplacement: 294.4 },
-    { 序号: 12, 点名: 'GP-37', 类型: '表面位移监测', 累计位移量X: -964.2, 累计位移量Y: -37.7, 累计位移量Z: 407.7, 小时位移速度X: 0.4, 小时位移速度Y: 0.4, 小时位移速度Z: -2.6, 小时位移加速度X: 1.2, 小时位移加速度Y: 0.5, 小时位移加速度Z: -2.1, 更新时间: '2025-09-06 16:00:00', status: 'alarm', totalDisplacement: 1048.5 },
-    { 序号: 13, 点名: 'GP-36', 类型: '表面位移监测', 累计位移量X: 6.2, 累计位移量Y: 16.4, 累计位移量Z: -129.7, 小时位移速度X: 0.8, 小时位移速度Y: 0.7, 小时位移速度Z: 0.6, 小时位移加速度X: 0.5, 小时位移加速度Y: 0.1, 小时位移加速度Z: -2.9, 更新时间: '2025-09-06 16:00:00', status: 'warning', totalDisplacement: 131.0 },
-    { 序号: 14, 点名: 'GP-35', 类型: '表面位移监测', 累计位移量X: 46.9, 累计位移量Y: 3.9, 累计位移量Z: 9.2, 小时位移速度X: 0.8, 小时位移速度Y: 1.0, 小时位移速度Z: -2.8, 小时位移加速度X: -0.2, 小时位移加速度Y: 2.0, 小时位移加速度Z: 0.4, 更新时间: '2025-09-06 16:00:00', status: 'normal', totalDisplacement: 47.8 },
-    { 序号: 15, 点名: 'GP-33', 类型: '表面位移监测', 累计位移量X: 96.5, 累计位移量Y: -118.3, 累计位移量Z: -271.7, 小时位移速度X: 1.5, 小时位移速度Y: 1.6, 小时位移速度Z: 0.1, 小时位移加速度X: 0.9, 小时位移加速度Y: 2.9, 小时位移加速度Z: -8.0, 更新时间: '2025-09-06 16:00:00', status: 'alarm', totalDisplacement: 314.4 },
-    { 序号: 16, 点名: 'GP-32', 类型: '表面位移监测', 累计位移量X: 104.0, 累计位移量Y: -0.7, 累计位移量Z: -62.3, 小时位移速度X: 0.4, 小时位移速度Y: 0.9, 小时位移速度Z: -2.6, 小时位移加速度X: 1.1, 小时位移加速度Y: 1.2, 小时位移加速度Z: -2.7, 更新时间: '2025-09-06 16:00:00', status: 'warning', totalDisplacement: 122.2 },
-    { 序号: 17, 点名: 'GP-31', 类型: '表面位移监测', 累计位移量X: 184.5, 累计位移量Y: 5.3, 累计位移量Z: -72.3, 小时位移速度X: 0.2, 小时位移速度Y: 1.0, 小时位移速度Z: -1.5, 小时位移加速度X: 1.2, 小时位移加速度Y: 1.6, 小时位移加速度Z: -1.4, 更新时间: '2025-09-06 16:00:00', status: 'alarm', totalDisplacement: 198.2 },
-    { 序号: 18, 点名: 'GP-23', 类型: '表面位移监测', 累计位移量X: -59.1, 累计位移量Y: -33.0, 累计位移量Z: -25.2, 小时位移速度X: 0.3, 小时位移速度Y: 0.3, 小时位移速度Z: 0.0, 小时位移加速度X: 2.2, 小时位移加速度Y: 0.5, 小时位移加速度Z: -1.1, 更新时间: '2025-09-06 16:00:00', status: 'warning', totalDisplacement: 70.4 },
-    { 序号: 19, 点名: 'GP-19', 类型: '表面位移监测', 累计位移量X: 3.9, 累计位移量Y: -6.8, 累计位移量Z: -38.2, 小时位移速度X: 0.9, 小时位移速度Y: 0.7, 小时位移速度Z: -2.2, 小时位移加速度X: 2.6, 小时位移加速度Y: 0.9, 小时位移加速度Z: -6.2, 更新时间: '2025-09-06 16:00:00', status: 'normal', totalDisplacement: 39.0 },
-    { 序号: 20, 点名: 'GP-18', 类型: '表面位移监测', 累计位移量X: 6.4, 累计位移量Y: -5.6, 累计位移量Z: -14.1, 小时位移速度X: 0.9, 小时位移速度Y: 0.6, 小时位移速度Z: 0.6, 小时位移加速度X: 2.0, 小时位移加速度Y: -0.3, 小时位移加速度Z: 0.1, 更新时间: '2025-09-06 16:00:00', status: 'normal', totalDisplacement: 16.5 }
+    { 序号: 1, 点名: 'GP-29', 累计位移量X: -31.7, 累计位移量Y: -23.5, 累计位移量Z: 13.1, 小时位移量X: -0.1, 小时位移量Y: -0.6, 小时位移量Z: -1.9, 小时位移加速度X: -0.5, 小时位移加速度Y: 1.1, 小时位移加速度Z: -0.4, 接收时间: '2025-09-23 09:00:00', status: 'normal', totalDisplacement: Math.sqrt(31.7*31.7 + 23.5*23.5 + 13.1*13.1) },
+    { 序号: 2, 点名: 'GP-28', 累计位移量X: 153.9, 累计位移量Y: 104.8, 累计位移量Z: -235, 小时位移量X: -1.4, 小时位移量Y: -1.5, 小时位移量Z: -1.8, 小时位移加速度X: -0.7, 小时位移加速度Y: -1.3, 小时位移加速度Z: 3.3, 接收时间: '2025-09-23 09:00:00', status: 'alarm', totalDisplacement: Math.sqrt(153.9*153.9 + 104.8*104.8 + 235*235) },
+    { 序号: 3, 点名: 'GP-27', 累计位移量X: 99.3, 累计位移量Y: 47, 累计位移量Z: -59.3, 小时位移量X: 0.6, 小时位移量Y: -0.3, 小时位移量Z: 2.3, 小时位移加速度X: 1.1, 小时位移加速度Y: 0.9, 小时位移加速度Z: 2.5, 接收时间: '2025-09-23 09:00:00', status: 'warning', totalDisplacement: Math.sqrt(99.3*99.3 + 47*47 + 59.3*59.3) },
+    { 序号: 4, 点名: 'GP-26', 累计位移量X: 44.4, 累计位移量Y: 29.9, 累计位移量Z: -428.5, 小时位移量X: -1, 小时位移量Y: 0.5, 小时位移量Z: 6.1, 小时位移加速度X: -3.5, 小时位移加速度Y: 0.3, 小时位移加速度Z: 7, 接收时间: '2025-09-23 09:00:00', status: 'alarm', totalDisplacement: Math.sqrt(44.4*44.4 + 29.9*29.9 + 428.5*428.5) },
+    { 序号: 5, 点名: 'GP-25', 累计位移量X: 21, 累计位移量Y: -9, 累计位移量Z: -18.5, 小时位移量X: -0.3, 小时位移量Y: -0.9, 小时位移量Z: 0.8, 小时位移加速度X: 0.1, 小时位移加速度Y: -0.2, 小时位移加速度Z: 0.3, 接收时间: '2025-09-23 09:00:00', status: 'normal', totalDisplacement: Math.sqrt(21*21 + 9*9 + 18.5*18.5) },
+    { 序号: 6, 点名: 'GP-24', 累计位移量X: 74.8, 累计位移量Y: 12.4, 累计位移量Z: -64.8, 小时位移量X: 1.4, 小时位移量Y: -0.5, 小时位移量Z: 1.6, 小时位移加速度X: 3.9, 小时位移加速度Y: -0.8, 小时位移加速度Z: 1.3, 接收时间: '2025-09-23 09:00:00', status: 'warning', totalDisplacement: Math.sqrt(74.8*74.8 + 12.4*12.4 + 64.8*64.8) },
+    { 序号: 7, 点名: 'GP-22', 累计位移量X: 75.5, 累计位移量Y: 27.7, 累计位移量Z: -79.2, 小时位移量X: 1.9, 小时位移量Y: -0.8, 小时位移量Z: 1.9, 小时位移加速度X: 4.8, 小时位移加速度Y: -1, 小时位移加速度Z: 2.8, 接收时间: '2025-09-23 09:00:00', status: 'warning', totalDisplacement: Math.sqrt(75.5*75.5 + 27.7*27.7 + 79.2*79.2) },
+    { 序号: 8, 点名: 'GP-21', 累计位移量X: 180, 累计位移量Y: 1, 累计位移量Z: -97.4, 小时位移量X: 2.8, 小时位移量Y: -0.3, 小时位移量Z: 2.3, 小时位移加速度X: 5.3, 小时位移加速度Y: -0.4, 小时位移加速度Z: 2.7, 接收时间: '2025-09-23 09:00:00', status: 'alarm', totalDisplacement: Math.sqrt(180*180 + 1*1 + 97.4*97.4) },
+    { 序号: 9, 点名: 'GP-17', 累计位移量X: -99.5, 累计位移量Y: 19.2, 累计位移量Z: -295.7, 小时位移量X: 2.8, 小时位移量Y: -0.6, 小时位移量Z: 2.5, 小时位移加速度X: 5.7, 小时位移加速度Y: -1.4, 小时位移加速度Z: 3.4, 接收时间: '2025-09-23 09:00:00', status: 'alarm', totalDisplacement: Math.sqrt(99.5*99.5 + 19.2*19.2 + 295.7*295.7) },
+    { 序号: 10, 点名: 'GP-40', 累计位移量X: -25.7, 累计位移量Y: -11.1, 累计位移量Z: -24.4, 小时位移量X: -2, 小时位移量Y: -1.4, 小时位移量Z: -5.9, 小时位移加速度X: -2.5, 小时位移加速度Y: 0.8, 小时位移加速度Z: -4.6, 接收时间: '2025-09-23 09:00:00', status: 'normal', totalDisplacement: Math.sqrt(25.7*25.7 + 11.1*11.1 + 24.4*24.4) }
   ];
 
   const columns: ColumnsType<GNSSData> = [
@@ -128,30 +117,51 @@ const SurfaceDisplacement: React.FC = () => {
       ),
     },
     {
-      title: '速度X (mm/h)',
-      dataIndex: '小时位移速度X',
-      key: '小时位移速度X',
+      title: '小时位移X (mm)',
+      dataIndex: '小时位移量X',
+      key: '小时位移量X',
       width: 120,
       render: (value: number) => value.toFixed(1),
     },
     {
-      title: '速度Y (mm/h)',
-      dataIndex: '小时位移速度Y',
-      key: '小时位移速度Y',
+      title: '小时位移Y (mm)',
+      dataIndex: '小时位移量Y',
+      key: '小时位移量Y',
       width: 120,
       render: (value: number) => value.toFixed(1),
     },
     {
-      title: '速度Z (mm/h)',
-      dataIndex: '小时位移速度Z',
-      key: '小时位移速度Z',
+      title: '小时位移Z (mm)',
+      dataIndex: '小时位移量Z',
+      key: '小时位移量Z',
       width: 120,
       render: (value: number) => value.toFixed(1),
     },
     {
-      title: '更新时间',
-      dataIndex: '更新时间',
-      key: '更新时间',
+      title: '加速度X (mm/h²)',
+      dataIndex: '小时位移加速度X',
+      key: '小时位移加速度X',
+      width: 130,
+      render: (value: number) => value.toFixed(1),
+    },
+    {
+      title: '加速度Y (mm/h²)',
+      dataIndex: '小时位移加速度Y',
+      key: '小时位移加速度Y',
+      width: 130,
+      render: (value: number) => value.toFixed(1),
+    },
+    {
+      title: '加速度Z (mm/h²)',
+      dataIndex: '小时位移加速度Z',
+      key: '小时位移加速度Z',
+      width: 130,
+      render: (value: number) => value.toFixed(1),
+    },
+    {
+      title: '接收时间',
+      dataIndex: '接收时间',
+      key: '接收时间',
       width: 150,
     },
     {
@@ -204,7 +214,7 @@ const SurfaceDisplacement: React.FC = () => {
         return false;
       }
       if (dateRange && dateRange[0] && dateRange[1]) {
-        const itemDate = dayjs(item.更新时间);
+        const itemDate = dayjs(item.接收时间);
         return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
       }
       return true;
@@ -291,7 +301,7 @@ const SurfaceDisplacement: React.FC = () => {
       return false;
     }
     if (dateRange && dateRange[0] && dateRange[1]) {
-      const itemDate = dayjs(item.更新时间);
+      const itemDate = dayjs(item.接收时间);
       return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
     }
     return true;
@@ -315,46 +325,6 @@ const SurfaceDisplacement: React.FC = () => {
   return (
     <div>
       <div className="page-title">表面位移监测</div>
-      
-      {/* 统计卡片 */}
-      <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="监测点总数"
-              value={statistics.total}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="正常状态"
-              value={statistics.normal}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="预警状态"
-              value={statistics.warning}
-              valueStyle={{ color: '#faad14' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="告警状态"
-              value={statistics.alarm}
-              valueStyle={{ color: '#ff4d4f' }}
-            />
-          </Card>
-        </Col>
-      </Row>
 
       <Card className="custom-card">
         {/* 筛选条件 */}

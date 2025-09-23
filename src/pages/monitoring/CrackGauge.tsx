@@ -26,17 +26,11 @@ const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 interface CrackData {
-  id: string;
-  deviceId: string;
-  deviceName: string;
-  location: string;
-  crackWidth: number;
-  crackLength: number;
-  temperature: number;
-  humidity: number;
-  batteryLevel: number;
-  status: 'normal' | 'warning' | 'alarm';
-  timestamp: string;
+  序号: number;
+  测点名称: string;
+  接收时间: string;
+  裂缝值: number;
+  status?: 'normal' | 'warning' | 'alarm';
 }
 
 const CrackGauge: React.FC = () => {
@@ -47,133 +41,51 @@ const CrackGauge: React.FC = () => {
   const [chartVisible, setChartVisible] = useState(false);
   const [chartContainer, setChartContainer] = useState<HTMLDivElement | null>(null);
 
-  // 模拟裂缝计数据
+  // 最新裂缝计测试数据
   const mockData: CrackData[] = [
-    {
-      id: '1',
-      deviceId: 'CG-001',
-      deviceName: '裂缝计1号',
-      location: 'A区边坡',
-      crackWidth: 2.5,
-      crackLength: 150.0,
-      temperature: 25.3,
-      humidity: 65.2,
-      batteryLevel: 85,
-      status: 'normal',
-      timestamp: '2025-09-06 16:00:00',
-    },
-    {
-      id: '2',
-      deviceId: 'CG-002',
-      deviceName: '裂缝计2号',
-      location: 'B区边坡',
-      crackWidth: 5.8,
-      crackLength: 280.5,
-      temperature: 24.8,
-      humidity: 68.1,
-      batteryLevel: 72,
-      status: 'warning',
-      timestamp: '2025-09-06 16:00:00',
-    },
-    {
-      id: '3',
-      deviceId: 'CG-003',
-      deviceName: '裂缝计3号',
-      location: 'C区边坡',
-      crackWidth: 12.3,
-      crackLength: 450.2,
-      temperature: 26.1,
-      humidity: 62.8,
-      batteryLevel: 45,
-      status: 'alarm',
-      timestamp: '2025-09-06 16:00:00',
-    },
-    {
-      id: '4',
-      deviceId: 'CG-004',
-      deviceName: '裂缝计4号',
-      location: 'D区边坡',
-      crackWidth: 1.8,
-      crackLength: 95.3,
-      temperature: 25.7,
-      humidity: 64.5,
-      batteryLevel: 91,
-      status: 'normal',
-      timestamp: '2025-09-06 16:00:00',
-    },
+    { 序号: 1, 测点名称: '裂缝计02', 接收时间: '2025-09-23 09:01:02', 裂缝值: 5.93, status: 'warning' },
+    { 序号: 2, 测点名称: '裂缝计03', 接收时间: '2025-09-23 08:23:14', 裂缝值: 5.62, status: 'warning' },
+    { 序号: 3, 测点名称: '裂缝计04', 接收时间: '2025-09-23 08:19:22', 裂缝值: 4.37, status: 'normal' },
+    { 序号: 4, 测点名称: '裂缝计02', 接收时间: '2025-09-23 08:00:56', 裂缝值: 5.9, status: 'warning' },
+    { 序号: 5, 测点名称: '裂缝计03', 接收时间: '2025-09-23 07:23:08', 裂缝值: 5.61, status: 'warning' },
+    { 序号: 6, 测点名称: '裂缝计01', 接收时间: '2025-09-23 07:13:22', 裂缝值: 4.15, status: 'normal' },
+    { 序号: 7, 测点名称: '裂缝计02', 接收时间: '2025-09-23 07:00:50', 裂缝值: 5.9, status: 'warning' },
+    { 序号: 8, 测点名称: '裂缝计03', 接收时间: '2025-09-23 06:23:02', 裂缝值: 5.61, status: 'warning' },
+    { 序号: 9, 测点名称: '裂缝计04', 接收时间: '2025-09-23 06:19:16', 裂缝值: 4.36, status: 'normal' },
+    { 序号: 10, 测点名称: '裂缝计02', 接收时间: '2025-09-23 06:00:44', 裂缝值: 5.91, status: 'warning' }
   ];
 
   const columns: ColumnsType<CrackData> = [
     {
-      title: '设备编号',
-      dataIndex: 'deviceId',
-      key: 'deviceId',
-      width: 100,
+      title: '序号',
+      dataIndex: '序号',
+      key: '序号',
+      width: 80,
     },
     {
-      title: '设备名称',
-      dataIndex: 'deviceName',
-      key: 'deviceName',
+      title: '测点名称',
+      dataIndex: '测点名称',
+      key: '测点名称',
       width: 120,
     },
     {
-      title: '安装位置',
-      dataIndex: 'location',
-      key: 'location',
-      width: 120,
+      title: '接收时间',
+      dataIndex: '接收时间',
+      key: '接收时间',
+      width: 150,
     },
     {
-      title: '裂缝宽度 (mm)',
-      dataIndex: 'crackWidth',
-      key: 'crackWidth',
+      title: '裂缝值 (mm)',
+      dataIndex: '裂缝值',
+      key: '裂缝值',
       width: 130,
       render: (value: number) => (
         <span style={{ 
           color: value > 10 ? '#ff4d4f' : value > 5 ? '#faad14' : '#52c41a' 
         }}>
-          {value.toFixed(1)}
+          {value.toFixed(2)}
         </span>
       ),
-    },
-    {
-      title: '裂缝长度 (mm)',
-      dataIndex: 'crackLength',
-      key: 'crackLength',
-      width: 130,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '温度 (°C)',
-      dataIndex: 'temperature',
-      key: 'temperature',
-      width: 100,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '湿度 (%)',
-      dataIndex: 'humidity',
-      key: 'humidity',
-      width: 100,
-      render: (value: number) => value.toFixed(1),
-    },
-    {
-      title: '电池电量 (%)',
-      dataIndex: 'batteryLevel',
-      key: 'batteryLevel',
-      width: 120,
-      render: (value: number) => (
-        <span style={{ 
-          color: value < 20 ? '#ff4d4f' : value < 50 ? '#faad14' : '#52c41a' 
-        }}>
-          {value}%
-        </span>
-      ),
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'timestamp',
-      key: 'timestamp',
-      width: 150,
     },
     {
       title: '状态',
@@ -302,11 +214,11 @@ const CrackGauge: React.FC = () => {
   };
 
   const filteredData = data.filter(item => {
-    if (selectedDevice !== 'all' && item.deviceId !== selectedDevice) {
+    if (selectedDevice !== 'all' && item.测点名称 !== selectedDevice) {
       return false;
     }
     if (dateRange && dateRange[0] && dateRange[1]) {
-      const itemDate = dayjs(item.timestamp);
+      const itemDate = dayjs(item.接收时间);
       return itemDate.isAfter(dateRange[0]) && itemDate.isBefore(dateRange[1]);
     }
     return true;
@@ -329,46 +241,6 @@ const CrackGauge: React.FC = () => {
   return (
     <div>
       <div className="page-title">裂缝计监测</div>
-      
-      {/* 统计卡片 */}
-      <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="设备总数"
-              value={statistics.total}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="正常状态"
-              value={statistics.normal}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="预警状态"
-              value={statistics.warning}
-              valueStyle={{ color: '#faad14' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="告警状态"
-              value={statistics.alarm}
-              valueStyle={{ color: '#ff4d4f' }}
-            />
-          </Card>
-        </Col>
-      </Row>
 
       <Card className="custom-card">
         {/* 筛选条件 */}
@@ -381,8 +253,8 @@ const CrackGauge: React.FC = () => {
               onChange={setSelectedDevice}
             >
               <Option value="all">全部设备</Option>
-              {mockData.map(item => (
-                <Option key={item.deviceId} value={item.deviceId}>{item.deviceName}</Option>
+              {Array.from(new Set(mockData.map(item => item.测点名称))).map(name => (
+                <Option key={name} value={name}>{name}</Option>
               ))}
             </Select>
           </Col>
@@ -425,7 +297,7 @@ const CrackGauge: React.FC = () => {
         <Table
           columns={columns}
           dataSource={filteredData}
-          rowKey="id"
+          rowKey="序号"
           loading={loading}
           pagination={{
             showSizeChanger: true,
