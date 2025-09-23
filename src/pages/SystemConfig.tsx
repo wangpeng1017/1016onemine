@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Card, Tabs } from 'antd';
-import { SettingOutlined, InfoCircleOutlined } from '@ant-design/icons';
-import ProjectInfo from './system-config/ProjectInfo';
-import RegionManagement from './system-config/RegionManagement';
-import AlarmSettings from './system-config/AlarmSettings';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+
+// 该页面已下线，统一重定向到“项目信息”子页面。
+// 保留文件仅用于兼容历史链接。
 
 interface SystemConfigData {
   // 系统基础配置
@@ -40,10 +39,9 @@ interface SystemConfigData {
 }
 
 const SystemConfig: React.FC = () => {
-  // 占位接口定义以避免类型报错（旧版字段保留但页面改为分模块）
-  const [loading] = useState(false);
+  return <Navigate to="/system-config/project-info" replace />;
 
-  // 默认配置数据（保留类型以便后续扩展）
+  // 以下字段仅为保留类型声明，避免历史引用时报错
   const defaultConfig: SystemConfigData = {
     systemName: '矿山安全监测系统',
     systemVersion: 'v2.1.0',
@@ -73,34 +71,7 @@ const SystemConfig: React.FC = () => {
     accountLockTime: 30,
   };
 
-  // 旧的单页表单改为分模块Tabs
-  return (
-    <div>
-      <div className="page-title">系统配置</div>
-      <Card className="custom-card">
-        <Tabs
-          defaultActiveKey="project"
-          items={[
-            {
-              key: 'project',
-              label: '项目信息',
-              children: <ProjectInfo />,
-            },
-            {
-              key: 'regions',
-              label: '区域管理',
-              children: <RegionManagement />,
-            },
-            {
-              key: 'alarms',
-              label: '告警设置',
-              children: <AlarmSettings />,
-            },
-          ]}
-        />
-      </Card>
-    </div>
-  );
+  // 原先的 Tabs 界面已移除
               onClick={handleSave}
             >
               保存配置

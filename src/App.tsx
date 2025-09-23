@@ -25,7 +25,6 @@ import HuituCloud from './pages/basic-platform/HuituCloud';
 import IotPlatform from './pages/basic-platform/IotPlatform';
 import DataIntegration from './pages/basic-platform/DataIntegration';
 import AccountManagement from './pages/AccountManagement';
-import SystemConfig from './pages/SystemConfig';
 import ProjectInfo from './pages/system-config/ProjectInfo';
 import RegionManagement from './pages/system-config/RegionManagement';
 import AlarmSettings from './pages/system-config/AlarmSettings';
