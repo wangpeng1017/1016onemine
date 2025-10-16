@@ -39,7 +39,19 @@ const GlobalLayout: React.FC = () => {
   };
 
   const handleLeftMenuClick = ({ key }: { key: string }) => {
-    navigate(`/${key}`);
+    // 根据当前路由前缀决定导航路径
+    const currentPath = location.pathname;
+    
+    if (currentPath.startsWith('/slope-monitoring')) {
+      // 在边坡监测管理模块下
+      navigate(`/slope-monitoring/${key}`);
+    } else if (currentPath.startsWith('/personnel-safety')) {
+      // 在人员定位安全模块下
+      navigate(`/personnel-safety/${key}`);
+    } else {
+      // 其他模块或默认
+      navigate(`/${key}`);
+    }
   };
 
   const getCurrentLeftMenuKey = () => {
