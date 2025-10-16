@@ -52,8 +52,29 @@ const SettingsLayout: React.FC<SettingsLayoutProps> = ({ children }) => {
     navigate(key);
   };
 
-  const handleTopMenuSelect = () => {
-    // 设置页面不处理顶部菜单选择，保持在设置页面
+  const handleTopMenuSelect = (topMenu: string, subMenu: string) => {
+    // 处理顶部菜单选择，跳转到其他页面
+    if (subMenu === 'home') {
+      navigate('/home');
+    } else if (subMenu === 'slope-monitoring') {
+      navigate('/slope-monitoring/slope-device-management');
+    } else if (subMenu === 'personnel-safety') {
+      navigate('/personnel-safety/personnel-home');
+    } else if (subMenu === 'ioc-planning') {
+      navigate('/home');
+    } else if (subMenu === 'ioc-production') {
+      navigate('/home');
+    } else if (subMenu === 'ioc-safety') {
+      navigate('/home');
+    } else if (subMenu === 'ioc-operation') {
+      navigate('/home');
+    } else if (subMenu === 'production-execution') {
+      navigate('/production-execution/production-continuity');
+    } else if (subMenu === 'equipment-management') {
+      navigate('/equipment-management/equipment-ledger');
+    } else {
+      navigate('/home');
+    }
   };
 
   const handleSettingsClick = () => {
@@ -76,27 +97,24 @@ const SettingsLayout: React.FC<SettingsLayoutProps> = ({ children }) => {
       
       <Layout style={{ flex: 1 }}>
         <Sider
+          trigger={null}
           collapsible
           collapsed={collapsed}
           onCollapse={setCollapsed}
           width={250}
           style={{
-            background: '#fff',
-            boxShadow: '2px 0 8px rgba(0,0,0,0.1)',
+            background: '#ffffff',
+            borderRight: '1px solid #f0f0f0',
           }}
         >
-          <div style={{ padding: '16px', borderBottom: '1px solid #f0f0f0' }}>
-            <Title level={4} style={{ margin: 0, textAlign: 'center' }}>
-              {collapsed ? '设置' : '系统设置'}
-            </Title>
-          </div>
           <Menu
+            theme="light"
             mode="inline"
             selectedKeys={[location.pathname]}
             defaultOpenKeys={['basic-functions', 'master-data']}
             items={menuItems}
             onClick={handleMenuClick}
-            style={{ border: 'none' }}
+            style={{ borderRight: 0 }}
           />
         </Sider>
         
