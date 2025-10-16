@@ -42,6 +42,8 @@ import DailyDispatch from './pages/production-execution/DailyDispatch';
 import SurveyingAcceptance from './pages/production-execution/SurveyingAcceptance';
 import ProductionAnalysis from './pages/production-execution/ProductionAnalysis';
 import BasicInfo from './pages/production-execution/BasicInfo';
+import EquipmentLedger from './pages/equipment-management/EquipmentLedger';
+import Placeholder from './pages/equipment-management/Placeholder';
 import './App.css';
 
 const App: React.FC = () => {
@@ -82,6 +84,14 @@ const App: React.FC = () => {
               <Route path="production-execution/surveying-acceptance" element={<SurveyingAcceptance />} />
               <Route path="production-execution/production-analysis" element={<ProductionAnalysis />} />
               <Route path="production-execution/basic-info" element={<BasicInfo />} />
+              
+              {/* 设备管理系统路由 */}
+              <Route path="equipment-management/equipment-ledger" element={<EquipmentLedger />} />
+              <Route path="equipment-management/inspection-management" element={<Placeholder title="点检管理" />} />
+              <Route path="equipment-management/maintenance-management" element={<Placeholder title="保养管理" />} />
+              <Route path="equipment-management/testing-management" element={<Placeholder title="检测检验管理" />} />
+              <Route path="equipment-management/fault-management" element={<Placeholder title="设备故障管理" />} />
+              <Route path="equipment-management/maintenance-plan" element={<Placeholder title="检修计划管理" />} />
               
               <Route path="device-management" element={<DeviceManagement />} />
               <Route path="model-management" element={<ModelManagement />} />
