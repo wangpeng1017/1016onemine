@@ -103,19 +103,6 @@ const App: React.FC = () => {
               <Route path="equipment-management/fault-management" element={<FaultManagement />} />
               <Route path="equipment-management/maintenance-plan" element={<RepairPlan />} />
               
-              {/* 设置页面路由 */}
-              <Route path="settings" element={<SettingsLayout />}>
-                <Route index element={<SettingsHome />} />
-                <Route path="data-dictionary" element={<DeviceTypes />} />
-                <Route path="account-management" element={<AccountManagement />} />
-                <Route path="system-config" element={<ProjectInfo />} />
-                <Route path="master-data/personnel" element={<Personnel />} />
-                <Route path="master-data/equipment" element={<Equipment />} />
-                <Route path="master-data/ore" element={<Ore />} />
-                <Route path="master-data/ore-body" element={<OreBody />} />
-                <Route path="master-data/environment" element={<Environment />} />
-              </Route>
-              
               <Route path="device-management" element={<DeviceManagement />} />
               <Route path="model-management" element={<ModelManagement />} />
 <Route path="threshold-settings" element={<ThresholdSettingsSimple />} />
@@ -147,6 +134,20 @@ const App: React.FC = () => {
               <Route path="system-config/region-management" element={<RegionManagement />} />
               <Route path="system-config/alarm-settings" element={<AlarmSettings />} />
               </Route>
+              
+              {/* 设置页面独立路由 */}
+              <Route path="settings" element={<SettingsLayout />}>
+                <Route index element={<SettingsHome />} />
+                <Route path="data-dictionary" element={<DeviceTypes />} />
+                <Route path="account-management" element={<AccountManagement />} />
+                <Route path="system-config" element={<ProjectInfo />} />
+                <Route path="master-data/personnel" element={<Personnel />} />
+                <Route path="master-data/equipment" element={<Equipment />} />
+                <Route path="master-data/ore" element={<Ore />} />
+                <Route path="master-data/ore-body" element={<OreBody />} />
+                <Route path="master-data/environment" element={<Environment />} />
+              </Route>
+              
               {/* 保留原有的MainLayout路由作为备选 */}
               <Route path="/legacy" element={<MainLayout />}>
                 <Route index element={<Navigate to="/legacy/home" replace />} />

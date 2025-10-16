@@ -9,8 +9,9 @@ import {
   SafetyOutlined 
 } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import TopNavigation from '../components/TopNavigation';
 
-const { Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
 interface SettingsLayoutProps {
@@ -51,34 +52,63 @@ const SettingsLayout: React.FC<SettingsLayoutProps> = ({ children }) => {
     navigate(key);
   };
 
+  const handleTopMenuSelect = () => {
+    // 设置页面不处理顶部菜单选择，保持在设置页面
+  };
+
+  const handleSettingsClick = () => {
+    navigate('/settings');
+  };
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={setCollapsed}
-        width={250}
+      <Header
         style={{
+          padding: 0,
           background: '#fff',
-          boxShadow: '2px 0 8px rgba(0,0,0,0.1)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 999,
         }}
       >
-        <div style={{ padding: '16px', borderBottom: '1px solid #f0f0f0' }}>
-          <Title level={4} style={{ margin: 0, textAlign: 'center' }}>
-            {collapsed ? '设置' : '系统设置'}
-          </Title>
-        </div>
-        <Menu
-          mode="inline"
-          selectedKeys={[location.pathname]}
-          defaultOpenKeys={['basic-functions', 'master-data']}
-          items={menuItems}
-          onClick={handleMenuClick}
-          style={{ border: 'none' }}
-        />
-      </Sider>
-      <Layout>
-        <Content style={{ padding: '24px', background: '#f0f2f5' }}>
+        <TopNavigation onMenuSelect={handleTopMenuSelect} onSettingsClick={handleSettingsClick} />
+      </Header>
+      
+      <Layout style={{ flex: 1 }}>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={setCollapsed}
+          width={250}
+          style={{
+            background: '#fff',
+            boxShadow: '2px 0 8px rgba(0,0,0,0.1)',
+          }}
+        >
+          <div style={{ padding: '16px', borderBottom: '1px solid #f0f0f0' }}>
+            <Title level={4} style={{ margin: 0, textAlign: 'center' }}>
+              {collapsed ? '设置' : '系统设置'}
+            </Title>
+          </div>
+          <Menu
+            mode="inline"
+            selectedKeys={[location.pathname]}
+            defaultOpenKeys={['basic-functions', 'master-data']}
+            items={menuItems}
+            onClick={handleMenuClick}
+            style={{ border: 'none' }}
+          />
+        </Sider>
+        
+        <Content
+          style={{
+            margin: '16px',
+            padding: '24px',
+            background: '#fff',
+            borderRadius: '8px',
+            overflow: 'auto',
+          }}
+        >
           {children || <Outlet />}
         </Content>
       </Layout>
