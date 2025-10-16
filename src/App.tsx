@@ -69,6 +69,14 @@ const App: React.FC = () => {
               <Route path="personnel-safety/personnel-statistics" element={<Home />} />
               <Route path="personnel-safety/personnel-settings" element={<ThresholdSettingsSimple />} />
               
+              {/* 生产执行系统路由 */}
+              <Route path="production-execution/production-continuity" element={<Home />} />
+              <Route path="production-execution/coal-operation-plan" element={<Home />} />
+              <Route path="production-execution/daily-dispatch" element={<Home />} />
+              <Route path="production-execution/surveying-acceptance" element={<Home />} />
+              <Route path="production-execution/production-analysis" element={<Home />} />
+              <Route path="production-execution/basic-info" element={<Home />} />
+              
               <Route path="device-management" element={<DeviceManagement />} />
               <Route path="model-management" element={<ModelManagement />} />
 <Route path="threshold-settings" element={<ThresholdSettingsSimple />} />

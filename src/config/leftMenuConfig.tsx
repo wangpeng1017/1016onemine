@@ -186,6 +186,40 @@ export const iocOperationLeftMenu: LeftMenuItem[] = [
   },
 ];
 
+// 生产执行系统的左侧菜单
+export const productionExecutionLeftMenu: LeftMenuItem[] = [
+  {
+    key: 'production-continuity',
+    icon: <BarChartOutlined />,
+    label: '生产接续管理',
+  },
+  {
+    key: 'coal-operation-plan',
+    icon: <DatabaseOutlined />,
+    label: '原煤作业计划',
+  },
+  {
+    key: 'daily-dispatch',
+    icon: <AlertOutlined />,
+    label: '日常调度管理',
+  },
+  {
+    key: 'surveying-acceptance',
+    icon: <DatabaseOutlined />,
+    label: '地测验收管理',
+  },
+  {
+    key: 'production-analysis',
+    icon: <BarChartOutlined />,
+    label: '生产情况分析',
+  },
+  {
+    key: 'basic-info',
+    icon: <SettingOutlined />,
+    label: '基础信息管理',
+  },
+];
+
 // 五个一级菜单的默认左侧菜单
 export const defaultLeftMenu: LeftMenuItem[] = [
   {
@@ -215,7 +249,7 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'ioc-operation': iocOperationLeftMenu,
   'home': [], // 首页不显示左侧菜单
   'smart-mine-design': defaultLeftMenu,
-  'smart-production': defaultLeftMenu,
+  'production-execution': productionExecutionLeftMenu,
   'env-monitoring': defaultLeftMenu,
   'smart-prod-ops-sales': defaultLeftMenu,
 };

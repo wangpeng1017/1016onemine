@@ -55,6 +55,9 @@ const PortalHome: React.FC = () => {
       description: '生产调度、设备协同、效率优化等智能生产管理',
       icon: <RocketOutlined style={{ fontSize: 48 }} />,
       color: '#faad14',
+      subMenus: [
+        { key: 'production-execution', label: '生产执行系统' },
+      ],
     },
     {
       key: 'smart-safety',
@@ -105,6 +108,8 @@ const PortalHome: React.FC = () => {
       navigate('/slope-monitoring/slope-device-management');
     } else if (subMenuKey === 'personnel-safety') {
       navigate('/personnel-safety/personnel-home');
+    } else if (subMenuKey === 'production-execution') {
+      navigate('/production-execution/production-continuity');
     } else {
       navigate('/home');
     }

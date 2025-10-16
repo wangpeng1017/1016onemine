@@ -33,6 +33,8 @@ const GlobalLayout: React.FC = () => {
       navigate('/home');
     } else if (subMenu === 'ioc-operation') {
       navigate('/home');
+    } else if (subMenu === 'production-execution') {
+      navigate('/production-execution/production-continuity');
     } else {
       navigate('/home'); // 默认跳转到首页
     }
@@ -48,6 +50,9 @@ const GlobalLayout: React.FC = () => {
     } else if (currentPath.startsWith('/personnel-safety')) {
       // 在人员定位安全模块下
       navigate(`/personnel-safety/${key}`);
+    } else if (currentPath.startsWith('/production-execution')) {
+      // 在生产执行系统模块下
+      navigate(`/production-execution/${key}`);
     } else {
       // 其他模块或默认
       navigate(`/${key}`);
