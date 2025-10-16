@@ -270,7 +270,7 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'smart-mine-design': defaultLeftMenu,
   'production-execution': productionExecutionLeftMenu,
   'equipment-management': equipmentManagementLeftMenu,
-  'smart-mine-design': defaultLeftMenu,
+  'env-monitoring': defaultLeftMenu,
   'smart-prod-ops-sales': defaultLeftMenu,
 };
 
