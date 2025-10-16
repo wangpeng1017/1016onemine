@@ -36,6 +36,7 @@ import ProjectInfo from './pages/system-config/ProjectInfo';
 import RegionManagement from './pages/system-config/RegionManagement';
 import AlarmSettings from './pages/system-config/AlarmSettings';
 import DeviceTypes from './pages/data-dictionary/DeviceTypes';
+import ProductionContinuity from './pages/production-execution/ProductionContinuity';
 import './App.css';
 
 const App: React.FC = () => {
@@ -70,12 +71,12 @@ const App: React.FC = () => {
               <Route path="personnel-safety/personnel-settings" element={<ThresholdSettingsSimple />} />
               
               {/* 生产执行系统路由 */}
-              <Route path="production-execution/production-continuity" element={<Home />} />
-              <Route path="production-execution/coal-operation-plan" element={<Home />} />
-              <Route path="production-execution/daily-dispatch" element={<Home />} />
-              <Route path="production-execution/surveying-acceptance" element={<Home />} />
-              <Route path="production-execution/production-analysis" element={<Home />} />
-              <Route path="production-execution/basic-info" element={<Home />} />
+              <Route path="production-execution/production-continuity" element={<ProductionContinuity />} />
+              <Route path="production-execution/coal-operation-plan" element={<ProductionContinuity />} />
+              <Route path="production-execution/daily-dispatch" element={<ProductionContinuity />} />
+              <Route path="production-execution/surveying-acceptance" element={<ProductionContinuity />} />
+              <Route path="production-execution/production-analysis" element={<ProductionContinuity />} />
+              <Route path="production-execution/basic-info" element={<ProductionContinuity />} />
               
               <Route path="device-management" element={<DeviceManagement />} />
               <Route path="model-management" element={<ModelManagement />} />
