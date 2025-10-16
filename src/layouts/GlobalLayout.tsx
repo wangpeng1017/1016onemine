@@ -83,24 +83,6 @@ const GlobalLayout: React.FC = () => {
             borderRight: '1px solid #f0f0f0',
           }}
         >
-          <div
-            style={{
-              height: 64,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#262626',
-              fontSize: collapsed ? 16 : 14,
-              fontWeight: 'bold',
-              borderBottom: '1px solid #f0f0f0',
-              paddingLeft: collapsed ? 0 : 16,
-              paddingRight: collapsed ? 0 : 16,
-              overflow: 'hidden',
-              textAlign: 'center',
-            }}
-          >
-            {collapsed ? '菜单' : currentSubMenu ? `${currentSubMenu}` : '菜单'}
-          </div>
           <Menu
             theme="light"
             mode="inline"
