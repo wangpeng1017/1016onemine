@@ -38,6 +38,7 @@ import AlarmSettings from './pages/system-config/AlarmSettings';
 import DeviceTypes from './pages/data-dictionary/DeviceTypes';
 import ProductionContinuity from './pages/production-execution/ProductionContinuity';
 import CoalOperationPlan from './pages/production-execution/CoalOperationPlan';
+import DailyDispatch from './pages/production-execution/DailyDispatch';
 import './App.css';
 
 const App: React.FC = () => {
@@ -74,7 +75,7 @@ const App: React.FC = () => {
               {/* 生产执行系统路由 */}
               <Route path="production-execution/production-continuity" element={<ProductionContinuity />} />
               <Route path="production-execution/coal-operation-plan" element={<CoalOperationPlan />} />
-              <Route path="production-execution/daily-dispatch" element={<ProductionContinuity />} />
+              <Route path="production-execution/daily-dispatch" element={<DailyDispatch />} />
               <Route path="production-execution/surveying-acceptance" element={<ProductionContinuity />} />
               <Route path="production-execution/production-analysis" element={<ProductionContinuity />} />
               <Route path="production-execution/basic-info" element={<ProductionContinuity />} />
