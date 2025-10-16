@@ -186,6 +186,40 @@ export const iocOperationLeftMenu: LeftMenuItem[] = [
   },
 ];
 
+// 设备管理系统的左侧菜单
+export const equipmentManagementLeftMenu: LeftMenuItem[] = [
+  {
+    key: 'equipment-ledger',
+    icon: <DatabaseOutlined />,
+    label: '设备台账管理',
+  },
+  {
+    key: 'inspection-management',
+    icon: <AlertOutlined />,
+    label: '点检管理',
+  },
+  {
+    key: 'maintenance-management',
+    icon: <SettingOutlined />,
+    label: '保养管理',
+  },
+  {
+    key: 'testing-management',
+    icon: <BarChartOutlined />,
+    label: '检测检验管理',
+  },
+  {
+    key: 'fault-management',
+    icon: <AlertOutlined />,
+    label: '设备故障管理',
+  },
+  {
+    key: 'maintenance-plan',
+    icon: <BarChartOutlined />,
+    label: '检修计划管理',
+  },
+];
+
 // 生产执行系统的左侧菜单
 export const productionExecutionLeftMenu: LeftMenuItem[] = [
   {
@@ -250,7 +284,8 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'home': [], // 首页不显示左侧菜单
   'smart-mine-design': defaultLeftMenu,
   'production-execution': productionExecutionLeftMenu,
-  'env-monitoring': defaultLeftMenu,
+  'equipment-management': equipmentManagementLeftMenu,
+  'smart-mine-design': defaultLeftMenu,
   'smart-prod-ops-sales': defaultLeftMenu,
 };
 

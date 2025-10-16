@@ -57,6 +57,7 @@ const PortalHome: React.FC = () => {
       color: '#faad14',
       subMenus: [
         { key: 'production-execution', label: '生产执行系统' },
+        { key: 'equipment-management', label: '设备管理系统' },
       ],
     },
     {
@@ -110,6 +111,8 @@ const PortalHome: React.FC = () => {
       navigate('/personnel-safety/personnel-home');
     } else if (subMenuKey === 'production-execution') {
       navigate('/production-execution/production-continuity');
+    } else if (subMenuKey === 'equipment-management') {
+      navigate('/equipment-management/equipment-ledger');
     } else {
       navigate('/home');
     }

@@ -44,6 +44,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect }) => {
       label: '智能生产协同',
       children: [
         { key: 'production-execution', label: '生产执行系统' },
+        { key: 'equipment-management', label: '设备管理系统' },
       ],
     },
     {

@@ -35,6 +35,8 @@ const GlobalLayout: React.FC = () => {
       navigate('/home');
     } else if (subMenu === 'production-execution') {
       navigate('/production-execution/production-continuity');
+    } else if (subMenu === 'equipment-management') {
+      navigate('/equipment-management/equipment-ledger');
     } else {
       navigate('/home'); // 默认跳转到首页
     }
@@ -53,6 +55,9 @@ const GlobalLayout: React.FC = () => {
     } else if (currentPath.startsWith('/production-execution')) {
       // 在生产执行系统模块下
       navigate(`/production-execution/${key}`);
+    } else if (currentPath.startsWith('/equipment-management')) {
+      // 在设备管理系统模块下
+      navigate(`/equipment-management/${key}`);
     } else {
       // 其他模块或默认
       navigate(`/${key}`);
