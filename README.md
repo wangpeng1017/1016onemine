@@ -1,6 +1,6 @@
-# 矿山监测系统前端演示应用
+# 智慧矿山平台
 
-这是一个基于React + TypeScript + Ant Design构建的矿山监测系统前端演示应用，复制了原始设计图中的UI界面和功能。
+这是一个基于React + TypeScript + Ant Design构建的智慧矿山平台应用，提供全面的矿山监测、安全预警和数据管理功能。
 
 ## 功能特性
 
@@ -42,7 +42,7 @@
 ## 项目结构
 
 ```
-mine-monitoring-demo/
+smart-mining-platform/
 ├── public/                 # 静态资源
 ├── src/
 │   ├── components/         # 通用组件

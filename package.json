@@ -1,7 +1,7 @@
 {
-  "name": "mine-monitoring-demo",
+  "name": "smart-mining-platform",
   "version": "1.0.0",
-  "description": "矿山监测系统前端演示应用",
+  "description": "智慧矿山平台",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
