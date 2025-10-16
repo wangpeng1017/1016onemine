@@ -188,7 +188,7 @@ const CoalOperationPlan: React.FC = () => {
       label: '年度计划',
       children: (
         <Table
-          columns={columns.filter((col) => col.dataIndex !== 'month')}
+          columns={columns.filter((col) => 'dataIndex' in col && col.dataIndex !== 'month')}
           dataSource={annualData}
           pagination={false}
           scroll={{ x: 1200 }}
