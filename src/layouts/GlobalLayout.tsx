@@ -41,7 +41,7 @@ const GlobalLayout: React.FC = () => {
   };
 
   // 转换左侧菜单格式为Ant Design Menu可用的格式
-  const convertMenuItems = (items: any[]) => {
+  const convertMenuItems = (items: any[]): any[] => {
     return items.map((item) => ({
       key: item.key,
       icon: item.icon,
