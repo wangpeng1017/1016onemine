@@ -49,30 +49,24 @@ const App: React.FC = () => {
               <Route path="home" element={<Home />} />
               
               {/* 边坡监测管理路由 */}
-              <Route path="slope-monitoring/*">
-                <Route index element={<Navigate to="/slope-monitoring/slope-home" replace />} />
-                <Route path="slope-home" element={<Home />} />
-                <Route path="slope-device-management" element={<DeviceManagement />} />
-                <Route path="slope-model-management" element={<ModelManagement />} />
-                <Route path="slope-threshold-settings" element={<ThresholdSettingsSimple />} />
-                <Route path="slope-monitoring-data" element={<MonitoringData />} />
-                <Route path="slope-alarm-records" element={<Navigate to="/alarm-records/point-alarms" replace />} />
-                <Route path="slope-data-reporting" element={<DataReporting />} />
-                <Route path="slope-basic-platform" element={<HuituCloud />} />
-                <Route path="slope-data-dictionary" element={<DeviceTypes />} />
-                <Route path="slope-account-management" element={<AccountManagement />} />
-                <Route path="slope-system-config" element={<Navigate to="/system-config/project-info" replace />} />
-              </Route>
+              <Route path="slope-monitoring/slope-home" element={<Home />} />
+              <Route path="slope-monitoring/slope-device-management" element={<DeviceManagement />} />
+              <Route path="slope-monitoring/slope-model-management" element={<ModelManagement />} />
+              <Route path="slope-monitoring/slope-threshold-settings" element={<ThresholdSettingsSimple />} />
+              <Route path="slope-monitoring/slope-monitoring-data" element={<MonitoringData />} />
+              <Route path="slope-monitoring/slope-alarm-records" element={<PointAlarms />} />
+              <Route path="slope-monitoring/slope-data-reporting" element={<DataReporting />} />
+              <Route path="slope-monitoring/slope-basic-platform" element={<HuituCloud />} />
+              <Route path="slope-monitoring/slope-data-dictionary" element={<DeviceTypes />} />
+              <Route path="slope-monitoring/slope-account-management" element={<AccountManagement />} />
+              <Route path="slope-monitoring/slope-system-config" element={<ProjectInfo />} />
               
               {/* 人员定位安全路由 */}
-              <Route path="personnel-safety/*">
-                <Route index element={<Navigate to="/personnel-safety/personnel-home" replace />} />
-                <Route path="personnel-home" element={<Home />} />
-                <Route path="personnel-tracking" element={<Home />} />
-                <Route path="personnel-safety-alert" element={<PointAlarms />} />
-                <Route path="personnel-statistics" element={<Home />} />
-                <Route path="personnel-settings" element={<ThresholdSettingsSimple />} />
-              </Route>
+              <Route path="personnel-safety/personnel-home" element={<Home />} />
+              <Route path="personnel-safety/personnel-tracking" element={<Home />} />
+              <Route path="personnel-safety/personnel-safety-alert" element={<PointAlarms />} />
+              <Route path="personnel-safety/personnel-statistics" element={<Home />} />
+              <Route path="personnel-safety/personnel-settings" element={<ThresholdSettingsSimple />} />
               
               <Route path="device-management" element={<DeviceManagement />} />
               <Route path="model-management" element={<ModelManagement />} />
