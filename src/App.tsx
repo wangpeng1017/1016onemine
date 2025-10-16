@@ -44,6 +44,16 @@ import ProductionAnalysis from './pages/production-execution/ProductionAnalysis'
 import BasicInfo from './pages/production-execution/BasicInfo';
 import EquipmentLedger from './pages/equipment-management/EquipmentLedger';
 import Placeholder from './pages/equipment-management/Placeholder';
+import FaultManagement from './pages/equipment-management/FaultManagement';
+import TestingManagement from './pages/equipment-management/TestingManagement';
+import RepairPlan from './pages/equipment-management/RepairPlan';
+import SettingsLayout from './layouts/SettingsLayout';
+import Personnel from './pages/master-data/Personnel';
+import Equipment from './pages/master-data/Equipment';
+import Ore from './pages/master-data/Ore';
+import OreBody from './pages/master-data/OreBody';
+import Environment from './pages/master-data/Environment';
+import SettingsHome from './pages/settings/SettingsHome';
 import './App.css';
 
 const App: React.FC = () => {
@@ -89,9 +99,22 @@ const App: React.FC = () => {
               <Route path="equipment-management/equipment-ledger" element={<EquipmentLedger />} />
               <Route path="equipment-management/inspection-management" element={<Placeholder title="点检管理" />} />
               <Route path="equipment-management/maintenance-management" element={<Placeholder title="保养管理" />} />
-              <Route path="equipment-management/testing-management" element={<Placeholder title="检测检验管理" />} />
-              <Route path="equipment-management/fault-management" element={<Placeholder title="设备故障管理" />} />
-              <Route path="equipment-management/maintenance-plan" element={<Placeholder title="检修计划管理" />} />
+              <Route path="equipment-management/testing-management" element={<TestingManagement />} />
+              <Route path="equipment-management/fault-management" element={<FaultManagement />} />
+              <Route path="equipment-management/maintenance-plan" element={<RepairPlan />} />
+              
+              {/* 设置页面路由 */}
+              <Route path="settings" element={<SettingsLayout />}>
+                <Route index element={<SettingsHome />} />
+                <Route path="data-dictionary" element={<DeviceTypes />} />
+                <Route path="account-management" element={<AccountManagement />} />
+                <Route path="system-config" element={<ProjectInfo />} />
+                <Route path="master-data/personnel" element={<Personnel />} />
+                <Route path="master-data/equipment" element={<Equipment />} />
+                <Route path="master-data/ore" element={<Ore />} />
+                <Route path="master-data/ore-body" element={<OreBody />} />
+                <Route path="master-data/environment" element={<Environment />} />
+              </Route>
               
               <Route path="device-management" element={<DeviceManagement />} />
               <Route path="model-management" element={<ModelManagement />} />

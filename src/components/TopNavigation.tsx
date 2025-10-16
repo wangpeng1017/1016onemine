@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, Dropdown, Button, Badge, Avatar, Space } from 'antd';
-import { BellOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { BellOutlined, UserOutlined, LogoutOutlined, SettingOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { useNavigation } from '../context/NavigationContext';
 
@@ -15,9 +15,10 @@ interface TopNavItem {
 
 interface TopNavigationProps {
   onMenuSelect: (topMenu: string, subMenu: string) => void;
+  onSettingsClick?: () => void;
 }
 
-const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect }) => {
+const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsClick }) => {
   const { currentTopMenu, currentSubMenu } = useNavigation();
 
   const topMenuItems: TopNavItem[] = [
@@ -164,6 +165,12 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect }) => {
       </div>
       <div style={{ flex: 1, marginLeft: 32 }}>{renderTopMenu()}</div>
       <Space size="middle">
+        <Button
+          type="text"
+          icon={<SettingOutlined style={{ fontSize: '18px' }} />}
+          onClick={onSettingsClick}
+          title="系统设置"
+        />
         <Badge count={5} size="small">
           <BellOutlined style={{ fontSize: '18px' }} />
         </Badge>

@@ -14,6 +14,10 @@ const GlobalLayout: React.FC = () => {
     useNavigation();
   const [collapsed, setCollapsed] = React.useState(false);
 
+  const handleSettingsClick = () => {
+    navigate('/settings');
+  };
+
   const handleTopMenuSelect = (topMenu: string, subMenu: string) => {
     const leftMenu = getLeftMenuForSubMenu(subMenu);
     setCurrentMenu(topMenu, subMenu, leftMenu);
@@ -92,7 +96,7 @@ const GlobalLayout: React.FC = () => {
           zIndex: 999,
         }}
       >
-        <TopNavigation onMenuSelect={handleTopMenuSelect} />
+        <TopNavigation onMenuSelect={handleTopMenuSelect} onSettingsClick={handleSettingsClick} />
       </Header>
 
       <Layout style={{ flex: 1 }}>

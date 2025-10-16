@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import { LeftMenuItem } from '../context/NavigationContext';
 
-// 边坡监测管理的左侧菜单 - 按照图片中的内容
+// 边坡监测管理的左侧菜单 - 已移除基础功能菜单项（数据字典、账号管理、系统配置已移至设置页面）
 export const slopeMonitoringLeftMenu: LeftMenuItem[] = [
   {
     key: 'slope-device-management',
@@ -43,21 +43,6 @@ export const slopeMonitoringLeftMenu: LeftMenuItem[] = [
     key: 'slope-data-reporting',
     icon: <CloudUploadOutlined />,
     label: '数据上报',
-  },
-  {
-    key: 'slope-data-dictionary',
-    icon: <AppstoreOutlined />,
-    label: '数据字典',
-  },
-  {
-    key: 'slope-account-management',
-    icon: <UserOutlined />,
-    label: '账号管理',
-  },
-  {
-    key: 'slope-system-config',
-    icon: <SettingOutlined />,
-    label: '系统配置',
   },
 ];
 
