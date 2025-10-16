@@ -22,13 +22,20 @@ const GlobalLayout: React.FC = () => {
     if (subMenu === 'home') {
       navigate('/home');
     } else if (subMenu === 'slope-monitoring') {
-      navigate('/slope-monitoring/home');
+      navigate('/slope-monitoring/slope-home');
     } else if (subMenu === 'personnel-safety') {
-      navigate('/personnel-safety/home');
+      navigate('/personnel-safety/personnel-home');
     } else if (subMenu === 'ioc-planning') {
-      navigate('/ioc-center/planning/home');
+      navigate('/home'); // 暂时跳转到首页
+    } else if (subMenu === 'ioc-production') {
+      navigate('/home');
+    } else if (subMenu === 'ioc-safety') {
+      navigate('/home');
+    } else if (subMenu === 'ioc-operation') {
+      navigate('/home');
+    } else {
+      navigate('/home'); // 默认跳转到首页
     }
-    // 可以根据需要添加更多的路由映射
   };
 
   const handleLeftMenuClick = ({ key }: { key: string }) => {
