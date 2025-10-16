@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
+import { NavigationProvider } from './context/NavigationContext';
+import GlobalLayout from './layouts/GlobalLayout';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import DataReporting from './pages/DataReporting';
@@ -38,10 +40,11 @@ import './App.css';
 const App: React.FC = () => {
   return (
     <ConfigProvider locale={zhCN}>
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<MainLayout />}>
+      <NavigationProvider>
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<GlobalLayout />}>
               <Route index element={<Navigate to="/home" replace />} />
               <Route path="home" element={<Home />} />
               <Route path="device-management" element={<DeviceManagement />} />
@@ -74,10 +77,16 @@ const App: React.FC = () => {
               <Route path="system-config/project-info" element={<ProjectInfo />} />
               <Route path="system-config/region-management" element={<RegionManagement />} />
               <Route path="system-config/alarm-settings" element={<AlarmSettings />} />
-            </Route>
-          </Routes>
-        </div>
-      </Router>
+              </Route>
+              {/* 保留原有的MainLayout路由作为备选 */}
+              <Route path="/legacy" element={<MainLayout />}>
+                <Route index element={<Navigate to="/legacy/home" replace />} />
+                <Route path="home" element={<Home />} />
+              </Route>
+            </Routes>
+          </div>
+        </Router>
+      </NavigationProvider>
     </ConfigProvider>
   );
 };
