@@ -213,7 +213,7 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'ioc-production': iocProductionLeftMenu,
   'ioc-safety': iocSafetyLeftMenu,
   'ioc-operation': iocOperationLeftMenu,
-  'home': defaultLeftMenu,
+  'home': [], // 首页不显示左侧菜单
   'smart-mine-design': defaultLeftMenu,
   'smart-production': defaultLeftMenu,
   'env-monitoring': defaultLeftMenu,

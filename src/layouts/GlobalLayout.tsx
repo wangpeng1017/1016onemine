@@ -86,24 +86,26 @@ const GlobalLayout: React.FC = () => {
       </Header>
 
       <Layout style={{ flex: 1 }}>
-        <Sider
-          trigger={null}
-          collapsible
-          collapsed={collapsed}
-          style={{
-            background: '#ffffff',
-            borderRight: '1px solid #f0f0f0',
-          }}
-        >
-          <Menu
-            theme="light"
-            mode="inline"
-            selectedKeys={[getCurrentLeftMenuKey()]}
-            items={convertMenuItems(leftMenuItems)}
-            onClick={handleLeftMenuClick}
-            style={{ borderRight: 0 }}
-          />
-        </Sider>
+        {leftMenuItems.length > 0 && (
+          <Sider
+            trigger={null}
+            collapsible
+            collapsed={collapsed}
+            style={{
+              background: '#ffffff',
+              borderRight: '1px solid #f0f0f0',
+            }}
+          >
+            <Menu
+              theme="light"
+              mode="inline"
+              selectedKeys={[getCurrentLeftMenuKey()]}
+              items={convertMenuItems(leftMenuItems)}
+              onClick={handleLeftMenuClick}
+              style={{ borderRight: 0 }}
+            />
+          </Sider>
+        )}
 
         <Content
           style={{

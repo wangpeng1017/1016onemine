@@ -6,6 +6,7 @@ import { NavigationProvider } from './context/NavigationContext';
 import GlobalLayout from './layouts/GlobalLayout';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
+import PortalHome from './pages/PortalHome';
 import DataReporting from './pages/DataReporting';
 import MonitoringData from './pages/MonitoringData';
 import AlarmRecords from './pages/AlarmRecords';
@@ -46,7 +47,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<GlobalLayout />}>
               <Route index element={<Navigate to="/home" replace />} />
-              <Route path="home" element={<Home />} />
+              <Route path="home" element={<PortalHome />} />
               
               {/* 边坡监测管理路由 */}
               <Route path="slope-monitoring/slope-home" element={<Home />} />
