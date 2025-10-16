@@ -22,7 +22,7 @@ const GlobalLayout: React.FC = () => {
     if (subMenu === 'home') {
       navigate('/home');
     } else if (subMenu === 'slope-monitoring') {
-      navigate('/slope-monitoring/slope-home');
+      navigate('/slope-monitoring/slope-device-management');
     } else if (subMenu === 'personnel-safety') {
       navigate('/personnel-safety/personnel-home');
     } else if (subMenu === 'ioc-planning') {

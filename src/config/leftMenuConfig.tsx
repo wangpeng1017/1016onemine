@@ -15,11 +15,6 @@ import { LeftMenuItem } from '../context/NavigationContext';
 // 边坡监测管理的左侧菜单 - 按照图片中的内容
 export const slopeMonitoringLeftMenu: LeftMenuItem[] = [
   {
-    key: 'slope-home',
-    icon: <HomeOutlined />,
-    label: '首页',
-  },
-  {
     key: 'slope-device-management',
     icon: <DatabaseOutlined />,
     label: '设备管理',
@@ -48,11 +43,6 @@ export const slopeMonitoringLeftMenu: LeftMenuItem[] = [
     key: 'slope-data-reporting',
     icon: <CloudUploadOutlined />,
     label: '数据上报',
-  },
-  {
-    key: 'slope-basic-platform',
-    icon: <CloudOutlined />,
-    label: '基础平台',
   },
   {
     key: 'slope-data-dictionary',
