@@ -46,7 +46,8 @@ const PortalHome: React.FC = () => {
       icon: <ToolOutlined style={{ fontSize: 32 }} />,
       color: '#52c41a',
       subMenus: [
-        { key: 'intelligent-ore-blending', label: '智能配矿管理' },
+        { key: 'ore-blending-management', label: '智能配矿管理' },
+        { key: 'blending-plan', label: '配矿计划' },
       ],
     },
     {
@@ -113,8 +114,10 @@ const PortalHome: React.FC = () => {
       navigate('/production-execution/production-continuity');
     } else if (subMenuKey === 'equipment-management') {
       navigate('/equipment-management/equipment-ledger');
-    } else if (subMenuKey === 'intelligent-ore-blending') {
+    } else if (subMenuKey === 'ore-blending-management') {
       navigate('/intelligent-ore-blending/management');
+    } else if (subMenuKey === 'blending-plan') {
+      navigate('/intelligent-ore-blending/plan');
     } else {
       navigate('/home');
     }

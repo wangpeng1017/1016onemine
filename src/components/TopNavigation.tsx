@@ -40,7 +40,9 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
       key: 'smart-mine-design',
       label: '智慧矿山设计',
       children: [
-        { key: 'intelligent-ore-blending', label: '智能配矿管理' },
+        { key: 'ore-blending-management', label: '智能配矿管理' },
+        { key: 'blending-plan', label: '配矿计划' },
+        { key: 'intelligent-blending', label: '智能配矿' },
       ],
     },
     {
