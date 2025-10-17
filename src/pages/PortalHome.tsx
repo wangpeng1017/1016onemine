@@ -1,15 +1,12 @@
 import React from 'react';
-import { Card, Row, Col, Typography, Badge, Button } from 'antd';
+import { Card, Row, Col, Typography } from 'antd';
 import {
   DashboardOutlined,
   SafetyOutlined,
   ToolOutlined,
-  TeamOutlined,
   EnvironmentOutlined,
   ShoppingOutlined,
   RocketOutlined,
-  ArrowRightOutlined,
-  SettingOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -151,7 +148,7 @@ const PortalHome: React.FC = () => {
               hoverable
               onClick={() => handleCardClick(card)}
               style={{
-                height: card.subMenus ? 'auto' : '280px',
+                height: '280px',
                 borderRadius: 8,
                 transition: 'all 0.3s ease',
                 background: '#fff',
@@ -198,13 +195,6 @@ const PortalHome: React.FC = () => {
                   <Title level={5} style={{ marginBottom: 2, fontSize: 16, fontWeight: 600, color: '#262626' }}>
                     {card.title}
                   </Title>
-                  {card.subMenus && (
-                    <Badge 
-                      count={card.subMenus.length} 
-                      style={{ backgroundColor: card.color }}
-                      size="small"
-                    />
-                  )}
                 </div>
               </div>
 
@@ -266,29 +256,6 @@ const PortalHome: React.FC = () => {
                 </div>
               )}
 
-              {/* 无子菜单时的进入按钮 */}
-              {!card.subMenus && (
-                <div style={{
-                  marginTop: 'auto',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  paddingTop: 16
-                }}>
-                  <Button
-                    type="primary"
-                    icon={<ArrowRightOutlined />}
-                    size="small"
-                    style={{
-                      background: card.color,
-                      border: 'none',
-                      borderRadius: 16,
-                      fontSize: 12
-                    }}
-                  >
-                    进入模块
-                  </Button>
-                </div>
-              )}
             </Card>
           </Col>
         ))}
