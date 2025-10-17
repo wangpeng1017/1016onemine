@@ -35,10 +35,8 @@ const PortalHome: React.FC = () => {
       icon: <DashboardOutlined style={{ fontSize: 32 }} />,
       color: '#1890ff',
       subMenus: [
-        { key: 'ioc-planning', label: '规划设计主题' },
         { key: 'ioc-production', label: '生产综合主题' },
         { key: 'ioc-safety', label: '安全综合主题' },
-        { key: 'ioc-operation', label: '运转综合主题' },
       ],
     },
     {
@@ -148,8 +146,7 @@ const PortalHome: React.FC = () => {
               hoverable
               onClick={() => handleCardClick(card)}
               style={{
-                height: card.subMenus ? 'auto' : '196px',
-                minHeight: card.subMenus ? '196px' : 'auto',
+                height: '196px',
                 borderRadius: 8,
                 transition: 'all 0.3s ease',
                 background: '#fff',
