@@ -63,7 +63,7 @@ const GlobalLayout: React.FC = () => {
     } else if (subMenu === 'slope-monitoring') {
       navigate('/slope-monitoring/slope-device-management');
     } else if (subMenu === 'personnel-safety') {
-      navigate('/personnel-safety/personnel-home');
+      navigate('/personnel-safety/personnel-tracking');
     } else if (subMenu === 'ioc-planning') {
       navigate('/home'); // 暂时跳转到首页
     } else if (subMenu === 'ioc-production') {
