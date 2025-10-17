@@ -55,6 +55,10 @@ import Ore from './pages/master-data/Ore';
 import OreBody from './pages/master-data/OreBody';
 import Environment from './pages/master-data/Environment';
 import SettingsHome from './pages/settings/SettingsHome';
+import PersonnelTracking from './pages/personnel-safety/PersonnelTracking';
+import SafetyAlert from './pages/personnel-safety/SafetyAlert';
+import AttendanceManagement from './pages/personnel-safety/AttendanceManagement';
+import EnvironmentalMonitoring from './pages/environmental-monitoring/EnvironmentalMonitoring';
 import './App.css';
 
 const App: React.FC = () => {
@@ -83,10 +87,16 @@ const App: React.FC = () => {
               
               {/* 人员定位安全路由 */}
               <Route path="personnel-safety/personnel-home" element={<Home />} />
-              <Route path="personnel-safety/personnel-tracking" element={<Home />} />
-              <Route path="personnel-safety/personnel-safety-alert" element={<PointAlarms />} />
-              <Route path="personnel-safety/personnel-statistics" element={<Home />} />
+              <Route path="personnel-safety/personnel-tracking" element={<PersonnelTracking />} />
+              <Route path="personnel-safety/personnel-safety-alert" element={<SafetyAlert />} />
+              <Route path="personnel-safety/personnel-statistics" element={<AttendanceManagement />} />
               <Route path="personnel-safety/personnel-settings" element={<ThresholdSettingsSimple />} />
+              
+              {/* 环境监测路由 */}
+              <Route path="env-monitoring/env-home" element={<EnvironmentalMonitoring />} />
+              <Route path="env-monitoring/env-monitoring" element={<EnvironmentalMonitoring />} />
+              <Route path="env-monitoring/env-alert" element={<EnvironmentalMonitoring />} />
+              <Route path="env-monitoring/env-analysis" element={<EnvironmentalMonitoring />} />
               
               {/* 生产执行系统路由 */}
               <Route path="production-execution/production-continuity" element={<ProductionContinuity />} />
