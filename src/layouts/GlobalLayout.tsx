@@ -37,6 +37,9 @@ const GlobalLayout: React.FC = () => {
     } else if (path.startsWith('/intelligent-ore-blending')) {
       topMenu = 'smart-mine-design';
       subMenu = 'intelligent-ore-blending';
+    } else if (path.startsWith('/env-monitoring')) {
+      topMenu = 'env-monitoring';
+      subMenu = 'env-monitoring';
     } else if (path === '/home' || path === '/') {
       topMenu = 'home';
       subMenu = 'home';
@@ -78,6 +81,8 @@ const GlobalLayout: React.FC = () => {
       navigate('/equipment-management/equipment-ledger');
     } else if (subMenu === 'intelligent-ore-blending') {
       navigate('/intelligent-ore-blending');
+    } else if (subMenu === 'env-monitoring') {
+      navigate('/env-monitoring/env-home');
     } else {
       navigate('/home'); // 默认跳转到首页
     }
@@ -102,6 +107,9 @@ const GlobalLayout: React.FC = () => {
     } else if (currentPath.startsWith('/intelligent-ore-blending')) {
       // 在智能配矿管理模块下，保持在同一页面内切换左侧菜单
       return; // IntelligentOreBlendingLayout 组件内部处理菜单切换
+    } else if (currentPath.startsWith('/env-monitoring')) {
+      // 在综合环境监测模块下
+      navigate(`/env-monitoring/${key}`);
     } else {
       // 其他模块或默认
       navigate(`/${key}`);
