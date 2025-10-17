@@ -34,12 +34,17 @@ const IntelligentOreBlendingLayout: React.FC = () => {
   };
 
   return (
-    <Layout style={{ minHeight: 'calc(100vh - 64px)', background: '#f0f2f5' }}>
+    <Layout style={{ minHeight: '100vh', background: '#f0f2f5', margin: 0, padding: 0 }}>
       <Sider
         width={200}
         style={{
           background: '#fff',
           borderRight: '1px solid #f0f0f0',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          overflow: 'auto',
         }}
       >
         <div style={{
@@ -59,8 +64,8 @@ const IntelligentOreBlendingLayout: React.FC = () => {
           style={{ borderRight: 0 }}
         />
       </Sider>
-      <Layout style={{ background: '#f0f2f5' }}>
-        <Content style={{ margin: 0 }}>
+      <Layout style={{ background: '#f0f2f5', marginLeft: 200 }}>
+        <Content style={{ margin: 0, padding: 0 }}>
           {renderContent()}
         </Content>
       </Layout>
