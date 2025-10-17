@@ -97,10 +97,19 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
 
   const renderTopMenu = () => {
     return (
-      <div style={{ display: 'flex', gap: 0 }}>
+      <div style={{ display: 'flex', gap: 8 }}>
         {topMenuItems.map((item) => {
           const isActive = currentTopMenu === item.key;
           const isParent = item.children && item.children.length > 0;
+
+          const baseStyle: React.CSSProperties = {
+            borderRadius: 20,
+            padding: '6px 12px',
+            color: isActive ? '#fff' : '#cbd5e1',
+            background: isActive ? 'linear-gradient(135deg, #3b82f6, #9333ea)' : 'transparent',
+            border: '1px solid rgba(255,255,255,0.08)',
+            fontWeight: isActive ? 600 : 500,
+          };
 
           if (isParent) {
             const subMenu: MenuProps['items'] = item.children!.map((child) => ({
@@ -110,19 +119,8 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
             }));
 
             return (
-              <Dropdown
-                key={item.key}
-                menu={{ items: subMenu }}
-                placement="bottomLeft"
-              >
-                <Button
-                  type={isActive ? 'primary' : 'text'}
-                  style={{
-                    borderRadius: 0,
-                    borderBottom: isActive ? '2px solid #1890ff' : 'none',
-                    fontWeight: isActive ? 600 : 400,
-                  }}
-                >
+              <Dropdown key={item.key} menu={{ items: subMenu }} placement="bottomLeft">
+                <Button type="text" style={baseStyle}>
                   {item.label}
                 </Button>
               </Dropdown>
@@ -130,16 +128,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
           }
 
           return (
-            <Button
-              key={item.key}
-              type={isActive ? 'primary' : 'text'}
-              onClick={() => handleTopMenuClick(item)}
-              style={{
-                borderRadius: 0,
-                borderBottom: isActive ? '2px solid #1890ff' : 'none',
-                fontWeight: isActive ? 600 : 400,
-              }}
-            >
+            <Button key={item.key} type="text" onClick={() => handleTopMenuClick(item)} style={baseStyle}>
               {item.label}
             </Button>
           );
@@ -151,38 +140,57 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
   return (
     <div
       style={{
-        background: '#fff',
-        borderBottom: '1px solid #f0f0f0',
-        padding: '0 16px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: 64,
+        padding: '8px 16px',
+        background: 'transparent',
       }}
     >
-      <div style={{ fontSize: 18, fontWeight: 'bold', color: '#262626' }}>
-        智慧矿山平台
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: 56,
+          padding: '8px 12px',
+          background: 'rgba(13,17,23,0.75)',
+          border: '1px solid rgba(255,255,255,0.06)',
+          borderRadius: 12,
+          boxShadow: '0 6px 24px rgba(0,0,0,0.25)',
+          backdropFilter: 'blur(10px)'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{
+            fontSize: 18,
+            fontWeight: 800,
+            background: 'linear-gradient(135deg, #60a5fa, #a78bfa)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent'
+          }}>
+            智慧矿山平台
+          </div>
+          <div style={{ flex: 1, marginLeft: 8 }}>{renderTopMenu()}</div>
+        </div>
+        <Space size="large" align="center">
+          <Badge count={5} size="small">
+            <BellOutlined style={{ fontSize: 18, color: '#94a3b8' }} />
+          </Badge>
+          <Dropdown
+            menu={{
+              items: userMenuItems,
+              onClick: handleUserMenuClick,
+            }}
+            placement="bottomRight"
+          >
+            <Space style={{ cursor: 'pointer', color: '#cbd5e1' }}>
+              <Avatar icon={<UserOutlined />} />
+              <span>管理员</span>
+            </Space>
+          </Dropdown>
+        </Space>
       </div>
-      <div style={{ flex: 1, marginLeft: 32 }}>{renderTopMenu()}</div>
-      <Space size="middle">
-        <Button
-          type="text"
-          icon={<SettingOutlined style={{ fontSize: '18px' }} />}
-          onClick={onSettingsClick}
-          title="系统设置"
-        />
-        <Badge count={5} size="small">
-          <BellOutlined style={{ fontSize: '18px' }} />
-        </Badge>
-        <Dropdown
-          menu={{
-            items: userMenuItems,
-            onClick: handleUserMenuClick,
-          }}
-          placement="bottomRight"
-        >
-          <Space style={{ cursor: 'pointer' }}>
-            <Avatar icon={<UserOutlined />} />
+    </div>
+  );
             <span>管理员</span>
           </Space>
         </Dropdown>

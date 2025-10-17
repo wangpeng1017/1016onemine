@@ -86,11 +86,11 @@ const GlobalLayout: React.FC = () => {
   };
 
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout style={{ height: '100vh', background: '#0f172a' }}>
       <Header
         style={{
           padding: 0,
-          background: '#fff',
+          background: 'transparent',
           position: 'sticky',
           top: 0,
           zIndex: 999,
@@ -125,9 +125,10 @@ const GlobalLayout: React.FC = () => {
           style={{
             margin: '16px',
             padding: '24px',
-            background: '#fff',
-            borderRadius: '8px',
+            background: 'rgba(255,255,255,0.03)',
+            borderRadius: '12px',
             overflow: 'auto',
+            border: '1px solid rgba(255,255,255,0.06)',
           }}
         >
           <Outlet />

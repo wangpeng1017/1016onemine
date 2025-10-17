@@ -121,16 +121,17 @@ const PortalHome: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '16px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', minHeight: 'calc(100vh - 64px)' }}>
+    <div style={{ padding: '16px', background: '#0f172a', minHeight: 'calc(100vh - 64px)' }}>
       {/* 顶部欢迎区域 */}
       <div style={{ 
         marginBottom: 24, 
         textAlign: 'center',
-        background: 'rgba(255,255,255,0.95)',
+        background: 'rgba(13,17,23,0.6)',
         borderRadius: 16,
         padding: '32px 24px',
         backdropFilter: 'blur(10px)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
+        border: '1px solid rgba(255,255,255,0.06)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
       }}>
         <Title level={1} style={{ 
           marginBottom: 8, 
@@ -142,7 +143,7 @@ const PortalHome: React.FC = () => {
         }}>
           智慧矿山平台
         </Title>
-        <Paragraph style={{ fontSize: 16, color: '#666', marginBottom: 16 }}>
+        <Paragraph style={{ fontSize: 16, color: '#94a3b8', marginBottom: 16 }}>
           欢迎使用智慧矿山综合管理平台
         </Paragraph>
         <Button 
@@ -171,10 +172,10 @@ const PortalHome: React.FC = () => {
                 height: card.subMenus ? 'auto' : '280px',
                 borderRadius: 16,
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                background: 'rgba(255,255,255,0.95)',
+                background: 'rgba(13,17,23,0.4)',
                 backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255,255,255,0.2)',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
               }}
               bodyStyle={{ 
                 padding: '20px 16px',
@@ -188,7 +189,7 @@ const PortalHome: React.FC = () => {
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.1)';
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.2)';
               }}
             >
               {/* 图标和标题区域 */}
@@ -213,7 +214,7 @@ const PortalHome: React.FC = () => {
                   <div style={{ color: '#fff' }}>{card.icon}</div>
                 </div>
                 <div style={{ flex: 1 }}>
-                  <Title level={5} style={{ marginBottom: 2, fontSize: 16, fontWeight: 600 }}>
+                  <Title level={5} style={{ marginBottom: 2, fontSize: 16, fontWeight: 600, color: '#e2e8f0' }}>
                     {card.title}
                   </Title>
                   {card.subMenus && (
@@ -229,7 +230,7 @@ const PortalHome: React.FC = () => {
               {/* 描述文本 */}
               <Paragraph
                 style={{
-                  color: '#666',
+                  color: '#94a3b8',
                   fontSize: 13,
                   lineHeight: 1.5,
                   marginBottom: card.subMenus ? 12 : 0,
@@ -253,11 +254,11 @@ const PortalHome: React.FC = () => {
                         onClick={(e) => handleSubMenuClick(e, subMenu.key)}
                         style={{
                           padding: '8px 10px',
-                          background: 'rgba(0,0,0,0.02)',
+                          background: 'rgba(255,255,255,0.05)',
                           borderRadius: 8,
                           cursor: 'pointer',
                           fontSize: 12,
-                          color: '#666',
+                          color: '#cbd5e1',
                           transition: 'all 0.2s',
                           textAlign: 'center',
                           border: `1px solid ${card.color}20`,
@@ -272,8 +273,8 @@ const PortalHome: React.FC = () => {
                           e.currentTarget.style.transform = 'scale(1.02)';
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'rgba(0,0,0,0.02)';
-                          e.currentTarget.style.color = '#666';
+                          e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                          e.currentTarget.style.color = '#cbd5e1';
                           e.currentTarget.style.transform = 'scale(1)';
                         }}
                       >
@@ -315,13 +316,14 @@ const PortalHome: React.FC = () => {
       {/* 快速访问区域 */}
       <div style={{
         marginTop: 24,
-        background: 'rgba(255,255,255,0.95)',
+        background: 'rgba(13,17,23,0.6)',
         borderRadius: 16,
         padding: '20px 24px',
         backdropFilter: 'blur(10px)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
+        border: '1px solid rgba(255,255,255,0.06)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
       }}>
-        <Title level={4} style={{ marginBottom: 16, color: '#333' }}>快速访问</Title>
+        <Title level={4} style={{ marginBottom: 16, color: '#e2e8f0' }}>快速访问</Title>
         <Row gutter={[12, 12]}>
           <Col><Button size="small" onClick={() => navigate('/slope-monitoring/slope-device-management')}>边坡监测</Button></Col>
           <Col><Button size="small" onClick={() => navigate('/production-execution/production-continuity')}>生产执行</Button></Col>
