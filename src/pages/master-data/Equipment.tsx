@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Button, Card, Modal, Form, Input, Select, DatePicker, message, Space, Tag, Row, Col, Descriptions } from 'antd';
-import { PlusOutlined, EditOutlined, EyeOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, EyeOutlined, DeleteOutlined, SearchOutlined, ReloadOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface EquipmentData {
@@ -36,6 +36,12 @@ const Equipment: React.FC = () => {
   const [selectedRecord, setSelectedRecord] = useState<EquipmentData | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [form] = Form.useForm();
+  
+  // 筛选状态
+  const [filterCategory, setFilterCategory] = useState<string>('');
+  const [filterType, setFilterType] = useState<string>('');
+  const [filterName, setFilterName] = useState<string>('');
+  const [filteredData, setFilteredData] = useState<EquipmentData[]>([]);
 
   const mockData: EquipmentData[] = [
     {
@@ -165,6 +171,46 @@ const Equipment: React.FC = () => {
     });
   };
 
+  // 筛选逻辑
+  const handleSearch = () => {
+    let filtered = mockData;
+    
+    if (filterName) {
+      filtered = filtered.filter(item => 
+        item.name.toLowerCase().includes(filterName.toLowerCase()) ||
+        item.equipmentId.toLowerCase().includes(filterName.toLowerCase())
+      );
+    }
+    
+    if (filterCategory) {
+      filtered = filtered.filter(item => item.category === filterCategory);
+    }
+    
+    if (filterType) {
+      filtered = filtered.filter(item => item.type === filterType);
+    }
+    
+    setFilteredData(filtered);
+  };
+
+  const handleReset = () => {
+    setFilterName('');
+    setFilterCategory('');
+    setFilterType('');
+    setFilteredData([]);
+  };
+
+  // 当大类变化时重置类型筛选
+  const handleCategoryFilterChange = (value: string) => {
+    setFilterCategory(value);
+    setFilterType(''); // 重置类型
+  };
+
+  // 获取当前显示的数据
+  const getDisplayData = () => {
+    return filteredData.length > 0 || filterName || filterCategory || filterType ? filteredData : mockData;
+  };
+
   return (
     <div>
       <Card
@@ -175,7 +221,71 @@ const Equipment: React.FC = () => {
           </Button>
         }
       >
-        <Table columns={columns} dataSource={mockData} pagination={{ pageSize: 10 }} scroll={{ x: 1400 }} />
+        {/* 筛选条件 */}
+        <Card 
+          size="small" 
+          style={{ marginBottom: 16, background: '#fafafa' }}
+          bodyStyle={{ padding: '12px 16px' }}
+        >
+          <Row gutter={[16, 16]} align="middle">
+            <Col xs={24} sm={12} md={6}>
+              <Input
+                placeholder="设备名称或编号"
+                value={filterName}
+                onChange={(e) => setFilterName(e.target.value)}
+                allowClear
+              />
+            </Col>
+            <Col xs={24} sm={12} md={5}>
+              <Select
+                placeholder="设备大类"
+                value={filterCategory || undefined}
+                onChange={handleCategoryFilterChange}
+                style={{ width: '100%' }}
+                allowClear
+              >
+                {Object.keys(equipmentCategories).map(cat => (
+                  <Select.Option key={cat} value={cat}>{cat}</Select.Option>
+                ))}
+              </Select>
+            </Col>
+            <Col xs={24} sm={12} md={5}>
+              <Select
+                placeholder="设备类型"
+                value={filterType || undefined}
+                onChange={setFilterType}
+                style={{ width: '100%' }}
+                disabled={!filterCategory}
+                allowClear
+              >
+                {filterCategory && equipmentCategories[filterCategory as keyof typeof equipmentCategories]?.map(type => (
+                  <Select.Option key={type} value={type}>{type}</Select.Option>
+                ))}
+              </Select>
+            </Col>
+            <Col xs={24} sm={12} md={8}>
+              <Space>
+                <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
+                  查询
+                </Button>
+                <Button icon={<ReloadOutlined />} onClick={handleReset}>
+                  重置
+                </Button>
+              </Space>
+            </Col>
+          </Row>
+        </Card>
+
+        <Table 
+          columns={columns} 
+          dataSource={getDisplayData()} 
+          pagination={{ 
+            pageSize: 10,
+            showTotal: (total) => `共 ${total} 条`,
+            showSizeChanger: true,
+          }} 
+          scroll={{ x: 1400 }} 
+        />
       </Card>
 
       {/* 添加设备模态框 */}
