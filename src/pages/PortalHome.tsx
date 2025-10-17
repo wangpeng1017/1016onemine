@@ -45,6 +45,9 @@ const PortalHome: React.FC = () => {
       description: '矿山设计规划、建模、优化等智能化设计工具',
       icon: <ToolOutlined style={{ fontSize: 32 }} />,
       color: '#52c41a',
+      subMenus: [
+        { key: 'intelligent-ore-blending', label: '智能配矿管理' },
+      ],
     },
     {
       key: 'smart-production',
@@ -110,6 +113,8 @@ const PortalHome: React.FC = () => {
       navigate('/production-execution/production-continuity');
     } else if (subMenuKey === 'equipment-management') {
       navigate('/equipment-management/equipment-ledger');
+    } else if (subMenuKey === 'intelligent-ore-blending') {
+      navigate('/intelligent-ore-blending/management');
     } else {
       navigate('/home');
     }
