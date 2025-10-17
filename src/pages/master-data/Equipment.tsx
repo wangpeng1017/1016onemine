@@ -7,7 +7,8 @@ interface EquipmentData {
   key: string;
   equipmentId: string;
   name: string;
-  type: string;
+  category: string; // 设备大类
+  type: string; // 设备类型
   model: string;
   serialNumber: string;
   manufacturer: string;
@@ -17,10 +18,23 @@ interface EquipmentData {
   responsible: string;
 }
 
+// 设备类型分类体系
+const equipmentCategories = {
+  '探矿设备': ['钻探设备', '物探设备', '化探设备'],
+  '采矿设备': ['钻孔设备', '爆破设备', '支护设备', '挖掘/装载设备'],
+  '选矿设备': ['破碎设备', '粉磨设备', '筛分设备', '分选设备', '脱水设备'],
+  '运输设备': ['矿车', '运输车', '皮带', '铁运设备', '转载机', '输送机', '自卸车'],
+  '定位设备': ['GNSS', '移动GPS模块', 'RFID定位', '激光定位', '陀螺仪', 'WIFI定位', '水准仪'],
+  '监测设备': ['小型固定传感器', '手持探测仪', '机载设备', '移动机器人', '雷达', '视频监控'],
+  '安防设备': ['视频监控', '门禁', '电网', '护栏铁丝网', '单兵安防设备', '消防设备'],
+  '辅助设备': ['排水设备', '通风设备', '供电设备', '储电设备', '电力保护设备', '通讯设备', '照明设备'],
+};
+
 const Equipment: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isDetailVisible, setIsDetailVisible] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<EquipmentData | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [form] = Form.useForm();
 
   const mockData: EquipmentData[] = [
@@ -28,7 +42,8 @@ const Equipment: React.FC = () => {
       key: '1',
       equipmentId: 'EQ001',
       name: 'A号采煤机',
-      type: '采掘设备',
+      category: '采矿设备',
+      type: '挖掘/装载设备',
       model: 'MG300/730-WD',
       serialNumber: 'SN202401001',
       manufacturer: '中煤装备集团',
@@ -41,7 +56,8 @@ const Equipment: React.FC = () => {
       key: '2',
       equipmentId: 'EQ002',
       name: '1号皮带输送机',
-      type: '运输设备',
+      category: '运输设备',
+      type: '皮带',
       model: 'DTL100/40/2×200',
       serialNumber: 'SN202401002',
       manufacturer: '山西煤机集团',
@@ -54,7 +70,8 @@ const Equipment: React.FC = () => {
       key: '3',
       equipmentId: 'EQ003',
       name: '主通风机',
-      type: '辅助设备',
+      category: '辅助设备',
+      type: '通风设备',
       model: 'GAF36-12-1',
       serialNumber: 'SN202401003',
       manufacturer: '沈阳鼓风机集团',
@@ -63,12 +80,41 @@ const Equipment: React.FC = () => {
       location: '主风井',
       responsible: '王师傅',
     },
+    {
+      key: '4',
+      equipmentId: 'EQ004',
+      name: 'RTK-GNSS定位仪',
+      category: '定位设备',
+      type: 'GNSS',
+      model: 'ZX-RTK300',
+      serialNumber: 'SN202401004',
+      manufacturer: '中海达集团',
+      purchaseDate: '2024-02-20',
+      status: '运行中',
+      location: '测量队',
+      responsible: '赵测量',
+    },
+    {
+      key: '5',
+      equipmentId: 'EQ005',
+      name: '边坡雷达监测系统',
+      category: '监测设备',
+      type: '雷达',
+      model: 'IBIS-FM',
+      serialNumber: 'SN202401005',
+      manufacturer: 'IDS公司',
+      purchaseDate: '2023-11-05',
+      status: '运行中',
+      location: '东侧边坡',
+      responsible: '孙安全',
+    },
   ];
 
   const columns: ColumnsType<EquipmentData> = [
     { title: '设备编号', dataIndex: 'equipmentId', key: 'equipmentId', width: 120 },
     { title: '设备名称', dataIndex: 'name', key: 'name', width: 150 },
-    { title: '设备类型', dataIndex: 'type', key: 'type', width: 120 },
+    { title: '设备大类', dataIndex: 'category', key: 'category', width: 120 },
+    { title: '设备类型', dataIndex: 'type', key: 'type', width: 130 },
     { title: '型号', dataIndex: 'model', key: 'model', width: 150 },
     { title: '制造商', dataIndex: 'manufacturer', key: 'manufacturer', width: 130 },
     { title: '采购日期', dataIndex: 'purchaseDate', key: 'purchaseDate', width: 120 },
@@ -149,19 +195,39 @@ const Equipment: React.FC = () => {
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="设备类型" name="type" rules={[{ required: true }]}>
-                <Select placeholder="请选择设备类型">
-                  <Select.Option value="采掘设备">采掘设备</Select.Option>
-                  <Select.Option value="运输设备">运输设备</Select.Option>
-                  <Select.Option value="辅助设备">辅助设备</Select.Option>
-                  <Select.Option value="安全设备">安全设备</Select.Option>
-                  <Select.Option value="监测设备">监测设备</Select.Option>
+              <Form.Item label="设备大类" name="category" rules={[{ required: true }]}>
+                <Select 
+                  placeholder="请选择设备大类"
+                  onChange={(value) => {
+                    setSelectedCategory(value);
+                    form.setFieldsValue({ type: undefined });
+                  }}
+                >
+                  {Object.keys(equipmentCategories).map(cat => (
+                    <Select.Option key={cat} value={cat}>{cat}</Select.Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Col>
             <Col span={12}>
+              <Form.Item label="设备类型" name="type" rules={[{ required: true }]}>
+                <Select placeholder="请先选择设备大类" disabled={!selectedCategory}>
+                  {selectedCategory && equipmentCategories[selectedCategory as keyof typeof equipmentCategories]?.map(type => (
+                    <Select.Option key={type} value={type}>{type}</Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
               <Form.Item label="设备型号" name="model" rules={[{ required: true }]}>
                 <Input placeholder="请输入设备型号" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="制造商" name="manufacturer" rules={[{ required: true }]}>
+                <Input placeholder="请输入制造商" />
               </Form.Item>
             </Col>
           </Row>
@@ -225,6 +291,7 @@ const Equipment: React.FC = () => {
           <Descriptions bordered column={2}>
             <Descriptions.Item label="设备编号">{selectedRecord.equipmentId}</Descriptions.Item>
             <Descriptions.Item label="设备名称">{selectedRecord.name}</Descriptions.Item>
+            <Descriptions.Item label="设备大类">{selectedRecord.category}</Descriptions.Item>
             <Descriptions.Item label="设备类型">{selectedRecord.type}</Descriptions.Item>
             <Descriptions.Item label="设备型号">{selectedRecord.model}</Descriptions.Item>
             <Descriptions.Item label="序列号">{selectedRecord.serialNumber}</Descriptions.Item>
