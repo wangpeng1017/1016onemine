@@ -191,12 +191,6 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
       </div>
     </div>
   );
-            <span>管理员</span>
-          </Space>
-        </Dropdown>
-      </Space>
-    </div>
-  );
 };
 
 export default TopNavigation;
