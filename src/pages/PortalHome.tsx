@@ -148,7 +148,7 @@ const PortalHome: React.FC = () => {
               hoverable
               onClick={() => handleCardClick(card)}
               style={{
-                height: '280px',
+                height: '196px',
                 borderRadius: 8,
                 transition: 'all 0.3s ease',
                 background: '#fff',
