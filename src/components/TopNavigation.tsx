@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Dropdown, Button, Badge, Avatar, Space } from 'antd';
+import { Menu, Dropdown, Button, Badge, Avatar, Space, Tooltip } from 'antd';
 import { BellOutlined, UserOutlined, LogoutOutlined, SettingOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { useNavigation } from '../context/NavigationContext';
@@ -15,7 +15,7 @@ interface TopNavItem {
 
 interface TopNavigationProps {
   onMenuSelect: (topMenu: string, subMenu: string) => void;
-  onSettingsClick?: () => void;
+  onSettingsClick: () => void;
 }
 
 const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsClick }) => {
@@ -103,12 +103,12 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
           const isParent = item.children && item.children.length > 0;
 
           const baseStyle: React.CSSProperties = {
-            borderRadius: 20,
+            borderRadius: 6,
             padding: '6px 12px',
-            color: isActive ? '#fff' : '#cbd5e1',
-            background: isActive ? 'linear-gradient(135deg, #3b82f6, #9333ea)' : 'transparent',
-            border: '1px solid rgba(255,255,255,0.08)',
-            fontWeight: isActive ? 600 : 500,
+            color: isActive ? '#fff' : '#595959',
+            background: isActive ? '#1890ff' : 'transparent',
+            border: 'none',
+            fontWeight: isActive ? 600 : 400,
           };
 
           if (isParent) {
@@ -140,8 +140,9 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
   return (
     <div
       style={{
-        padding: '8px 16px',
-        background: 'transparent',
+        background: '#fff',
+        borderBottom: '1px solid #f0f0f0',
+        padding: '0 24px',
       }}
     >
       <div
@@ -149,31 +150,29 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: 56,
-          padding: '8px 12px',
-          background: 'rgba(13,17,23,0.75)',
-          border: '1px solid rgba(255,255,255,0.06)',
-          borderRadius: 12,
-          boxShadow: '0 6px 24px rgba(0,0,0,0.25)',
-          backdropFilter: 'blur(10px)'
+          height: 64,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
           <div style={{
-            fontSize: 18,
-            fontWeight: 800,
-            background: 'linear-gradient(135deg, #60a5fa, #a78bfa)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            color: 'transparent'
+            fontSize: 20,
+            fontWeight: 700,
+            color: '#1890ff'
           }}>
             智慧矿山平台
           </div>
-          <div style={{ flex: 1, marginLeft: 8 }}>{renderTopMenu()}</div>
+          <div>{renderTopMenu()}</div>
         </div>
-        <Space size="large" align="center">
+        <Space size="middle" align="center">
+          <Tooltip title="系统设置">
+            <Button
+              type="text"
+              icon={<SettingOutlined style={{ fontSize: 18 }} />}
+              onClick={onSettingsClick}
+            />
+          </Tooltip>
           <Badge count={5} size="small">
-            <BellOutlined style={{ fontSize: 18, color: '#94a3b8' }} />
+            <BellOutlined style={{ fontSize: 18, color: '#595959' }} />
           </Badge>
           <Dropdown
             menu={{
@@ -182,9 +181,9 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
             }}
             placement="bottomRight"
           >
-            <Space style={{ cursor: 'pointer', color: '#cbd5e1' }}>
+            <Space style={{ cursor: 'pointer' }}>
               <Avatar icon={<UserOutlined />} />
-              <span>管理员</span>
+              <span style={{ color: '#262626' }}>管理员</span>
             </Space>
           </Dropdown>
         </Space>

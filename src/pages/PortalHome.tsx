@@ -121,44 +121,26 @@ const PortalHome: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '16px', background: '#0f172a', minHeight: 'calc(100vh - 64px)' }}>
+    <div style={{ padding: '24px', background: '#f0f2f5', minHeight: 'calc(100vh - 64px)' }}>
       {/* 顶部欢迎区域 */}
       <div style={{ 
         marginBottom: 24, 
-        textAlign: 'center',
-        background: 'rgba(13,17,23,0.6)',
-        borderRadius: 16,
+        background: '#fff',
+        borderRadius: 8,
         padding: '32px 24px',
-        backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(255,255,255,0.06)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+        textAlign: 'center',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
       }}>
         <Title level={1} style={{ 
           marginBottom: 8, 
-          background: 'linear-gradient(135deg, #667eea, #764ba2)',
-          backgroundClip: 'text',
-          WebkitBackgroundClip: 'text',
-          color: 'transparent',
-          fontWeight: 700
+          color: '#262626',
+          fontWeight: 600
         }}>
           智慧矿山平台
         </Title>
-        <Paragraph style={{ fontSize: 16, color: '#94a3b8', marginBottom: 16 }}>
+        <Paragraph style={{ fontSize: 16, color: '#8c8c8c', marginBottom: 0 }}>
           欢迎使用智慧矿山综合管理平台
         </Paragraph>
-        <Button 
-          type="primary" 
-          icon={<SettingOutlined />}
-          onClick={() => navigate('/settings')}
-          style={{ 
-            borderRadius: 20,
-            background: 'linear-gradient(135deg, #667eea, #764ba2)',
-            border: 'none',
-            height: 36
-          }}
-        >
-          系统设置
-        </Button>
       </div>
 
       {/* 模块卡片网格 */}
@@ -170,12 +152,11 @@ const PortalHome: React.FC = () => {
               onClick={() => handleCardClick(card)}
               style={{
                 height: card.subMenus ? 'auto' : '280px',
-                borderRadius: 16,
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                background: 'rgba(13,17,23,0.4)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+                borderRadius: 8,
+                transition: 'all 0.3s ease',
+                background: '#fff',
+                border: '1px solid #f0f0f0',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
               }}
               bodyStyle={{ 
                 padding: '20px 16px',
@@ -185,11 +166,11 @@ const PortalHome: React.FC = () => {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.boxShadow = '0 12px 48px rgba(0,0,0,0.15)';
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.12)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.2)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
               }}
             >
               {/* 图标和标题区域 */}
@@ -214,7 +195,7 @@ const PortalHome: React.FC = () => {
                   <div style={{ color: '#fff' }}>{card.icon}</div>
                 </div>
                 <div style={{ flex: 1 }}>
-                  <Title level={5} style={{ marginBottom: 2, fontSize: 16, fontWeight: 600, color: '#e2e8f0' }}>
+                  <Title level={5} style={{ marginBottom: 2, fontSize: 16, fontWeight: 600, color: '#262626' }}>
                     {card.title}
                   </Title>
                   {card.subMenus && (
@@ -230,7 +211,7 @@ const PortalHome: React.FC = () => {
               {/* 描述文本 */}
               <Paragraph
                 style={{
-                  color: '#94a3b8',
+                  color: '#8c8c8c',
                   fontSize: 13,
                   lineHeight: 1.5,
                   marginBottom: card.subMenus ? 12 : 0,
@@ -254,14 +235,14 @@ const PortalHome: React.FC = () => {
                         onClick={(e) => handleSubMenuClick(e, subMenu.key)}
                         style={{
                           padding: '8px 10px',
-                          background: 'rgba(255,255,255,0.05)',
+                          background: '#fafafa',
                           borderRadius: 8,
                           cursor: 'pointer',
                           fontSize: 12,
-                          color: '#cbd5e1',
+                          color: '#595959',
                           transition: 'all 0.2s',
                           textAlign: 'center',
-                          border: `1px solid ${card.color}20`,
+                          border: `1px solid #f0f0f0`,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -273,8 +254,8 @@ const PortalHome: React.FC = () => {
                           e.currentTarget.style.transform = 'scale(1.02)';
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                          e.currentTarget.style.color = '#cbd5e1';
+                          e.currentTarget.style.background = '#fafafa';
+                          e.currentTarget.style.color = '#595959';
                           e.currentTarget.style.transform = 'scale(1)';
                         }}
                       >
@@ -316,20 +297,17 @@ const PortalHome: React.FC = () => {
       {/* 快速访问区域 */}
       <div style={{
         marginTop: 24,
-        background: 'rgba(13,17,23,0.6)',
-        borderRadius: 16,
+        background: '#fff',
+        borderRadius: 8,
         padding: '20px 24px',
-        backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(255,255,255,0.06)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
       }}>
-        <Title level={4} style={{ marginBottom: 16, color: '#e2e8f0' }}>快速访问</Title>
+        <Title level={4} style={{ marginBottom: 16, color: '#262626' }}>快速访问</Title>
         <Row gutter={[12, 12]}>
           <Col><Button size="small" onClick={() => navigate('/slope-monitoring/slope-device-management')}>边坡监测</Button></Col>
           <Col><Button size="small" onClick={() => navigate('/production-execution/production-continuity')}>生产执行</Button></Col>
           <Col><Button size="small" onClick={() => navigate('/equipment-management/equipment-ledger')}>设备管理</Button></Col>
           <Col><Button size="small" onClick={() => navigate('/personnel-safety/personnel-home')}>人员安全</Button></Col>
-          <Col><Button size="small" onClick={() => navigate('/settings')}>系统设置</Button></Col>
         </Row>
       </div>
     </div>
