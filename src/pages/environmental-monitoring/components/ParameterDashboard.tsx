@@ -17,9 +17,9 @@ interface ParameterDashboardProps {
 
 const ParameterDashboard: React.FC<ParameterDashboardProps> = ({ sensors, recentData }) => {
   
-  const getAverageByType = (type: ParameterType) => {
+  const getAverageByType = (type: ParameterType): string => {
     const typeSensors = sensors.filter(s => s.type === type);
-    if (typeSensors.length === 0) return 0;
+    if (typeSensors.length === 0) return '0';
     const sum = typeSensors.reduce((acc, s) => acc + s.value, 0);
     return (sum / typeSensors.length).toFixed(2);
   };
