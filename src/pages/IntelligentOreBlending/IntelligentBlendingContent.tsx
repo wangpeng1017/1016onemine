@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Form, Input, Button, Space, Table, message, Row, Col, InputNumber } from 'antd';
-import { ThunderboltOutlined, SaveOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Card, Form, Input, Button, Space, Table, message, Row, Col, InputNumber, DatePicker, Select, Divider, Tag } from 'antd';
+import { ThunderboltOutlined, SaveOutlined, PlusOutlined, DeleteOutlined, CalendarOutlined, SettingOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface OreSourceRow {
@@ -20,6 +20,33 @@ interface ResultRow {
   gradeContribution: number;
 }
 
+// 电铲信息行
+interface ShovelRow {
+  key: string;
+  shovelNo: string; // 电铲编号
+  bench: number | null; // 前段/台阶高
+  oreType: string; // 矿石类型
+  selectableIndex: number | null; // 可选指数
+  feTotal: number | null; // 地质全铁(%)
+  sTotal: number | null; // 地质硫(%)
+  gangue: number | null; // 含岩率(%)
+  layerOutput: number | null; // 层位产量(t)
+  minable: number | null; // 可开采量(t)
+}
+
+// 卸矿点行
+interface UnloadRow {
+  key: string;
+  site: string; // 卸矿点
+  matchValue: number | null; // 产量配伍值
+  feMin: number | null;
+  feMax: number | null;
+  sMin: number | null;
+  sMax: number | null;
+  alkMin: number | null; // 碱度/碱含量下限
+  alkMax: number | null; // 上限
+}
+
 const IntelligentBlendingContent: React.FC = () => {
   const [form] = Form.useForm();
   const [oreList, setOreList] = useState<OreSourceRow[]>([
@@ -28,6 +55,23 @@ const IntelligentBlendingContent: React.FC = () => {
   const [resultData, setResultData] = useState<ResultRow[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [calculatedGrade, setCalculatedGrade] = useState<number>(0);
+
+  // 参考图-顶部参数
+  const [shift, setShift] = useState<'白班' | '夜班'>('白班');
+  const [shovelOrder, setShovelOrder] = useState<number>(2);
+  const [truckOrder, setTruckOrder] = useState<number>(1);
+
+  // 电铲信息
+  const [shovels, setShovels] = useState<ShovelRow[]>([
+    { key: '1', shovelNo: '2#', bench: -165, oreType: '赤铁矿', selectableIndex: 43.99, feTotal: 28.90, sTotal: 11.07, gangue: 0, layerOutput: 1, minable: 25000 },
+    { key: '2', shovelNo: '3#', bench: -150, oreType: '红矿', selectableIndex: 57.66, feTotal: 30.27, sTotal: 10.89, gangue: 2.0, layerOutput: 1, minable: 23625 },
+    { key: '3', shovelNo: '9#', bench: -195, oreType: '浅灰矿', selectableIndex: 47.68, feTotal: 29.34, sTotal: 8.64, gangue: 0, layerOutput: 1, minable: 30000 },
+  ]);
+
+  const [unloads, setUnloads] = useState<UnloadRow[]>([
+    { key: '1', site: '矿仓', matchValue: 1, feMin: 20, feMax: 28, sMin: 0, sMax: 0.34, alkMin: 0, alkMax: 6 },
+    { key: '2', site: '北坡矿场', matchValue: 1, feMin: 20, feMax: 28, sMin: 0, sMax: 0.34, alkMin: 0, alkMax: 6 },
+  ]);
 
   // 矿石来源表格列
   const oreColumns: ColumnsType<OreSourceRow> = [
@@ -118,6 +162,78 @@ const IntelligentBlendingContent: React.FC = () => {
       ),
     },
   ];
+
+  // 电铲信息表格列（参考图）
+  const shovelColumns: ColumnsType<ShovelRow> = [
+    { title: '电铲', dataIndex: 'shovelNo', key: 'shovelNo', width: 90, render: (v, r, idx) => (
+      <Select value={v} style={{ width: '100%' }}
+        options={[{value:'2#',label:'2#'},{value:'3#',label:'3#'},{value:'9#',label:'9#'}]}
+        onChange={(val)=> updateShovel(idx, 'shovelNo', val)}
+      />
+    )},
+    { title: '前段', dataIndex: 'bench', key: 'bench', width: 120, render: (v, r, idx)=>(
+      <InputNumber style={{ width: '100%' }} value={v as number | null} placeholder="-165" onChange={(val)=>updateShovel(idx,'bench',val as number|null)} />
+    )},
+    { title: '矿石类型', dataIndex: 'oreType', key: 'oreType', width: 140, render: (v, r, idx)=>(
+      <Select value={v} style={{ width: '100%' }}
+        options={[{value:'赤铁矿',label:'赤铁矿'},{value:'红矿',label:'红矿'},{value:'浅灰矿',label:'浅灰矿'}]}
+        onChange={(val)=> updateShovel(idx,'oreType',val)} />
+    )},
+    { title: '可选指数', dataIndex: 'selectableIndex', key: 'selectableIndex', width: 120, render: (v, r, idx)=>(
+      <InputNumber style={{ width: '100%' }} precision={2} value={v as number|null} onChange={(val)=>updateShovel(idx,'selectableIndex',val as number|null)} />
+    )},
+    { title: '地质全铁(%)', dataIndex: 'feTotal', key: 'feTotal', width: 130, render: (v, r, idx)=>(
+      <InputNumber style={{ width: '100%' }} precision={2} value={v as number|null} onChange={(val)=>updateShovel(idx,'feTotal',val as number|null)} />
+    )},
+    { title: '地质硫(%)', dataIndex: 'sTotal', key: 'sTotal', width: 120, render: (v, r, idx)=>(
+      <InputNumber style={{ width: '100%' }} precision={2} value={v as number|null} onChange={(val)=>updateShovel(idx,'sTotal',val as number|null)} />
+    )},
+    { title: '含岩率(%)', dataIndex: 'gangue', key: 'gangue', width: 120, render: (v, r, idx)=>(
+      <InputNumber style={{ width: '100%' }} precision={2} value={v as number|null} onChange={(val)=>updateShovel(idx,'gangue',val as number|null)} />
+    )},
+    { title: '层位产量(t)', dataIndex: 'layerOutput', key: 'layerOutput', width: 130, render: (v, r, idx)=>(
+      <InputNumber style={{ width: '100%' }} precision={0} value={v as number|null} onChange={(val)=>updateShovel(idx,'layerOutput',val as number|null)} />
+    )},
+    { title: '可开采量(t)', dataIndex: 'minable', key: 'minable', width: 140, render: (v, r, idx)=>(
+      <InputNumber style={{ width: '100%' }} precision={0} value={v as number|null} onChange={(val)=>updateShovel(idx,'minable',val as number|null)} />
+    )},
+    { title: '操作', key: 'action', width: 80, fixed: 'right', render: (_, __, idx)=>(
+      <Button type="link" danger size="small" icon={<DeleteOutlined />} onClick={()=>removeShovel(idx)}>删除</Button>
+    )}
+  ];
+
+  const unloadColumns: ColumnsType<UnloadRow> = [
+    { title: '卸矿点', dataIndex: 'site', key: 'site', width: 140 },
+    { title: '产量配伍值', dataIndex: 'matchValue', key: 'matchValue', width: 130, render: (v, r, idx)=>(
+      <InputNumber style={{ width: '100%' }} min={0} precision={0} value={v as number|null} onChange={(val)=>updateUnload(idx,'matchValue',val as number|null)} />
+    )},
+    { title: '全铁下限(%)', dataIndex: 'feMin', key: 'feMin', width: 120, render: (v, r, idx)=>(<InputNumber style={{ width:'100%' }} precision={2} value={v as number|null} onChange={(val)=>updateUnload(idx,'feMin',val as number|null)} />)},
+    { title: '全铁上限(%)', dataIndex: 'feMax', key: 'feMax', width: 120, render: (v, r, idx)=>(<InputNumber style={{ width:'100%' }} precision={2} value={v as number|null} onChange={(val)=>updateUnload(idx,'feMax',val as number|null)} />)},
+    { title: '硫下限(%)', dataIndex: 'sMin', key: 'sMin', width: 110, render: (v, r, idx)=>(<InputNumber style={{ width:'100%' }} precision={2} value={v as number|null} onChange={(val)=>updateUnload(idx,'sMin',val as number|null)} />)},
+    { title: '硫上限(%)', dataIndex: 'sMax', key: 'sMax', width: 110, render: (v, r, idx)=>(<InputNumber style={{ width:'100%' }} precision={2} value={v as number|null} onChange={(val)=>updateUnload(idx,'sMax',val as number|null)} />)},
+    { title: '碱度下限', dataIndex: 'alkMin', key: 'alkMin', width: 110, render: (v, r, idx)=>(<InputNumber style={{ width:'100%' }} precision={2} value={v as number|null} onChange={(val)=>updateUnload(idx,'alkMin',val as number|null)} />)},
+    { title: '碱度上限', dataIndex: 'alkMax', key: 'alkMax', width: 110, render: (v, r, idx)=>(<InputNumber style={{ width:'100%' }} precision={2} value={v as number|null} onChange={(val)=>updateUnload(idx,'alkMax',val as number|null)} />)},
+  ];
+
+  const updateShovel = (index: number, field: keyof ShovelRow, value: any) => {
+    const list = [...shovels];
+    list[index] = { ...list[index], [field]: value } as ShovelRow;
+    setShovels(list);
+  };
+  const removeShovel = (index: number) => {
+    const list = shovels.filter((_, i)=>i!==index);
+    setShovels(list);
+  };
+  const addShovel = () => {
+    const nextIndex = shovels.length + 1;
+    setShovels([...shovels, { key: String(nextIndex), shovelNo: `${nextIndex}#`, bench: null, oreType: '赤铁矿', selectableIndex: null, feTotal: null, sTotal: null, gangue: null, layerOutput: 1, minable: null }]);
+  };
+
+  const updateUnload = (index: number, field: keyof UnloadRow, value: any) => {
+    const list = [...unloads];
+    list[index] = { ...list[index], [field]: value } as UnloadRow;
+    setUnloads(list);
+  };
 
   // 计算结果表格列
   const resultColumns: ColumnsType<ResultRow> = [
@@ -262,7 +378,74 @@ const IntelligentBlendingContent: React.FC = () => {
         </p>
       </div>
 
-      {/* 配矿参数输入 */}
+      {/* 顶部参数工具栏 */}
+      <Card size="small" style={{ marginBottom: 16, borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+        title={<span><CalendarOutlined style={{ color:'#8c8c8c', marginRight:8 }}/><span>生产参数</span></span>}
+        extra={
+          <Space>
+            <Button icon={<SettingOutlined />}>生成配矿参数</Button>
+            <Button type="primary">生成配矿</Button>
+          </Space>
+        }
+      >
+        <Row gutter={[16,16]} align="middle">
+          <Col xs={24} lg={6}>
+            <Space>
+              <span style={{ color:'#595959' }}>配矿日期</span>
+              <DatePicker style={{ width: 160 }} />
+            </Space>
+          </Col>
+          <Col xs={24} lg={4}>
+            <Space>
+              <span style={{ color:'#595959' }}>班次</span>
+              <Select value={shift} style={{ width: 120 }} options={[{value:'白班',label:'白班'},{value:'夜班',label:'夜班'}]} onChange={(v)=>setShift(v as any)} />
+            </Space>
+          </Col>
+          <Col xs={24} lg={6}>
+            <Space>
+              <span style={{ color:'#595959' }}>电铲序表</span>
+              <InputNumber min={1} value={shovelOrder} onChange={(v)=>setShovelOrder((v||1) as number)} />
+            </Space>
+          </Col>
+          <Col xs={24} lg={6}>
+            <Space>
+              <span style={{ color:'#595959' }}>矿车点序表</span>
+              <InputNumber min={1} value={truckOrder} onChange={(v)=>setTruckOrder((v||1) as number)} />
+            </Space>
+          </Col>
+        </Row>
+      </Card>
+
+      {/* 电铲信息 */}
+      <Card size="small" title="电铲信息" style={{ marginBottom: 16, borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+        extra={<Space>
+          <Button size="small" onClick={addShovel} icon={<PlusOutlined />}>新增电铲</Button>
+        </Space>}
+      >
+        <Table
+          rowKey="key"
+          columns={shovelColumns}
+          dataSource={shovels}
+          pagination={false}
+          size="small"
+          scroll={{ x: 1200 }}
+        />
+      </Card>
+
+      {/* 卸矿点信息 */}
+      <Card size="small" title="卸矿点信息" style={{ marginBottom: 16, borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+        <Table
+          rowKey="key"
+          columns={unloadColumns}
+          dataSource={unloads}
+          pagination={false}
+          size="small"
+          scroll={{ x: 1000 }}
+          className="custom-table"
+        />
+      </Card>
+
+      {/* 配矿参数输入（基础版保留） */}
       <Card 
         title="配矿信息输入" 
         style={{ 
