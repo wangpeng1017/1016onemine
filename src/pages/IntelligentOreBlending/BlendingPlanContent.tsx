@@ -175,7 +175,7 @@ const BlendingPlanContent: React.FC = () => {
       width: 100,
       align: 'center',
       render: (status: string) => {
-        let config = { color: 'default', icon: null };
+        let config: { color: string; icon: React.ReactNode } = { color: 'default', icon: null };
         if (status === '执行中') {
           config = { color: 'processing', icon: <ClockCircleOutlined /> };
         } else if (status === '已完成') {
