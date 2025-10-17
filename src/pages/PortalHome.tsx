@@ -94,10 +94,12 @@ const PortalHome: React.FC = () => {
       if (firstSubMenu.key === 'slope-monitoring') {
         navigate('/slope-monitoring/slope-device-management');
       } else if (firstSubMenu.key === 'personnel-safety') {
-        navigate('/personnel-safety/personnel-home');
+        navigate('/personnel-safety/personnel-tracking');
       } else {
         navigate('/home');
       }
+    } else if (card.key === 'env-monitoring') {
+      navigate('/env-monitoring/env-home');
     } else {
       navigate('/home');
     }
@@ -108,7 +110,7 @@ const PortalHome: React.FC = () => {
     if (subMenuKey === 'slope-monitoring') {
       navigate('/slope-monitoring/slope-device-management');
     } else if (subMenuKey === 'personnel-safety') {
-      navigate('/personnel-safety/personnel-home');
+      navigate('/personnel-safety/personnel-tracking');
     } else if (subMenuKey === 'production-execution') {
       navigate('/production-execution/production-continuity');
     } else if (subMenuKey === 'equipment-management') {

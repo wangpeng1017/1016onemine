@@ -49,11 +49,6 @@ export const slopeMonitoringLeftMenu: LeftMenuItem[] = [
 // 人员定位安全的左侧菜单
 export const personnelSafetyLeftMenu: LeftMenuItem[] = [
   {
-    key: 'personnel-home',
-    icon: <HomeOutlined />,
-    label: '首页',
-  },
-  {
     key: 'personnel-tracking',
     icon: <DatabaseOutlined />,
     label: '人员追踪',

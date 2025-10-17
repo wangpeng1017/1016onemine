@@ -86,7 +86,6 @@ const App: React.FC = () => {
               <Route path="slope-monitoring/slope-system-config" element={<ProjectInfo />} />
               
               {/* 人员定位安全路由 */}
-              <Route path="personnel-safety/personnel-home" element={<Home />} />
               <Route path="personnel-safety/personnel-tracking" element={<PersonnelTracking />} />
               <Route path="personnel-safety/personnel-safety-alert" element={<SafetyAlert />} />
               <Route path="personnel-safety/personnel-statistics" element={<AttendanceManagement />} />
