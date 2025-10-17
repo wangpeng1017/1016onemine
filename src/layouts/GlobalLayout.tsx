@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import TopNavigation from '../components/TopNavigation';
@@ -13,6 +13,41 @@ const GlobalLayout: React.FC = () => {
   const { currentTopMenu, currentSubMenu, leftMenuItems, setCurrentMenu } =
     useNavigation();
   const [collapsed, setCollapsed] = React.useState(false);
+
+  // 根据当前路由初始化导航状态
+  useEffect(() => {
+    const path = location.pathname;
+    
+    // 根据路径确定当前的菜单状态
+    let topMenu = 'home';
+    let subMenu = 'home';
+    
+    if (path.startsWith('/slope-monitoring')) {
+      topMenu = 'smart-safety';
+      subMenu = 'slope-monitoring';
+    } else if (path.startsWith('/personnel-safety')) {
+      topMenu = 'smart-safety';
+      subMenu = 'personnel-safety';
+    } else if (path.startsWith('/production-execution')) {
+      topMenu = 'smart-production';
+      subMenu = 'production-execution';
+    } else if (path.startsWith('/equipment-management')) {
+      topMenu = 'smart-production';
+      subMenu = 'equipment-management';
+    } else if (path.startsWith('/intelligent-ore-blending')) {
+      topMenu = 'smart-mine-design';
+      subMenu = 'intelligent-ore-blending';
+    } else if (path === '/home' || path === '/') {
+      topMenu = 'home';
+      subMenu = 'home';
+    }
+    
+    // 只有在导航状态未初始化或者与当前路径不匹配时才设置
+    if (currentTopMenu !== topMenu || currentSubMenu !== subMenu) {
+      const leftMenu = getLeftMenuForSubMenu(subMenu);
+      setCurrentMenu(topMenu, subMenu, leftMenu);
+    }
+  }, [location.pathname, currentTopMenu, currentSubMenu, setCurrentMenu]);
 
   const handleSettingsClick = () => {
     navigate('/settings');

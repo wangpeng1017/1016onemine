@@ -479,6 +479,7 @@ const BlendingPlanContent: React.FC = () => {
           loading={loading}
           scroll={{ x: 1600 }}
           size="middle"
+          className="custom-table"
           rowSelection={{
             type: 'checkbox',
             onChange: (selectedRowKeys, selectedRows) => {

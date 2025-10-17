@@ -250,9 +250,28 @@ const IntelligentBlendingContent: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: 24 }}>
+    <div style={{ padding: 24, background: '#f5f5f5', minHeight: 'calc(100vh - 64px)' }}>
+      {/* 页面标题 */}
+      <div style={{ marginBottom: 24 }}>
+        <h2 style={{ margin: 0, color: '#262626', fontSize: '24px', fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+          <ThunderboltOutlined style={{ marginRight: 8, color: '#1890ff' }} />
+          智能配矿计算
+        </h2>
+        <p style={{ margin: '4px 0 0 0', color: '#8c8c8c', fontSize: '14px' }}>
+          通过输入矿石来源数据，智能计算最优配矿方案
+        </p>
+      </div>
+
       {/* 配矿参数输入 */}
-      <Card title="配矿信息输入" style={{ marginBottom: 16 }}>
+      <Card 
+        title="配矿信息输入" 
+        style={{ 
+          marginBottom: 16, 
+          borderRadius: 8, 
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)' 
+        }}
+        size="small"
+      >
         <Form form={form} layout="inline" style={{ marginBottom: 16 }}>
           <Form.Item name="targetGrade" label="目标品位(%)">
             <InputNumber placeholder="请输入" style={{ width: 200 }} min={0} max={100} precision={2} />
@@ -268,17 +287,28 @@ const IntelligentBlendingContent: React.FC = () => {
           pagination={false}
           size="middle"
           bordered
+          className="custom-table"
         />
 
         <div style={{ marginTop: 16 }}>
           <Space>
-            <Button icon={<PlusOutlined />} onClick={handleAddRow}>
+            <Button icon={<PlusOutlined />} onClick={handleAddRow} size="middle">
               添加矿石来源
             </Button>
-            <Button type="primary" icon={<ThunderboltOutlined />} onClick={handleCalculate}>
+            <Button 
+              type="primary" 
+              icon={<ThunderboltOutlined />} 
+              onClick={handleCalculate}
+              size="middle"
+              style={{ 
+                background: 'linear-gradient(135deg, #1890ff 0%, #096dd9 100%)',
+                border: 'none',
+                boxShadow: '0 2px 4px rgba(24, 144, 255, 0.3)'
+              }}
+            >
               开始计算
             </Button>
-            <Button onClick={handleReset}>
+            <Button onClick={handleReset} size="middle">
               重置
             </Button>
           </Space>
@@ -289,8 +319,21 @@ const IntelligentBlendingContent: React.FC = () => {
       {showResult && (
         <Card
           title="配矿计算结果"
+          style={{ 
+            borderRadius: 8, 
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)' 
+          }}
           extra={
-            <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
+            <Button 
+              type="primary" 
+              icon={<SaveOutlined />} 
+              onClick={handleSave}
+              style={{ 
+                background: 'linear-gradient(135deg, #52c41a 0%, #389e0d 100%)',
+                border: 'none',
+                boxShadow: '0 2px 4px rgba(82, 196, 26, 0.3)'
+              }}
+            >
               保存方案
             </Button>
           }
@@ -301,6 +344,7 @@ const IntelligentBlendingContent: React.FC = () => {
             pagination={false}
             size="middle"
             bordered
+            className="custom-table"
             summary={() => (
               <Table.Summary>
                 <Table.Summary.Row>
@@ -328,34 +372,63 @@ const IntelligentBlendingContent: React.FC = () => {
             )}
           />
 
-          <div style={{ marginTop: 16, padding: 16, background: '#f0f2f5', borderRadius: 8 }}>
-            <Row gutter={16}>
-              <Col span={8}>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 14, color: '#8c8c8c', marginBottom: 8 }}>混合品位</div>
-                  <div style={{ fontSize: 28, fontWeight: 600, color: '#1890ff' }}>
+          {/* 关键指标统计 */}
+          <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+            <Col xs={24} lg={8}>
+              <Card 
+                size="small"
+                style={{ 
+                  borderRadius: 8, 
+                  background: 'linear-gradient(135deg, #1890ff 0%, #096dd9 100%)',
+                  border: 'none'
+                }}
+              >
+                <div style={{ textAlign: 'center', color: '#fff' }}>
+                  <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', marginBottom: 8 }}>混合品位</div>
+                  <div style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}>
                     {calculatedGrade.toFixed(2)}%
                   </div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)' }}>计算结果</div>
                 </div>
-              </Col>
-              <Col span={8}>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 14, color: '#8c8c8c', marginBottom: 8 }}>总配矿量</div>
-                  <div style={{ fontSize: 28, fontWeight: 600, color: '#52c41a' }}>
-                    {resultData.reduce((sum, row) => sum + row.quantity, 0).toLocaleString()} 吨
+              </Card>
+            </Col>
+            <Col xs={24} lg={8}>
+              <Card 
+                size="small"
+                style={{ 
+                  borderRadius: 8, 
+                  background: 'linear-gradient(135deg, #52c41a 0%, #389e0d 100%)',
+                  border: 'none'
+                }}
+              >
+                <div style={{ textAlign: 'center', color: '#fff' }}>
+                  <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', marginBottom: 8 }}>总配矿量</div>
+                  <div style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}>
+                    {resultData.reduce((sum, row) => sum + row.quantity, 0).toLocaleString()}
                   </div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)' }}>吨</div>
                 </div>
-              </Col>
-              <Col span={8}>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 14, color: '#8c8c8c', marginBottom: 8 }}>矿源数量</div>
-                  <div style={{ fontSize: 28, fontWeight: 600, color: '#722ed1' }}>
-                    {resultData.length} 个
+              </Card>
+            </Col>
+            <Col xs={24} lg={8}>
+              <Card 
+                size="small"
+                style={{ 
+                  borderRadius: 8, 
+                  background: 'linear-gradient(135deg, #722ed1 0%, #531dab 100%)',
+                  border: 'none'
+                }}
+              >
+                <div style={{ textAlign: 'center', color: '#fff' }}>
+                  <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', marginBottom: 8 }}>矿源数量</div>
+                  <div style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}>
+                    {resultData.length}
                   </div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)' }}>个</div>
                 </div>
-              </Col>
-            </Row>
-          </div>
+              </Card>
+            </Col>
+          </Row>
         </Card>
       )}
     </div>
