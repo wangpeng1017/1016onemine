@@ -9,6 +9,8 @@ import {
   CloudOutlined,
   AppstoreOutlined,
   UserOutlined,
+  DashboardOutlined,
+  EnvironmentOutlined,
 } from '@ant-design/icons';
 import { LeftMenuItem } from '../context/NavigationContext';
 
@@ -266,7 +268,23 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'intelligent-ore-blending': [], // 智能配矿管理使用自己的左侧菜单
   'production-execution': productionExecutionLeftMenu,
   'equipment-management': equipmentManagementLeftMenu,
-  'env-monitoring': defaultLeftMenu,
+  'env-monitoring': [
+    {
+      key: 'env-home',
+      icon: <DashboardOutlined />,
+      label: '实时监控',
+    },
+    {
+      key: 'env-monitoring',
+      icon: <EnvironmentOutlined />,
+      label: '监测地图',
+    },
+    {
+      key: 'env-sensors',
+      icon: <SettingOutlined />,
+      label: '传感器管理',
+    },
+  ],
   'smart-prod-ops-sales': defaultLeftMenu,
 };
 

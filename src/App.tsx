@@ -94,8 +94,7 @@ const App: React.FC = () => {
               {/* 环境监测路由 */}
               <Route path="env-monitoring/env-home" element={<EnvironmentalMonitoring />} />
               <Route path="env-monitoring/env-monitoring" element={<EnvironmentalMonitoring />} />
-              <Route path="env-monitoring/env-alert" element={<EnvironmentalMonitoring />} />
-              <Route path="env-monitoring/env-analysis" element={<EnvironmentalMonitoring />} />
+              <Route path="env-monitoring/env-sensors" element={<EnvironmentalMonitoring />} />
               
               {/* 生产执行系统路由 */}
               <Route path="production-execution/production-continuity" element={<ProductionContinuity />} />

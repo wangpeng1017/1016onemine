@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Tabs, Table, Button, Space, Tag, Modal, Form, Input, Select, InputNumber, message } from 'antd';
 import { DashboardOutlined, EnvironmentOutlined, SettingOutlined, PlusOutlined, EditOutlined } from '@ant-design/icons';
+import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import EnvironmentMap, { SensorData, ParameterType } from './components/EnvironmentMap';
 import ParameterDashboard from './components/ParameterDashboard';
@@ -8,10 +9,28 @@ import ParameterDashboard from './components/ParameterDashboard';
 const { Option } = Select;
 
 const EnvironmentalMonitoring: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [selectedSensor, setSelectedSensor] = useState<SensorData | null>(null);
   const [sensorModalVisible, setSensorModalVisible] = useState(false);
   const [editingSensor, setEditingSensor] = useState<SensorData | null>(null);
   const [sensorForm] = Form.useForm();
+
+  // 根据路由确定当前Tab
+  const getActiveTab = () => {
+    if (location.pathname.includes('/env-monitoring/env-monitoring')) return 'map';
+    if (location.pathname.includes('/env-monitoring/env-sensors')) return 'sensors';
+    return 'dashboard';
+  };
+
+  const handleTabChange = (key: string) => {
+    const tabRoutes: Record<string, string> = {
+      dashboard: '/env-monitoring/env-home',
+      map: '/env-monitoring/env-monitoring',
+      sensors: '/env-monitoring/env-sensors'
+    };
+    navigate(tabRoutes[key]);
+  };
 
   // 模拟传感器数据
   const [sensors, setSensors] = useState<SensorData[]>([
@@ -267,7 +286,8 @@ const EnvironmentalMonitoring: React.FC = () => {
   return (
     <div style={{ padding: 24, background: '#f0f2f5', minHeight: '100vh' }}>
       <Tabs
-        defaultActiveKey="dashboard"
+        activeKey={getActiveTab()}
+        onChange={handleTabChange}
         items={[
           {
             key: 'dashboard',
