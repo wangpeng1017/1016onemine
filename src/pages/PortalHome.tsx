@@ -122,27 +122,6 @@ const PortalHome: React.FC = () => {
 
   return (
     <div style={{ padding: '24px', background: '#f0f2f5', minHeight: 'calc(100vh - 64px)' }}>
-      {/* 顶部欢迎区域 */}
-      <div style={{ 
-        marginBottom: 24, 
-        background: '#fff',
-        borderRadius: 8,
-        padding: '32px 24px',
-        textAlign: 'center',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
-      }}>
-        <Title level={1} style={{ 
-          marginBottom: 8, 
-          color: '#262626',
-          fontWeight: 600
-        }}>
-          智慧矿山平台
-        </Title>
-        <Paragraph style={{ fontSize: 16, color: '#8c8c8c', marginBottom: 0 }}>
-          欢迎使用智慧矿山综合管理平台
-        </Paragraph>
-      </div>
-
       {/* 模块卡片网格 */}
       <Row gutter={[16, 16]}>
         {portalCards.map((card) => (
@@ -264,7 +243,7 @@ const PortalHome: React.FC = () => {
         ))}
       </Row>
 
-      {/* 快速访问区域 */}
+      {/* 快速访问区域 - 设置入口 */}
       <div style={{
         marginTop: 24,
         background: '#fff',
@@ -272,12 +251,10 @@ const PortalHome: React.FC = () => {
         padding: '20px 24px',
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
       }}>
-        <Title level={4} style={{ marginBottom: 16, color: '#262626' }}>快速访问</Title>
+        <Title level={4} style={{ marginBottom: 16, color: '#262626' }}>设置</Title>
         <Row gutter={[12, 12]}>
-          <Col><Button size="small" onClick={() => navigate('/slope-monitoring/slope-device-management')}>边坡监测</Button></Col>
-          <Col><Button size="small" onClick={() => navigate('/production-execution/production-continuity')}>生产执行</Button></Col>
-          <Col><Button size="small" onClick={() => navigate('/equipment-management/equipment-ledger')}>设备管理</Button></Col>
-          <Col><Button size="small" onClick={() => navigate('/personnel-safety/personnel-home')}>人员安全</Button></Col>
+          <Col><Button size="small" onClick={() => navigate('/settings/master-data/personnel')}>主数据管理</Button></Col>
+          <Col><Button size="small" onClick={() => navigate('/settings/data-dictionary')}>数据字典</Button></Col>
         </Row>
       </div>
     </div>

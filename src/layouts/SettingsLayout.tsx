@@ -101,7 +101,7 @@ const SettingsLayout: React.FC<SettingsLayoutProps> = ({ children }) => {
           collapsible
           collapsed={collapsed}
           onCollapse={setCollapsed}
-          width={250}
+          width={200}
           style={{
             background: '#ffffff',
             borderRight: '1px solid #f0f0f0',
