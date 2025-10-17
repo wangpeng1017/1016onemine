@@ -47,9 +47,7 @@ import Placeholder from './pages/equipment-management/Placeholder';
 import FaultManagement from './pages/equipment-management/FaultManagement';
 import TestingManagement from './pages/equipment-management/TestingManagement';
 import RepairPlan from './pages/equipment-management/RepairPlan';
-import OreBlendingManagement from './pages/IntelligentOreBlending/OreBlendingManagement';
-import BlendingPlan from './pages/IntelligentOreBlending/BlendingPlan';
-import IntelligentBlending from './pages/IntelligentOreBlending/IntelligentBlending';
+import IntelligentOreBlendingLayout from './pages/IntelligentOreBlending/IntelligentOreBlendingLayout';
 import SettingsLayout from './layouts/SettingsLayout';
 import Personnel from './pages/master-data/Personnel';
 import Equipment from './pages/master-data/Equipment';
@@ -107,9 +105,7 @@ const App: React.FC = () => {
               <Route path="equipment-management/maintenance-plan" element={<RepairPlan />} />
               
               {/* 智能配矿管理路由 */}
-              <Route path="intelligent-ore-blending/management" element={<OreBlendingManagement />} />
-              <Route path="intelligent-ore-blending/plan" element={<BlendingPlan />} />
-              <Route path="intelligent-ore-blending/intelligent" element={<IntelligentBlending />} />
+              <Route path="intelligent-ore-blending" element={<IntelligentOreBlendingLayout />} />
               
               <Route path="device-management" element={<DeviceManagement />} />
               <Route path="model-management" element={<ModelManagement />} />
