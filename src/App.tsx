@@ -59,6 +59,7 @@ import PersonnelTracking from './pages/personnel-safety/PersonnelTracking';
 import SafetyAlert from './pages/personnel-safety/SafetyAlert';
 import AttendanceManagement from './pages/personnel-safety/AttendanceManagement';
 import EnvironmentalMonitoring from './pages/environmental-monitoring/EnvironmentalMonitoring';
+import SmartProdOpsSales from './pages/SmartProdOpsSales';
 import './App.css';
 
 const App: React.FC = () => {
@@ -95,6 +96,9 @@ const App: React.FC = () => {
               <Route path="env-monitoring/env-home" element={<EnvironmentalMonitoring />} />
               <Route path="env-monitoring/env-monitoring" element={<EnvironmentalMonitoring />} />
               <Route path="env-monitoring/env-sensors" element={<EnvironmentalMonitoring />} />
+              
+              {/* 智慧产运销路由 */}
+              <Route path="smart-prod-ops-sales" element={<SmartProdOpsSales />} />
               
               {/* 生产执行系统路由 */}
               <Route path="production-execution/production-continuity" element={<ProductionContinuity />} />

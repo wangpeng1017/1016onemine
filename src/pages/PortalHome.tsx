@@ -100,6 +100,8 @@ const PortalHome: React.FC = () => {
       }
     } else if (card.key === 'env-monitoring') {
       navigate('/env-monitoring/env-home');
+    } else if (card.key === 'smart-prod-ops-sales') {
+      navigate('/smart-prod-ops-sales');
     } else {
       navigate('/home');
     }

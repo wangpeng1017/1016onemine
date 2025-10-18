@@ -40,6 +40,9 @@ const GlobalLayout: React.FC = () => {
     } else if (path.startsWith('/env-monitoring')) {
       topMenu = 'env-monitoring';
       subMenu = 'env-monitoring';
+    } else if (path.startsWith('/smart-prod-ops-sales')) {
+      topMenu = 'smart-prod-ops-sales';
+      subMenu = 'smart-prod-ops-sales';
     } else if (path === '/home' || path === '/') {
       topMenu = 'home';
       subMenu = 'home';
@@ -83,6 +86,8 @@ const GlobalLayout: React.FC = () => {
       navigate('/intelligent-ore-blending');
     } else if (subMenu === 'env-monitoring') {
       navigate('/env-monitoring/env-home');
+    } else if (subMenu === 'smart-prod-ops-sales') {
+      navigate('/smart-prod-ops-sales');
     } else {
       navigate('/home'); // 默认跳转到首页
     }

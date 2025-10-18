@@ -113,6 +113,26 @@ const EnvironmentalMonitoring: React.FC = () => {
       unit: '%',
       status: 'normal',
       timestamp: dayjs().format('YYYY-MM-DD HH:mm:ss')
+    },
+    {
+      id: 'TEMP-003',
+      name: '温度传感器3',
+      type: 'temperature',
+      location: [87.6230, 43.7940],
+      value: 28.8,
+      unit: '°C',
+      status: 'normal',
+      timestamp: dayjs().format('YYYY-MM-DD HH:mm:ss')
+    },
+    {
+      id: 'DUST-002',
+      name: '粉尘传感器2',
+      type: 'dust',
+      location: [87.6155, 43.7985],
+      value: 75.3,
+      unit: 'mg/m³',
+      status: 'warning',
+      timestamp: dayjs().format('YYYY-MM-DD HH:mm:ss')
     }
   ]);
 

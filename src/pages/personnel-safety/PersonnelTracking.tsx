@@ -70,6 +70,42 @@ const PersonnelTracking: React.FC = () => {
       status: 'online',
       lastUpdate: dayjs().format('YYYY-MM-DD HH:mm:ss'),
       tagId: 'TAG-006'
+    },
+    {
+      id: 'P007',
+      name: '周九',
+      department: '运输部',
+      position: [87.6135, 43.7945],
+      status: 'online',
+      lastUpdate: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      tagId: 'TAG-007'
+    },
+    {
+      id: 'P008',
+      name: '吴十',
+      department: '运输部',
+      position: [87.6195, 43.7915],
+      status: 'online',
+      lastUpdate: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      tagId: 'TAG-008'
+    },
+    {
+      id: 'P009',
+      name: '郑十一',
+      department: '机电部',
+      position: [87.6175, 43.7965],
+      status: 'offline',
+      lastUpdate: dayjs().subtract(5, 'minute').format('YYYY-MM-DD HH:mm:ss'),
+      tagId: 'TAG-009'
+    },
+    {
+      id: 'P010',
+      name: '陈十二',
+      department: '安全部',
+      position: [87.6210, 43.7940],
+      status: 'online',
+      lastUpdate: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      tagId: 'TAG-010'
     }
   ]);
 
@@ -104,6 +140,21 @@ const PersonnelTracking: React.FC = () => {
       alertRule: {
         enterAlert: true,
         stayDuration: 30
+      }
+    },
+    {
+      id: 'DZ003',
+      name: '高压线路区',
+      type: 'forbidden',
+      level: 3,
+      coordinates: [
+        [87.6125, 43.7955],
+        [87.6145, 43.7955],
+        [87.6145, 43.7975],
+        [87.6125, 43.7975]
+      ],
+      alertRule: {
+        enterAlert: true
       }
     }
   ];
