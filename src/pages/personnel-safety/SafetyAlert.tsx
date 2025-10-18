@@ -68,6 +68,93 @@ const SafetyAlert: React.FC = () => {
       timestamp: dayjs().subtract(30, 'minute').format('YYYY-MM-DD HH:mm:ss'),
       handled: true,
       handlerNote: '已联系人员，正在撤离'
+    },
+    {
+      id: 'A004',
+      personnelId: 'P007',
+      personnelName: '周九',
+      department: '运输部',
+      zoneId: 'DZ002',
+      zoneName: '边坡监测区',
+      type: 'stay',
+      level: 2,
+      timestamp: dayjs().subtract(15, 'minute').format('YYYY-MM-DD HH:mm:ss'),
+      handled: false
+    },
+    {
+      id: 'A005',
+      personnelId: 'P008',
+      personnelName: '吴十',
+      department: '运输部',
+      zoneId: 'DZ003',
+      zoneName: '高压线路区',
+      type: 'enter',
+      level: 3,
+      timestamp: dayjs().subtract(5, 'minute').format('YYYY-MM-DD HH:mm:ss'),
+      handled: false
+    },
+    {
+      id: 'A006',
+      personnelId: 'P004',
+      personnelName: '赵六',
+      department: '机电部',
+      zoneId: 'DZ001',
+      zoneName: '爆破作业区',
+      type: 'enter',
+      level: 3,
+      timestamp: dayjs().subtract(45, 'minute').format('YYYY-MM-DD HH:mm:ss'),
+      handled: true,
+      handlerNote: '已确认人员撤离'
+    },
+    {
+      id: 'A007',
+      personnelId: 'P010',
+      personnelName: '陈十二',
+      department: '安全部',
+      zoneId: 'DZ002',
+      zoneName: '边坡监测区',
+      type: 'stay',
+      level: 2,
+      timestamp: dayjs().subtract(20, 'minute').format('YYYY-MM-DD HH:mm:ss'),
+      handled: false
+    },
+    {
+      id: 'A008',
+      personnelId: 'P001',
+      personnelName: '张三',
+      department: '采矿部',
+      zoneId: 'DZ001',
+      zoneName: '爆破作业区',
+      type: 'enter',
+      level: 3,
+      timestamp: dayjs().subtract(60, 'minute').format('YYYY-MM-DD HH:mm:ss'),
+      handled: true,
+      handlerNote: '安全巡视，已离开'
+    },
+    {
+      id: 'A009',
+      personnelId: 'P006',
+      personnelName: '孙八',
+      department: '安全部',
+      zoneId: 'DZ003',
+      zoneName: '高压线路区',
+      type: 'enter',
+      level: 3,
+      timestamp: dayjs().subtract(25, 'minute').format('YYYY-MM-DD HH:mm:ss'),
+      handled: false
+    },
+    {
+      id: 'A010',
+      personnelId: 'P009',
+      personnelName: '郑十一',
+      department: '机电部',
+      zoneId: 'DZ002',
+      zoneName: '边坡监测区',
+      type: 'stay',
+      level: 2,
+      timestamp: dayjs().subtract(35, 'minute').format('YYYY-MM-DD HH:mm:ss'),
+      handled: true,
+      handlerNote: '设备维护完成，人员已离开'
     }
   ]);
 

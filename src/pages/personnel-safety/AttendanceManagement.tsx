@@ -101,6 +101,54 @@ const AttendanceManagement: React.FC = () => {
       status: 'normal',
       zoneId: 'ATT-ZONE-001',
       zoneName: '矿区入口'
+    },
+    {
+      id: 'ATT007',
+      personnelId: 'P007',
+      personnelName: '周九',
+      department: '运输部',
+      checkInTime: dayjs().hour(8).minute(3).format('YYYY-MM-DD HH:mm:ss'),
+      checkOutTime: dayjs().hour(17).minute(35).format('YYYY-MM-DD HH:mm:ss'),
+      workHours: 9.53,
+      status: 'normal',
+      zoneId: 'ATT-ZONE-001',
+      zoneName: '矿区入口'
+    },
+    {
+      id: 'ATT008',
+      personnelId: 'P008',
+      personnelName: '吴十',
+      department: '运输部',
+      checkInTime: dayjs().hour(8).minute(20).format('YYYY-MM-DD HH:mm:ss'),
+      checkOutTime: dayjs().hour(17).minute(15).format('YYYY-MM-DD HH:mm:ss'),
+      workHours: 8.92,
+      status: 'late',
+      zoneId: 'ATT-ZONE-001',
+      zoneName: '矿区入口'
+    },
+    {
+      id: 'ATT009',
+      personnelId: 'P009',
+      personnelName: '郑十一',
+      department: '机电部',
+      checkInTime: dayjs().hour(8).minute(2).format('YYYY-MM-DD HH:mm:ss'),
+      checkOutTime: dayjs().hour(17).minute(28).format('YYYY-MM-DD HH:mm:ss'),
+      workHours: 9.43,
+      status: 'normal',
+      zoneId: 'ATT-ZONE-001',
+      zoneName: '矿区入口'
+    },
+    {
+      id: 'ATT010',
+      personnelId: 'P010',
+      personnelName: '陈十二',
+      department: '安全部',
+      checkInTime: dayjs().hour(7).minute(55).format('YYYY-MM-DD HH:mm:ss'),
+      checkOutTime: dayjs().hour(17).minute(32).format('YYYY-MM-DD HH:mm:ss'),
+      workHours: 9.62,
+      status: 'normal',
+      zoneId: 'ATT-ZONE-001',
+      zoneName: '矿区入口'
     }
   ];
 
