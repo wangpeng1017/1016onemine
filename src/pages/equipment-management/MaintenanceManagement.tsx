@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Button, Card, Modal, Form, Input, Select, DatePicker, InputNumber, message, Space, Tag, Row, Col } from 'antd';
-import { PlusOutlined, EditOutlined, CheckOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, CheckOutlined, DeleteOutlined, SearchOutlined, ReloadOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface MaintenanceTask {
@@ -18,8 +18,12 @@ interface MaintenanceTask {
 const MaintenanceManagement: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
+  const [editingTask, setEditingTask] = useState<MaintenanceTask | null>(null);
+  const [searchText, setSearchText] = useState('');
+  const [filterStatus, setFilterStatus] = useState<string | undefined>(undefined);
+  const [filterType, setFilterType] = useState<string | undefined>(undefined);
 
-  const mockData: MaintenanceTask[] = [
+  const [tasks, setTasks] = useState<MaintenanceTask[]>([
     {
       key: '1',
       taskId: 'MNT-001',
@@ -53,7 +57,84 @@ const MaintenanceManagement: React.FC = () => {
       status: '已完成',
       assignee: '王五',
     },
-  ];
+    {
+      key: '4',
+      taskId: 'MNT-004',
+      equipment: '装载机',
+      maintenanceType: '液压系统检查',
+      cycle: '每两周',
+      lastDate: '2024-06-01',
+      nextDate: '2024-06-15',
+      status: '进行中',
+      assignee: '赵六',
+    },
+    {
+      key: '5',
+      taskId: 'MNT-005',
+      equipment: '破碎机',
+      maintenanceType: '锤头更换',
+      cycle: '每月',
+      lastDate: '2024-05-28',
+      nextDate: '2024-06-28',
+      status: '待执行',
+      assignee: '钱七',
+    },
+    {
+      key: '6',
+      taskId: 'MNT-006',
+      equipment: '通风机',
+      maintenanceType: '轴承润滑',
+      cycle: '每周',
+      lastDate: '2024-06-05',
+      nextDate: '2024-06-12',
+      status: '已完成',
+      assignee: '孙八',
+    },
+    {
+      key: '7',
+      taskId: 'MNT-007',
+      equipment: '排水泵',
+      maintenanceType: '密封更换',
+      cycle: '每季度',
+      lastDate: '2024-04-01',
+      nextDate: '2024-07-01',
+      status: '待执行',
+      assignee: '李四',
+    },
+    {
+      key: '8',
+      taskId: 'MNT-008',
+      equipment: '2号皮带输送机',
+      maintenanceType: '张紧检查',
+      cycle: '每周',
+      lastDate: '2024-06-03',
+      nextDate: '2024-06-10',
+      status: '进行中',
+      assignee: '王五',
+    },
+    {
+      key: '9',
+      taskId: 'MNT-009',
+      equipment: 'C号采煤机',
+      maintenanceType: '电气检查',
+      cycle: '每日',
+      lastDate: '2024-06-09',
+      nextDate: '2024-06-10',
+      status: '已完成',
+      assignee: '张三',
+    },
+    {
+      key: '10',
+      taskId: 'MNT-010',
+      equipment: '装载机',
+      maintenanceType: '冷却系统清理',
+      cycle: '每月',
+      lastDate: '2024-05-15',
+      nextDate: '2024-06-15',
+      status: '待执行',
+      assignee: '赵六',
+    },
+  ]);
 
   const columns: ColumnsType<MaintenanceTask> = [
     { title: '任务ID', dataIndex: 'taskId', key: 'taskId', width: 120 },
@@ -80,29 +161,116 @@ const MaintenanceManagement: React.FC = () => {
       title: '操作',
       key: 'action',
       width: 150,
-      render: () => (
-        <Space>
-          <Button type="link" size="small" icon={<EditOutlined />}>编辑</Button>
-          <Button type="link" size="small" icon={<CheckOutlined />}>完成</Button>
+      render: (_, record) => (
+        <Space size="small">
+          <Button type="link" size="small" icon={<EditOutlined />} onClick={() => handleEdit(record)}>编辑</Button>
+          {record.status !== '已完成' && (
+            <Button type="link" size="small" icon={<CheckOutlined />} onClick={() => handleComplete(record)}>完成</Button>
+          )}
+          <Button type="link" size="small" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record)}>删除</Button>
         </Space>
       ),
     },
   ];
 
   const handleAdd = () => {
+    setEditingTask(null);
+    form.resetFields();
     setIsModalVisible(true);
   };
 
-  const handleModalOk = () => {
-    form.validateFields().then(() => {
-      message.success('保养任务创建成功！');
+  const handleEdit = (task: MaintenanceTask) => {
+    setEditingTask(task);
+    form.setFieldsValue(task);
+    setIsModalVisible(true);
+  };
+
+  const handleDelete = (task: MaintenanceTask) => {
+    Modal.confirm({
+      title: '确认删除',
+      content: `确定要删除任务 ${task.taskId} 吗？`,
+      onOk() {
+        setTasks(prev => prev.filter(t => t.key !== task.key));
+        message.success('删除成功');
+      },
+    });
+  };
+
+  const handleComplete = (task: MaintenanceTask) => {
+    setTasks(prev => prev.map(t => t.key === task.key ? { ...t, status: '已完成' } : t));
+    message.success('任务标记为已完成');
+  };
+
+  const handleSave = () => {
+    form.validateFields().then(values => {
+      const payload: Partial<MaintenanceTask> = {
+        ...values,
+        nextDate: (values.nextDate && (values.nextDate as any).format) ? (values.nextDate as any).format('YYYY-MM-DD') : values.nextDate,
+      };
+      if (editingTask) {
+        setTasks(prev => prev.map(t => t.key === editingTask.key ? { ...editingTask, ...payload } as MaintenanceTask : t));
+        message.success('任务更新成功');
+      } else {
+        const newTask: MaintenanceTask = {
+          ...payload,
+          key: String(tasks.length + 1),
+          taskId: `MNT-${String(tasks.length + 1).padStart(3, '0')}`,
+          status: '待执行',
+        } as MaintenanceTask;
+        setTasks(prev => [newTask, ...prev]);
+        message.success('任务创建成功');
+      }
       setIsModalVisible(false);
       form.resetFields();
     });
   };
 
+  const getFilteredTasks = () => {
+    let filtered = tasks;
+    if (searchText) {
+      filtered = filtered.filter(t =>
+        t.taskId.toLowerCase().includes(searchText.toLowerCase()) ||
+        t.equipment.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+    if (filterStatus) filtered = filtered.filter(t => t.status === filterStatus);
+    if (filterType) filtered = filtered.filter(t => t.maintenanceType === filterType);
+    return filtered;
+  };
+
+  const handleResetFilter = () => {
+    setSearchText('');
+    setFilterStatus(undefined);
+    setFilterType(undefined);
+  };
+
   return (
     <div>
+      <Card style={{ marginBottom: 16 }}>
+        <Row gutter={16} align="middle">
+          <Col span={6}>
+            <Input placeholder="搜索任务ID/设备" value={searchText} onChange={(e) => setSearchText(e.target.value)} prefix={<SearchOutlined />} onPressEnter={() => {}} />
+          </Col>
+          <Col span={4}>
+            <Select placeholder="状态" allowClear style={{ width: '100%' }} value={filterStatus} onChange={setFilterStatus}>
+              <Select.Option value="待执行">待执行</Select.Option>
+              <Select.Option value="进行中">进行中</Select.Option>
+              <Select.Option value="已完成">已完成</Select.Option>
+            </Select>
+          </Col>
+          <Col span={6}>
+            <Input placeholder="保养类型(精确匹配)" value={filterType} onChange={(e) => setFilterType(e.target.value)} />
+          </Col>
+          <Col span={6}>
+            <Space>
+              <Button onClick={handleResetFilter}>重置</Button>
+              <Button icon={<ReloadOutlined />}>刷新</Button>
+              <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>新建保养任务</Button>
+            </Space>
+          </Col>
+        </Row>
+      </Card>
+
       <Card
         title="保养管理"
         extra={
@@ -111,10 +279,10 @@ const MaintenanceManagement: React.FC = () => {
           </Button>
         }
       >
-        <Table columns={columns} dataSource={mockData} pagination={{ pageSize: 10 }} scroll={{ x: 1300 }} />
+        <Table columns={columns} dataSource={getFilteredTasks()} pagination={{ pageSize: 10, showTotal: (t)=>`共 ${t} 条` }} scroll={{ x: 1300 }} />
       </Card>
 
-      <Modal title="创建保养任务" open={isModalVisible} onOk={handleModalOk} onCancel={() => setIsModalVisible(false)} width={700}>
+      <Modal title={editingTask ? '编辑保养任务' : '创建保养任务'} open={isModalVisible} onOk={handleSave} onCancel={() => setIsModalVisible(false)} width={700}>
         <Form form={form} layout="vertical">
           <Row gutter={16}>
             <Col span={12}>
