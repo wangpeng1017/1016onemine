@@ -12,11 +12,19 @@ import {
   Tag,
   message,
   Modal,
+  Form,
+  Input,
+  InputNumber,
 } from 'antd';
 import {
   ReloadOutlined,
   DownloadOutlined,
   LineChartOutlined,
+  PlusOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  EyeOutlined,
+  SearchOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
@@ -49,6 +57,11 @@ const SurfaceDisplacement: React.FC = () => {
   const [dateRange, setDateRange] = useState<[dayjs.Dayjs | null, dayjs.Dayjs | null] | null>(null);
   const [chartVisible, setChartVisible] = useState(false);
   const [chartContainer, setChartContainer] = useState<HTMLDivElement | null>(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editingRecord, setEditingRecord] = useState<GNSSData | null>(null);
+  const [searchText, setSearchText] = useState('');
+  const [filterStatus, setFilterStatus] = useState<string | undefined>(undefined);
+  const [form] = Form.useForm();
 
   // 基于最新测试数据的表面位移监测数据
   const mockData: GNSSData[] = [
@@ -179,6 +192,19 @@ const SurfaceDisplacement: React.FC = () => {
         return <Tag color={config.color}>{config.text}</Tag>;
       },
     },
+    {
+      title: '操作',
+      key: 'action',
+      width: 200,
+      fixed: 'right',
+      render: (_, record) => (
+        <Space size="small">
+          <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => handleView(record)}>查看</Button>
+          <Button type="link" size="small" icon={<EditOutlined />} onClick={() => handleEdit(record)}>编辑</Button>
+          <Button type="link" size="small" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record)}>删除</Button>
+        </Space>
+      ),
+    },
   ];
 
   const loadData = () => {
@@ -196,6 +222,92 @@ const SurfaceDisplacement: React.FC = () => {
 
   const handleExport = () => {
     message.success('数据导出功能开发中...');
+  };
+
+  const getFilteredData = () => {
+    let filtered = data;
+    if (searchText) {
+      filtered = filtered.filter(item => item.点名.toLowerCase().includes(searchText.toLowerCase()));
+    }
+    if (filterStatus) {
+      filtered = filtered.filter(item => item.status === filterStatus);
+    }
+    if (selectedStation && selectedStation !== 'all') {
+      filtered = filtered.filter(item => item.点名 === selectedStation);
+    }
+    return filtered;
+  };
+
+  const handleAdd = () => {
+    setEditingRecord(null);
+    form.resetFields();
+    setModalVisible(true);
+  };
+
+  const handleEdit = (record: GNSSData) => {
+    setEditingRecord(record);
+    form.setFieldsValue(record);
+    setModalVisible(true);
+  };
+
+  const handleView = (record: GNSSData) => {
+    Modal.info({
+      title: `测点详情 - ${record.点名}`,
+      width: 600,
+      content: (
+        <div>
+          <p>累计位移X: {record.累计位移量X} mm</p>
+          <p>累计位移Y: {record.累计位移量Y} mm</p>
+          <p>累计位移Z: {record.累计位移量Z} mm</p>
+          <p>小时位移X: {record.小时位移量X} mm</p>
+          <p>小时位移Y: {record.小时位移量Y} mm</p>
+          <p>小时位移Z: {record.小时位移量Z} mm</p>
+          <p>接收时间: {record.接收时间}</p>
+        </div>
+      ),
+    });
+  };
+
+  const handleDelete = (record: GNSSData) => {
+    Modal.confirm({
+      title: '确认删除',
+      content: `确定要删除测点 ${record.点名} 的数据吗？`,
+      onOk() {
+        setData(prev => prev.filter(item => item.序号 !== record.序号));
+        message.success('删除成功');
+      },
+    });
+  };
+
+  const handleSave = () => {
+    form.validateFields().then(values => {
+      if (editingRecord) {
+        setData(prev => prev.map(item =>
+          item.序号 === editingRecord.序号 ? { ...item, ...values } : item
+        ));
+        message.success('更新成功');
+      } else {
+        const newRecord: GNSSData = {
+          序号: data.length + 1,
+          ...values,
+          接收时间: new Date().toISOString().replace('T', ' ').substring(0, 19),
+          totalDisplacement: Math.sqrt(
+            values.累计位移量X ** 2 +
+            values.累计位移量Y ** 2 +
+            values.累计位移量Z ** 2
+          ),
+        };
+        setData(prev => [...prev, newRecord]);
+        message.success('添加成功');
+      }
+      setModalVisible(false);
+    });
+  };
+
+  const handleResetFilter = () => {
+    setSearchText('');
+    setFilterStatus(undefined);
+    setSelectedStation('all');
   };
 
   const handleViewChart = () => {
