@@ -115,8 +115,8 @@ const DeviceManagement: React.FC = () => {
   const [selectedRadar, setSelectedRadar] = useState<RadarRow | null>(null);
   const [radarForm] = Form.useForm();
 
-  // 模拟数据
-  const mockData: Device[] = [
+  // 状态管理
+  const [devices, setDevices] = useState<Device[]>([
     {
       key: '1',
       id: 'DEV001',
@@ -220,7 +220,60 @@ const DeviceManagement: React.FC = () => {
       signalStrength: 90,
       installDate: '2023-04-12',
     },
-  ];
+    {
+      key: '7',
+      id: 'DEV007',
+      name: '雷达监测点-02',
+      type: '雷达传感器',
+      location: '边坡A区-中部',
+      status: 'online',
+      lastUpdate: '2024-01-15 14:28:45',
+      batteryLevel: 88,
+      signalStrength: 94,
+      installDate: '2023-06-20',
+    },
+    {
+      key: '8',
+      id: 'DEV008',
+      name: '土压力传感器-04',
+      type: '压力传感器',
+      location: '边坡B区-下部',
+      status: 'online',
+      lastUpdate: '2024-01-15 14:26:30',
+      batteryLevel: 78,
+      signalStrength: 85,
+      installDate: '2023-07-25',
+    },
+    {
+      key: '9',
+      id: 'DEV009',
+      name: '裂缝计-06',
+      type: '裂缝监测仪',
+      location: '岩体C区-中部',
+      status: 'online',
+      lastUpdate: '2024-01-15 14:22:18',
+      batteryLevel: 82,
+      signalStrength: 87,
+      installDate: '2023-08-15',
+    },
+    {
+      key: '10',
+      id: 'DEV010',
+      name: '雨量计-03',
+      type: '气象传感器',
+      location: '监测站-西侧',
+      status: 'online',
+      lastUpdate: '2024-01-15 14:29:55',
+      batteryLevel: 91,
+      signalStrength: 93,
+      installDate: '2023-06-05',
+    },
+  ]);
+
+  // 筛选状态
+  const [searchName, setSearchName] = useState('');
+  const [filterType, setFilterType] = useState<string | undefined>(undefined);
+  const [filterStatus, setFilterStatus] = useState<string | undefined>(undefined);
 
   const statusConfig = {
     online: { color: 'green', text: '在线' },
@@ -321,11 +374,12 @@ const [radarData, setRadarData] = useState<RadarRow[]>([
     {
       title: '操作',
       key: 'action',
-      width: 180,
+      width: 220,
       render: (_, record) => (
         <Space size="small">
           <Button type="link" icon={<EyeOutlined />} onClick={() => handleViewDetail(record)}>查看</Button>
           <Button type="link" icon={<EditOutlined />} onClick={() => handleEdit(record)}>编辑</Button>
+          <Button type="link" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record)}>删除</Button>
         </Space>
       ),
     },
@@ -347,7 +401,8 @@ const [radarData, setRadarData] = useState<RadarRow[]>([
       title: '确认删除',
       content: `确定要删除设备 ${device.name} 吗？`,
       onOk() {
-        console.log('删除设备:', device.id);
+        setDevices(prev => prev.filter(d => d.key !== device.key));
+        message.success('设备删除成功');
       },
     });
   };
@@ -385,19 +440,54 @@ const [radarData, setRadarData] = useState<RadarRow[]>([
   };
 
   const getFilteredData = () => {
-    if (activeTab === 'all') return mockData;
-    return mockData.filter(device => {
-      switch (activeTab) {
-        case 'radar':
-          return device.type === '雷达传感器';
-        case 'sensor':
-          return ['压力传感器', '裂缝监测仪', '气象传感器', '水位传感器'].includes(device.type);
-        case 'camera':
-          return device.type === '监控设备';
-        default:
-          return true;
-      }
-    });
+    let filtered = devices;
+
+    // 应用标签页筛选
+    if (activeTab !== 'all') {
+      filtered = filtered.filter(device => {
+        switch (activeTab) {
+          case 'radar':
+            return device.type === '雷达传感器';
+          case 'sensor':
+            return ['压力传感器', '裂缝监测仪', '气象传感器', '水位传感器'].includes(device.type);
+          case 'camera':
+            return device.type === '监控设备';
+          default:
+            return true;
+        }
+      });
+    }
+
+    // 应用搜索名称筛选
+    if (searchName) {
+      filtered = filtered.filter(device => 
+        device.name.toLowerCase().includes(searchName.toLowerCase())
+      );
+    }
+
+    // 应用设备类型筛选
+    if (filterType) {
+      filtered = filtered.filter(device => device.type === filterType);
+    }
+
+    // 应用设备状态筛选
+    if (filterStatus) {
+      filtered = filtered.filter(device => device.status === filterStatus);
+    }
+
+    return filtered;
+  };
+
+  const handleSearch = () => {
+    // 触发重新渲染
+    setLoading(true);
+    setTimeout(() => setLoading(false), 300);
+  };
+
+  const handleResetFilter = () => {
+    setSearchName('');
+    setFilterType(undefined);
+    setFilterStatus(undefined);
   };
 
   // 雷达编辑/查看操作
@@ -473,28 +563,47 @@ radarForm.setFieldsValue({
             <Input
               placeholder="请输入设备名称"
               prefix={<SearchOutlined />}
+              value={searchName}
+              onChange={(e) => setSearchName(e.target.value)}
+              onPressEnter={handleSearch}
             />
           </Col>
           <Col span={4}>
-            <Select placeholder="设备类型" style={{ width: '100%' }}>
-              <Option value="radar">雷达传感器</Option>
-              <Option value="pressure">压力传感器</Option>
-              <Option value="crack">裂缝监测仪</Option>
-              <Option value="weather">气象传感器</Option>
-              <Option value="water">水位传感器</Option>
-              <Option value="camera">监控设备</Option>
+            <Select 
+              placeholder="设备类型" 
+              style={{ width: '100%' }}
+              value={filterType}
+              onChange={setFilterType}
+              allowClear
+            >
+              <Option value="雷达传感器">雷达传感器</Option>
+              <Option value="压力传感器">压力传感器</Option>
+              <Option value="裂缝监测仪">裂缝监测仪</Option>
+              <Option value="气象传感器">气象传感器</Option>
+              <Option value="水位传感器">水位传感器</Option>
+              <Option value="监控设备">监控设备</Option>
             </Select>
           </Col>
           <Col span={4}>
-            <Select placeholder="设备状态" style={{ width: '100%' }}>
+            <Select 
+              placeholder="设备状态" 
+              style={{ width: '100%' }}
+              value={filterStatus}
+              onChange={setFilterStatus}
+              allowClear
+            >
               <Option value="online">在线</Option>
               <Option value="offline">离线</Option>
+              <Option value="maintenance">维护中</Option>
             </Select>
           </Col>
           <Col span={6}>
             <Space>
-              <Button type="primary" icon={<SearchOutlined />}>
+              <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
                 查询
+              </Button>
+              <Button onClick={handleResetFilter}>
+                重置
               </Button>
               <Button icon={<ReloadOutlined />} onClick={handleRefresh}>
                 刷新

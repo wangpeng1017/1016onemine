@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Button, Card, Modal, Form, Input, DatePicker, Select, message, Space, Row, Col, InputNumber } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined, SearchOutlined, ReloadOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface Equipment {
@@ -19,6 +19,12 @@ const EquipmentLedger: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingKey, setEditingKey] = useState<string | null>(null);
   const [form] = Form.useForm();
+
+  // 筛选状态
+  const [searchText, setSearchText] = useState('');
+  const [filterType, setFilterType] = useState<string | undefined>(undefined);
+  const [filterStatus, setFilterStatus] = useState<string | undefined>(undefined);
+
   const [equipmentList, setEquipmentList] = useState<Equipment[]>([
     {
       key: '1',
@@ -63,6 +69,72 @@ const EquipmentLedger: React.FC = () => {
       purchaseDate: '2023-01-05',
       status: '正常',
       lastMaintenance: '2024-06-12',
+    },
+    {
+      key: '5',
+      equipmentNo: 'EQ-005',
+      equipmentName: 'C号采煤机',
+      equipmentType: '采煤设备',
+      model: 'MG-400',
+      department: '采煤二队',
+      purchaseDate: '2022-09-10',
+      status: '正常',
+      lastMaintenance: '2024-06-15',
+    },
+    {
+      key: '6',
+      equipmentNo: 'EQ-006',
+      equipmentName: '2号皮带输送机',
+      equipmentType: '运输设备',
+      model: 'DTⅡ-2250',
+      department: '运输队',
+      purchaseDate: '2022-01-15',
+      status: '正常',
+      lastMaintenance: '2024-05-25',
+    },
+    {
+      key: '7',
+      equipmentNo: 'EQ-007',
+      equipmentName: '液压钻机',
+      equipmentType: '采装设备',
+      model: 'HD-580',
+      department: '采煤二队',
+      purchaseDate: '2023-03-20',
+      status: '正常',
+      lastMaintenance: '2024-06-05',
+    },
+    {
+      key: '8',
+      equipmentNo: 'EQ-008',
+      equipmentName: '通风机',
+      equipmentType: '通风设备',
+      model: 'FBD-8.0',
+      department: '通风队',
+      purchaseDate: '2021-08-10',
+      status: '故障',
+      lastMaintenance: '2024-04-15',
+    },
+    {
+      key: '9',
+      equipmentNo: 'EQ-009',
+      equipmentName: '排水泵',
+      equipmentType: '排水设备',
+      model: 'WD-500',
+      department: '排水队',
+      purchaseDate: '2022-05-25',
+      status: '正常',
+      lastMaintenance: '2024-06-18',
+    },
+    {
+      key: '10',
+      equipmentNo: 'EQ-010',
+      equipmentName: '装载机',
+      equipmentType: '采装设备',
+      model: 'LW-600',
+      department: '采煤一队',
+      purchaseDate: '2023-07-08',
+      status: '正常',
+      lastMaintenance: '2024-06-20',
     },
   ]);
 
@@ -123,6 +195,37 @@ const EquipmentLedger: React.FC = () => {
     message.success('设备删除成功！');
   };
 
+  const getFilteredData = () => {
+    let filtered = equipmentList;
+
+    if (searchText) {
+      filtered = filtered.filter(item => 
+        item.equipmentName.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.equipmentNo.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+    if (filterType) {
+      filtered = filtered.filter(item => item.equipmentType === filterType);
+    }
+
+    if (filterStatus) {
+      filtered = filtered.filter(item => item.status === filterStatus);
+    }
+
+    return filtered;
+  };
+
+  const handleSearch = () => {
+    // 触发重新渲染
+  };
+
+  const handleResetFilter = () => {
+    setSearchText('');
+    setFilterType(undefined);
+    setFilterStatus(undefined);
+  };
+
   const handleModalOk = () => {
     form.validateFields().then((values) => {
       if (editingKey) {
@@ -146,6 +249,62 @@ const EquipmentLedger: React.FC = () => {
 
   return (
     <div>
+      {/* 筛选条件 */}
+      <Card style={{ marginBottom: 16 }}>
+        <Row gutter={16} align="middle">
+          <Col span={6}>
+            <Input
+              placeholder="请输入设备名称/编号"
+              prefix={<SearchOutlined />}
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onPressEnter={handleSearch}
+            />
+          </Col>
+          <Col span={4}>
+            <Select 
+              placeholder="设备类型"
+              style={{ width: '100%' }}
+              value={filterType}
+              onChange={setFilterType}
+              allowClear
+            >
+              <Select.Option value="采煤设备">采煤设备</Select.Option>
+              <Select.Option value="运输设备">运输设备</Select.Option>
+              <Select.Option value="采装设备">采装设备</Select.Option>
+              <Select.Option value="通风设备">通风设备</Select.Option>
+              <Select.Option value="排水设备">排水设备</Select.Option>
+            </Select>
+          </Col>
+          <Col span={4}>
+            <Select 
+              placeholder="设备状态"
+              style={{ width: '100%' }}
+              value={filterStatus}
+              onChange={setFilterStatus}
+              allowClear
+            >
+              <Select.Option value="正常">正常</Select.Option>
+              <Select.Option value="维修中">维修中</Select.Option>
+              <Select.Option value="故障">故障</Select.Option>
+            </Select>
+          </Col>
+          <Col span={6}>
+            <Space>
+              <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
+                查询
+              </Button>
+              <Button onClick={handleResetFilter}>
+                重置
+              </Button>
+              <Button icon={<ReloadOutlined />}>
+                刷新
+              </Button>
+            </Space>
+          </Col>
+        </Row>
+      </Card>
+
       <Card
         title="设备台账管理"
         extra={
@@ -157,7 +316,7 @@ const EquipmentLedger: React.FC = () => {
       >
         <Table
           columns={columns}
-          dataSource={equipmentList}
+          dataSource={getFilteredData()}
           pagination={{ pageSize: 10, showTotal: (total) => `共 ${total} 条` }}
           scroll={{ x: 1400 }}
         />

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Card, Table, Button, Space, Input, InputNumber, Modal, Form, Select, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { EditOutlined, SaveOutlined, CloseOutlined, SettingOutlined, PlusOutlined } from '@ant-design/icons';
+import { EditOutlined, SaveOutlined, CloseOutlined, SettingOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 
 interface ThresholdItem {
   id: string;
@@ -22,8 +22,13 @@ const initialData: ThresholdItem[] = [
   { id: '1', name: 'GP-96', type: 'Y方向小时位移量', unit: 'mm', blueMin: 6, blueMax: 8, yellowMin: 8, yellowMax: 10, orangeMin: 10, orangeMax: 12, redMin: 12, redMax: 15 },
   { id: '2', name: 'GP-95', type: 'Y方向小时位移量', unit: 'mm', blueMin: 6, blueMax: 8, yellowMin: 8, yellowMax: 10, orangeMin: 10, orangeMax: 12, redMin: 12, redMax: 15 },
   { id: '3', name: 'GP-105', type: 'Y方向小时位移量', unit: 'mm', blueMin: 6, blueMax: 8, yellowMin: 8, yellowMax: 10, orangeMin: 10, orangeMax: 12, redMin: 12, redMax: 15 },
+  { id: '4', name: '土压力计', type: '土压力', unit: 'kPa', blueMin: 80, blueMax: 100, yellowMin: 100, yellowMax: 120, orangeMin: 120, orangeMax: 140, redMin: 140, redMax: 160 },
+  { id: '5', name: '土压力计2', type: '土压力', unit: 'kPa', blueMin: 85, blueMax: 105, yellowMin: 105, yellowMax: 125, orangeMin: 125, orangeMax: 145, redMin: 145, redMax: 165 },
+  { id: '6', name: '裂缝计01', type: '裂缝值', unit: 'mm', blueMin: 10, blueMax: 12, yellowMin: 12, yellowMax: 15, orangeMin: 15, orangeMax: 18, redMin: 18, redMax: 20 },
+  { id: '7', name: '裂缝计02', type: '裂缝值', unit: 'mm', blueMin: 10, blueMax: 12, yellowMin: 12, yellowMax: 15, orangeMin: 15, orangeMax: 18, redMin: 18, redMax: 20 },
   { id: '8', name: 'GP-96', type: 'Z方向小时位移量', unit: 'mm', blueMin: 9, blueMax: 10, yellowMin: 10, yellowMax: 12.5, orangeMin: 12.5, orangeMax: 15, redMin: 15, redMax: 17.5 },
   { id: '9', name: 'GP-95', type: 'Z方向小时位移量', unit: 'mm', blueMin: 9, blueMax: 10, yellowMin: 10, yellowMax: 12.5, orangeMin: 12.5, orangeMax: 15, redMin: 15, redMax: 17.5 },
+  { id: '10', name: 'A1', type: '水面高程', unit: 'm', blueMin: 10, blueMax: 11, yellowMin: 11, yellowMax: 12, orangeMin: 12, orangeMax: 13, redMin: 13, redMax: 14 },
 ];
 
 const typeUnitMap: Record<string, string> = {
@@ -123,6 +128,17 @@ const ThresholdSettingsSimple: React.FC = () => {
     addForm.resetFields();
   };
 
+  const handleDelete = (record: ThresholdItem) => {
+    Modal.confirm({
+      title: '确认删除',
+      content: `确定要删除测点 ${record.name} 的阈值规则吗？`,
+      onOk() {
+        setData(prev => prev.filter(item => item.id !== record.id));
+        message.success('已删除阈值规则');
+      },
+    });
+  };
+
   const columns: ColumnsType<ThresholdItem> = [
     { title: '序号', dataIndex: 'id', width: 70 },
     { title: '测点名称', dataIndex: 'name', width: 120 },
@@ -168,7 +184,7 @@ const ThresholdSettingsSimple: React.FC = () => {
       ) : (<span>{r.redMin}-{r.redMax}{getUnitByType(r.type, r.unit)}</span>)
     },
     {
-      title: '操作', key: 'action', fixed: 'right', width: 160,
+      title: '操作', key: 'action', fixed: 'right', width: 200,
       render: (_, r) => (
         <Space size="small">
           {editingId === r.id ? (
@@ -177,7 +193,10 @@ const ThresholdSettingsSimple: React.FC = () => {
               <Button size="small" icon={<CloseOutlined />} onClick={cancelEdit}>取消</Button>
             </>
           ) : (
-            <Button type="link" size="small" icon={<EditOutlined />} onClick={() => startEdit(r)}>编辑</Button>
+            <>
+              <Button type="link" size="small" icon={<EditOutlined />} onClick={() => startEdit(r)}>编辑</Button>
+              <Button type="link" size="small" danger icon={<DeleteOutlined />} onClick={() => handleDelete(r)}>删除</Button>
+            </>
           )}
         </Space>
       )

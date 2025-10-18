@@ -21,6 +21,8 @@ import {
   DeleteOutlined,
   UserOutlined,
   LockOutlined,
+  SearchOutlined,
+  ReloadOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
@@ -43,6 +45,11 @@ const AccountManagement: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [editingUser, setEditingUser] = useState<UserData | null>(null);
   const [form] = Form.useForm();
+
+  // 筛选状态
+  const [searchText, setSearchText] = useState('');
+  const [filterRole, setFilterRole] = useState<string | undefined>(undefined);
+  const [filterStatus, setFilterStatus] = useState<string | undefined>(undefined);
 
   // 模拟用户数据
   const [userData, setUserData] = useState<UserData[]>([
@@ -78,6 +85,83 @@ const AccountManagement: React.FC = () => {
       status: 'inactive',
       lastLogin: '2025-09-05 09:15:00',
       createTime: '2025-03-20 14:45:00',
+    },
+    {
+      id: '4',
+      username: 'operator2',
+      realName: '操作员王五',
+      email: 'wangwu@mining.com',
+      phone: '13800138003',
+      role: 'operator',
+      status: 'active',
+      lastLogin: '2025-09-06 13:45:00',
+      createTime: '2025-03-10 09:20:00',
+    },
+    {
+      id: '5',
+      username: 'admin2',
+      realName: '副管理员赵六',
+      email: 'zhaoliu@mining.com',
+      phone: '13800138004',
+      role: 'admin',
+      status: 'active',
+      lastLogin: '2025-09-06 14:50:00',
+      createTime: '2025-01-15 11:00:00',
+    },
+    {
+      id: '6',
+      username: 'viewer2',
+      realName: '观察员钱七',
+      email: 'qianqi@mining.com',
+      phone: '13800138005',
+      role: 'viewer',
+      status: 'active',
+      lastLogin: '2025-09-06 10:30:00',
+      createTime: '2025-04-01 08:15:00',
+    },
+    {
+      id: '7',
+      username: 'operator3',
+      realName: '操作员孙八',
+      email: 'sunba@mining.com',
+      phone: '13800138006',
+      role: 'operator',
+      status: 'inactive',
+      lastLogin: '2025-09-04 16:20:00',
+      createTime: '2025-02-28 14:30:00',
+    },
+    {
+      id: '8',
+      username: 'viewer3',
+      realName: '观察员周九',
+      email: 'zhoujiu@mining.com',
+      phone: '13800138007',
+      role: 'viewer',
+      status: 'active',
+      lastLogin: '2025-09-06 09:00:00',
+      createTime: '2025-04-15 10:45:00',
+    },
+    {
+      id: '9',
+      username: 'operator4',
+      realName: '操作员吴十',
+      email: 'wushi@mining.com',
+      phone: '13800138008',
+      role: 'operator',
+      status: 'active',
+      lastLogin: '2025-09-06 15:10:00',
+      createTime: '2025-03-25 13:20:00',
+    },
+    {
+      id: '10',
+      username: 'viewer4',
+      realName: '观察员郑十一',
+      email: 'zhengshiyi@mining.com',
+      phone: '13800138009',
+      role: 'viewer',
+      status: 'active',
+      lastLogin: '2025-09-06 11:40:00',
+      createTime: '2025-05-01 09:00:00',
     },
   ]);
 
@@ -198,6 +282,39 @@ const AccountManagement: React.FC = () => {
     message.success('用户删除成功');
   };
 
+  const getFilteredData = () => {
+    let filtered = userData;
+
+    if (searchText) {
+      filtered = filtered.filter(user => 
+        user.username.toLowerCase().includes(searchText.toLowerCase()) ||
+        user.realName.toLowerCase().includes(searchText.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+    if (filterRole) {
+      filtered = filtered.filter(user => user.role === filterRole);
+    }
+
+    if (filterStatus) {
+      filtered = filtered.filter(user => user.status === filterStatus);
+    }
+
+    return filtered;
+  };
+
+  const handleSearch = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 300);
+  };
+
+  const handleResetFilter = () => {
+    setSearchText('');
+    setFilterRole(undefined);
+    setFilterStatus(undefined);
+  };
+
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
@@ -238,6 +355,59 @@ const AccountManagement: React.FC = () => {
   return (
     <div>
       <div className="page-title">账号管理</div>
+
+      {/* 筛选条件 */}
+      <Card style={{ marginBottom: 16 }}>
+        <Row gutter={16} align="middle">
+          <Col span={6}>
+            <Input
+              placeholder="请输入用户名/姓名/邮箱"
+              prefix={<SearchOutlined />}
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onPressEnter={handleSearch}
+            />
+          </Col>
+          <Col span={4}>
+            <Select 
+              placeholder="角色"
+              style={{ width: '100%' }}
+              value={filterRole}
+              onChange={setFilterRole}
+              allowClear
+            >
+              <Option value="admin">管理员</Option>
+              <Option value="operator">操作员</Option>
+              <Option value="viewer">观察员</Option>
+            </Select>
+          </Col>
+          <Col span={4}>
+            <Select 
+              placeholder="状态"
+              style={{ width: '100%' }}
+              value={filterStatus}
+              onChange={setFilterStatus}
+              allowClear
+            >
+              <Option value="active">启用</Option>
+              <Option value="inactive">禁用</Option>
+            </Select>
+          </Col>
+          <Col span={6}>
+            <Space>
+              <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
+                查询
+              </Button>
+              <Button onClick={handleResetFilter}>
+                重置
+              </Button>
+              <Button icon={<ReloadOutlined />} onClick={() => {}}>
+                刷新
+              </Button>
+            </Space>
+          </Col>
+        </Row>
+      </Card>
       
       {/* 统计卡片 */}
       <Row gutter={16} style={{ marginBottom: 16 }}>
@@ -293,7 +463,7 @@ const AccountManagement: React.FC = () => {
 
         <Table
           columns={columns}
-          dataSource={userData}
+          dataSource={getFilteredData()}
           rowKey="id"
           loading={loading}
           pagination={{

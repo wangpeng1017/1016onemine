@@ -43,6 +43,18 @@ const GlobalLayout: React.FC = () => {
     } else if (path.startsWith('/smart-prod-ops-sales')) {
       topMenu = 'smart-prod-ops-sales';
       subMenu = 'smart-prod-ops-sales';
+    } else if (path.startsWith('/ioc-planning')) {
+      topMenu = 'ioc-center';
+      subMenu = 'ioc-planning';
+    } else if (path.startsWith('/ioc-production')) {
+      topMenu = 'ioc-center';
+      subMenu = 'ioc-production';
+    } else if (path.startsWith('/ioc-safety')) {
+      topMenu = 'ioc-center';
+      subMenu = 'ioc-safety';
+    } else if (path.startsWith('/ioc-operation')) {
+      topMenu = 'ioc-center';
+      subMenu = 'ioc-operation';
     } else if (path === '/home' || path === '/') {
       topMenu = 'home';
       subMenu = 'home';
@@ -71,13 +83,13 @@ const GlobalLayout: React.FC = () => {
     } else if (subMenu === 'personnel-safety') {
       navigate('/personnel-safety/personnel-tracking');
     } else if (subMenu === 'ioc-planning') {
-      navigate('/home'); // 暂时跳转到首页
+      navigate('/ioc-planning');
     } else if (subMenu === 'ioc-production') {
-      navigate('/home');
+      navigate('/ioc-production');
     } else if (subMenu === 'ioc-safety') {
-      navigate('/home');
+      navigate('/ioc-safety');
     } else if (subMenu === 'ioc-operation') {
-      navigate('/home');
+      navigate('/ioc-operation');
     } else if (subMenu === 'production-execution') {
       navigate('/production-execution/production-continuity');
     } else if (subMenu === 'equipment-management') {

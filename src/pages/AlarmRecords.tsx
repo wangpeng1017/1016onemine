@@ -27,6 +27,9 @@ import {
   PlayCircleOutlined,
   PauseCircleOutlined,
   CloseCircleOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  PlusOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
@@ -57,12 +60,19 @@ const AlarmRecords: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [detailVisible, setDetailVisible] = useState(false);
   const [handleVisible, setHandleVisible] = useState(false);
+  const [addEditVisible, setAddEditVisible] = useState(false);
   const [gisVisible, setGisVisible] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<AlarmRecord | null>(null);
   const [handleForm] = Form.useForm();
+  const [addEditForm] = Form.useForm();
 
-  // 模拟数据
-  const mockData: AlarmRecord[] = [
+  // 筛选状态
+  const [searchDevice, setSearchDevice] = useState('');
+  const [filterLevel, setFilterLevel] = useState<string | undefined>(undefined);
+  const [filterStatus, setFilterStatus] = useState<string | undefined>(undefined);
+
+  // 数据状态
+  const [alarmData, setAlarmData] = useState<AlarmRecord[]>([
     {
       key: '1',
       id: 'ALM001',
@@ -135,7 +145,7 @@ const AlarmRecords: React.FC = () => {
     },
     {
       key: '5',
-      id: 'AL005',
+      id: 'ALM005',
       deviceName: '地下水位计-04',
       deviceId: 'DEV005',
       alarmType: '水位异常',
@@ -149,7 +159,99 @@ const AlarmRecords: React.FC = () => {
       location: '岩体E区-中部',
       coordinates: '116.567890, 40.098765',
     },
-  ];
+    {
+      key: '6',
+      id: 'ALM006',
+      deviceName: '土压力传感器-05',
+      deviceId: 'DEV006',
+      alarmType: '压力突变',
+      level: 'high',
+      alarmTime: '2024-01-15 09:30:45',
+      status: 'resolved',
+      description: '土压力值在短时间内突然上升',
+      currentValue: 145.8,
+      thresholdValue: 130.0,
+      unit: 'kPa',
+      location: '边坡B区-上部',
+      coordinates: '116.234888, 39.765555',
+      handler: '王工程师',
+      handleTime: '2024-01-15 10:15:00',
+      handleNote: '已确认为施工负载引起，现已恢复正常',
+    },
+    {
+      key: '7',
+      id: 'ALM007',
+      deviceName: '雷达监测点-03',
+      deviceId: 'DEV007',
+      alarmType: '位移累计超限',
+      level: 'critical',
+      alarmTime: '2024-01-15 08:45:20',
+      status: 'pending',
+      description: '监测点累计位移超过危险阈值',
+      currentValue: 85.2,
+      thresholdValue: 80.0,
+      unit: 'mm',
+      location: '边坡A区-底部',
+      coordinates: '116.125678, 39.656789',
+    },
+    {
+      key: '8',
+      id: 'ALM008',
+      deviceName: '裂缝计-07',
+      deviceId: 'DEV008',
+      alarmType: '裂缝容变增大',
+      level: 'medium',
+      alarmTime: '2024-01-15 07:20:15',
+      status: 'resolved',
+      description: '裂缝宽度持续增大',
+      currentValue: 15.5,
+      thresholdValue: 15.0,
+      unit: 'mm',
+      location: '岩体C区-上部',
+      coordinates: '116.346789, 39.877654',
+      handler: '刘技术员',
+      handleTime: '2024-01-15 09:00:00',
+      handleNote: '现场检查，裂缝已稳定',
+    },
+    {
+      key: '9',
+      id: 'ALM009',
+      deviceName: '摄像头-02',
+      deviceId: 'DEV009',
+      alarmType: '设备故障',
+      level: 'low',
+      alarmTime: '2024-01-15 06:15:30',
+      status: 'resolved',
+      description: '监控设备图像模糊',
+      currentValue: 0,
+      thresholdValue: 0,
+      unit: '',
+      location: '边坡A区-监控点',
+      coordinates: '116.124567, 39.655432',
+      handler: '陈维修',
+      handleTime: '2024-01-15 08:00:00',
+      handleNote: '清洁镜头，问题解决',
+    },
+    {
+      key: '10',
+      id: 'ALM010',
+      deviceName: '雨量计-03',
+      deviceId: 'DEV010',
+      alarmType: '极端天气预警',
+      level: 'high',
+      alarmTime: '2024-01-15 05:30:00',
+      status: 'processing',
+      description: '预计未来将有强降雨',
+      currentValue: 45.0,
+      thresholdValue: 40.0,
+      unit: 'mm',
+      location: '监测站-北侧',
+      coordinates: '116.457890, 39.988765',
+      handler: '黄工程师',
+      handleTime: '2024-01-15 06:00:00',
+      handleNote: '已启动应急预案，持续监控',
+    },
+  ]);
 
   const levelConfig = {
     low: { color: 'blue', text: '低级' },
@@ -162,6 +264,95 @@ const AlarmRecords: React.FC = () => {
     pending: { color: 'default', text: '待处理' },
     processing: { color: 'processing', text: '处理中' },
     resolved: { color: 'success', text: '已处理' },
+  };
+
+  const getFilteredData = () => {
+    let filtered = alarmData;
+
+    if (searchDevice) {
+      filtered = filtered.filter(record => 
+        record.deviceName.toLowerCase().includes(searchDevice.toLowerCase())
+      );
+    }
+
+    if (filterLevel) {
+      filtered = filtered.filter(record => record.level === filterLevel);
+    }
+
+    if (filterStatus) {
+      filtered = filtered.filter(record => record.status === filterStatus);
+    }
+
+    return filtered;
+  };
+
+  const handleSearch = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 300);
+  };
+
+  const handleResetFilter = () => {
+    setSearchDevice('');
+    setFilterLevel(undefined);
+    setFilterStatus(undefined);
+  };
+
+  const handleAdd = () => {
+    setSelectedRecord(null);
+    addEditForm.resetFields();
+    setAddEditVisible(true);
+  };
+
+  const handleEditAlarm = (record: AlarmRecord) => {
+    setSelectedRecord(record);
+    addEditForm.setFieldsValue({
+      deviceName: record.deviceName,
+      deviceId: record.deviceId,
+      alarmType: record.alarmType,
+      level: record.level,
+      description: record.description,
+      currentValue: record.currentValue,
+      thresholdValue: record.thresholdValue,
+      unit: record.unit,
+      location: record.location,
+      coordinates: record.coordinates,
+    });
+    setAddEditVisible(true);
+  };
+
+  const handleDeleteAlarm = (record: AlarmRecord) => {
+    Modal.confirm({
+      title: '确认删除',
+      content: `确定要删除告警记录 ${record.id} 吗？`,
+      onOk() {
+        setAlarmData(prev => prev.filter(a => a.key !== record.key));
+        message.success('告警记录删除成功');
+      },
+    });
+  };
+
+  const handleSaveAlarm = () => {
+    addEditForm.validateFields().then(values => {
+      if (selectedRecord) {
+        // 编辑
+        setAlarmData(prev => prev.map(item => 
+          item.key === selectedRecord.key ? { ...item, ...values } : item
+        ));
+        message.success('告警记录更新成功');
+      } else {
+        // 新增
+        const newAlarm: AlarmRecord = {
+          key: String(alarmData.length + 1),
+          id: `ALM${String(alarmData.length + 1).padStart(3, '0')}`,
+          ...values,
+          alarmTime: new Date().toISOString().replace('T', ' ').substring(0, 19),
+          status: 'pending' as const,
+        };
+        setAlarmData(prev => [newAlarm, ...prev]);
+        message.success('告警记录添加成功');
+      }
+      setAddEditVisible(false);
+    });
   };
 
   const columns: ColumnsType<AlarmRecord> = [
@@ -212,7 +403,8 @@ const AlarmRecords: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      width: 200,
+      width: 260,
+      fixed: 'right',
       render: (_, record) => (
         <Space size="small">
           <Button
@@ -224,10 +416,10 @@ const AlarmRecords: React.FC = () => {
           </Button>
           <Button
             type="link"
-            icon={<EnvironmentOutlined />}
-            onClick={() => handleGISLocation(record)}
+            icon={<EditOutlined />}
+            onClick={() => handleEditAlarm(record)}
           >
-            定位
+            编辑
           </Button>
           {record.status === 'pending' && (
             <Button
@@ -247,6 +439,14 @@ const AlarmRecords: React.FC = () => {
               完成
             </Button>
           )}
+          <Button
+            type="link"
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDeleteAlarm(record)}
+          >
+            删除
+          </Button>
         </Space>
       ),
     },
@@ -373,15 +573,24 @@ const AlarmRecords: React.FC = () => {
 
       {/* 查询条件 */}
       <Card style={{ marginBottom: 16 }}>
-        <Row gutter={16}>
+        <Row gutter={16} align="middle">
           <Col span={5}>
             <Input
               placeholder="请输入设备名称"
               prefix={<SearchOutlined />}
+              value={searchDevice}
+              onChange={(e) => setSearchDevice(e.target.value)}
+              onPressEnter={handleSearch}
             />
           </Col>
           <Col span={4}>
-            <Select placeholder="告警级别" style={{ width: '100%' }}>
+            <Select 
+              placeholder="告警级别" 
+              style={{ width: '100%' }}
+              value={filterLevel}
+              onChange={setFilterLevel}
+              allowClear
+            >
               <Option value="low">低级</Option>
               <Option value="medium">中级</Option>
               <Option value="high">高级</Option>
@@ -389,7 +598,13 @@ const AlarmRecords: React.FC = () => {
             </Select>
           </Col>
           <Col span={4}>
-            <Select placeholder="处理状态" style={{ width: '100%' }}>
+            <Select 
+              placeholder="处理状态" 
+              style={{ width: '100%' }}
+              value={filterStatus}
+              onChange={setFilterStatus}
+              allowClear
+            >
               <Option value="pending">待处理</Option>
               <Option value="processing">处理中</Option>
               <Option value="resolved">已处理</Option>
@@ -400,8 +615,11 @@ const AlarmRecords: React.FC = () => {
           </Col>
           <Col span={4}>
             <Space>
-              <Button type="primary" icon={<SearchOutlined />}>
+              <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
                 查询
+              </Button>
+              <Button onClick={handleResetFilter}>
+                重置
               </Button>
               <Button icon={<ReloadOutlined />} onClick={handleRefresh}>
                 刷新
@@ -412,10 +630,17 @@ const AlarmRecords: React.FC = () => {
       </Card>
 
       {/* 告警表格 */}
-      <Card className="custom-card">
+      <Card 
+        className="custom-card"
+        extra={
+          <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
+            新增告警
+          </Button>
+        }
+      >
         <Table
           columns={columns}
-          dataSource={mockData}
+          dataSource={getFilteredData()}
           loading={loading}
           pagination={{
             total: 50,
@@ -476,6 +701,115 @@ const AlarmRecords: React.FC = () => {
             </Descriptions.Item>
           </Descriptions>
         )}
+      </Modal>
+
+      {/* 新增/编辑弹窗 */}
+      <Modal
+        title={selectedRecord ? '编辑告警记录' : '新增告警记录'}
+        open={addEditVisible}
+        onCancel={() => setAddEditVisible(false)}
+        onOk={handleSaveAlarm}
+        width={700}
+      >
+        <Form form={addEditForm} layout="vertical">
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="deviceName"
+                label="设备名称"
+                rules={[{ required: true, message: '请输入设备名称' }]}
+              >
+                <Input placeholder="请输入设备名称" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="deviceId"
+                label="设备ID"
+                rules={[{ required: true, message: '请输入设备ID' }]}
+              >
+                <Input placeholder="请输入设备ID" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="alarmType"
+                label="告警类型"
+                rules={[{ required: true, message: '请输入告警类型' }]}
+              >
+                <Input placeholder="请输入告警类型" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="level"
+                label="告警级别"
+                rules={[{ required: true, message: '请选择告警级别' }]}
+              >
+                <Select placeholder="请选择告警级别">
+                  <Option value="low">低级</Option>
+                  <Option value="medium">中级</Option>
+                  <Option value="high">高级</Option>
+                  <Option value="critical">紧急</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item
+            name="description"
+            label="告警描述"
+            rules={[{ required: true, message: '请输入告警描述' }]}
+          >
+            <Input.TextArea rows={3} placeholder="请输入告警描述" />
+          </Form.Item>
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item
+                name="currentValue"
+                label="当前值"
+                rules={[{ required: true, message: '请输入当前值' }]}
+              >
+                <Input type="number" placeholder="请输入当前值" />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="thresholdValue"
+                label="阈值"
+                rules={[{ required: true, message: '请输入阈值' }]}
+              >
+                <Input type="number" placeholder="请输入阈值" />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="unit" label="单位">
+                <Input placeholder="请输入单位" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="location"
+                label="位置"
+                rules={[{ required: true, message: '请输入位置' }]}
+              >
+                <Input placeholder="请输入位置" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="coordinates"
+                label="坐标"
+                rules={[{ required: true, message: '请输入坐标' }]}
+              >
+                <Input placeholder="例如：116.123456, 39.654321" />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
       </Modal>
     </div>
   );
