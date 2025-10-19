@@ -58,6 +58,8 @@ const InspectionManagement: React.FC = () => {
     { key: '10', taskId: 'INS-010', equipment: '2号皮带输送机', inspectionType: '皮带紧度', inspector: '黄九', date: '2024-06-06', result: '正常', remark: '皮帧紧度合适' },
   ]);
 
+  const [editingPlan, setEditingPlan] = useState<InspectionPlan | null>(null);
+
   const plansColumns: ColumnsType<InspectionPlan> = [
     { title: '任务ID', dataIndex: 'taskId', key: 'taskId', width: 120 },
     { title: '设备名称', dataIndex: 'equipment', key: 'equipment', width: 150 },
@@ -82,8 +84,10 @@ const InspectionManagement: React.FC = () => {
       width: 200,
       render: (_, record) => (
         <Space size="small">
-          <Button type="link" size="small" icon={<EditOutlined />}>编辑</Button>
-          <Button type="link" size="small" icon={<CheckOutlined />}>完成</Button>
+          <Button type="link" size="small" icon={<EditOutlined />} onClick={() => handleEditPlan(record)}>编辑</Button>
+          {record.status !== '已完成' && (
+            <Button type="link" size="small" icon={<CheckOutlined />} onClick={() => handleCompletePlan(record)}>完成</Button>
+          )}
           <Button type="link" size="small" danger icon={<DeleteOutlined />} onClick={() => handleDeletePlan(record)}>删除</Button>
         </Space>
       ),
@@ -109,12 +113,38 @@ const InspectionManagement: React.FC = () => {
   ];
 
   const handleAddPlan = () => {
+    setEditingPlan(null);
+    form.resetFields();
     setIsModalVisible(true);
   };
 
-  const handleModalOk = () => {
-    form.validateFields().then(() => {
-      message.success('点检计划创建成功！');
+  const handleEditPlan = (plan: InspectionPlan) => {
+    setEditingPlan(plan);
+    form.setFieldsValue(plan);
+    setIsModalVisible(true);
+  };
+
+  const handleCompletePlan = (plan: InspectionPlan) => {
+    setPlansData(prev => prev.map(p => p.key === plan.key ? { ...p, status: '已完成' } : p));
+    message.success('计划标记为已完成');
+  };
+
+  const handleSave = () => {
+    form.validateFields().then(values => {
+      const payload: Partial<InspectionPlan> = { ...values };
+      if (editingPlan) {
+        setPlansData(prev => prev.map(p => p.key === editingPlan.key ? { ...editingPlan, ...payload } as InspectionPlan : p));
+        message.success('计划更新成功');
+      } else {
+        const newPlan: InspectionPlan = {
+          ...payload,
+          key: String(plansData.length + 1),
+          taskId: `INS-${String(plansData.length + 1).padStart(3, '0')}`,
+          status: '待执行',
+        } as InspectionPlan;
+        setPlansData(prev => [newPlan, ...prev]);
+        message.success('点检计划创建成功');
+      }
       setIsModalVisible(false);
       form.resetFields();
     });
@@ -152,41 +182,57 @@ const InspectionManagement: React.FC = () => {
 
   return (
     <div>
-      {activeTab === 'plans' ? (
-        <Card
-          title="点检计划管理"
-          extra={
+      <Card style={{ marginBottom: 16 }}>
+        <Row gutter={16} align="middle">
+          <Col span={6}>
+            <Input 
+              placeholder="搜索任务ID/设备" 
+              value={searchText} 
+              onChange={(e) => setSearchText(e.target.value)} 
+              prefix={<SearchOutlined />} 
+            />
+          </Col>
+          <Col span={4}>
+            <Select 
+              placeholder="状态" 
+              allowClear 
+              style={{ width: '100%' }} 
+              value={filterStatus} 
+              onChange={setFilterStatus}
+            >
+              <Select.Option value="待执行">待执行</Select.Option>
+              <Select.Option value="进行中">进行中</Select.Option>
+              <Select.Option value="已完成">已完成</Select.Option>
+            </Select>
+          </Col>
+          <Col span={8}>
             <Space>
-              <Button type="primary" icon={<PlusOutlined />} onClick={handleAddPlan}>
-                新建计划
-              </Button>
-              <Select value={activeTab} onChange={setActiveTab} style={{ width: 150 }}>
+              <Button onClick={handleResetFilter}>重置</Button>
+              <Button icon={<ReloadOutlined />}>刷新</Button>
+              <Button type="primary" icon={<PlusOutlined />} onClick={handleAddPlan}>新建计划</Button>
+              <Select value={activeTab} onChange={setActiveTab} style={{ width: 130 }}>
                 <Select.Option value="plans">点检计划</Select.Option>
                 <Select.Option value="records">检查记录</Select.Option>
               </Select>
             </Space>
-          }
-        >
-          <Table columns={plansColumns} dataSource={plansData} pagination={false} scroll={{ x: 1200 }} />
+          </Col>
+        </Row>
+      </Card>
+
+      {activeTab === 'plans' ? (
+        <Card title="点检计划管理">
+          <Table columns={plansColumns} dataSource={getFilteredPlans()} pagination={{ pageSize: 10, showTotal: (t) => `共 ${t} 条` }} scroll={{ x: 1200 }} />
         </Card>
       ) : (
-        <Card
-          title="点检记录查询"
-          extra={
-            <Select value={activeTab} onChange={setActiveTab} style={{ width: 150 }}>
-              <Select.Option value="plans">点检计划</Select.Option>
-              <Select.Option value="records">检查记录</Select.Option>
-            </Select>
-          }
-        >
-          <Table columns={recordsColumns} dataSource={recordsData} pagination={false} scroll={{ x: 1000 }} />
+        <Card title="点检记录查询">
+          <Table columns={recordsColumns} dataSource={recordsData} pagination={{ pageSize: 10, showTotal: (t) => `共 ${t} 条` }} scroll={{ x: 1000 }} />
         </Card>
       )}
 
       <Modal
-        title="创建新的点检计划"
+        title={editingPlan ? '编辑点检计划' : '创建新的点检计划'}
         open={isModalVisible}
-        onOk={handleModalOk}
+        onOk={handleSave}
         onCancel={() => setIsModalVisible(false)}
         width={700}
       >
