@@ -147,7 +147,7 @@ const FaultManagement: React.FC = () => {
       status: '处理中',
       solution: '正在检修制动系统',
     },
-  ];
+  ]);
 
   const columns: ColumnsType<Fault> = [
     { title: '故障ID', dataIndex: 'faultId', key: 'faultId', width: 120 },

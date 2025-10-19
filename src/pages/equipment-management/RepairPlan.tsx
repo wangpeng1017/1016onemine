@@ -162,7 +162,7 @@ const RepairPlan: React.FC = () => {
       description: '更换钢丝绳、检修制动系统',
       budget: 60000,
     },
-  ];
+  ]);
 
   const columns: ColumnsType<RepairPlan> = [
     { title: '计划ID', dataIndex: 'planId', key: 'planId', width: 120 },

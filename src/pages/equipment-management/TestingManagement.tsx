@@ -147,7 +147,7 @@ const TestingManagement: React.FC = () => {
       status: '有效',
       reportPath: '/reports/test-010.pdf',
     },
-  ];
+  ]);
 
   const columns: ColumnsType<TestRecord> = [
     { title: '检测ID', dataIndex: 'testId', key: 'testId', width: 120 },
