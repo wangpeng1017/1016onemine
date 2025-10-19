@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Button, Card, Modal, Form, Input, Select, DatePicker, message, Space, Tag, Row, Col, Descriptions } from 'antd';
-import { PlusOutlined, EyeOutlined, FileTextOutlined } from '@ant-design/icons';
+import { PlusOutlined, EyeOutlined, FileTextOutlined, EditOutlined, DeleteOutlined, SearchOutlined, ReloadOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface TestRecord {
@@ -20,9 +20,13 @@ const TestingManagement: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isDetailVisible, setIsDetailVisible] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<TestRecord | null>(null);
+  const [editingRecord, setEditingRecord] = useState<TestRecord | null>(null);
   const [form] = Form.useForm();
+  const [searchText, setSearchText] = useState('');
+  const [filterStatus, setFilterStatus] = useState<string | undefined>(undefined);
+  const [filterResult, setFilterResult] = useState<string | undefined>(undefined);
 
-  const mockData: TestRecord[] = [
+  const [records, setRecords] = useState<TestRecord[]>([
     {
       key: '1',
       testId: 'TEST-001',
@@ -59,6 +63,90 @@ const TestingManagement: React.FC = () => {
       status: '有效',
       reportPath: '/reports/test-003.pdf',
     },
+    {
+      key: '4',
+      testId: 'TEST-004',
+      equipment: 'B号采煤机',
+      testType: '安全检测',
+      testPerson: '安检员周八',
+      testDate: '2024-05-10',
+      testResult: '合格',
+      nextTestDate: '2024-08-10',
+      status: '有效',
+      reportPath: '/reports/test-004.pdf',
+    },
+    {
+      key: '5',
+      testId: 'TEST-005',
+      equipment: '装载机',
+      testType: '性能检验',
+      testPerson: '检验员吴九',
+      testDate: '2024-03-25',
+      testResult: '不合格',
+      nextTestDate: '2024-06-25',
+      status: '过期',
+      reportPath: '/reports/test-005.pdf',
+    },
+    {
+      key: '6',
+      testId: 'TEST-006',
+      equipment: '排水泵',
+      testType: '机械检测',
+      testPerson: '机械师郑十',
+      testDate: '2024-05-05',
+      testResult: '合格',
+      nextTestDate: '2024-08-05',
+      status: '有效',
+      reportPath: '/reports/test-006.pdf',
+    },
+    {
+      key: '7',
+      testId: 'TEST-007',
+      equipment: '破碎机',
+      testType: '安全检测',
+      testPerson: '安检员王五',
+      testDate: '2024-04-15',
+      testResult: '待整改',
+      nextTestDate: '2024-07-15',
+      status: '临期',
+      reportPath: '/reports/test-007.pdf',
+    },
+    {
+      key: '8',
+      testId: 'TEST-008',
+      equipment: 'C号采煤机',
+      testType: '电气检测',
+      testPerson: '电工陈七',
+      testDate: '2024-05-20',
+      testResult: '合格',
+      nextTestDate: '2024-08-20',
+      status: '有效',
+      reportPath: '/reports/test-008.pdf',
+    },
+    {
+      key: '9',
+      testId: 'TEST-009',
+      equipment: '2号皮带输送机',
+      testType: '性能检验',
+      testPerson: '检验员李六',
+      testDate: '2024-04-30',
+      testResult: '合格',
+      nextTestDate: '2024-07-30',
+      status: '有效',
+      reportPath: '/reports/test-009.pdf',
+    },
+    {
+      key: '10',
+      testId: 'TEST-010',
+      equipment: '提升机',
+      testType: '安全检测',
+      testPerson: '安检员张三',
+      testDate: '2024-05-25',
+      testResult: '合格',
+      nextTestDate: '2024-08-25',
+      status: '有效',
+      reportPath: '/reports/test-010.pdf',
+    },
   ];
 
   const columns: ColumnsType<TestRecord> = [
@@ -91,9 +179,9 @@ const TestingManagement: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      width: 200,
+      width: 250,
       render: (_, record) => (
-        <Space>
+        <Space size="small">
           <Button 
             type="link" 
             size="small" 
@@ -105,8 +193,11 @@ const TestingManagement: React.FC = () => {
           >
             详情
           </Button>
-          <Button type="link" size="small" icon={<FileTextOutlined />}>
-            报告
+          <Button type="link" size="small" icon={<EditOutlined />} onClick={() => handleEdit(record)}>
+            编辑
+          </Button>
+          <Button type="link" size="small" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record)}>
+            删除
           </Button>
         </Space>
       ),
@@ -114,32 +205,137 @@ const TestingManagement: React.FC = () => {
   ];
 
   const handleAdd = () => {
+    setEditingRecord(null);
+    form.resetFields();
     setIsModalVisible(true);
   };
 
-  const handleModalOk = () => {
-    form.validateFields().then(() => {
-      message.success('检测记录添加成功！');
+  const handleEdit = (record: TestRecord) => {
+    setEditingRecord(record);
+    form.setFieldsValue(record);
+    setIsModalVisible(true);
+  };
+
+  const handleDelete = (record: TestRecord) => {
+    Modal.confirm({
+      title: '确认删除',
+      content: `确定要删除检测记录 ${record.testId} 吗？`,
+      onOk() {
+        setRecords(prev => prev.filter(r => r.key !== record.key));
+        message.success('删除成功');
+      },
+    });
+  };
+
+  const handleSave = () => {
+    form.validateFields().then(values => {
+      const payload: Partial<TestRecord> = {
+        ...values,
+        testDate: values.testDate ? (values.testDate as any).format('YYYY-MM-DD') : values.testDate,
+        nextTestDate: values.nextTestDate ? (values.nextTestDate as any).format('YYYY-MM-DD') : values.nextTestDate,
+      };
+      if (editingRecord) {
+        setRecords(prev => prev.map(r => r.key === editingRecord.key ? { ...editingRecord, ...payload } as TestRecord : r));
+        message.success('检测记录更新成功');
+      } else {
+        const newRecord: TestRecord = {
+          ...payload,
+          key: String(records.length + 1),
+          testId: `TEST-${String(records.length + 1).padStart(3, '0')}`,
+          status: '有效',
+          reportPath: `/reports/test-${String(records.length + 1).padStart(3, '0')}.pdf`,
+        } as TestRecord;
+        setRecords(prev => [newRecord, ...prev]);
+        message.success('检测记录添加成功');
+      }
       setIsModalVisible(false);
       form.resetFields();
     });
   };
 
+  const getFilteredRecords = () => {
+    let filtered = records;
+    if (searchText) {
+      filtered = filtered.filter(r =>
+        r.testId.toLowerCase().includes(searchText.toLowerCase()) ||
+        r.equipment.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+    if (filterStatus) filtered = filtered.filter(r => r.status === filterStatus);
+    if (filterResult) filtered = filtered.filter(r => r.testResult === filterResult);
+    return filtered;
+  };
+
+  const handleResetFilter = () => {
+    setSearchText('');
+    setFilterStatus(undefined);
+    setFilterResult(undefined);
+  };
+
   return (
     <div>
-      <Card
-        title="检测检验管理"
-        extra={
-          <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-            添加检测
-          </Button>
-        }
-      >
-        <Table columns={columns} dataSource={mockData} pagination={{ pageSize: 10 }} scroll={{ x: 1300 }} />
+      <Card style={{ marginBottom: 16 }}>
+        <Row gutter={16} align="middle">
+          <Col span={6}>
+            <Input 
+              placeholder="搜索检测ID/设备" 
+              value={searchText} 
+              onChange={(e) => setSearchText(e.target.value)} 
+              prefix={<SearchOutlined />} 
+            />
+          </Col>
+          <Col span={4}>
+            <Select 
+              placeholder="状态" 
+              allowClear 
+              style={{ width: '100%' }} 
+              value={filterStatus} 
+              onChange={setFilterStatus}
+            >
+              <Select.Option value="有效">有效</Select.Option>
+              <Select.Option value="临期">临期</Select.Option>
+              <Select.Option value="过期">过期</Select.Option>
+            </Select>
+          </Col>
+          <Col span={4}>
+            <Select 
+              placeholder="检测结果" 
+              allowClear 
+              style={{ width: '100%' }} 
+              value={filterResult} 
+              onChange={setFilterResult}
+            >
+              <Select.Option value="合格">合格</Select.Option>
+              <Select.Option value="待整改">待整改</Select.Option>
+              <Select.Option value="不合格">不合格</Select.Option>
+            </Select>
+          </Col>
+          <Col span={8}>
+            <Space>
+              <Button onClick={handleResetFilter}>重置</Button>
+              <Button icon={<ReloadOutlined />}>刷新</Button>
+              <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>添加检测</Button>
+            </Space>
+          </Col>
+        </Row>
       </Card>
 
-      {/* 添加检测记录模态框 */}
-      <Modal title="添加检测记录" open={isModalVisible} onOk={handleModalOk} onCancel={() => setIsModalVisible(false)} width={700}>
+      <Card title="检测检验管理">
+        <Table 
+          columns={columns} 
+          dataSource={getFilteredRecords()} 
+          pagination={{ pageSize: 10, showTotal: (t) => `共 ${t} 条` }} 
+          scroll={{ x: 1300 }} 
+        />
+      </Card>
+
+      <Modal 
+        title={editingRecord ? '编辑检测记录' : '添加检测记录'} 
+        open={isModalVisible} 
+        onOk={handleSave} 
+        onCancel={() => setIsModalVisible(false)} 
+        width={700}
+      >
         <Form form={form} layout="vertical">
           <Row gutter={16}>
             <Col span={12}>
