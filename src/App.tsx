@@ -60,6 +60,7 @@ import SafetyAlert from './pages/personnel-safety/SafetyAlert';
 import AttendanceManagement from './pages/personnel-safety/AttendanceManagement';
 import EnvironmentalMonitoring from './pages/environmental-monitoring/EnvironmentalMonitoring';
 import ComprehensiveEnvMonitoring from './pages/comprehensive-env/ComprehensiveEnvMonitoring';
+import ProductionSalesCenter from './pages/production-sales/ProductionSalesCenter';
 import SmartProdOpsSales from './pages/SmartProdOpsSales';
 import IocPlanning from './pages/ioc/IocPlanning';
 import IocProduction from './pages/ioc/IocProduction';
@@ -107,6 +108,7 @@ const App: React.FC = () => {
               
               {/* 智慧产运销路由 */}
               <Route path="smart-prod-ops-sales" element={<SmartProdOpsSales />} />
+              <Route path="production-sales-center" element={<ProductionSalesCenter />} />
               
               {/* IOC中心路由 */}
               <Route path="ioc-planning" element={<IocPlanning />} />
