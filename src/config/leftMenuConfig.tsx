@@ -285,6 +285,7 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
       label: '传感器管理',
     },
   ],
+  'comprehensive-env-monitoring': [], // 综合环境监测使用内嵌菜单
   'smart-prod-ops-sales': defaultLeftMenu,
 };
 

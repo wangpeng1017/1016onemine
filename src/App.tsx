@@ -59,6 +59,7 @@ import PersonnelTracking from './pages/personnel-safety/PersonnelTracking';
 import SafetyAlert from './pages/personnel-safety/SafetyAlert';
 import AttendanceManagement from './pages/personnel-safety/AttendanceManagement';
 import EnvironmentalMonitoring from './pages/environmental-monitoring/EnvironmentalMonitoring';
+import ComprehensiveEnvMonitoring from './pages/comprehensive-env/ComprehensiveEnvMonitoring';
 import SmartProdOpsSales from './pages/SmartProdOpsSales';
 import IocPlanning from './pages/ioc/IocPlanning';
 import IocProduction from './pages/ioc/IocProduction';
@@ -100,6 +101,9 @@ const App: React.FC = () => {
               <Route path="env-monitoring/env-home" element={<EnvironmentalMonitoring />} />
               <Route path="env-monitoring/env-monitoring" element={<EnvironmentalMonitoring />} />
               <Route path="env-monitoring/env-sensors" element={<EnvironmentalMonitoring />} />
+              
+              {/* 综合环境监测路由 */}
+              <Route path="comprehensive-env-monitoring" element={<ComprehensiveEnvMonitoring />} />
               
               {/* 智慧产运销路由 */}
               <Route path="smart-prod-ops-sales" element={<SmartProdOpsSales />} />
