@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, Row, Col, Statistic, DatePicker, Button, Table, Tabs, Space } from 'antd';
 import { DownloadOutlined, LineChartOutlined, BarChartOutlined, PieChartOutlined } from '@ant-design/icons';
 import ReactECharts from 'echarts-for-react';
-import { reportService, siloService, tempPileService, lossService } from '../../services/productionSalesMockService';
+import { reportService, siloService, tempPileService } from '../../services/productionSalesMockService';
 import type { BalanceSheet, ProductionReport } from '../../types/productionSales';
 import dayjs from 'dayjs';
 
@@ -17,11 +17,7 @@ const ReportPage: React.FC = () => {
     dayjs()
   ]);
 
-  useEffect(() => {
-    loadData();
-  }, [selectedPeriod, dateRange]);
-
-  const loadData = () => {
+  const loadData = useCallback(() => {
     const balance = reportService.getBalanceSheet(selectedPeriod);
     setBalanceSheet(balance);
 
@@ -30,7 +26,11 @@ const ReportPage: React.FC = () => {
       dateRange[1].format('YYYY-MM-DD')
     );
     setProductionData(production);
-  };
+  }, [selectedPeriod, dateRange]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleExport = () => {
     // 模拟导出Excel

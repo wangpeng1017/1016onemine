@@ -6,9 +6,6 @@ import {
   BarChartOutlined,
   AlertOutlined,
   CloudUploadOutlined,
-  CloudOutlined,
-  AppstoreOutlined,
-  UserOutlined,
   DashboardOutlined,
   EnvironmentOutlined,
 } from '@ant-design/icons';

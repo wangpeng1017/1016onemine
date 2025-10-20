@@ -12,7 +12,7 @@ const GlobalLayout: React.FC = () => {
   const location = useLocation();
   const { currentTopMenu, currentSubMenu, leftMenuItems, setCurrentMenu } =
     useNavigation();
-  const [collapsed, setCollapsed] = React.useState(false);
+  const [collapsed] = React.useState(false);
 
   // 根据当前路由初始化导航状态
   useEffect(() => {

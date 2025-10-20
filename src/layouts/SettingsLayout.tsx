@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Typography } from 'antd';
+import { Layout, Menu } from 'antd';
 import { 
   UserOutlined, 
   ToolOutlined, 
@@ -12,7 +12,6 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import TopNavigation from '../components/TopNavigation';
 
 const { Header, Sider, Content } = Layout;
-const { Title } = Typography;
 
 interface SettingsLayoutProps {
   children?: React.ReactNode;

@@ -4,7 +4,6 @@ import { WarningOutlined, PlusOutlined } from '@ant-design/icons';
 import ReactECharts from 'echarts-for-react';
 import { siloService, tempPileService, lossService } from '../../services/productionSalesMockService';
 import type { Silo, TemporaryCoalPile, LossRecord } from '../../types/productionSales';
-import dayjs from 'dayjs';
 
 const { Option } = Select;
 

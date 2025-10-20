@@ -24,11 +24,7 @@ import {
   CloudOutlined,
   RadarChartOutlined,
   BellOutlined,
-  UploadOutlined,
   AppstoreOutlined,
-  MonitorOutlined,
-  FileTextOutlined,
-  InfoCircleOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 

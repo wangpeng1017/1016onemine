@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Statistic, Table, Button, Modal, Form, Input, Select, Tag, Space, message, Progress } from 'antd';
-import { PlusOutlined, DollarOutlined, ShoppingCartOutlined, RiseOutlined, FallOutlined } from '@ant-design/icons';
+import { PlusOutlined, ShoppingCartOutlined, RiseOutlined, FallOutlined } from '@ant-design/icons';
 import ReactECharts from 'echarts-for-react';
 import { dashboardService, customerService, feedbackService } from '../../services/productionSalesMockService';
 import type { SalesDashboard, Customer, CustomerFeedback } from '../../types/productionSales';

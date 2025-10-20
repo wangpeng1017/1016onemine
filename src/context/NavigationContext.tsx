@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import type { MenuProps } from 'antd';
 
 export interface LeftMenuItem {
   key: string;

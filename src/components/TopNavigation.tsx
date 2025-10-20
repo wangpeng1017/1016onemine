@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Menu, Dropdown, Button, Badge, Avatar, Space, Tooltip } from 'antd';
+import React from 'react';
+import { Dropdown, Button, Badge, Avatar, Space, Tooltip } from 'antd';
 import { BellOutlined, UserOutlined, LogoutOutlined, SettingOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { useNavigation } from '../context/NavigationContext';
@@ -19,7 +19,7 @@ interface TopNavigationProps {
 }
 
 const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsClick }) => {
-  const { currentTopMenu, currentSubMenu } = useNavigation();
+  const { currentTopMenu } = useNavigation();
 
   const topMenuItems: TopNavItem[] = [
     {

@@ -8,7 +8,6 @@ import {
   Col,
   Statistic,
   Tag,
-  Progress,
   message,
   Select,
   DatePicker,
@@ -25,10 +24,8 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
-import dayjs from 'dayjs';
 
 const { Option } = Select;
-const { RangePicker } = DatePicker;
 
 interface ConsoleData {
   id: string;

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Card, Select, Switch, Slider, Button, Space, Checkbox } from 'antd';
-import { BarsOutlined, FullscreenOutlined, ReloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
+import { Card, Slider, Button, Space, Checkbox } from 'antd';
+import { BarsOutlined, FullscreenOutlined, ReloadOutlined } from '@ant-design/icons';
 import * as echarts from 'echarts';
 
 interface RiskPoint {

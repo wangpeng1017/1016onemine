@@ -9,7 +9,6 @@ import Home from './pages/Home';
 import PortalHome from './pages/PortalHome';
 import DataReporting from './pages/DataReporting';
 import MonitoringData from './pages/MonitoringData';
-import AlarmRecords from './pages/AlarmRecords';
 import PointAlarms from './pages/alarm/PointAlarms';
 import RadarAlarms from './pages/alarm/RadarAlarms';
 import DeviceManagement from './pages/DeviceManagement';
