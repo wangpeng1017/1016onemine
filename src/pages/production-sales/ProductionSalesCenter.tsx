@@ -3,21 +3,8 @@ import { Card, Tabs } from 'antd';
 import { BarChartOutlined, DatabaseOutlined, LineChartOutlined, CommentOutlined } from '@ant-design/icons';
 import SalesPlanPage from './SalesPlanPage';
 import InventoryManagementPage from './InventoryManagementPage';
-
-// 简化版报表和反馈页面
-const ReportPage: React.FC = () => (
-  <Card style={{ padding: 24, minHeight: 600 }}>
-    <h2>产存销报表</h2>
-    <p>产量报表、存量报表、销量报表、产存销平衡表功能开发中...</p>
-  </Card>
-);
-
-const FeedbackPage: React.FC = () => (
-  <Card style={{ padding: 24, minHeight: 600 }}>
-    <h2>销售反馈</h2>
-    <p>销售数据看板、客户反馈管理功能开发中...</p>
-  </Card>
-);
+import ReportPage from './ReportPage';
+import FeedbackPage from './FeedbackPage';
 
 const ProductionSalesCenter: React.FC = () => {
   return (
