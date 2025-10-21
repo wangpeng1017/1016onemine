@@ -17,11 +17,14 @@ const SalesPlanPage: React.FC = () => {
   const [approvalModalVisible, setApprovalModalVisible] = useState(false);
   const [executionModalVisible, setExecutionModalVisible] = useState(false);
   const [videoModalVisible, setVideoModalVisible] = useState(false);
+  const [summaryModalVisible, setSummaryModalVisible] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<SalesPlan | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<string>('');
+  const [queryFilters, setQueryFilters] = useState({ responsible: '', channel: '', dateRange: null as any });
   const [form] = Form.useForm();
   const [approvalForm] = Form.useForm();
   const [executionForm] = Form.useForm();
+  const [summaryForm] = Form.useForm();
 
   useEffect(() => {
     setPlans(salesPlanService.getAll());
@@ -84,9 +87,14 @@ const SalesPlanPage: React.FC = () => {
             </Button>
           )}
           {record.status === 'executing' && (
-            <Button type="link" size="small" onClick={() => handleExecution(record)}>
-              进度反馈
-            </Button>
+            <>
+              <Button type="link" size="small" onClick={() => handleExecution(record)}>
+                进度反馈
+              </Button>
+              <Button type="link" size="small" onClick={() => handleSummary(record)}>
+                总结
+              </Button>
+            </>
           )}
           <Button type="link" size="small" onClick={() => handleViewDetail(record)}>
             详情
