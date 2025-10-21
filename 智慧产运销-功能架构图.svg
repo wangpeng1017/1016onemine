@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100">
+  <defs>
+    <style>
+      .arch-title { font-size: 32px; font-weight: bold; fill: #13c2c2; }
+      .layer-title { font-size: 20px; font-weight: bold; fill: #fff; }
+      .module-title { font-size: 15px; font-weight: bold; fill: #262626; }
+      .feature-text { font-size: 12px; fill: #595959; }
+      .layer-bg1 { fill: #13c2c2; opacity: 0.9; }
+      .layer-bg2 { fill: #1890ff; opacity: 0.9; }
+      .layer-bg3 { fill: #fa8c16; opacity: 0.9; }
+      .layer-bg4 { fill: #52c41a; opacity: 0.9; }
+      .module-box { fill: #ffffff; stroke: #d9d9d9; stroke-width: 2; rx: 6; }
+      .module-box-highlight { fill: #e6fffb; stroke: #13c2c2; stroke-width: 2; rx: 6; }
+      .connector { stroke: #8c8c8c; stroke-width: 2; fill: none; stroke-dasharray: 5,5; }
+    </style>
+  </defs>
+
+  <text x="800" y="50" class="arch-title" text-anchor="middle">智慧产运销 - 功能架构图</text>
+
+  <!-- 第一层：展示层 -->
+  <rect x="50" y="90" width="1500" height="180" class="layer-bg1" rx="8"/>
+  <text x="800" y="120" class="layer-title" text-anchor="middle">展示层 - 用户交互界面</text>
+
+  <rect x="80" y="145" width="320" height="110" class="module-box-highlight"/>
+  <text x="240" y="170" class="module-title" text-anchor="middle">销售计划管理</text>
+  <text x="240" y="192" class="feature-text" text-anchor="middle">• 计划制定编辑</text>
+  <text x="240" y="210" class="feature-text" text-anchor="middle">• 审批流程可视化</text>
+  <text x="240" y="228" class="feature-text" text-anchor="middle">• 执行进度跟踪</text>
+  <text x="240" y="246" class="feature-text" text-anchor="middle">• 统计分析图表</text>
+
+  <rect x="430" y="145" width="320" height="110" class="module-box"/>
+  <text x="590" y="170" class="module-title" text-anchor="middle">库存监控大屏</text>
+  <text x="590" y="192" class="feature-text" text-anchor="middle">• 筒仓可视化展示</text>
+  <text x="590" y="210" class="feature-text" text-anchor="middle">• 临时堆煤盘点</text>
+  <text x="590" y="228" class="feature-text" text-anchor="middle">• 损耗量统计</text>
+  <text x="590" y="246" class="feature-text" text-anchor="middle">• 库存预警提示</text>
+
+  <rect x="780" y="145" width="320" height="110" class="module-box"/>
+  <text x="940" y="170" class="module-title" text-anchor="middle">产存销报表中心</text>
+  <text x="940" y="192" class="feature-text" text-anchor="middle">• 综合报表展示</text>
+  <text x="940" y="210" class="feature-text" text-anchor="middle">• 产存销平衡表</text>
+  <text x="940" y="228" class="feature-text" text-anchor="middle">• 多维度图表</text>
+  <text x="940" y="246" class="feature-text" text-anchor="middle">• 报表导出打印</text>
+
+  <rect x="1130" y="145" width="400" height="110" class="module-box"/>
+  <text x="1330" y="170" class="module-title" text-anchor="middle">销售反馈管理</text>
+  <text x="1250" y="192" class="feature-text" text-anchor="middle">• 实时数据看板</text>
+  <text x="1250" y="210" class="feature-text" text-anchor="middle">• 地磅数据查询</text>
+  <text x="1250" y="228" class="feature-text" text-anchor="middle">• 客户反馈管理</text>
+  <text x="1410" y="192" class="feature-text" text-anchor="middle">• 视频回看</text>
+  <text x="1410" y="210" class="feature-text" text-anchor="middle">• 异常预警</text>
+  <text x="1410" y="228" class="feature-text" text-anchor="middle">• 统计分析</text>
+
+  <!-- 第二层：业务层 -->
+  <rect x="50" y="300" width="1500" height="210" class="layer-bg2" rx="8"/>
+  <text x="800" y="330" class="layer-title" text-anchor="middle">业务层 - 核心业务逻辑</text>
+
+  <rect x="80" y="355" width="330" height="140" class="module-box"/>
+  <text x="245" y="380" class="module-title" text-anchor="middle">销售计划业务</text>
+  <text x="100" y="405" class="feature-text" text-anchor="start">• 计划制定与草稿管理</text>
+  <text x="100" y="423" class="feature-text" text-anchor="start">• 审批流程引擎</text>
+  <text x="100" y="441" class="feature-text" text-anchor="start">• 计划自动生效</text>
+  <text x="100" y="459" class="feature-text" text-anchor="start">• 执行进度计算</text>
+  <text x="100" y="477" class="feature-text" text-anchor="start">• 完成率对比分析</text>
+
+  <rect x="440" y="355" width="330" height="140" class="module-box"/>
+  <text x="605" y="380" class="module-title" text-anchor="middle">库存管理业务</text>
+  <text x="460" y="405" class="feature-text" text-anchor="start">• 筒仓料位实时计算</text>
+  <text x="460" y="423" class="feature-text" text-anchor="start">• 临时堆煤盘点管理</text>
+  <text x="460" y="441" class="feature-text" text-anchor="start">• 损耗量分类统计</text>
+  <text x="460" y="459" class="feature-text" text-anchor="start">• 库存预警规则引擎</text>
+  <text x="460" y="477" class="feature-text" text-anchor="start">• 进出场计划管理</text>
+
+  <rect x="800" y="355" width="330" height="140" class="module-box"/>
+  <text x="965" y="380" class="module-title" text-anchor="middle">产存销数据业务</text>
+  <text x="820" y="405" class="feature-text" text-anchor="start">• 产量数据接入处理</text>
+  <text x="820" y="423" class="feature-text" text-anchor="start">• 存量自动计算</text>
+  <text x="820" y="441" class="feature-text" text-anchor="start">• 销量数据汇总</text>
+  <text x="820" y="459" class="feature-text" text-anchor="start">• 产存销平衡计算</text>
+  <text x="820" y="477" class="feature-text" text-anchor="start">• 报表自动生成</text>
+
+  <rect x="1160" y="355" width="370" height="140" class="module-box"/>
+  <text x="1345" y="380" class="module-title" text-anchor="middle">销售执行与反馈业务</text>
+  <text x="1180" y="405" class="feature-text" text-anchor="start">• 地磅数据实时对接</text>
+  <text x="1180" y="423" class="feature-text" text-anchor="start">• 车牌识别与比对预警</text>
+  <text x="1180" y="441" class="feature-text" text-anchor="start">• 称重异常检测</text>
+  <text x="1180" y="459" class="feature-text" text-anchor="start">• 客户反馈流程管理</text>
+  <text x="1180" y="477" class="feature-text" text-anchor="start">• 销售数据实时统计</text>
+
+  <!-- 第三层：数据层 -->
+  <rect x="50" y="540" width="1500" height="180" class="layer-bg3" rx="8"/>
+  <text x="800" y="570" class="layer-title" text-anchor="middle">数据层 - 数据处理与存储</text>
+
+  <rect x="80" y="595" width="270" height="110" class="module-box"/>
+  <text x="215" y="620" class="module-title" text-anchor="middle">数据采集</text>
+  <text x="215" y="642" class="feature-text" text-anchor="middle">• 销售计划数据</text>
+  <text x="215" y="660" class="feature-text" text-anchor="middle">• 传感器数据</text>
+  <text x="215" y="678" class="feature-text" text-anchor="middle">• 地磅称重数据</text>
+  <text x="215" y="696" class="feature-text" text-anchor="middle">• 盘点录入数据</text>
+
+  <rect x="380" y="595" width="270" height="110" class="module-box"/>
+  <text x="515" y="620" class="module-title" text-anchor="middle">数据处理</text>
+  <text x="515" y="642" class="feature-text" text-anchor="middle">• 存煤量计算</text>
+  <text x="515" y="660" class="feature-text" text-anchor="middle">• 平衡表计算</text>
+  <text x="515" y="678" class="feature-text" text-anchor="middle">• 完成率计算</text>
+  <text x="515" y="696" class="feature-text" text-anchor="middle">• 预警规则触发</text>
+
+  <rect x="680" y="595" width="270" height="110" class="module-box"/>
+  <text x="815" y="620" class="module-title" text-anchor="middle">数据存储</text>
+  <text x="815" y="642" class="feature-text" text-anchor="middle">• 计划库</text>
+  <text x="815" y="660" class="feature-text" text-anchor="middle">• 库存库</text>
+  <text x="815" y="678" class="feature-text" text-anchor="middle">• 销售库</text>
+  <text x="815" y="696" class="feature-text" text-anchor="middle">• 历史数据库</text>
+
+  <rect x="980" y="595" width="270" height="110" class="module-box"/>
+  <text x="1115" y="620" class="module-title" text-anchor="middle">智能分析</text>
+  <text x="1115" y="642" class="feature-text" text-anchor="middle">• 趋势预测</text>
+  <text x="1115" y="660" class="feature-text" text-anchor="middle">• 异常检测</text>
+  <text x="1115" y="678" class="feature-text" text-anchor="middle">• 对比分析</text>
+  <text x="1115" y="696" class="feature-text" text-anchor="middle">• 优化建议</text>
+
+  <rect x="1280" y="595" width="250" height="110" class="module-box"/>
+  <text x="1405" y="620" class="module-title" text-anchor="middle">数据服务</text>
+  <text x="1405" y="642" class="feature-text" text-anchor="middle">• RESTful API</text>
+  <text x="1405" y="660" class="feature-text" text-anchor="middle">• 数据导出</text>
+  <text x="1405" y="678" class="feature-text" text-anchor="middle">• 外部对接</text>
+  <text x="1405" y="696" class="feature-text" text-anchor="middle">• 权限控制</text>
+
+  <!-- 第四层：设备与系统层 -->
+  <rect x="50" y="750" width="1500" height="160" class="layer-bg4" rx="8"/>
+  <text x="800" y="780" class="layer-title" text-anchor="middle">设备与系统层 - 数据来源</text>
+
+  <rect x="80" y="805" width="230" height="90" class="module-box"/>
+  <text x="195" y="830" class="module-title" text-anchor="middle">雷达料位计</text>
+  <text x="195" y="850" class="feature-text" text-anchor="middle">筒仓料位</text>
+  <text x="195" y="868" class="feature-text" text-anchor="middle">实时数据</text>
+  <text x="195" y="886" class="feature-text" text-anchor="middle">数据传输</text>
+
+  <rect x="340" y="805" width="230" height="90" class="module-box"/>
+  <text x="455" y="830" class="module-title" text-anchor="middle">地磅房系统</text>
+  <text x="455" y="850" class="feature-text" text-anchor="middle">无人值守</text>
+  <text x="455" y="868" class="feature-text" text-anchor="middle">车牌识别</text>
+  <text x="455" y="886" class="feature-text" text-anchor="middle">称重数据</text>
+
+  <rect x="600" y="805" width="230" height="90" class="module-box"/>
+  <text x="715" y="830" class="module-title" text-anchor="middle">监控视频</text>
+  <text x="715" y="850" class="feature-text" text-anchor="middle">装车录像</text>
+  <text x="715" y="868" class="feature-text" text-anchor="middle">视频存储</text>
+  <text x="715" y="886" class="feature-text" text-anchor="middle">回放查询</text>
+
+  <rect x="860" y="805" width="230" height="90" class="module-box"/>
+  <text x="975" y="830" class="module-title" text-anchor="middle">生产系统</text>
+  <text x="975" y="850" class="feature-text" text-anchor="middle">收方量</text>
+  <text x="975" y="868" class="feature-text" text-anchor="middle">产量数据</text>
+  <text x="975" y="886" class="feature-text" text-anchor="middle">技术部门</text>
+
+  <rect x="1120" y="805" width="180" height="90" class="module-box"/>
+  <text x="1210" y="830" class="module-title" text-anchor="middle">通信网络</text>
+  <text x="1210" y="850" class="feature-text" text-anchor="middle">工业以太网</text>
+  <text x="1210" y="868" class="feature-text" text-anchor="middle">5G/WiFi</text>
+  <text x="1210" y="886" class="feature-text" text-anchor="middle">数据传输</text>
+
+  <rect x="1330" y="805" width="200" height="90" class="module-box"/>
+  <text x="1430" y="830" class="module-title" text-anchor="middle">外部系统</text>
+  <text x="1430" y="850" class="feature-text" text-anchor="middle">ERP系统</text>
+  <text x="1430" y="868" class="feature-text" text-anchor="middle">财务系统</text>
+  <text x="1430" y="886" class="feature-text" text-anchor="middle">CRM系统</text>
+
+  <!-- 连接线 -->
+  <path d="M 800 270 L 800 300" class="connector"/>
+  <path d="M 800 510 L 800 540" class="connector"/>
+  <path d="M 800 720 L 800 750" class="connector"/>
+
+  <!-- 底部说明 -->
+  <rect x="50" y="940" width="1500" height="140" fill="#fafafa" stroke="#d9d9d9" stroke-width="2" rx="8"/>
+  <text x="800" y="970" class="module-title" text-anchor="middle" font-size="18">核心技术特点</text>
+  
+  <text x="120" y="995" class="feature-text" text-anchor="start" font-weight="bold">🔹 计划驱动：</text>
+  <text x="260" y="995" class="feature-text" text-anchor="start">销售计划全生命周期管理，从制定到执行到总结</text>
+  
+  <text x="120" y="1015" class="feature-text" text-anchor="start" font-weight="bold">🔹 实时监控：</text>
+  <text x="260" y="1015" class="feature-text" text-anchor="start">筒仓料位实时计算，库存动态监控，预警及时</text>
+  
+  <text x="120" y="1035" class="feature-text" text-anchor="start" font-weight="bold">🔹 数据融合：</text>
+  <text x="260" y="1035" class="feature-text" text-anchor="start">产存销数据整合，平衡表自动计算，全局视图</text>
+
+  <text x="120" y="1055" class="feature-text" text-anchor="start" font-weight="bold">🔹 无人值守：</text>
+  <text x="260" y="1055" class="feature-text" text-anchor="start">地磅房自动化，车牌识别，称重数据自动采集</text>
+
+  <text x="850" y="995" class="feature-text" text-anchor="start" font-weight="bold">🔹 智能预警：</text>
+  <text x="990" y="995" class="feature-text" text-anchor="start">车辆不符/称重异常/库存异常多维度预警</text>
+  
+  <text x="850" y="1015" class="feature-text" text-anchor="start" font-weight="bold">🔹 闭环管理：</text>
+  <text x="990" y="1015" class="feature-text" text-anchor="start">客户反馈快速响应，持续改进产品和服务</text>
+  
+  <text x="850" y="1035" class="feature-text" text-anchor="start" font-weight="bold">🔹 决策支持：</text>
+  <text x="990" y="1035" class="feature-text" text-anchor="start">多维度统计分析，趋势预测，优化建议</text>
+
+  <text x="850" y="1055" class="feature-text" text-anchor="start" font-weight="bold">🔹 视频追溯：</text>
+  <text x="990" y="1055" class="feature-text" text-anchor="start">装车过程视频记录，历史回看，证据追溯</text>
+
+</svg>

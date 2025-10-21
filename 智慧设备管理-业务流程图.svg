@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100">
+  <defs>
+    <style>
+      .flow-title { font-size: 28px; font-weight: bold; fill: #722ed1; }
+      .section-title { font-size: 18px; font-weight: bold; fill: #262626; }
+      .process-box { fill: #f9f0ff; stroke: #722ed1; stroke-width: 2; rx: 8; }
+      .plan-box { fill: #e6f7ff; stroke: #1890ff; stroke-width: 2; rx: 8; }
+      .task-box { fill: #fff7e6; stroke: #fa8c16; stroke-width: 2; rx: 8; }
+      .repair-box { fill: #fff1f0; stroke: #ff4d4f; stroke-width: 2; rx: 8; }
+      .parts-box { fill: #f6ffed; stroke: #52c41a; stroke-width: 2; rx: 8; }
+      .text { font-size: 14px; fill: #262626; text-anchor: middle; }
+      .small-text { font-size: 12px; fill: #595959; text-anchor: middle; }
+      .arrow { stroke: #8c8c8c; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .data-arrow { stroke: #722ed1; stroke-width: 2; fill: none; marker-end: url(#arrowhead-purple); stroke-dasharray: 5,5; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#8c8c8c" />
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#722ed1" />
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="700" y="40" class="flow-title" text-anchor="middle">智慧设备管理 - 业务流程图</text>
+
+  <!-- 第一层：设备档案建立 -->
+  <text x="700" y="90" class="section-title" text-anchor="middle">━━━ 设备全生命周期管理起点 ━━━</text>
+
+  <rect x="250" y="110" width="900" height="100" class="process-box"/>
+  <text x="700" y="140" class="text" font-size="16" font-weight="bold">设备档案建立（一机一档）</text>
+  <text x="350" y="165" class="small-text">设备入库登记</text>
+  <text x="520" y="165" class="small-text">基本信息录入</text>
+  <text x="700" y="165" class="small-text">生成设备二维码</text>
+  <text x="880" y="165" class="small-text">关联备件清单</text>
+  <text x="1050" y="165" class="small-text">建立电子档案</text>
+  <text x="350" y="190" class="small-text">设备编号分配</text>
+  <text x="520" y="190" class="small-text">责任人分配</text>
+  <text x="700" y="190" class="small-text">说明书/图纸归档</text>
+  <text x="880" y="190" class="small-text">AI风险评估初始化</text>
+  <text x="1050" y="190" class="small-text">移动端扫码查阅</text>
+
+  <!-- 第二层：三大计划管理 -->
+  <text x="700" y="240" class="section-title" text-anchor="middle">━━━ 预防性维护计划层 ━━━</text>
+
+  <path d="M 700 210 L 700 260" class="data-arrow"/>
+  <path d="M 700 260 L 300 260 L 300 280" class="arrow"/>
+  <path d="M 700 260 L 700 280" class="arrow"/>
+  <path d="M 700 260 L 1100 260 L 1100 280" class="arrow"/>
+
+  <!-- 点检管理 -->
+  <rect x="100" y="280" width="400" height="130" class="plan-box"/>
+  <text x="300" y="310" class="text" font-weight="bold">点检管理</text>
+  <text x="130" y="335" class="small-text" text-anchor="start">1. 制定点检计划（周期/内容）</text>
+  <text x="130" y="355" class="small-text" text-anchor="start">2. 审批流程</text>
+  <text x="130" y="375" class="small-text" text-anchor="start">3. 自动生成点检任务</text>
+  <text x="130" y="395" class="small-text" text-anchor="start">4. 任务下发执行（清单式操作）</text>
+
+  <!-- 保养管理 -->
+  <rect x="550" y="280" width="400" height="130" class="plan-box"/>
+  <text x="750" y="310" class="text" font-weight="bold">保养管理</text>
+  <text x="580" y="335" class="small-text" text-anchor="start">1. 制定保养计划（周期/项目）</text>
+  <text x="580" y="355" class="small-text" text-anchor="start">2. 审批流程</text>
+  <text x="580" y="375" class="small-text" text-anchor="start">3. 自动生成保养任务</text>
+  <text x="580" y="395" class="small-text" text-anchor="start">4. 任务下发执行（清单式操作）</text>
+
+  <!-- 检修管理 -->
+  <rect x="1000" y="280" width="300" height="130" class="plan-box"/>
+  <text x="1150" y="310" class="text" font-weight="bold">检修管理</text>
+  <text x="1020" y="335" class="small-text" text-anchor="start">1. 制定检修计划</text>
+  <text x="1020" y="355" class="small-text" text-anchor="start">2. 审批流程</text>
+  <text x="1020" y="375" class="small-text" text-anchor="start">3. 生成检修任务</text>
+  <text x="1020" y="395" class="small-text" text-anchor="start">4. 执行与记录</text>
+
+  <!-- 第三层：任务执行看板 -->
+  <text x="700" y="440" class="section-title" text-anchor="middle">━━━ 任务执行与验收层 ━━━</text>
+
+  <path d="M 300 410 L 300 480" class="arrow"/>
+  <path d="M 750 410 L 750 480" class="arrow"/>
+  <path d="M 1150 410 L 1150 480" class="arrow"/>
+
+  <rect x="150" y="480" width="1100" height="120" class="task-box"/>
+  <text x="700" y="510" class="text" font-size="16" font-weight="bold">看板式任务管理（Kanban）</text>
+  
+  <rect x="200" y="530" width="180" height="55" fill="#fff" stroke="#fa8c16" stroke-width="1" rx="4"/>
+  <text x="290" y="550" class="small-text" font-weight="bold">待下发</text>
+  <text x="290" y="568" class="small-text">计划生成</text>
+  <text x="290" y="582" class="small-text">待派工</text>
+
+  <text x="400" y="560" class="text">→</text>
+
+  <rect x="420" y="530" width="180" height="55" fill="#fff" stroke="#fa8c16" stroke-width="1" rx="4"/>
+  <text x="510" y="550" class="small-text" font-weight="bold">待执行</text>
+  <text x="510" y="568" class="small-text">执行人接收</text>
+  <text x="510" y="582" class="small-text">现场操作</text>
+
+  <text x="620" y="560" class="text">→</text>
+
+  <rect x="640" y="530" width="180" height="55" fill="#fff" stroke="#fa8c16" stroke-width="1" rx="4"/>
+  <text x="730" y="550" class="small-text" font-weight="bold">待验收</text>
+  <text x="730" y="568" class="small-text">上传结果</text>
+  <text x="730" y="582" class="small-text">等待审核</text>
+
+  <text x="840" y="560" class="text">→</text>
+
+  <rect x="860" y="530" width="180" height="55" fill="#fff" stroke="#fa8c16" stroke-width="1" rx="4"/>
+  <text x="950" y="550" class="small-text" font-weight="bold">已完成</text>
+  <text x="950" y="568" class="small-text">验收通过</text>
+  <text x="950" y="582" class="small-text">归档记录</text>
+
+  <rect x="1070" y="530" width="160" height="55" fill="#fff1f0" stroke="#ff4d4f" stroke-width="1" rx="4"/>
+  <text x="1150" y="550" class="small-text" font-weight="bold">已退回</text>
+  <text x="1150" y="568" class="small-text">验收不通过</text>
+  <text x="1150" y="582" class="small-text">返回执行</text>
+
+  <!-- 第四层：故障维修流程 -->
+  <text x="700" y="630" class="section-title" text-anchor="middle">━━━ 故障响应与维修层 ━━━</text>
+
+  <rect x="100" y="650" width="550" height="150" class="repair-box"/>
+  <text x="375" y="680" class="text" font-weight="bold">维修管理流程</text>
+  
+  <rect x="120" y="700" width="120" height="80" fill="#fff" stroke="#ff4d4f" stroke-width="1" rx="4"/>
+  <text x="180" y="725" class="small-text" font-weight="bold">故障报修</text>
+  <text x="180" y="743" class="small-text">扫码/选择设备</text>
+  <text x="180" y="758" class="small-text">故障描述</text>
+  <text x="180" y="773" class="small-text">上传现场照片</text>
+
+  <text x="255" y="740" class="text" font-size="16">→</text>
+
+  <rect x="280" y="700" width="120" height="80" fill="#fff" stroke="#ff4d4f" stroke-width="1" rx="4"/>
+  <text x="340" y="725" class="small-text" font-weight="bold">工单派发</text>
+  <text x="340" y="743" class="small-text">优先级判定</text>
+  <text x="340" y="758" class="small-text">分配维修人员</text>
+  <text x="340" y="773" class="small-text">关联维修标准</text>
+
+  <text x="415" y="740" class="text" font-size="16">→</text>
+
+  <rect x="440" y="700" width="120" height="80" fill="#fff" stroke="#ff4d4f" stroke-width="1" rx="4"/>
+  <text x="500" y="725" class="small-text" font-weight="bold">维修执行</text>
+  <text x="500" y="743" class="small-text">故障诊断</text>
+  <text x="500" y="758" class="small-text">更换备件</text>
+  <text x="500" y="773" class="small-text">记录工时</text>
+
+  <text x="575" y="740" class="text" font-size="16">→</text>
+
+  <rect x="600" y="700" width="30" height="80" fill="#fff" stroke="#ff4d4f" stroke-width="1" rx="4"/>
+  <text x="615" y="745" class="small-text" font-weight="bold" transform="rotate(-90 615 745)">验收</text>
+
+  <!-- 备件管理连接 -->
+  <path d="M 500 780 L 500 820 L 900 820 L 900 650" class="data-arrow"/>
+  <text x="700" y="815" class="small-text" fill="#722ed1">备件出库</text>
+
+  <!-- 第五层：备件管理 -->
+  <rect x="700" y="650" width="550" height="150" class="parts-box"/>
+  <text x="975" y="680" class="text" font-weight="bold">备品备件管理</text>
+  
+  <text x="730" y="710" class="small-text" text-anchor="start">• 库存实时监控（安全库存预警）</text>
+  <text x="730" y="730" class="small-text" text-anchor="start">• 备件入库/出库管理</text>
+  <text x="730" y="750" class="small-text" text-anchor="start">• 关联设备查询</text>
+  <text x="730" y="770" class="small-text" text-anchor="start">• 使用历史追溯</text>
+  <text x="730" y="790" class="small-text" text-anchor="start">• 库龄预警（长期未使用）</text>
+
+  <text x="1010" y="710" class="small-text" text-anchor="start">• 消耗统计分析</text>
+  <text x="1010" y="730" class="small-text" text-anchor="start">• 库存周转率分析</text>
+  <text x="1010" y="750" class="small-text" text-anchor="start">• 供应商管理</text>
+  <text x="1010" y="770" class="small-text" text-anchor="start">• 采购建议生成</text>
+  <text x="1010" y="790" class="small-text" text-anchor="start">• 盘点管理</text>
+
+  <!-- 第六层：数据反馈与分析 -->
+  <text x="700" y="830" class="section-title" text-anchor="middle">━━━ 数据分析与持续改进层 ━━━</text>
+
+  <path d="M 300 600 L 300 870" class="data-arrow"/>
+  <path d="M 620 800 L 620 870" class="data-arrow"/>
+  <path d="M 975 800 L 975 870" class="data-arrow"/>
+
+  <rect x="100" y="870" width="1200" height="110" class="process-box"/>
+  <text x="700" y="900" class="text" font-size="16" font-weight="bold">设备健康总览与智能分析</text>
+  
+  <text x="200" y="925" class="small-text">设备完好率统计</text>
+  <text x="380" y="925" class="small-text">维修趋势分析</text>
+  <text x="550" y="925" class="small-text">故障类型分析</text>
+  <text x="710" y="925" class="small-text">平均维修时长</text>
+  <text x="860" y="925" class="small-text">备件消耗分析</text>
+  <text x="1020" y="925" class="small-text">设备利用率</text>
+  <text x="1170" y="925" class="small-text">成本分析</text>
+
+  <text x="200" y="950" class="small-text">预防性维护效果</text>
+  <text x="380" y="950" class="small-text">设备老化预警</text>
+  <text x="550" y="950" class="small-text">维修费用统计</text>
+  <text x="710" y="950" class="small-text">任务完成率</text>
+  <text x="860" y="950" class="small-text">逾期任务统计</text>
+  <text x="1020" y="950" class="small-text">AI风险评估</text>
+  <text x="1170" y="950" class="small-text">优化建议</text>
+
+  <!-- 反馈回路 -->
+  <path d="M 1250 920 L 1320 920 L 1320 160 L 1150 160" class="data-arrow"/>
+  <text x="1340" y="540" class="small-text" fill="#722ed1" transform="rotate(-90 1340 540)">持续优化</text>
+
+  <!-- 底部说明 -->
+  <rect x="50" y="1010" width="1300" height="80" fill="#fafafa" stroke="#d9d9d9" stroke-width="1" rx="4"/>
+  <text x="70" y="1035" class="text" text-anchor="start" font-weight="bold">核心业务流程：</text>
+  <text x="70" y="1055" class="small-text" text-anchor="start">1. 设备档案建立 → 2. 预防性维护计划（点检/保养/检修）→ 3. 任务执行与验收 → 4. 故障维修响应 → 5. 备件智能管理 → 6. 数据分析优化</text>
+  <text x="70" y="1075" class="small-text" text-anchor="start">特点：全生命周期管理 | 计划化预防维护 | 看板式任务流转 | 移动端扫码操作 | 智能预警分析 | 闭环管理体系</text>
+</svg>

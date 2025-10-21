@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100">
+  <defs>
+    <style>
+      .flow-title { font-size: 28px; font-weight: bold; fill: #52c41a; }
+      .section-title { font-size: 18px; font-weight: bold; fill: #262626; }
+      .process-box { fill: #f6ffed; stroke: #52c41a; stroke-width: 2; rx: 8; }
+      .monitor-box { fill: #e6f7ff; stroke: #1890ff; stroke-width: 2; rx: 8; }
+      .report-box { fill: #fff7e6; stroke: #fa8c16; stroke-width: 2; rx: 8; }
+      .emergency-box { fill: #fff1f0; stroke: #ff4d4f; stroke-width: 2; rx: 8; }
+      .green-box { fill: #e6fffb; stroke: #13c2c2; stroke-width: 2; rx: 8; }
+      .text { font-size: 14px; fill: #262626; text-anchor: middle; }
+      .small-text { font-size: 12px; fill: #595959; text-anchor: middle; }
+      .arrow { stroke: #8c8c8c; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .data-arrow { stroke: #52c41a; stroke-width: 2; fill: none; marker-end: url(#arrowhead-green); stroke-dasharray: 5,5; }
+      .warn-arrow { stroke: #ff4d4f; stroke-width: 2; fill: none; marker-end: url(#arrowhead-red); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#8c8c8c" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#52c41a" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff4d4f" />
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="700" y="40" class="flow-title" text-anchor="middle">综合环境监测 - 业务流程图</text>
+
+  <!-- 第一层：数据采集与监测 -->
+  <text x="700" y="90" class="section-title" text-anchor="middle">━━━ 数据采集与监测层 ━━━</text>
+
+  <rect x="50" y="110" width="200" height="80" class="monitor-box"/>
+  <text x="150" y="140" class="text">水务监测</text>
+  <text x="150" y="160" class="small-text">设备运行状态</text>
+  <text x="150" y="178" class="small-text">管道压力/液位/流量</text>
+
+  <rect x="280" y="110" width="200" height="80" class="monitor-box"/>
+  <text x="380" y="140" class="text">大气监测</text>
+  <text x="380" y="160" class="small-text">PM2.5/PM10/TSP</text>
+  <text x="380" y="178" class="small-text">实时数据采集</text>
+
+  <rect x="510" y="110" width="200" height="80" class="monitor-box"/>
+  <text x="610" y="140" class="text">噪声监测</text>
+  <text x="610" y="160" class="small-text">分贝实时监测</text>
+  <text x="610" y="178" class="small-text">噪声等级判定</text>
+
+  <rect x="740" y="110" width="200" height="80" class="monitor-box"/>
+  <text x="840" y="140" class="text">第三方检测</text>
+  <text x="840" y="160" class="small-text">水质/土壤/固废</text>
+  <text x="840" y="178" class="small-text">生态环境检测</text>
+
+  <rect x="970" y="110" width="200" height="80" class="monitor-box"/>
+  <text x="1070" y="140" class="text">施工单位监督</text>
+  <text x="1070" y="160" class="small-text">作业设备登记</text>
+  <text x="1070" y="178" class="small-text">环保符合性检查</text>
+
+  <rect x="1200" y="110" width="170" height="80" class="monitor-box"/>
+  <text x="1285" y="140" class="text">合规文件</text>
+  <text x="1285" y="160" class="small-text">环保批复</text>
+  <text x="1285" y="178" class="small-text">验收报告</text>
+
+  <!-- 数据流向处理层 -->
+  <path d="M 150 190 L 150 250" class="data-arrow"/>
+  <path d="M 380 190 L 380 250" class="data-arrow"/>
+  <path d="M 610 190 L 610 250" class="data-arrow"/>
+  <path d="M 840 190 L 840 250" class="data-arrow"/>
+  <path d="M 1070 190 L 1070 250" class="data-arrow"/>
+  <path d="M 1285 190 L 1285 250" class="data-arrow"/>
+
+  <!-- 第二层：数据处理与分析 -->
+  <text x="700" y="240" class="section-title" text-anchor="middle">━━━ 数据处理与分析层 ━━━</text>
+
+  <rect x="100" y="260" width="1200" height="120" class="report-box"/>
+  <text x="700" y="290" class="text" font-size="16" font-weight="bold">环境数据中台</text>
+  
+  <text x="200" y="320" class="small-text">实时数据处理</text>
+  <text x="400" y="320" class="small-text">阈值监控</text>
+  <text x="600" y="320" class="small-text">异常检测</text>
+  <text x="800" y="320" class="small-text">趋势分析</text>
+  <text x="1000" y="320" class="small-text">合规性检查</text>
+  <text x="1200" y="320" class="small-text">报告归档</text>
+
+  <text x="200" y="350" class="small-text">历史数据存储</text>
+  <text x="400" y="350" class="small-text">预警规则引擎</text>
+  <text x="600" y="350" class="small-text">智能对比分析</text>
+  <text x="800" y="350" class="small-text">指标计算</text>
+  <text x="1000" y="350" class="small-text">环保档案管理</text>
+  <text x="1200" y="350" class="small-text">数据可视化</text>
+
+  <!-- 第三层：预警与决策 -->
+  <text x="700" y="410" class="section-title" text-anchor="middle">━━━ 预警与决策层 ━━━</text>
+
+  <rect x="100" y="430" width="250" height="100" class="emergency-box"/>
+  <text x="225" y="460" class="text" font-weight="bold">智能预警系统</text>
+  <text x="225" y="480" class="small-text">实时监测超标报警</text>
+  <text x="225" y="498" class="small-text">多级预警推送</text>
+  <text x="225" y="516" class="small-text">预警追踪闭环</text>
+
+  <rect x="380" y="430" width="250" height="100" class="emergency-box"/>
+  <text x="505" y="460" class="text" font-weight="bold">应急响应中心</text>
+  <text x="505" y="480" class="small-text">应急预案触发</text>
+  <text x="505" y="498" class="small-text">应急指挥调度</text>
+  <text x="505" y="516" class="small-text">物资调度管理</text>
+
+  <rect x="660" y="430" width="250" height="100" class="process-box"/>
+  <text x="785" y="460" class="text" font-weight="bold">合规性管理</text>
+  <text x="785" y="480" class="small-text">环保手续核查</text>
+  <text x="785" y="498" class="small-text">设备符合性校验</text>
+  <text x="785" y="516" class="small-text">整改措施跟踪</text>
+
+  <rect x="940" y="430" width="250" height="100" class="green-box"/>
+  <text x="1065" y="460" class="text" font-weight="bold">绿色矿山管理</text>
+  <text x="1065" y="480" class="small-text">指标对标分析</text>
+  <text x="1065" y="498" class="small-text">考核评估统计</text>
+  <text x="1065" y="516" class="small-text">巩固方案管理</text>
+
+  <!-- 连接到决策层 -->
+  <path d="M 700 380 L 700 400 L 225 400 L 225 430" class="warn-arrow"/>
+  <path d="M 700 380 L 700 400 L 505 400 L 505 430" class="warn-arrow"/>
+  <path d="M 700 380 L 700 400 L 785 400 L 785 430" class="arrow"/>
+  <path d="M 700 380 L 700 400 L 1065 400 L 1065 430" class="arrow"/>
+
+  <!-- 第四层：业务应用与管理 -->
+  <text x="700" y="560" class="section-title" text-anchor="middle">━━━ 业务应用与管理层 ━━━</text>
+
+  <rect x="80" y="580" width="200" height="90" class="process-box"/>
+  <text x="180" y="610" class="text">监控驾驶舱</text>
+  <text x="180" y="628" class="small-text">实时数据大屏</text>
+  <text x="180" y="646" class="small-text">设备状态展示</text>
+  <text x="180" y="664" class="small-text">历史趋势分析</text>
+
+  <rect x="310" y="580" width="200" height="90" class="process-box"/>
+  <text x="410" y="610" class="text">报告管理</text>
+  <text x="410" y="628" class="small-text">检测报告录入</text>
+  <text x="410" y="646" class="small-text">在线查阅预览</text>
+  <text x="410" y="664" class="small-text">档案分类管理</text>
+
+  <rect x="540" y="580" width="200" height="90" class="report-box"/>
+  <text x="640" y="610" class="text">合规档案库</text>
+  <text x="640" y="628" class="small-text">批复文件归档</text>
+  <text x="640" y="646" class="small-text">文档标记查阅</text>
+  <text x="640" y="664" class="small-text">搜索与筛选</text>
+
+  <rect x="770" y="580" width="200" height="90" class="emergency-box"/>
+  <text x="870" y="610" class="text">应急演练</text>
+  <text x="870" y="628" class="small-text">演练计划管理</text>
+  <text x="870" y="646" class="small-text">模拟指挥调度</text>
+  <text x="870" y="664" class="small-text">评估与记录</text>
+
+  <rect x="1000" y="580" width="200" height="90" class="green-box"/>
+  <text x="1100" y="610" class="text">绿色矿山工作台</text>
+  <text x="1100" y="628" class="small-text">指标导入对比</text>
+  <text x="1100" y="646" class="small-text">核查记录台账</text>
+  <text x="1100" y="664" class="small-text">考核统计可视化</text>
+
+  <rect x="1230" y="580" width="140" height="90" class="process-box"/>
+  <text x="1300" y="610" class="text">施工监管</text>
+  <text x="1300" y="628" class="small-text">作业记录</text>
+  <text x="1300" y="646" class="small-text">设备校验</text>
+  <text x="1300" y="664" class="small-text">预警提示</text>
+
+  <!-- 连接业务层 -->
+  <path d="M 225 530 L 225 550 L 180 550 L 180 580" class="arrow"/>
+  <path d="M 505 530 L 505 550 L 870 550 L 870 580" class="arrow"/>
+  <path d="M 785 530 L 785 550 L 640 550 L 640 580" class="arrow"/>
+  <path d="M 1065 530 L 1065 550 L 1100 550 L 1100 580" class="arrow"/>
+
+  <!-- 第五层：用户交互与展示 -->
+  <text x="700" y="700" class="section-title" text-anchor="middle">━━━ 用户交互与展示层 ━━━</text>
+
+  <rect x="150" y="720" width="240" height="100" class="monitor-box"/>
+  <text x="270" y="750" class="text" font-weight="bold">Web端应用</text>
+  <text x="270" y="770" class="small-text">管理人员/环保部门使用</text>
+  <text x="270" y="788" class="small-text">监控驾驶舱/报告管理/数据分析</text>
+  <text x="270" y="806" class="small-text">应急指挥/绿色矿山工作台</text>
+
+  <rect x="430" y="720" width="240" height="100" class="monitor-box"/>
+  <text x="550" y="750" class="text" font-weight="bold">移动端应用</text>
+  <text x="550" y="770" class="small-text">现场人员/值班人员使用</text>
+  <text x="550" y="788" class="small-text">实时监测查看/预警接收</text>
+  <text x="550" y="806" class="small-text">应急上报/快速审批</text>
+
+  <rect x="710" y="720" width="240" height="100" class="monitor-box"/>
+  <text x="830" y="750" class="text" font-weight="bold">大屏展示</text>
+  <text x="830" y="770" class="small-text">调度中心/会议室展示</text>
+  <text x="830" y="788" class="small-text">环境监测实时大屏</text>
+  <text x="830" y="806" class="small-text">绿色矿山建设成效展示</text>
+
+  <rect x="990" y="720" width="240" height="100" class="report-box"/>
+  <text x="1110" y="750" class="text" font-weight="bold">政府对接平台</text>
+  <text x="1110" y="770" class="small-text">环保部门/自然资源部门</text>
+  <text x="1110" y="788" class="small-text">数据上报/在线核查</text>
+  <text x="1110" y="806" class="small-text">政府监管接口</text>
+
+  <!-- 用户层连接 -->
+  <path d="M 180 670 L 180 690 L 270 690 L 270 720" class="arrow"/>
+  <path d="M 410 670 L 410 690 L 550 690 L 550 720" class="arrow"/>
+  <path d="M 640 670 L 640 690 L 830 690 L 830 720" class="arrow"/>
+  <path d="M 870 670 L 870 690 L 830 690" class="arrow"/>
+  <path d="M 1100 670 L 1100 690 L 1110 690 L 1110 720" class="arrow"/>
+
+  <!-- 反馈回路 -->
+  <path d="M 270 820 L 270 900 L 1110 900 L 1110 820" class="data-arrow"/>
+  <text x="700" y="920" class="small-text" fill="#52c41a">━━━━━ 数据反馈与持续优化 ━━━━━</text>
+  <path d="M 1110 900 L 1110 950 L 1350 950 L 1350 150" class="data-arrow"/>
+  <path d="M 270 900 L 270 950 L 50 950 L 50 150" class="data-arrow"/>
+
+  <!-- 底部关键流程说明 -->
+  <rect x="50" y="980" width="1320" height="100" fill="#fafafa" stroke="#d9d9d9" stroke-width="1" rx="4"/>
+  <text x="70" y="1005" class="text" text-anchor="start" font-weight="bold">核心业务流程：</text>
+  <text x="70" y="1025" class="small-text" text-anchor="start">1. 环境数据实时采集 → 2. 智能分析与预警 → 3. 应急响应/合规管理 → 4. 业务应用管理 → 5. 多端展示交互 → 6. 反馈优化</text>
+  <text x="70" y="1045" class="small-text" text-anchor="start">特点：全方位监测覆盖 | 实时预警响应 | 合规性保障 | 绿色矿山建设 | 政府数据对接 | 应急联动机制</text>
+  <text x="70" y="1065" class="small-text" text-anchor="start">目标：构建智慧化环保管理体系，实现环保工作数字化、标准化、可追溯</text>
+</svg>

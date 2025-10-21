@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200">
+  <defs>
+    <style>
+      .arch-title { font-size: 32px; font-weight: bold; fill: #52c41a; }
+      .layer-title { font-size: 20px; font-weight: bold; fill: #fff; }
+      .module-title { font-size: 15px; font-weight: bold; fill: #262626; }
+      .feature-text { font-size: 12px; fill: #595959; }
+      .layer-bg1 { fill: #52c41a; opacity: 0.9; }
+      .layer-bg2 { fill: #1890ff; opacity: 0.9; }
+      .layer-bg3 { fill: #fa8c16; opacity: 0.9; }
+      .layer-bg4 { fill: #722ed1; opacity: 0.9; }
+      .layer-bg5 { fill: #13c2c2; opacity: 0.9; }
+      .module-box { fill: #ffffff; stroke: #d9d9d9; stroke-width: 2; rx: 6; }
+      .module-box-highlight { fill: #f6ffed; stroke: #52c41a; stroke-width: 2; rx: 6; }
+      .module-box-blue { fill: #e6f7ff; stroke: #1890ff; stroke-width: 2; rx: 6; }
+      .connector { stroke: #8c8c8c; stroke-width: 2; fill: none; stroke-dasharray: 5,5; }
+    </style>
+  </defs>
+
+  <!-- 主标题 -->
+  <text x="800" y="50" class="arch-title" text-anchor="middle">综合环境监测 - 功能架构图</text>
+
+  <!-- ==================== 第一层：展示层 ==================== -->
+  <rect x="50" y="90" width="1500" height="200" class="layer-bg1" rx="8"/>
+  <text x="800" y="120" class="layer-title" text-anchor="middle">展示层 - 用户交互界面</text>
+
+  <!-- 监控驾驶舱 -->
+  <rect x="80" y="145" width="240" height="130" class="module-box-highlight"/>
+  <text x="200" y="170" class="module-title" text-anchor="middle">监控驾驶舱</text>
+  <text x="200" y="192" class="feature-text" text-anchor="middle">• 水务监控大屏</text>
+  <text x="200" y="210" class="feature-text" text-anchor="middle">• 大气监测仪表盘</text>
+  <text x="200" y="228" class="feature-text" text-anchor="middle">• 噪声实时监控</text>
+  <text x="200" y="246" class="feature-text" text-anchor="middle">• 设备状态可视化</text>
+  <text x="200" y="264" class="feature-text" text-anchor="middle">• 历史趋势分析</text>
+
+  <!-- 报告管理 -->
+  <rect x="350" y="145" width="240" height="130" class="module-box"/>
+  <text x="470" y="170" class="module-title" text-anchor="middle">报告管理中心</text>
+  <text x="470" y="192" class="feature-text" text-anchor="middle">• 检测报告录入</text>
+  <text x="470" y="210" class="feature-text" text-anchor="middle">• 在线预览查阅</text>
+  <text x="470" y="228" class="feature-text" text-anchor="middle">• 档案分类管理</text>
+  <text x="470" y="246" class="feature-text" text-anchor="middle">• 文档标记批注</text>
+  <text x="470" y="264" class="feature-text" text-anchor="middle">• 智能搜索筛选</text>
+
+  <!-- 合规档案库 -->
+  <rect x="620" y="145" width="240" height="130" class="module-box"/>
+  <text x="740" y="170" class="module-title" text-anchor="middle">合规档案库</text>
+  <text x="740" y="192" class="feature-text" text-anchor="middle">• 环保批复归档</text>
+  <text x="740" y="210" class="feature-text" text-anchor="middle">• 验收报告管理</text>
+  <text x="740" y="228" class="feature-text" text-anchor="middle">• 文件上传下载</text>
+  <text x="740" y="246" class="feature-text" text-anchor="middle">• 在线预览标注</text>
+  <text x="740" y="264" class="feature-text" text-anchor="middle">• 合规性审核</text>
+
+  <!-- 应急管理 -->
+  <rect x="890" y="145" width="240" height="130" class="module-box"/>
+  <text x="1010" y="170" class="module-title" text-anchor="middle">应急管理</text>
+  <text x="1010" y="192" class="feature-text" text-anchor="middle">• 应急预案管理</text>
+  <text x="1010" y="210" class="feature-text" text-anchor="middle">• 演练计划安排</text>
+  <text x="1010" y="228" class="feature-text" text-anchor="middle">• 模拟指挥调度</text>
+  <text x="1010" y="246" class="feature-text" text-anchor="middle">• 物资调度管理</text>
+  <text x="1010" y="264" class="feature-text" text-anchor="middle">• 演练评估记录</text>
+
+  <!-- 绿色矿山工作台 -->
+  <rect x="1160" y="145" width="240" height="130" class="module-box"/>
+  <text x="1280" y="170" class="module-title" text-anchor="middle">绿色矿山工作台</text>
+  <text x="1280" y="192" class="feature-text" text-anchor="middle">• 指标导入对标</text>
+  <text x="1280" y="210" class="feature-text" text-anchor="middle">• 自评数据录入</text>
+  <text x="1280" y="228" class="feature-text" text-anchor="middle">• 考核统计可视化</text>
+  <text x="1280" y="246" class="feature-text" text-anchor="middle">• 方案版本管理</text>
+  <text x="1280" y="264" class="feature-text" text-anchor="middle">• 核查记录台账</text>
+
+  <!-- 施工监管 -->
+  <rect x="1430" y="145" width="100" height="130" class="module-box"/>
+  <text x="1480" y="170" class="module-title" text-anchor="middle" font-size="13">施工监管</text>
+  <text x="1480" y="192" class="feature-text" text-anchor="middle">• 作业记录</text>
+  <text x="1480" y="210" class="feature-text" text-anchor="middle">• 设备登记</text>
+  <text x="1480" y="228" class="feature-text" text-anchor="middle">• 符合性校验</text>
+  <text x="1480" y="246" class="feature-text" text-anchor="middle">• 预警提示</text>
+
+  <!-- ==================== 第二层：业务层 ==================== -->
+  <rect x="50" y="320" width="1500" height="220" class="layer-bg2" rx="8"/>
+  <text x="800" y="350" class="layer-title" text-anchor="middle">业务层 - 核心业务逻辑</text>
+
+  <!-- 实时监测管理 -->
+  <rect x="80" y="375" width="280" height="150" class="module-box"/>
+  <text x="220" y="400" class="module-title" text-anchor="middle">实时监测管理</text>
+  <text x="100" y="425" class="feature-text" text-anchor="start">• 水务设施状态监控</text>
+  <text x="100" y="443" class="feature-text" text-anchor="start">• 管道压力/液位/流量监测</text>
+  <text x="100" y="461" class="feature-text" text-anchor="start">• 大气质量实时监测(PM2.5/PM10/TSP)</text>
+  <text x="100" y="479" class="feature-text" text-anchor="start">• 噪声分贝实时监控</text>
+  <text x="100" y="497" class="feature-text" text-anchor="start">• 阈值设置与动态调整</text>
+  <text x="100" y="515" class="feature-text" text-anchor="start">• 历史数据回溯分析</text>
+
+  <!-- 预警与应急 -->
+  <rect x="390" y="375" width="280" height="150" class="module-box"/>
+  <text x="530" y="400" class="module-title" text-anchor="middle">预警与应急</text>
+  <text x="410" y="425" class="feature-text" text-anchor="start">• 超标自动预警推送</text>
+  <text x="410" y="443" class="feature-text" text-anchor="start">• 多级预警规则引擎</text>
+  <text x="410" y="461" class="feature-text" text-anchor="start">• 应急预案自动触发</text>
+  <text x="410" y="479" class="feature-text" text-anchor="start">• 应急指挥调度协同</text>
+  <text x="410" y="497" class="feature-text" text-anchor="start">• 预警追踪闭环管理</text>
+  <text x="410" y="515" class="feature-text" text-anchor="start">• 演练管理与评估</text>
+
+  <!-- 合规性管理 -->
+  <rect x="700" y="375" width="280" height="150" class="module-box"/>
+  <text x="840" y="400" class="module-title" text-anchor="middle">合规性管理</text>
+  <text x="720" y="425" class="feature-text" text-anchor="start">• 环保手续电子化归档</text>
+  <text x="720" y="443" class="feature-text" text-anchor="start">• 批复文件审核管理</text>
+  <text x="720" y="461" class="feature-text" text-anchor="start">• 施工设备环保符合性校验</text>
+  <text x="720" y="479" class="feature-text" text-anchor="start">• 不合规设备预警提示</text>
+  <text x="720" y="497" class="feature-text" text-anchor="start">• 整改措施跟踪闭环</text>
+  <text x="720" y="515" class="feature-text" text-anchor="start">• 政府核查记录管理</text>
+
+  <!-- 检测报告管理 -->
+  <rect x="1010" y="375" width="280" height="150" class="module-box"/>
+  <text x="1150" y="400" class="module-title" text-anchor="middle">检测报告管理</text>
+  <text x="1030" y="425" class="feature-text" text-anchor="start">• 水质检测报告录入与归档</text>
+  <text x="1030" y="443" class="feature-text" text-anchor="start">• 土壤检测报告管理</text>
+  <text x="1030" y="461" class="feature-text" text-anchor="start">• 固废检测报告管理</text>
+  <text x="1030" y="479" class="feature-text" text-anchor="start">• 生态环境检测报告管理</text>
+  <text x="1030" y="497" class="feature-text" text-anchor="start">• 检测数据趋势分析</text>
+  <text x="1030" y="515" class="feature-text" text-anchor="start">• 报告在线预览与下载</text>
+
+  <!-- 绿色矿山建设 -->
+  <rect x="1320" y="375" width="210" height="150" class="module-box"/>
+  <text x="1425" y="400" class="module-title" text-anchor="middle">绿色矿山建设</text>
+  <text x="1340" y="425" class="feature-text" text-anchor="start">• 评价指标对标</text>
+  <text x="1340" y="443" class="feature-text" text-anchor="start">• 自评数据分析</text>
+  <text x="1340" y="461" class="feature-text" text-anchor="start">• 考核得分统计</text>
+  <text x="1340" y="479" class="feature-text" text-anchor="start">• 巩固方案管理</text>
+  <text x="1340" y="497" class="feature-text" text-anchor="start">• 未达标项跟踪</text>
+  <text x="1340" y="515" class="feature-text" text-anchor="start">• 建设成效展示</text>
+
+  <!-- ==================== 第三层：数据层 ==================== -->
+  <rect x="50" y="570" width="1500" height="200" class="layer-bg3" rx="8"/>
+  <text x="800" y="600" class="layer-title" text-anchor="middle">数据层 - 数据处理与存储</text>
+
+  <!-- 数据采集 -->
+  <rect x="80" y="625" width="270" height="130" class="module-box"/>
+  <text x="215" y="650" class="module-title" text-anchor="middle">数据采集</text>
+  <text x="215" y="672" class="feature-text" text-anchor="middle">• 水务系统实时数据</text>
+  <text x="215" y="690" class="feature-text" text-anchor="middle">• 大气监测站数据</text>
+  <text x="215" y="708" class="feature-text" text-anchor="middle">• 噪声监测设备数据</text>
+  <text x="215" y="726" class="feature-text" text-anchor="middle">• 第三方检测数据</text>
+  <text x="215" y="744" class="feature-text" text-anchor="middle">• 人工录入表单数据</text>
+
+  <!-- 数据处理 -->
+  <rect x="380" y="625" width="270" height="130" class="module-box"/>
+  <text x="515" y="650" class="module-title" text-anchor="middle">数据处理</text>
+  <text x="515" y="672" class="feature-text" text-anchor="middle">• 数据清洗与校验</text>
+  <text x="515" y="690" class="feature-text" text-anchor="middle">• 实时计算引擎</text>
+  <text x="515" y="708" class="feature-text" text-anchor="middle">• 阈值对比分析</text>
+  <text x="515" y="726" class="feature-text" text-anchor="middle">• 异常检测识别</text>
+  <text x="515" y="744" class="feature-text" text-anchor="middle">• 指标自动计算</text>
+
+  <!-- 数据存储 -->
+  <rect x="680" y="625" width="270" height="130" class="module-box"/>
+  <text x="815" y="650" class="module-title" text-anchor="middle">数据存储</text>
+  <text x="815" y="672" class="feature-text" text-anchor="middle">• 时序数据库</text>
+  <text x="815" y="690" class="feature-text" text-anchor="middle">• 关系型数据库</text>
+  <text x="815" y="708" class="feature-text" text-anchor="middle">• 文档对象存储</text>
+  <text x="815" y="726" class="feature-text" text-anchor="middle">• 历史数据归档</text>
+  <text x="815" y="744" class="feature-text" text-anchor="middle">• 报告文件存储</text>
+
+  <!-- 智能分析 -->
+  <rect x="980" y="625" width="270" height="130" class="module-box"/>
+  <text x="1115" y="650" class="module-title" text-anchor="middle">智能分析</text>
+  <text x="1115" y="672" class="feature-text" text-anchor="middle">• 趋势预测分析</text>
+  <text x="1115" y="690" class="feature-text" text-anchor="middle">• 异常模式识别</text>
+  <text x="1115" y="708" class="feature-text" text-anchor="middle">• 合规性智能检查</text>
+  <text x="1115" y="726" class="feature-text" text-anchor="middle">• 指标对标分析</text>
+  <text x="1115" y="744" class="feature-text" text-anchor="middle">• 优化建议生成</text>
+
+  <!-- 数据服务 -->
+  <rect x="1280" y="625" width="250" height="130" class="module-box"/>
+  <text x="1405" y="650" class="module-title" text-anchor="middle">数据服务</text>
+  <text x="1405" y="672" class="feature-text" text-anchor="middle">• RESTful API</text>
+  <text x="1405" y="690" class="feature-text" text-anchor="middle">• WebSocket推送</text>
+  <text x="1405" y="708" class="feature-text" text-anchor="middle">• 消息队列服务</text>
+  <text x="1405" y="726" class="feature-text" text-anchor="middle">• 政府数据对接</text>
+  <text x="1405" y="744" class="feature-text" text-anchor="middle">• 数据权限控制</text>
+
+  <!-- ==================== 第四层：设备与系统层 ==================== -->
+  <rect x="50" y="800" width="1500" height="180" class="layer-bg4" rx="8"/>
+  <text x="800" y="830" class="layer-title" text-anchor="middle">设备与系统层 - 感知与执行</text>
+
+  <!-- 水务系统 -->
+  <rect x="80" y="855" width="230" height="110" class="module-box"/>
+  <text x="195" y="880" class="module-title" text-anchor="middle">智慧水务系统</text>
+  <text x="195" y="900" class="feature-text" text-anchor="middle">水泵设备</text>
+  <text x="195" y="918" class="feature-text" text-anchor="middle">压力传感器</text>
+  <text x="195" y="936" class="feature-text" text-anchor="middle">液位传感器</text>
+  <text x="195" y="954" class="feature-text" text-anchor="middle">流量计</text>
+
+  <!-- 大气监测站 -->
+  <rect x="340" y="855" width="230" height="110" class="module-box"/>
+  <text x="455" y="880" class="module-title" text-anchor="middle">大气监测站</text>
+  <text x="455" y="900" class="feature-text" text-anchor="middle">PM2.5监测仪</text>
+  <text x="455" y="918" class="feature-text" text-anchor="middle">PM10监测仪</text>
+  <text x="455" y="936" class="feature-text" text-anchor="middle">TSP监测仪</text>
+  <text x="455" y="954" class="feature-text" text-anchor="middle">气象传感器</text>
+
+  <!-- 噪声监测设备 -->
+  <rect x="600" y="855" width="230" height="110" class="module-box"/>
+  <text x="715" y="880" class="module-title" text-anchor="middle">噪声监测设备</text>
+  <text x="715" y="900" class="feature-text" text-anchor="middle">声级计</text>
+  <text x="715" y="918" class="feature-text" text-anchor="middle">分贝传感器</text>
+  <text x="715" y="936" class="feature-text" text-anchor="middle">噪声分析仪</text>
+  <text x="715" y="954" class="feature-text" text-anchor="middle">数据采集器</text>
+
+  <!-- 第三方检测机构 -->
+  <rect x="860" y="855" width="230" height="110" class="module-box"/>
+  <text x="975" y="880" class="module-title" text-anchor="middle">第三方检测机构</text>
+  <text x="975" y="900" class="feature-text" text-anchor="middle">水质检测</text>
+  <text x="975" y="918" class="feature-text" text-anchor="middle">土壤检测</text>
+  <text x="975" y="936" class="feature-text" text-anchor="middle">固废检测</text>
+  <text x="975" y="954" class="feature-text" text-anchor="middle">生态评估</text>
+
+  <!-- 视频监控系统 -->
+  <rect x="1120" y="855" width="180" height="110" class="module-box"/>
+  <text x="1210" y="880" class="module-title" text-anchor="middle">视频监控</text>
+  <text x="1210" y="900" class="feature-text" text-anchor="middle">高清摄像头</text>
+  <text x="1210" y="918" class="feature-text" text-anchor="middle">AI识别</text>
+  <text x="1210" y="936" class="feature-text" text-anchor="middle">录像存储</text>
+  <text x="1210" y="954" class="feature-text" text-anchor="middle">远程查看</text>
+
+  <!-- 通信网络 -->
+  <rect x="1330" y="855" width="200" height="110" class="module-box"/>
+  <text x="1430" y="880" class="module-title" text-anchor="middle">通信网络</text>
+  <text x="1430" y="900" class="feature-text" text-anchor="middle">5G网络</text>
+  <text x="1430" y="918" class="feature-text" text-anchor="middle">工业以太网</text>
+  <text x="1430" y="936" class="feature-text" text-anchor="middle">无线传输</text>
+  <text x="1430" y="954" class="feature-text" text-anchor="middle">物联网协议</text>
+
+  <!-- ==================== 第五层：外部对接 ==================== -->
+  <rect x="50" y="1010" width="1500" height="90" class="layer-bg5" rx="8"/>
+  <text x="800" y="1040" class="layer-title" text-anchor="middle">外部对接层 - 政府与第三方</text>
+
+  <rect x="200" y="1055" width="280" height="35" class="module-box-blue"/>
+  <text x="340" y="1078" class="feature-text" text-anchor="middle">• 环保部门数据上报</text>
+
+  <rect x="520" y="1055" width="280" height="35" class="module-box-blue"/>
+  <text x="660" y="1078" class="feature-text" text-anchor="middle">• 自然资源部门对接</text>
+
+  <rect x="840" y="1055" width="280" height="35" class="module-box-blue"/>
+  <text x="980" y="1078" class="feature-text" text-anchor="middle">• 政府在线核查接口</text>
+
+  <rect x="1160" y="1055" width="280" height="35" class="module-box-blue"/>
+  <text x="1300" y="1078" class="feature-text" text-anchor="middle">• 第三方检测机构对接</text>
+
+  <!-- 连接线 -->
+  <path d="M 800 290 L 800 320" class="connector"/>
+  <path d="M 800 540 L 800 570" class="connector"/>
+  <path d="M 800 770 L 800 800" class="connector"/>
+  <path d="M 800 980 L 800 1010" class="connector"/>
+
+  <!-- 底部说明 -->
+  <rect x="50" y="1120" width="1500" height="60" fill="#fafafa" stroke="#d9d9d9" stroke-width="2" rx="8"/>
+  <text x="800" y="1145" class="module-title" text-anchor="middle" font-size="18">核心技术特点</text>
+  
+  <text x="120" y="1165" class="feature-text" text-anchor="start" font-weight="bold">🔹 全方位监测：</text>
+  <text x="280" y="1165" class="feature-text" text-anchor="start">水、大气、噪声、土壤、固废、生态全覆盖</text>
+  
+  <text x="700" y="1165" class="feature-text" text-anchor="start" font-weight="bold">🔹 智能预警：</text>
+  <text x="830" y="1165" class="feature-text" text-anchor="start">实时超标报警，应急预案自动触发</text>
+  
+  <text x="1200" y="1165" class="feature-text" text-anchor="start" font-weight="bold">🔹 合规保障：</text>
+  <text x="1350" y="1165" class="feature-text" text-anchor="start">电子化档案，政府对接</text>
+
+</svg>

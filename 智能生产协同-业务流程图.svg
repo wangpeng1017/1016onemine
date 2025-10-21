@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000">
+  <defs>
+    <style>
+      .flow-title { font-size: 28px; font-weight: bold; fill: #1890ff; }
+      .section-title { font-size: 18px; font-weight: bold; fill: #262626; }
+      .process-box { fill: #e6f7ff; stroke: #1890ff; stroke-width: 2; rx: 8; }
+      .system-box { fill: #f6ffed; stroke: #52c41a; stroke-width: 2; rx: 8; }
+      .data-box { fill: #fff7e6; stroke: #fa8c16; stroke-width: 2; rx: 8; }
+      .decision-box { fill: #fff1f0; stroke: #ff4d4f; stroke-width: 2; rx: 8; }
+      .text { font-size: 14px; fill: #262626; text-anchor: middle; }
+      .small-text { font-size: 12px; fill: #595959; text-anchor: middle; }
+      .arrow { stroke: #8c8c8c; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .data-arrow { stroke: #fa8c16; stroke-width: 2; fill: none; marker-end: url(#arrowhead-orange); stroke-dasharray: 5,5; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#8c8c8c" />
+    </marker>
+    <marker id="arrowhead-orange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#fa8c16" />
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="700" y="40" class="flow-title" text-anchor="middle">智能生产协同 - 业务流程图</text>
+
+  <!-- 第一层：数据采集与感知 -->
+  <text x="700" y="90" class="section-title" text-anchor="middle">━━━ 数据采集与感知层 ━━━</text>
+  
+  <rect x="50" y="110" width="180" height="80" class="system-box"/>
+  <text x="140" y="140" class="text">数字孪生地图</text>
+  <text x="140" y="160" class="small-text">三维场景</text>
+  <text x="140" y="178" class="small-text">实时定位</text>
+
+  <rect x="280" y="110" width="180" height="80" class="system-box"/>
+  <text x="370" y="140" class="text">生产设备监控</text>
+  <text x="370" y="160" class="small-text">皮带/电铲/排土</text>
+  <text x="370" y="178" class="small-text">运行参数采集</text>
+
+  <rect x="510" y="110" width="180" height="80" class="system-box"/>
+  <text x="600" y="140" class="text">车辆监控</text>
+  <text x="600" y="160" class="small-text">GPS定位</text>
+  <text x="600" y="178" class="small-text">状态采集</text>
+
+  <rect x="740" y="110" width="180" height="80" class="system-box"/>
+  <text x="830" y="140" class="text">无人驾驶系统</text>
+  <text x="830" y="160" class="small-text">路径规划</text>
+  <text x="830" y="178" class="small-text">自动作业</text>
+
+  <rect x="970" y="110" width="180" height="80" class="system-box"/>
+  <text x="1060" y="140" class="text">智能巡检</text>
+  <text x="1060" y="160" class="small-text">机器人巡检</text>
+  <text x="1060" y="178" class="small-text">异常识别</text>
+
+  <rect x="1200" y="110" width="180" height="80" class="system-box"/>
+  <text x="1290" y="140" class="text">能耗监测</text>
+  <text x="1290" y="160" class="small-text">水电油</text>
+  <text x="1290" y="178" class="small-text">实时采集</text>
+
+  <!-- 数据流向数据中台 -->
+  <path d="M 140 190 L 140 250" class="data-arrow"/>
+  <path d="M 370 190 L 370 250" class="data-arrow"/>
+  <path d="M 600 190 L 600 250" class="data-arrow"/>
+  <path d="M 830 190 L 830 250" class="data-arrow"/>
+  <path d="M 1060 190 L 1060 250" class="data-arrow"/>
+  <path d="M 1290 190 L 1290 250" class="data-arrow"/>
+
+  <!-- 第二层：数据处理与分析 -->
+  <text x="700" y="240" class="section-title" text-anchor="middle">━━━ 数据处理与分析层 ━━━</text>
+
+  <rect x="100" y="260" width="1200" height="100" class="data-box"/>
+  <text x="700" y="290" class="text" font-size="16" font-weight="bold">生产数据中台</text>
+  <text x="250" y="315" class="small-text">实时数据处理</text>
+  <text x="450" y="315" class="small-text">历史数据存储</text>
+  <text x="650" y="315" class="small-text">智能分析算法</text>
+  <text x="850" y="315" class="small-text">异常检测</text>
+  <text x="1050" y="315" class="small-text">趋势预测</text>
+  <text x="250" y="340" class="small-text">数据清洗</text>
+  <text x="450" y="340" class="small-text">数据融合</text>
+  <text x="650" y="340" class="small-text">指标计算</text>
+  <text x="850" y="340" class="small-text">报警规则引擎</text>
+  <text x="1050" y="340" class="small-text">优化建议</text>
+
+  <!-- 第三层：业务应用与管理 -->
+  <text x="700" y="390" class="section-title" text-anchor="middle">━━━ 业务应用与管理层 ━━━</text>
+
+  <!-- 调度管理核心 -->
+  <rect x="480" y="410" width="240" height="100" class="process-box"/>
+  <text x="600" y="440" class="text" font-weight="bold">调度管理中心</text>
+  <text x="600" y="460" class="small-text">实时监控调度</text>
+  <text x="600" y="478" class="small-text">应急指挥</text>
+  <text x="600" y="496" class="small-text">生产协同</text>
+
+  <!-- 数据流向调度中心 -->
+  <path d="M 700 360 L 700 380 L 600 380 L 600 410" class="arrow"/>
+
+  <!-- 调度中心连接到各业务模块 -->
+  <path d="M 480 460 L 260 460" class="arrow"/>
+  <path d="M 720 460 L 940 460" class="arrow"/>
+  <path d="M 600 510 L 600 580" class="arrow"/>
+
+  <!-- 左侧业务模块 -->
+  <rect x="50" y="420" width="180" height="80" class="process-box"/>
+  <text x="140" y="450" class="text">生产报表</text>
+  <text x="140" y="468" class="small-text">自动生成</text>
+  <text x="140" y="486" class="small-text">智能分析</text>
+
+  <!-- 右侧业务模块 -->
+  <rect x="970" y="420" width="180" height="80" class="process-box"/>
+  <text x="1060" y="450" class="text">车辆管理</text>
+  <text x="1060" y="468" class="small-text">档案管理</text>
+  <text x="1060" y="486" class="small-text">实时监控</text>
+
+  <rect x="1200" y="420" width="180" height="80" class="process-box"/>
+  <text x="1290" y="450" class="text">能耗管理</text>
+  <text x="1290" y="468" class="small-text">精细化监控</text>
+  <text x="1290" y="486" class="small-text">优化分析</text>
+
+  <!-- 第四层：决策与执行 -->
+  <text x="700" y="570" class="section-title" text-anchor="middle">━━━ 决策与执行层 ━━━</text>
+
+  <rect x="280" y="590" width="200" height="80" class="decision-box"/>
+  <text x="380" y="620" class="text">预警与应急</text>
+  <text x="380" y="638" class="small-text">实时报警</text>
+  <text x="380" y="656" class="small-text">应急预案启动</text>
+
+  <rect x="520" y="590" width="200" height="80" class="decision-box"/>
+  <text x="620" y="620" class="text">生产调度指令</text>
+  <text x="620" y="638" class="small-text">任务分配</text>
+  <text x="620" y="656" class="small-text">资源调配</text>
+
+  <rect x="760" y="590" width="200" height="80" class="decision-box"/>
+  <text x="860" y="620" class="text">远程操控</text>
+  <text x="860" y="638" class="small-text">远程集控</text>
+  <text x="860" y="656" class="small-text">无人驾驶调度</text>
+
+  <!-- 第五层：执行反馈 -->
+  <text x="700" y="700" class="section-title" text-anchor="middle">━━━ 执行反馈层 ━━━</text>
+
+  <rect x="150" y="720" width="180" height="70" class="system-box"/>
+  <text x="240" y="745" class="text">现场作业</text>
+  <text x="240" y="763" class="small-text">采剥运排</text>
+  <text x="240" y="780" class="small-text">人员班组</text>
+
+  <rect x="380" y="720" width="180" height="70" class="system-box"/>
+  <text x="470" y="745" class="text">设备执行</text>
+  <text x="470" y="763" class="small-text">皮带/电铲</text>
+  <text x="470" y="780" class="small-text">自动化运行</text>
+
+  <rect x="610" y="720" width="180" height="70" class="system-box"/>
+  <text x="700" y="745" class="text">车辆调度</text>
+  <text x="700" y="763" class="small-text">有人/无人</text>
+  <text x="700" y="780" class="small-text">路径执行</text>
+
+  <rect x="840" y="720" width="180" height="70" class="system-box"/>
+  <text x="930" y="745" class="text">煤质控制</text>
+  <text x="930" y="763" class="small-text">配煤生产</text>
+  <text x="930" y="780" class="small-text">质量检验</text>
+
+  <rect x="1070" y="720" width="180" height="70" class="system-box"/>
+  <text x="1160" y="745" class="text">值班管理</text>
+  <text x="1160" y="763" class="small-text">当班人员</text>
+  <text x="1160" y="780" class="small-text">日志记录</text>
+
+  <!-- 执行层反馈到数据采集层 -->
+  <path d="M 380 670 L 380 720" class="arrow"/>
+  <path d="M 620 670 L 620 720" class="arrow"/>
+  <path d="M 860 670 L 860 720" class="arrow"/>
+
+  <!-- 反馈回路 -->
+  <path d="M 240 790 L 240 850 L 1160 850 L 1160 790" class="data-arrow"/>
+  <text x="700" y="870" class="small-text" fill="#fa8c16">━━━━━ 数据反馈回路 ━━━━━</text>
+  <path d="M 1160 850 L 1160 110" class="data-arrow"/>
+  <path d="M 240 850 L 240 110" class="data-arrow"/>
+
+  <!-- 右侧关键流程说明 -->
+  <rect x="50" y="900" width="1300" height="80" fill="#fafafa" stroke="#d9d9d9" stroke-width="1" rx="4"/>
+  <text x="70" y="925" class="text" text-anchor="start" font-weight="bold">核心业务流程：</text>
+  <text x="70" y="945" class="small-text" text-anchor="start">1. 数据采集 → 2. 数据分析处理 → 3. 调度决策 → 4. 指令下发 → 5. 现场执行 → 6. 反馈监控 → 闭环优化</text>
+  <text x="70" y="965" class="small-text" text-anchor="start">特点：实时性、智能化、可视化、一体化协同</text>
+</svg>

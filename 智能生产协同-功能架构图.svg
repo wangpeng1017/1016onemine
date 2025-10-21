@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100">
+  <defs>
+    <style>
+      .arch-title { font-size: 32px; font-weight: bold; fill: #1890ff; }
+      .layer-title { font-size: 20px; font-weight: bold; fill: #fff; }
+      .module-title { font-size: 15px; font-weight: bold; fill: #262626; }
+      .feature-text { font-size: 12px; fill: #595959; }
+      .layer-bg1 { fill: #1890ff; opacity: 0.9; }
+      .layer-bg2 { fill: #52c41a; opacity: 0.9; }
+      .layer-bg3 { fill: #fa8c16; opacity: 0.9; }
+      .layer-bg4 { fill: #722ed1; opacity: 0.9; }
+      .module-box { fill: #ffffff; stroke: #d9d9d9; stroke-width: 2; rx: 6; }
+      .module-box-highlight { fill: #e6f7ff; stroke: #1890ff; stroke-width: 2; rx: 6; }
+      .connector { stroke: #8c8c8c; stroke-width: 2; fill: none; stroke-dasharray: 5,5; }
+    </style>
+  </defs>
+
+  <!-- 主标题 -->
+  <text x="800" y="50" class="arch-title" text-anchor="middle">智能生产协同 - 功能架构图</text>
+
+  <!-- ==================== 第一层：展示层 ==================== -->
+  <rect x="50" y="90" width="1500" height="180" class="layer-bg1" rx="8"/>
+  <text x="800" y="120" class="layer-title" text-anchor="middle">展示层 - 用户交互界面</text>
+
+  <!-- 数字孪生 -->
+  <rect x="80" y="145" width="220" height="110" class="module-box-highlight"/>
+  <text x="190" y="170" class="module-title" text-anchor="middle">数字孪生地图</text>
+  <text x="190" y="190" class="feature-text" text-anchor="middle">• 三维矿山场景</text>
+  <text x="190" y="208" class="feature-text" text-anchor="middle">• 实时设备定位</text>
+  <text x="190" y="226" class="feature-text" text-anchor="middle">• 车辆轨迹追踪</text>
+  <text x="190" y="244" class="feature-text" text-anchor="middle">• 动态数据标注</text>
+
+  <!-- 调度工作台 -->
+  <rect x="330" y="145" width="220" height="110" class="module-box-highlight"/>
+  <text x="440" y="170" class="module-title" text-anchor="middle">调度工作台</text>
+  <text x="440" y="190" class="feature-text" text-anchor="middle">• 实时监控面板</text>
+  <text x="440" y="208" class="feature-text" text-anchor="middle">• 指挥调度界面</text>
+  <text x="440" y="226" class="feature-text" text-anchor="middle">• 应急预案触发</text>
+  <text x="440" y="244" class="feature-text" text-anchor="middle">• 调度日志管理</text>
+
+  <!-- 生产报表 -->
+  <rect x="580" y="145" width="220" height="110" class="module-box"/>
+  <text x="690" y="170" class="module-title" text-anchor="middle">生产报表中心</text>
+  <text x="690" y="190" class="feature-text" text-anchor="middle">• 自动化报表生成</text>
+  <text x="690" y="208" class="feature-text" text-anchor="middle">• 智能数据分析</text>
+  <text x="690" y="226" class="feature-text" text-anchor="middle">• 趋势预测图表</text>
+  <text x="690" y="244" class="feature-text" text-anchor="middle">• 导出打印功能</text>
+
+  <!-- 车辆管理 -->
+  <rect x="830" y="145" width="220" height="110" class="module-box"/>
+  <text x="940" y="170" class="module-title" text-anchor="middle">车辆管理</text>
+  <text x="940" y="190" class="feature-text" text-anchor="middle">• 车辆档案管理</text>
+  <text x="940" y="208" class="feature-text" text-anchor="middle">• 实时轨迹监控</text>
+  <text x="940" y="226" class="feature-text" text-anchor="middle">• 电子围栏报警</text>
+  <text x="940" y="244" class="feature-text" text-anchor="middle">• 视频对讲调度</text>
+
+  <!-- 能耗管理 -->
+  <rect x="1080" y="145" width="220" height="110" class="module-box"/>
+  <text x="1190" y="170" class="module-title" text-anchor="middle">能耗管理</text>
+  <text x="1190" y="190" class="feature-text" text-anchor="middle">• 能耗实时监控</text>
+  <text x="1190" y="208" class="feature-text" text-anchor="middle">• 能源流向分析</text>
+  <text x="1190" y="226" class="feature-text" text-anchor="middle">• 精细化管理</text>
+  <text x="1190" y="244" class="feature-text" text-anchor="middle">• 优化建议推送</text>
+
+  <!-- 值班管理 -->
+  <rect x="1330" y="145" width="200" height="110" class="module-box"/>
+  <text x="1430" y="170" class="module-title" text-anchor="middle">值班管理</text>
+  <text x="1430" y="190" class="feature-text" text-anchor="middle">• 排班日历</text>
+  <text x="1430" y="208" class="feature-text" text-anchor="middle">• 值班信息展示</text>
+  <text x="1430" y="226" class="feature-text" text-anchor="middle">• 交接班记录</text>
+  <text x="1430" y="244" class="feature-text" text-anchor="middle">• 应急联系</text>
+
+  <!-- ==================== 第二层：业务层 ==================== -->
+  <rect x="50" y="300" width="1500" height="200" class="layer-bg2" rx="8"/>
+  <text x="800" y="330" class="layer-title" text-anchor="middle">业务层 - 核心业务逻辑</text>
+
+  <!-- 调度管理 -->
+  <rect x="80" y="355" width="280" height="130" class="module-box"/>
+  <text x="220" y="380" class="module-title" text-anchor="middle">调度管理</text>
+  <text x="100" y="405" class="feature-text" text-anchor="start">• 生产任务分配与调整</text>
+  <text x="100" y="423" class="feature-text" text-anchor="start">• 设备资源调度优化</text>
+  <text x="100" y="441" class="feature-text" text-anchor="start">• 人员班组协调管理</text>
+  <text x="100" y="459" class="feature-text" text-anchor="start">• 应急事件响应处置</text>
+  <text x="100" y="477" class="feature-text" text-anchor="start">• 调度指令下发与跟踪</text>
+
+  <!-- 远程管控 -->
+  <rect x="390" y="355" width="280" height="130" class="module-box"/>
+  <text x="530" y="380" class="module-title" text-anchor="middle">远程管控</text>
+  <text x="410" y="405" class="feature-text" text-anchor="start">• 地面生产系统远程集控</text>
+  <text x="410" y="423" class="feature-text" text-anchor="start">• 无人驾驶车辆调度</text>
+  <text x="410" y="441" class="feature-text" text-anchor="start">• 挖掘机远程操控</text>
+  <text x="410" y="459" class="feature-text" text-anchor="start">• 巡检机器人管理</text>
+  <text x="410" y="477" class="feature-text" text-anchor="start">• 视频监控与AI分析</text>
+
+  <!-- 生产分析 -->
+  <rect x="700" y="355" width="280" height="130" class="module-box"/>
+  <text x="840" y="380" class="module-title" text-anchor="middle">生产分析</text>
+  <text x="720" y="405" class="feature-text" text-anchor="start">• 产量统计与对比分析</text>
+  <text x="720" y="423" class="feature-text" text-anchor="start">• 设备效率评估</text>
+  <text x="720" y="441" class="feature-text" text-anchor="start">• 成本核算与控制</text>
+  <text x="720" y="459" class="feature-text" text-anchor="start">• 异常检测与预警</text>
+  <text x="720" y="477" class="feature-text" text-anchor="start">• 趋势预测与优化建议</text>
+
+  <!-- 资源管理 -->
+  <rect x="1010" y="355" width="280" height="130" class="module-box"/>
+  <text x="1150" y="380" class="module-title" text-anchor="middle">资源管理</text>
+  <text x="1030" y="405" class="feature-text" text-anchor="start">• 车辆全生命周期管理</text>
+  <text x="1030" y="423" class="feature-text" text-anchor="start">• 能源消耗监控与优化</text>
+  <text x="1030" y="441" class="feature-text" text-anchor="start">• 煤质管理与配煤指导</text>
+  <text x="1030" y="459" class="feature-text" text-anchor="start">• 设备保养维护计划</text>
+  <text x="1030" y="477" class="feature-text" text-anchor="start">• 物资仓储管理</text>
+
+  <!-- 预警管理 -->
+  <rect x="1320" y="355" width="210" height="130" class="module-box"/>
+  <text x="1425" y="380" class="module-title" text-anchor="middle">预警管理</text>
+  <text x="1340" y="405" class="feature-text" text-anchor="start">• 规则引擎配置</text>
+  <text x="1340" y="423" class="feature-text" text-anchor="start">• 多级预警推送</text>
+  <text x="1340" y="441" class="feature-text" text-anchor="start">• 预案自动触发</text>
+  <text x="1340" y="459" class="feature-text" text-anchor="start">• 报警追踪闭环</text>
+  <text x="1340" y="477" class="feature-text" text-anchor="start">• 统计分析</text>
+
+  <!-- ==================== 第三层：数据层 ==================== -->
+  <rect x="50" y="530" width="1500" height="180" class="layer-bg3" rx="8"/>
+  <text x="800" y="560" class="layer-title" text-anchor="middle">数据层 - 数据处理与存储</text>
+
+  <!-- 数据采集 -->
+  <rect x="80" y="585" width="260" height="110" class="module-box"/>
+  <text x="210" y="610" class="module-title" text-anchor="middle">数据采集</text>
+  <text x="210" y="630" class="feature-text" text-anchor="middle">• 设备传感器数据</text>
+  <text x="210" y="648" class="feature-text" text-anchor="middle">• 车辆GPS/状态数据</text>
+  <text x="210" y="666" class="feature-text" text-anchor="middle">• 视频监控数据流</text>
+  <text x="210" y="684" class="feature-text" text-anchor="middle">• 人工录入表单数据</text>
+
+  <!-- 数据处理 -->
+  <rect x="370" y="585" width="260" height="110" class="module-box"/>
+  <text x="500" y="610" class="module-title" text-anchor="middle">数据处理</text>
+  <text x="500" y="630" class="feature-text" text-anchor="middle">• 数据清洗与校验</text>
+  <text x="500" y="648" class="feature-text" text-anchor="middle">• 实时计算引擎</text>
+  <text x="500" y="666" class="feature-text" text-anchor="middle">• 数据融合关联</text>
+  <text x="500" y="684" class="feature-text" text-anchor="middle">• 指标自动计算</text>
+
+  <!-- 数据存储 -->
+  <rect x="660" y="585" width="260" height="110" class="module-box"/>
+  <text x="790" y="610" class="module-title" text-anchor="middle">数据存储</text>
+  <text x="790" y="630" class="feature-text" text-anchor="middle">• 时序数据库</text>
+  <text x="790" y="648" class="feature-text" text-anchor="middle">• 关系型数据库</text>
+  <text x="790" y="666" class="feature-text" text-anchor="middle">• 文档对象存储</text>
+  <text x="790" y="684" class="feature-text" text-anchor="middle">• 数据仓库/数据湖</text>
+
+  <!-- 智能分析 -->
+  <rect x="950" y="585" width="260" height="110" class="module-box"/>
+  <text x="1080" y="610" class="module-title" text-anchor="middle">智能分析</text>
+  <text x="1080" y="630" class="feature-text" text-anchor="middle">• 机器学习模型</text>
+  <text x="1080" y="648" class="feature-text" text-anchor="middle">• 异常检测算法</text>
+  <text x="1080" y="666" class="feature-text" text-anchor="middle">• 趋势预测分析</text>
+  <text x="1080" y="684" class="feature-text" text-anchor="middle">• 优化推荐引擎</text>
+
+  <!-- 数据服务 -->
+  <rect x="1240" y="585" width="290" height="110" class="module-box"/>
+  <text x="1385" y="610" class="module-title" text-anchor="middle">数据服务</text>
+  <text x="1385" y="630" class="feature-text" text-anchor="middle">• RESTful API接口</text>
+  <text x="1385" y="648" class="feature-text" text-anchor="middle">• WebSocket实时推送</text>
+  <text x="1385" y="666" class="feature-text" text-anchor="middle">• 消息队列服务</text>
+  <text x="1385" y="684" class="feature-text" text-anchor="middle">• 数据权限控制</text>
+
+  <!-- ==================== 第四层：设备层 ==================== -->
+  <rect x="50" y="740" width="1500" height="160" class="layer-bg4" rx="8"/>
+  <text x="800" y="770" class="layer-title" text-anchor="middle">设备层 - 感知与执行</text>
+
+  <!-- 生产设备 -->
+  <rect x="80" y="795" width="220" height="90" class="module-box"/>
+  <text x="190" y="820" class="module-title" text-anchor="middle">生产设备</text>
+  <text x="190" y="840" class="feature-text" text-anchor="middle">皮带运输系统</text>
+  <text x="190" y="858" class="feature-text" text-anchor="middle">电铲/挖掘机</text>
+  <text x="190" y="876" class="feature-text" text-anchor="middle">排土机械</text>
+
+  <!-- 无人系统 -->
+  <rect x="330" y="795" width="220" height="90" class="module-box"/>
+  <text x="440" y="820" class="module-title" text-anchor="middle">无人系统</text>
+  <text x="440" y="840" class="feature-text" text-anchor="middle">无人驾驶矿卡</text>
+  <text x="440" y="858" class="feature-text" text-anchor="middle">无人挖掘机</text>
+  <text x="440" y="876" class="feature-text" text-anchor="middle">巡检机器人</text>
+
+  <!-- 监控设备 -->
+  <rect x="580" y="795" width="220" height="90" class="module-box"/>
+  <text x="690" y="820" class="module-title" text-anchor="middle">监控设备</text>
+  <text x="690" y="840" class="feature-text" text-anchor="middle">视频监控系统</text>
+  <text x="690" y="858" class="feature-text" text-anchor="middle">环境传感器</text>
+  <text x="690" y="876" class="feature-text" text-anchor="middle">安全监测设备</text>
+
+  <!-- 定位系统 -->
+  <rect x="830" y="795" width="220" height="90" class="module-box"/>
+  <text x="940" y="820" class="module-title" text-anchor="middle">定位系统</text>
+  <text x="940" y="840" class="feature-text" text-anchor="middle">GPS/北斗定位</text>
+  <text x="940" y="858" class="feature-text" text-anchor="middle">UWB室内定位</text>
+  <text x="940" y="876" class="feature-text" text-anchor="middle">激光雷达</text>
+
+  <!-- 能耗设备 -->
+  <rect x="1080" y="795" width="220" height="90" class="module-box"/>
+  <text x="1190" y="820" class="module-title" text-anchor="middle">能耗设备</text>
+  <text x="1190" y="840" class="feature-text" text-anchor="middle">智能电表</text>
+  <text x="1190" y="858" class="feature-text" text-anchor="middle">水表/流量计</text>
+  <text x="1190" y="876" class="feature-text" text-anchor="middle">油耗监测</text>
+
+  <!-- 通信设备 -->
+  <rect x="1330" y="795" width="200" height="90" class="module-box"/>
+  <text x="1430" y="820" class="module-title" text-anchor="middle">通信设备</text>
+  <text x="1430" y="840" class="feature-text" text-anchor="middle">5G基站</text>
+  <text x="1430" y="858" class="feature-text" text-anchor="middle">工业以太网</text>
+  <text x="1430" y="876" class="feature-text" text-anchor="middle">无线对讲</text>
+
+  <!-- 连接线 -->
+  <path d="M 800 270 L 800 300" class="connector"/>
+  <path d="M 800 500 L 800 530" class="connector"/>
+  <path d="M 800 710 L 800 740" class="connector"/>
+
+  <!-- 底部说明 -->
+  <rect x="50" y="930" width="1500" height="140" fill="#fafafa" stroke="#d9d9d9" stroke-width="2" rx="8"/>
+  <text x="800" y="960" class="module-title" text-anchor="middle" font-size="18">核心技术特点</text>
+  
+  <text x="100" y="990" class="feature-text" text-anchor="start" font-weight="bold">🔹 数字孪生技术：</text>
+  <text x="280" y="990" class="feature-text" text-anchor="start">三维可视化矿山全景，实时映射物理世界</text>
+  
+  <text x="100" y="1015" class="feature-text" text-anchor="start" font-weight="bold">🔹 智能调度算法：</text>
+  <text x="280" y="1015" class="feature-text" text-anchor="start">AI优化生产计划，提升设备利用率与协同效率</text>
+  
+  <text x="100" y="1040" class="feature-text" text-anchor="start" font-weight="bold">🔹 实时数据驱动：</text>
+  <text x="280" y="1040" class="feature-text" text-anchor="start">毫秒级数据采集处理，支持秒级决策响应</text>
+
+  <text x="900" y="990" class="feature-text" text-anchor="start" font-weight="bold">🔹 多系统集成：</text>
+  <text x="1080" y="990" class="feature-text" text-anchor="start">无缝对接远程集控、无人驾驶等智能系统</text>
+  
+  <text x="900" y="1015" class="feature-text" text-anchor="start" font-weight="bold">🔹 预警与应急：</text>
+  <text x="1080" y="1015" class="feature-text" text-anchor="start">智能预警引擎，自动触发应急预案</text>
+  
+  <text x="900" y="1040" class="feature-text" text-anchor="start" font-weight="bold">🔹 移动端支持：</text>
+  <text x="1080" y="1040" class="feature-text" text-anchor="start">随时随地掌握生产动态，移动办公审批</text>
+
+</svg>

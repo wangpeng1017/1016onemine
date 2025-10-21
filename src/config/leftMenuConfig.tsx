@@ -10,7 +10,7 @@ import {
   EnvironmentOutlined,
   SafetyOutlined,
   FileTextOutlined,
-  ShieldOutlined,
+  SafetyCertificateOutlined,
   FileProtectOutlined,
   TeamOutlined,
   UsergroupAddOutlined,
@@ -280,7 +280,7 @@ export const safetyManagementLeftMenu: LeftMenuItem[] = [
   },
   {
     key: 'dual-prevention',
-    icon: <ShieldOutlined />,
+    icon: <SafetyCertificateOutlined />,
     label: '双重预防机制',
   },
   {

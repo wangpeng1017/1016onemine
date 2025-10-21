@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000">
+  <defs>
+    <style>
+      .flow-title { font-size: 28px; font-weight: bold; fill: #13c2c2; }
+      .section-title { font-size: 18px; font-weight: bold; fill: #262626; }
+      .plan-box { fill: #e6fffb; stroke: #13c2c2; stroke-width: 2; rx: 8; }
+      .storage-box { fill: #fff7e6; stroke: #fa8c16; stroke-width: 2; rx: 8; }
+      .sales-box { fill: #e6f7ff; stroke: #1890ff; stroke-width: 2; rx: 8; }
+      .report-box { fill: #f6ffed; stroke: #52c41a; stroke-width: 2; rx: 8; }
+      .feedback-box { fill: #fff1f0; stroke: #ff4d4f; stroke-width: 2; rx: 8; }
+      .text { font-size: 14px; fill: #262626; text-anchor: middle; }
+      .small-text { font-size: 12px; fill: #595959; text-anchor: middle; }
+      .arrow { stroke: #8c8c8c; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .data-arrow { stroke: #13c2c2; stroke-width: 2; fill: none; marker-end: url(#arrowhead-cyan); stroke-dasharray: 5,5; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#8c8c8c" />
+    </marker>
+    <marker id="arrowhead-cyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#13c2c2" />
+    </marker>
+  </defs>
+
+  <text x="700" y="40" class="flow-title" text-anchor="middle">智慧产运销 - 业务流程图</text>
+
+  <!-- 第一层：销售计划 -->
+  <text x="700" y="90" class="section-title" text-anchor="middle">━━━ 销售计划管理层 ━━━</text>
+
+  <rect x="150" y="110" width="1100" height="130" class="plan-box"/>
+  <text x="700" y="140" class="text" font-size="16" font-weight="bold">销售计划全生命周期</text>
+  
+  <rect x="200" y="160" width="180" height="65" fill="#fff" stroke="#13c2c2" stroke-width="1" rx="4"/>
+  <text x="290" y="182" class="small-text" font-weight="bold">计划制定</text>
+  <text x="290" y="200" class="small-text">煤量/金额/周期</text>
+  <text x="290" y="216" class="small-text">煤质要求/渠道</text>
+
+  <text x="400" y="195" class="text">→</text>
+
+  <rect x="430" y="160" width="180" height="65" fill="#fff" stroke="#13c2c2" stroke-width="1" rx="4"/>
+  <text x="520" y="182" class="small-text" font-weight="bold">审批流程</text>
+  <text x="520" y="200" class="small-text">提交审核</text>
+  <text x="520" y="216" class="small-text">通过/驳回</text>
+
+  <text x="630" y="195" class="text">→</text>
+
+  <rect x="660" y="160" width="180" height="65" fill="#fff" stroke="#13c2c2" stroke-width="1" rx="4"/>
+  <text x="750" y="182" class="small-text" font-weight="bold">计划执行</text>
+  <text x="750" y="200" class="small-text">计划生效</text>
+  <text x="750" y="216" class="small-text">进度跟踪</text>
+
+  <text x="860" y="195" class="text">→</text>
+
+  <rect x="890" y="160" width="180" height="65" fill="#fff" stroke="#13c2c2" stroke-width="1" rx="4"/>
+  <text x="980" y="182" class="small-text" font-weight="bold">总结分析</text>
+  <text x="980" y="200" class="small-text">完成情况</text>
+  <text x="980" y="216" class="small-text">问题改进</text>
+
+  <text x="1090" y="195" class="text">→</text>
+
+  <rect x="1090" y="160" width="140" height="65" fill="#fff" stroke="#13c2c2" stroke-width="1" rx="4"/>
+  <text x="1160" y="188" class="small-text" font-weight="bold">历史回溯</text>
+  <text x="1160" y="210" class="small-text">统计分析</text>
+
+  <!-- 第二层：存量管理 -->
+  <text x="700" y="270" class="section-title" text-anchor="middle">━━━ 库存存量管理层 ━━━</text>
+
+  <path d="M 700 240 L 700 290" class="data-arrow"/>
+
+  <rect x="100" y="290" width="350" height="140" class="storage-box"/>
+  <text x="275" y="320" class="text" font-weight="bold">筒仓存煤量监测</text>
+  <text x="130" y="345" class="small-text" text-anchor="start">• 雷达料位计实时数据采集</text>
+  <text x="130" y="365" class="small-text" text-anchor="start">• 自动计算存煤量</text>
+  <text x="130" y="385" class="small-text" text-anchor="start">• 高位/低位预警</text>
+  <text x="130" y="405" class="small-text" text-anchor="start">• 可视化筒仓图展示</text>
+  <text x="130" y="425" class="small-text" text-anchor="start">• 料位历史趋势分析</text>
+
+  <rect x="500" y="290" width="350" height="140" class="storage-box"/>
+  <text x="675" y="320" class="text" font-weight="bold">临时堆煤量管理</text>
+  <text x="520" y="345" class="small-text" text-anchor="start">• 定期盘点录入</text>
+  <text x="520" y="365" class="small-text" text-anchor="start">• 进出场计划管理</text>
+  <text x="520" y="385" class="small-text" text-anchor="start">• 超期堆放预警</text>
+  <text x="520" y="405" class="small-text" text-anchor="start">• 历史盘点查询</text>
+  <text x="520" y="425" class="small-text" text-anchor="start">• 煤堆位置标识</text>
+
+  <rect x="900" y="290" width="350" height="140" class="storage-box"/>
+  <text x="1075" y="320" class="text" font-weight="bold">损耗量管理</text>
+  <text x="920" y="345" class="small-text" text-anchor="start">• 外协用煤记录</text>
+  <text x="920" y="365" class="small-text" text-anchor="start">• 生产排弃废料统计</text>
+  <text x="920" y="385" class="small-text" text-anchor="start">• 损耗煤（自燃/风吹）</text>
+  <text x="920" y="405" class="small-text" text-anchor="start">• 分类统计分析</text>
+  <text x="920" y="425" class="small-text" text-anchor="start">• 损耗趋势分析</text>
+
+  <!-- 第三层：产存销报表 -->
+  <text x="700" y="460" class="section-title" text-anchor="middle">━━━ 产存销综合报表层 ━━━</text>
+
+  <path d="M 275 430 L 275 480" class="data-arrow"/>
+  <path d="M 675 430 L 675 480" class="data-arrow"/>
+  <path d="M 1075 430 L 1075 480" class="data-arrow"/>
+
+  <rect x="100" y="480" width="1200" height="130" class="report-box"/>
+  <text x="700" y="510" class="text" font-size="16" font-weight="bold">产存销数据中台</text>
+  
+  <text x="200" y="540" class="small-text">产量报表生成</text>
+  <text x="400" y="540" class="small-text">存量实时监控</text>
+  <text x="600" y="540" class="small-text">销量数据汇总</text>
+  <text x="800" y="540" class="small-text">产存销平衡表</text>
+  <text x="1000" y="540" class="small-text">多维度统计</text>
+  <text x="1180" y="540" class="small-text">可视化图表</text>
+
+  <text x="200" y="570" class="small-text">收方量数据接入</text>
+  <text x="400" y="570" class="small-text">库存自动计算</text>
+  <text x="600" y="570" class="small-text">地磅数据对接</text>
+  <text x="800" y="570" class="small-text">期末库存计算</text>
+  <text x="1000" y="570" class="small-text">趋势对比分析</text>
+  <text x="1180" y="570" class="small-text">报表导出打印</text>
+
+  <text x="250" y="595" class="small-text">日/周/月/年报表</text>
+  <text x="500" y="595" class="small-text">损耗量统计</text>
+  <text x="750" y="595" class="small-text">计划完成率</text>
+  <text x="1000" y="595" class="small-text">交互式筛选</text>
+
+  <!-- 第四层：销售执行与反馈 -->
+  <text x="700" y="640" class="section-title" text-anchor="middle">━━━ 销售执行与反馈层 ━━━</text>
+
+  <path d="M 700 610 L 700 660" class="arrow"/>
+
+  <rect x="100" y="660" width="550" height="140" class="sales-box"/>
+  <text x="375" y="690" class="text" font-weight="bold">地磅房无人值守系统对接</text>
+  
+  <text x="130" y="715" class="small-text" text-anchor="start">数据实时采集：</text>
+  <text x="130" y="735" class="small-text" text-anchor="start">• 车辆信息（车牌号/车型）</text>
+  <text x="130" y="755" class="small-text" text-anchor="start">• 称重信息（毛重/皮重/净重）</text>
+  <text x="130" y="775" class="small-text" text-anchor="start">• 监控视频关联</text>
+  <text x="130" y="795" class="small-text" text-anchor="start">• 自动生成装车记录</text>
+
+  <text x="400" y="715" class="small-text" text-anchor="start">智能预警：</text>
+  <text x="400" y="735" class="small-text" text-anchor="start">• 车牌与车辆不符</text>
+  <text x="400" y="755" class="small-text" text-anchor="start">• 称重异常检测</text>
+  <text x="400" y="775" class="small-text" text-anchor="start">• 历史数据回看</text>
+  <text x="400" y="795" class="small-text" text-anchor="start">• 视频追溯查询</text>
+
+  <rect x="700" y="660" width="550" height="140" class="feedback-box"/>
+  <text x="975" y="690" class="text" font-weight="bold">销售反馈管理</text>
+  
+  <text x="730" y="715" class="small-text" text-anchor="start">销售数据实时反馈：</text>
+  <text x="730" y="735" class="small-text" text-anchor="start">• 今日/本周/本月销量/销售额</text>
+  <text x="730" y="755" class="small-text" text-anchor="start">• 销售价格波动监控</text>
+  <text x="730" y="775" class="small-text" text-anchor="start">• 各渠道销售占比</text>
+  <text x="730" y="795" class="small-text" text-anchor="start">• 客户购买历史分析</text>
+
+  <text x="1040" y="715" class="small-text" text-anchor="start">客户反馈：</text>
+  <text x="1040" y="735" class="small-text" text-anchor="start">• 反馈信息收集</text>
+  <text x="1040" y="755" class="small-text" text-anchor="start">• 处理流程跟踪</text>
+  <text x="1040" y="775" class="small-text" text-anchor="start">• 问题分类统计</text>
+  <text x="1040" y="795" class="small-text" text-anchor="start">• 改进建议生成</text>
+
+  <!-- 反馈回路 -->
+  <path d="M 375 800 L 375 850 L 975 850 L 975 800" class="data-arrow"/>
+  <text x="675" y="870" class="small-text" fill="#13c2c2">━━━━ 数据驱动决策闭环 ━━━━</text>
+  <path d="M 975 850 L 975 880 L 1350 880 L 1350 195 L 1070 195" class="data-arrow"/>
+  <path d="M 375 850 L 375 880 L 50 880 L 50 195 L 200 195" class="data-arrow"/>
+
+  <!-- 底部说明 -->
+  <rect x="50" y="910" width="1300" height="80" fill="#fafafa" stroke="#d9d9d9" stroke-width="1" rx="4"/>
+  <text x="70" y="935" class="text" text-anchor="start" font-weight="bold">核心业务流程：</text>
+  <text x="70" y="955" class="small-text" text-anchor="start">1. 销售计划制定与审批 → 2. 库存实时监控（筒仓+临时堆煤-损耗）→ 3. 产存销数据整合分析 → 4. 地磅装车执行 → 5. 销售反馈与改进 → 闭环优化</text>
+  <text x="70" y="975" class="small-text" text-anchor="start">特点：计划驱动 | 实时监控 | 数据融合 | 智能预警 | 无人值守 | 客户反馈 | 决策支持 | 产存销平衡</text>
+</svg>
