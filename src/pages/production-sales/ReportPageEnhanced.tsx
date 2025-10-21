@@ -64,7 +64,7 @@ const ReportPageEnhanced: React.FC = () => {
 
       // 计算该周期内的销售和库存数据
       const filteredSales = salesPlans.filter(s => {
-        const planDate = dayjs(s.planDate);
+        const planDate = dayjs(s.startDate);
         if (reportType === 'daily') {
           return planDate.isSame(currentDate, 'day');
         } else if (reportType === 'weekly') {
@@ -74,8 +74,8 @@ const ReportPageEnhanced: React.FC = () => {
         }
       });
 
-      const salesVolume = filteredSales.reduce((sum, s) => sum + s.plannedVolume, 0);
-      const salesRevenue = filteredSales.reduce((sum, s) => sum + s.estimatedRevenue, 0);
+      const salesVolume = filteredSales.reduce((sum, s) => sum + s.salesVolume, 0);
+      const salesRevenue = filteredSales.reduce((sum, s) => sum + (s.estimatedAmount || 0), 0);
 
       // 获取该周期末的库存数据（筒仓 + 临时堆煤）
       const siloVolume = silos.reduce((sum, s) => sum + s.currentVolume, 0);
