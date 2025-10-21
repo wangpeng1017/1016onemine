@@ -106,7 +106,7 @@ const App: React.FC = () => {
               <Route path="comprehensive-env-monitoring" element={<ComprehensiveEnvMonitoring />} />
               
               {/* 智慧产运销路由 */}
-              <Route path="smart-prod-ops-sales" element={<SmartProdOpsSales />} />
+              <Route path="smart-prod-ops-sales" element={<ProductionSalesCenter />} />
               <Route path="production-sales-center" element={<ProductionSalesCenter />} />
               
               {/* IOC中心路由 */}
