@@ -153,11 +153,12 @@ const SEED_PLANS: SalesPlan[] = [
       { id: 'APR-006', approver: '王总', action: 'approve', opinion: '同意', timestamp: '2024-01-25 15:00:00' }
     ],
     summary: {
-      actualVolume: 29500,
-      actualAmount: 13725000,
+      finalVolume: 29500,
+      finalAmount: 13725000,
       completionRate: 105,
-      analysis: '超额完成，客户满意度高',
-      improvements: '继续保持合作'
+      problemAnalysis: '超额完成，客户满意度高',
+      improvements: '继续保持合作',
+      completedAt: '2024-05-16'
     }
   },
   {
@@ -261,11 +262,12 @@ const SEED_PLANS: SalesPlan[] = [
       { id: 'APR-012', approver: '王总', action: 'approve', opinion: '加急，立即执行', timestamp: '2024-01-06 08:00:00' }
     ],
     summary: {
-      actualVolume: 8200,
-      actualAmount: 4305000,
+      finalVolume: 8200,
+      finalAmount: 4305000,
       completionRate: 103,
-      analysis: '提前完成，保障了节前需求',
-      improvements: '应急机制运作良好'
+      problemAnalysis: '提前完成，保障了节前需求',
+      improvements: '应急机制运作良好',
+      completedAt: '2024-02-09'
     }
   },
   {

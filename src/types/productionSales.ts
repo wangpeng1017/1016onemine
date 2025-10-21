@@ -171,7 +171,7 @@ export interface CustomerFeedback {
   customerName: string;
   customerId?: string;
   feedbackDate: string;
-  type: 'quality' | 'service' | 'delivery' | 'other';
+  type: 'quality' | 'service' | 'delivery' | 'price' | 'other';
   content: string;
   status: 'pending' | 'processing' | 'resolved';
   responsible?: string;
