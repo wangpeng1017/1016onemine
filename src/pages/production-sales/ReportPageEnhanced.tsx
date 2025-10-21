@@ -5,6 +5,9 @@ import ReactECharts from 'echarts-for-react';
 import { salesPlanService, siloService, tempPileService, dashboardService } from '../../services/productionSalesMockService';
 import type { SalesPlan, Silo, TemporaryCoalPile, SalesDashboard } from '../../types/productionSales';
 import dayjs from 'dayjs';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
+
+dayjs.extend(weekOfYear);
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
