@@ -102,7 +102,7 @@ export interface TemporaryCoalPile {
 export interface LossRecord {
   id: string;
   date: string;
-  category: 'external_coal' | 'production_waste' | 'natural_loss';
+  category: 'external_coal' | 'production_waste' | 'natural_loss' | 'ash' | 'fire_coal' | 'dirty_coal';
   categoryName: string;
   volume: number; // 损耗量(吨)
   department: string;
