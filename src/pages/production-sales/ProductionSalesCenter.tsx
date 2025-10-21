@@ -3,8 +3,8 @@ import { Card, Tabs } from 'antd';
 import { BarChartOutlined, DatabaseOutlined, LineChartOutlined, CommentOutlined } from '@ant-design/icons';
 import SalesPlanPageEnhanced from './SalesPlanPageEnhanced';
 import InventoryManagementPageEnhanced from './InventoryManagementPageEnhanced';
-import ReportPage from './ReportPage';
-import FeedbackPage from './FeedbackPage';
+import ReportPageEnhanced from './ReportPageEnhanced';
+import FeedbackPageEnhanced from './FeedbackPageEnhanced';
 
 const ProductionSalesCenter: React.FC = () => {
   return (
@@ -43,7 +43,7 @@ const ProductionSalesCenter: React.FC = () => {
                   产存销报表
                 </span>
               ),
-              children: <ReportPage />
+              children: <ReportPageEnhanced />
             },
             {
               key: 'feedback',
@@ -53,7 +53,7 @@ const ProductionSalesCenter: React.FC = () => {
                   销售反馈
                 </span>
               ),
-              children: <FeedbackPage />
+              children: <FeedbackPageEnhanced />
             }
           ]}
         />

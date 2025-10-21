@@ -1,0 +1,534 @@
+import React, { useState, useEffect } from 'react';
+import { Card, Row, Col, Table, Button, Select, DatePicker, Space, Tag, Statistic, message, Tabs } from 'antd';
+import { DownloadOutlined, FileExcelOutlined, FilePdfOutlined, BarChartOutlined, LineChartOutlined, DatabaseOutlined } from '@ant-design/icons';
+import ReactECharts from 'echarts-for-react';
+import { salesPlanService, inventoryService, dashboardService } from '../../services/productionSalesMockService';
+import type { SalesPlan, Inventory, SalesDashboard } from '../../types/productionSales';
+import dayjs from 'dayjs';
+
+const { Option } = Select;
+const { RangePicker } = DatePicker;
+
+interface ReportData {
+  period: string;
+  salesVolume: number;
+  salesRevenue: number;
+  inventoryVolume: number;
+  inventoryValue: number;
+  productionVolume?: number;
+}
+
+const ReportPageEnhanced: React.FC = () => {
+  const [salesPlans, setSalesPlans] = useState<SalesPlan[]>([]);
+  const [inventories, setInventories] = useState<Inventory[]>([]);
+  const [dashboard, setDashboard] = useState<SalesDashboard | null>(null);
+  const [reportType, setReportType] = useState<'daily' | 'weekly' | 'monthly'>('monthly');
+  const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs]>([
+    dayjs().subtract(1, 'month'),
+    dayjs()
+  ]);
+  const [selectedCoalType, setSelectedCoalType] = useState<string>('all');
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = () => {
+    setSalesPlans(salesPlanService.getAll());
+    setInventories(inventoryService.getAll());
+    setDashboard(dashboardService.getDashboard());
+  };
+
+  // 生成报表数据
+  const generateReportData = (): ReportData[] => {
+    const data: ReportData[] = [];
+    const startDate = dateRange[0];
+    const endDate = dateRange[1];
+    
+    // 根据报表类型生成不同周期的数据
+    let currentDate = startDate.clone();
+    while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
+      let period = '';
+      if (reportType === 'daily') {
+        period = currentDate.format('YYYY-MM-DD');
+      } else if (reportType === 'weekly') {
+        period = `${currentDate.format('YYYY')}年第${currentDate.week()}周`;
+      } else {
+        period = currentDate.format('YYYY-MM');
+      }
+
+      // 计算该周期内的销售和库存数据
+      const filteredSales = salesPlans.filter(s => {
+        const planDate = dayjs(s.planDate);
+        if (reportType === 'daily') {
+          return planDate.isSame(currentDate, 'day');
+        } else if (reportType === 'weekly') {
+          return planDate.week() === currentDate.week() && planDate.year() === currentDate.year();
+        } else {
+          return planDate.month() === currentDate.month() && planDate.year() === currentDate.year();
+        }
+      });
+
+      const salesVolume = filteredSales.reduce((sum, s) => sum + s.plannedVolume, 0);
+      const salesRevenue = filteredSales.reduce((sum, s) => sum + s.estimatedRevenue, 0);
+
+      // 获取该周期末的库存数据
+      const periodInventories = inventories.filter(i => 
+        selectedCoalType === 'all' || i.coalType === selectedCoalType
+      );
+      const inventoryVolume = periodInventories.reduce((sum, i) => sum + i.currentVolume, 0);
+      const inventoryValue = periodInventories.reduce((sum, i) => sum + i.estimatedValue, 0);
+
+      data.push({
+        period,
+        salesVolume: parseFloat(salesVolume.toFixed(2)),
+        salesRevenue: parseFloat(salesRevenue.toFixed(2)),
+        inventoryVolume: parseFloat(inventoryVolume.toFixed(2)),
+        inventoryValue: parseFloat(inventoryValue.toFixed(2)),
+        productionVolume: salesVolume * (0.9 + Math.random() * 0.2) // 模拟生产量
+      });
+
+      // 移动到下一个周期
+      if (reportType === 'daily') {
+        currentDate = currentDate.add(1, 'day');
+      } else if (reportType === 'weekly') {
+        currentDate = currentDate.add(1, 'week');
+      } else {
+        currentDate = currentDate.add(1, 'month');
+      }
+    }
+
+    return data;
+  };
+
+  const reportData = generateReportData();
+
+  // 存量报表列定义
+  const inventoryReportColumns = [
+    { title: '煤种', dataIndex: 'coalType', key: 'coalType', width: 120 },
+    { title: '堆场', dataIndex: 'location', key: 'location', width: 120 },
+    { title: '当前库存(吨)', dataIndex: 'currentVolume', key: 'currentVolume', width: 120, render: (v: number) => v.toLocaleString() },
+    { title: '最大容量(吨)', dataIndex: 'maxCapacity', key: 'maxCapacity', width: 120, render: (v: number) => v.toLocaleString() },
+    { 
+      title: '容量使用率', 
+      key: 'utilizationRate', 
+      width: 120,
+      render: (_: any, record: Inventory) => {
+        const rate = (record.currentVolume / record.maxCapacity * 100).toFixed(1);
+        return <Tag color={parseFloat(rate) > 90 ? 'red' : parseFloat(rate) > 70 ? 'orange' : 'green'}>{rate}%</Tag>;
+      }
+    },
+    { title: '预估价值(元)', dataIndex: 'estimatedValue', key: 'estimatedValue', width: 150, render: (v: number) => '¥' + v.toLocaleString() },
+    { 
+      title: '堆放天数', 
+      dataIndex: 'storageDate', 
+      key: 'storageDays', 
+      width: 100,
+      render: (date: string) => {
+        const days = dayjs().diff(dayjs(date), 'day');
+        return <Tag color={days > 30 ? 'red' : days > 15 ? 'orange' : 'blue'}>{days}天</Tag>;
+      }
+    }
+  ];
+
+  // 销量报表列定义
+  const salesReportColumns = [
+    { title: '周期', dataIndex: 'period', key: 'period', width: 150 },
+    { title: '销售量(吨)', dataIndex: 'salesVolume', key: 'salesVolume', width: 120, render: (v: number) => v.toLocaleString() },
+    { title: '销售额(元)', dataIndex: 'salesRevenue', key: 'salesRevenue', width: 150, render: (v: number) => '¥' + v.toLocaleString() },
+    { 
+      title: '平均单价(元/吨)', 
+      key: 'avgPrice', 
+      width: 120,
+      render: (_: any, record: ReportData) => 
+        record.salesVolume > 0 ? '¥' + (record.salesRevenue / record.salesVolume).toFixed(2) : '-'
+    }
+  ];
+
+  // 综合报表列定义
+  const comprehensiveReportColumns = [
+    { title: '周期', dataIndex: 'period', key: 'period', width: 120 },
+    { title: '生产量(吨)', dataIndex: 'productionVolume', key: 'productionVolume', width: 100, render: (v: number) => v?.toFixed(0) || '-' },
+    { title: '销售量(吨)', dataIndex: 'salesVolume', key: 'salesVolume', width: 100, render: (v: number) => v.toLocaleString() },
+    { title: '库存量(吨)', dataIndex: 'inventoryVolume', key: 'inventoryVolume', width: 100, render: (v: number) => v.toLocaleString() },
+    { title: '销售额(元)', dataIndex: 'salesRevenue', key: 'salesRevenue', width: 120, render: (v: number) => '¥' + v.toLocaleString() },
+    { title: '库存价值(元)', dataIndex: 'inventoryValue', key: 'inventoryValue', width: 120, render: (v: number) => '¥' + v.toLocaleString() }
+  ];
+
+  // 销售趋势图表
+  const salesTrendChart = {
+    title: { text: '销售趋势分析', left: 'center', textStyle: { fontSize: 14 } },
+    tooltip: { trigger: 'axis' },
+    legend: { data: ['销售量', '销售额'], bottom: 10 },
+    xAxis: { type: 'category', data: reportData.map(d => d.period), axisLabel: { rotate: 45 } },
+    yAxis: [
+      { type: 'value', name: '销售量(吨)', position: 'left' },
+      { type: 'value', name: '销售额(元)', position: 'right' }
+    ],
+    series: [
+      { 
+        name: '销售量', 
+        type: 'bar', 
+        data: reportData.map(d => d.salesVolume),
+        itemStyle: { color: '#1890ff' },
+        yAxisIndex: 0
+      },
+      { 
+        name: '销售额', 
+        type: 'line', 
+        data: reportData.map(d => d.salesRevenue),
+        itemStyle: { color: '#52c41a' },
+        yAxisIndex: 1,
+        smooth: true
+      }
+    ],
+    grid: { left: '10%', right: '10%', bottom: '20%', top: '15%' }
+  };
+
+  // 库存趋势图表
+  const inventoryTrendChart = {
+    title: { text: '库存趋势分析', left: 'center', textStyle: { fontSize: 14 } },
+    tooltip: { trigger: 'axis' },
+    legend: { data: ['库存量', '库存价值'], bottom: 10 },
+    xAxis: { type: 'category', data: reportData.map(d => d.period), axisLabel: { rotate: 45 } },
+    yAxis: [
+      { type: 'value', name: '库存量(吨)', position: 'left' },
+      { type: 'value', name: '库存价值(元)', position: 'right' }
+    ],
+    series: [
+      { 
+        name: '库存量', 
+        type: 'line', 
+        data: reportData.map(d => d.inventoryVolume),
+        itemStyle: { color: '#faad14' },
+        yAxisIndex: 0,
+        smooth: true,
+        areaStyle: { opacity: 0.3 }
+      },
+      { 
+        name: '库存价值', 
+        type: 'line', 
+        data: reportData.map(d => d.inventoryValue),
+        itemStyle: { color: '#ff4d4f' },
+        yAxisIndex: 1,
+        smooth: true
+      }
+    ],
+    grid: { left: '10%', right: '10%', bottom: '20%', top: '15%' }
+  };
+
+  // 产销存对比图表
+  const productionSalesInventoryChart = {
+    title: { text: '产销存对比分析', left: 'center', textStyle: { fontSize: 14 } },
+    tooltip: { trigger: 'axis' },
+    legend: { data: ['生产量', '销售量', '库存量'], bottom: 10 },
+    xAxis: { type: 'category', data: reportData.map(d => d.period), axisLabel: { rotate: 45 } },
+    yAxis: { type: 'value', name: '数量(吨)' },
+    series: [
+      { 
+        name: '生产量', 
+        type: 'bar', 
+        data: reportData.map(d => d.productionVolume),
+        itemStyle: { color: '#1890ff' }
+      },
+      { 
+        name: '销售量', 
+        type: 'bar', 
+        data: reportData.map(d => d.salesVolume),
+        itemStyle: { color: '#52c41a' }
+      },
+      { 
+        name: '库存量', 
+        type: 'line', 
+        data: reportData.map(d => d.inventoryVolume),
+        itemStyle: { color: '#faad14' },
+        smooth: true
+      }
+    ],
+    grid: { left: '10%', right: '5%', bottom: '20%', top: '15%' }
+  };
+
+  // 导出为Excel
+  const handleExportExcel = (type: 'inventory' | 'sales' | 'comprehensive') => {
+    let data: any[] = [];
+    let filename = '';
+    
+    if (type === 'inventory') {
+      data = inventories;
+      filename = `存量报表_${dayjs().format('YYYYMMDD')}.csv`;
+    } else if (type === 'sales') {
+      data = reportData;
+      filename = `销量报表_${dateRange[0].format('YYYYMMDD')}_${dateRange[1].format('YYYYMMDD')}.csv`;
+    } else {
+      data = reportData;
+      filename = `产存销报表_${dateRange[0].format('YYYYMMDD')}_${dateRange[1].format('YYYYMMDD')}.csv`;
+    }
+
+    // 简单CSV导出
+    const csvContent = convertToCSV(data);
+    const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    message.success('Excel报表已导出');
+  };
+
+  // 导出为PDF
+  const handleExportPDF = () => {
+    message.info('PDF导出功能开发中，可通过浏览器打印功能转换为PDF');
+    window.print();
+  };
+
+  // 简单的CSV转换
+  const convertToCSV = (data: any[]): string => {
+    if (data.length === 0) return '';
+    
+    const headers = Object.keys(data[0]).join(',');
+    const rows = data.map(obj => 
+      Object.values(obj).map(val => 
+        typeof val === 'string' && val.includes(',') ? `"${val}"` : val
+      ).join(',')
+    );
+    
+    return [headers, ...rows].join('\n');
+  };
+
+  // 计算汇总统计
+  const summaryStats = {
+    totalSales: reportData.reduce((sum, d) => sum + d.salesVolume, 0),
+    totalRevenue: reportData.reduce((sum, d) => sum + d.salesRevenue, 0),
+    totalInventory: inventories.reduce((sum, i) => sum + i.currentVolume, 0),
+    totalInventoryValue: inventories.reduce((sum, i) => sum + i.estimatedValue, 0),
+    avgSalesVolume: reportData.length > 0 ? reportData.reduce((sum, d) => sum + d.salesVolume, 0) / reportData.length : 0,
+    avgRevenue: reportData.length > 0 ? reportData.reduce((sum, d) => sum + d.salesRevenue, 0) / reportData.length : 0
+  };
+
+  return (
+    <div style={{ padding: 24, background: '#f0f2f5', minHeight: '100vh' }}>
+      <Card 
+        title="产存销报表分析"
+        extra={
+          <Space>
+            <Select value={reportType} onChange={setReportType} style={{ width: 120 }}>
+              <Option value="daily">日报</Option>
+              <Option value="weekly">周报</Option>
+              <Option value="monthly">月报</Option>
+            </Select>
+            <RangePicker 
+              value={dateRange}
+              onChange={(dates) => dates && setDateRange(dates as [dayjs.Dayjs, dayjs.Dayjs])}
+            />
+            <Select value={selectedCoalType} onChange={setSelectedCoalType} style={{ width: 120 }}>
+              <Option value="all">全部煤种</Option>
+              <Option value="焦煤">焦煤</Option>
+              <Option value="动力煤">动力煤</Option>
+              <Option value="无烟煤">无烟煤</Option>
+            </Select>
+          </Space>
+        }
+        style={{ marginBottom: 24 }}
+      >
+        <Row gutter={16}>
+          <Col span={6}>
+            <Card>
+              <Statistic 
+                title="累计销售量" 
+                value={summaryStats.totalSales.toFixed(0)} 
+                suffix="吨"
+                valueStyle={{ color: '#1890ff' }}
+              />
+              <div style={{ marginTop: 8, fontSize: 12, color: '#999' }}>
+                日均: {summaryStats.avgSalesVolume.toFixed(1)}吨
+              </div>
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card>
+              <Statistic 
+                title="累计销售额" 
+                value={summaryStats.totalRevenue.toFixed(0)} 
+                prefix="¥"
+                valueStyle={{ color: '#52c41a' }}
+              />
+              <div style={{ marginTop: 8, fontSize: 12, color: '#999' }}>
+                日均: ¥{summaryStats.avgRevenue.toFixed(0)}
+              </div>
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card>
+              <Statistic 
+                title="当前库存量" 
+                value={summaryStats.totalInventory.toFixed(0)} 
+                suffix="吨"
+                valueStyle={{ color: '#faad14' }}
+              />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card>
+              <Statistic 
+                title="库存总价值" 
+                value={summaryStats.totalInventoryValue.toFixed(0)} 
+                prefix="¥"
+                valueStyle={{ color: '#ff4d4f' }}
+              />
+            </Card>
+          </Col>
+        </Row>
+      </Card>
+
+      <Tabs
+        defaultActiveKey="inventory"
+        items={[
+          {
+            key: 'inventory',
+            label: (
+              <span>
+                <DatabaseOutlined />
+                存量报表
+              </span>
+            ),
+            children: (
+              <Card
+                title="库存明细报表"
+                extra={
+                  <Space>
+                    <Button icon={<FileExcelOutlined />} onClick={() => handleExportExcel('inventory')}>
+                      导出Excel
+                    </Button>
+                    <Button icon={<FilePdfOutlined />} onClick={handleExportPDF}>
+                      导出PDF
+                    </Button>
+                  </Space>
+                }
+              >
+                <Table 
+                  columns={inventoryReportColumns} 
+                  dataSource={inventories.filter(i => selectedCoalType === 'all' || i.coalType === selectedCoalType)} 
+                  rowKey="id" 
+                  pagination={{ pageSize: 10 }}
+                  summary={() => (
+                    <Table.Summary>
+                      <Table.Summary.Row style={{ background: '#fafafa', fontWeight: 'bold' }}>
+                        <Table.Summary.Cell index={0} colSpan={2}>合计</Table.Summary.Cell>
+                        <Table.Summary.Cell index={2}>
+                          {inventories.filter(i => selectedCoalType === 'all' || i.coalType === selectedCoalType)
+                            .reduce((sum, i) => sum + i.currentVolume, 0).toLocaleString()}
+                        </Table.Summary.Cell>
+                        <Table.Summary.Cell index={3}>
+                          {inventories.filter(i => selectedCoalType === 'all' || i.coalType === selectedCoalType)
+                            .reduce((sum, i) => sum + i.maxCapacity, 0).toLocaleString()}
+                        </Table.Summary.Cell>
+                        <Table.Summary.Cell index={4}>-</Table.Summary.Cell>
+                        <Table.Summary.Cell index={5}>
+                          ¥{inventories.filter(i => selectedCoalType === 'all' || i.coalType === selectedCoalType)
+                            .reduce((sum, i) => sum + i.estimatedValue, 0).toLocaleString()}
+                        </Table.Summary.Cell>
+                        <Table.Summary.Cell index={6}>-</Table.Summary.Cell>
+                      </Table.Summary.Row>
+                    </Table.Summary>
+                  )}
+                />
+                <div style={{ marginTop: 24 }}>
+                  <ReactECharts option={inventoryTrendChart} style={{ height: 350 }} />
+                </div>
+              </Card>
+            )
+          },
+          {
+            key: 'sales',
+            label: (
+              <span>
+                <LineChartOutlined />
+                销量报表
+              </span>
+            ),
+            children: (
+              <Card
+                title="销售统计报表"
+                extra={
+                  <Space>
+                    <Button icon={<FileExcelOutlined />} onClick={() => handleExportExcel('sales')}>
+                      导出Excel
+                    </Button>
+                    <Button icon={<FilePdfOutlined />} onClick={handleExportPDF}>
+                      导出PDF
+                    </Button>
+                  </Space>
+                }
+              >
+                <Table 
+                  columns={salesReportColumns} 
+                  dataSource={reportData} 
+                  rowKey="period" 
+                  pagination={{ pageSize: 10 }}
+                  summary={() => (
+                    <Table.Summary>
+                      <Table.Summary.Row style={{ background: '#fafafa', fontWeight: 'bold' }}>
+                        <Table.Summary.Cell index={0}>合计</Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}>
+                          {reportData.reduce((sum, d) => sum + d.salesVolume, 0).toLocaleString()}
+                        </Table.Summary.Cell>
+                        <Table.Summary.Cell index={2}>
+                          ¥{reportData.reduce((sum, d) => sum + d.salesRevenue, 0).toLocaleString()}
+                        </Table.Summary.Cell>
+                        <Table.Summary.Cell index={3}>
+                          ¥{(reportData.reduce((sum, d) => sum + d.salesRevenue, 0) / 
+                            reportData.reduce((sum, d) => sum + d.salesVolume, 0)).toFixed(2)}
+                        </Table.Summary.Cell>
+                      </Table.Summary.Row>
+                    </Table.Summary>
+                  )}
+                />
+                <div style={{ marginTop: 24 }}>
+                  <ReactECharts option={salesTrendChart} style={{ height: 350 }} />
+                </div>
+              </Card>
+            )
+          },
+          {
+            key: 'comprehensive',
+            label: (
+              <span>
+                <BarChartOutlined />
+                产存销综合
+              </span>
+            ),
+            children: (
+              <Space direction="vertical" size="large" style={{ width: '100%' }}>
+                <Card
+                  title="产存销综合报表"
+                  extra={
+                    <Space>
+                      <Button icon={<FileExcelOutlined />} onClick={() => handleExportExcel('comprehensive')}>
+                        导出Excel
+                      </Button>
+                      <Button icon={<FilePdfOutlined />} onClick={handleExportPDF}>
+                        导出PDF
+                      </Button>
+                    </Space>
+                  }
+                >
+                  <Table 
+                    columns={comprehensiveReportColumns} 
+                    dataSource={reportData} 
+                    rowKey="period" 
+                    pagination={{ pageSize: 10 }}
+                  />
+                </Card>
+                <Card>
+                  <ReactECharts option={productionSalesInventoryChart} style={{ height: 400 }} />
+                </Card>
+              </Space>
+            )
+          }
+        ]}
+      />
+    </div>
+  );
+};
+
+export default ReportPageEnhanced;
