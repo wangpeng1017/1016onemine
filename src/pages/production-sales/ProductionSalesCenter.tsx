@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Tabs } from 'antd';
 import { BarChartOutlined, DatabaseOutlined, LineChartOutlined, CommentOutlined } from '@ant-design/icons';
-import SalesPlanPage from './SalesPlanPage';
-import InventoryManagementPage from './InventoryManagementPage';
+import SalesPlanPageEnhanced from './SalesPlanPageEnhanced';
+import InventoryManagementPageEnhanced from './InventoryManagementPageEnhanced';
 import ReportPage from './ReportPage';
 import FeedbackPage from './FeedbackPage';
 
@@ -23,7 +23,7 @@ const ProductionSalesCenter: React.FC = () => {
                   销售计划
                 </span>
               ),
-              children: <SalesPlanPage />
+              children: <SalesPlanPageEnhanced />
             },
             {
               key: 'inventory',
@@ -33,7 +33,7 @@ const ProductionSalesCenter: React.FC = () => {
                   存量管理
                 </span>
               ),
-              children: <InventoryManagementPage />
+              children: <InventoryManagementPageEnhanced />
             },
             {
               key: 'report',
