@@ -62,7 +62,7 @@ const DualPreventionMechanism: React.FC = () => {
     { title: '上报人', dataIndex: 'reporter', key: 'reporter' },
     { title: '上报时间', dataIndex: 'reportTime', key: 'reportTime' },
     { title: '状态', dataIndex: 'status', key: 'status', render: (status: string, record: HazardRecord) => <Badge status={status === '已闭环' ? 'success' : 'processing'} text={<>{status}{record.overdue && <Tag color="red" style={{ marginLeft: 8 }}>逾期</Tag>}</>} /> },
-    { title: '操作', key: 'action', fixed: 'right', width: 150, render: (_: any, record: HazardRecord) => <Space size="small"><Button type="link" size="small" icon={<EyeOutlined />}>详情</Button>{record.status !== '已闭环' && <Button type="primary" size="small">处理</Button>}</Space> },
+    { title: '操作', key: 'action', fixed: 'right', width: 150, render: (_: unknown, record: HazardRecord) => <Space size="small"><Button type="link" size="small" icon={<EyeOutlined />}>详情</Button>{record.status !== '已闭环' && <Button type="primary" size="small">处理</Button>}</Space> },
   ];
 
   const hazardData: HazardRecord[] = [
