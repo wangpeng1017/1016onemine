@@ -8,6 +8,15 @@ import {
   CloudUploadOutlined,
   DashboardOutlined,
   EnvironmentOutlined,
+  SafetyOutlined,
+  FileTextOutlined,
+  ShieldOutlined,
+  FileProtectOutlined,
+  TeamOutlined,
+  UsergroupAddOutlined,
+  SolutionOutlined,
+  MedicineBoxOutlined,
+  DollarOutlined,
 } from '@ant-design/icons';
 import { LeftMenuItem } from '../context/NavigationContext';
 
@@ -252,6 +261,70 @@ export const defaultLeftMenu: LeftMenuItem[] = [
   },
 ];
 
+// 安全管理中心的左侧菜单
+export const safetyManagementLeftMenu: LeftMenuItem[] = [
+  {
+    key: 'safety-management-home',
+    icon: <HomeOutlined />,
+    label: '首页概览',
+  },
+  {
+    key: 'standard-archives',
+    icon: <FileTextOutlined />,
+    label: '标准规范档案库',
+  },
+  {
+    key: 'safety-standardization',
+    icon: <SafetyOutlined />,
+    label: '安全生产标准化',
+  },
+  {
+    key: 'dual-prevention',
+    icon: <ShieldOutlined />,
+    label: '双重预防机制',
+  },
+  {
+    key: 'work-permit',
+    icon: <FileProtectOutlined />,
+    label: '作业票证管理',
+  },
+  {
+    key: 'safety-training',
+    icon: <TeamOutlined />,
+    label: '安全培训',
+  },
+  {
+    key: 'team-building',
+    icon: <UsergroupAddOutlined />,
+    label: '班组建设',
+  },
+  {
+    key: 'contractor-management',
+    icon: <SolutionOutlined />,
+    label: '承包商管理',
+  },
+  {
+    key: 'occupational-health',
+    icon: <MedicineBoxOutlined />,
+    label: '职业健康',
+  },
+  {
+    key: 'monitoring-control',
+    icon: <RadarChartOutlined />,
+    label: '监测监控一张图',
+  },
+  {
+    key: 'safety-cost',
+    icon: <DollarOutlined />,
+    label: '安全费用管理',
+  },
+  {
+    key: 'emergency-management',
+    icon: <AlertOutlined />,
+    label: '应急管理',
+  },
+];
+
 // 左侧菜单配置映射
 export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'slope-monitoring': slopeMonitoringLeftMenu,
@@ -285,6 +358,7 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'comprehensive-env-monitoring': [], // 综合环境监测使用内嵌菜单
   'production-sales-center': [], // 产运销管理使用内嵌菜单
   'smart-prod-ops-sales': [], // 产运销管理使用内嵌Tab菜单，不需要左侧菜单
+  'safety-management': safetyManagementLeftMenu, // 安全管理中心
 };
 
 export const getLeftMenuForSubMenu = (subMenuKey: string): LeftMenuItem[] => {

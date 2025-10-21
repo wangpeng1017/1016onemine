@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1200" width="1800" height="1200">
+  <defs>
+    <style>
+      .title { font: bold 28px sans-serif; fill: #ffffff; }
+      .layer-title { font: bold 18px sans-serif; fill: #ffffff; }
+      .module-title { font: bold 15px sans-serif; fill: #333333; }
+      .data-text { font: 12px sans-serif; fill: #555555; }
+      .small-text { font: 10px sans-serif; fill: #666666; }
+      .header { fill: #2c3e50; }
+      .layer1 { fill: #3498db; }
+      .layer2 { fill: #e74c3c; }
+      .layer3 { fill: #f39c12; }
+      .layer4 { fill: #27ae60; }
+      .layer5 { fill: #9b59b6; }
+      .layer6 { fill: #1abc9c; }
+      .module-box { fill: #ffffff; stroke: #34495e; stroke-width: 2; }
+      .data-flow { stroke: #3498db; stroke-width: 3; fill: none; marker-end: url(#arrow-blue); }
+      .bi-flow { stroke: #27ae60; stroke-width: 3; fill: none; marker-end: url(#arrow-green); marker-start: url(#arrow-green-start); }
+      .trigger-flow { stroke: #e74c3c; stroke-width: 3; fill: none; marker-end: url(#arrow-red); stroke-dasharray: 8,4; }
+      .integration-flow { stroke: #9b59b6; stroke-width: 2.5; fill: none; marker-end: url(#arrow-purple); }
+    </style>
+    
+    <!-- 箭头标记 -->
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#3498db"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#27ae60"/>
+    </marker>
+    <marker id="arrow-green-start" markerWidth="12" markerHeight="12" refX="1" refY="6" orient="auto">
+      <polygon points="12 0, 0 6, 12 12" fill="#27ae60"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#e74c3c"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#9b59b6"/>
+    </marker>
+  </defs>
+  
+  <!-- 标题 -->
+  <rect class="header" x="0" y="0" width="1800" height="70" rx="5"/>
+  <text class="title" x="900" y="45" text-anchor="middle">智慧矿山安全管理中心 - 数据流向图</text>
+  
+  <!-- 第一层:数据采集层 -->
+  <rect class="layer1" x="50" y="90" width="1700" height="35" rx="5"/>
+  <text class="layer-title" x="900" y="113" text-anchor="middle">数据采集层 (Data Collection Layer)</text>
+  
+  <!-- 传感器数据 -->
+  <rect class="module-box" x="50" y="135" width="200" height="110" rx="4"/>
+  <text class="module-title" x="150" y="157" text-anchor="middle">传感器数据</text>
+  <text class="data-text" x="150" y="175" text-anchor="middle">· 边坡位移传感器</text>
+  <text class="data-text" x="150" y="190" text-anchor="middle">· 气体浓度传感器</text>
+  <text class="data-text" x="150" y="205" text-anchor="middle">· 粉尘监测传感器</text>
+  <text class="data-text" x="150" y="220" text-anchor="middle">· 水位流量传感器</text>
+  <text class="data-text" x="150" y="235" text-anchor="middle">· 温度传感器</text>
+  
+  <!-- 视频数据 -->
+  <rect class="module-box" x="270" y="135" width="200" height="110" rx="4"/>
+  <text class="module-title" x="370" y="157" text-anchor="middle">视频监控数据</text>
+  <text class="data-text" x="370" y="175" text-anchor="middle">· 实时视频流</text>
+  <text class="data-text" x="370" y="190" text-anchor="middle">· AI行为识别</text>
+  <text class="data-text" x="370" y="205" text-anchor="middle">· 人脸识别</text>
+  <text class="data-text" x="370" y="220" text-anchor="middle">· 违规行为检测</text>
+  <text class="data-text" x="370" y="235" text-anchor="middle">· 历史录像</text>
+  
+  <!-- 定位数据 -->
+  <rect class="module-box" x="490" y="135" width="200" height="110" rx="4"/>
+  <text class="module-title" x="590" y="157" text-anchor="middle">定位跟踪数据</text>
+  <text class="data-text" x="590" y="175" text-anchor="middle">· 人员实时位置</text>
+  <text class="data-text" x="590" y="190" text-anchor="middle">· 车辆GPS轨迹</text>
+  <text class="data-text" x="590" y="205" text-anchor="middle">· 设备位置信息</text>
+  <text class="data-text" x="590" y="220" text-anchor="middle">· 电子围栏数据</text>
+  <text class="data-text" x="590" y="235" text-anchor="middle">· 考勤签到</text>
+  
+  <!-- 业务数据 -->
+  <rect class="module-box" x="710" y="135" width="200" height="110" rx="4"/>
+  <text class="module-title" x="810" y="157" text-anchor="middle">业务系统数据</text>
+  <text class="data-text" x="810" y="175" text-anchor="middle">· 隐患上报</text>
+  <text class="data-text" x="810" y="190" text-anchor="middle">· 作业票证申请</text>
+  <text class="data-text" x="810" y="205" text-anchor="middle">· 培训考试记录</text>
+  <text class="data-text" x="810" y="220" text-anchor="middle">· 体检数据</text>
+  <text class="data-text" x="810" y="235" text-anchor="middle">· 费用申请</text>
+  
+  <!-- 设备数据 -->
+  <rect class="module-box" x="930" y="135" width="200" height="110" rx="4"/>
+  <text class="module-title" x="1030" y="157" text-anchor="middle">设备运行数据</text>
+  <text class="data-text" x="1030" y="175" text-anchor="middle">· 设备状态</text>
+  <text class="data-text" x="1030" y="190" text-anchor="middle">· 运行参数</text>
+  <text class="data-text" x="1030" y="205" text-anchor="middle">· 故障报警</text>
+  <text class="data-text" x="1030" y="220" text-anchor="middle">· 维保记录</text>
+  <text class="data-text" x="1030" y="235" text-anchor="middle">· 能耗数据</text>
+  
+  <!-- 外部系统 -->
+  <rect class="module-box" x="1150" y="135" width="200" height="110" rx="4"/>
+  <text class="module-title" x="1250" y="157" text-anchor="middle">外部系统数据</text>
+  <text class="data-text" x="1250" y="175" text-anchor="middle">· HR人员信息</text>
+  <text class="data-text" x="1250" y="190" text-anchor="middle">· 财务数据</text>
+  <text class="data-text" x="1250" y="205" text-anchor="middle">· 气象数据</text>
+  <text class="data-text" x="1250" y="220" text-anchor="middle">· 第三方培训</text>
+  <text class="data-text" x="1250" y="235" text-anchor="middle">· 政府监管平台</text>
+  
+  <!-- 档案数据 -->
+  <rect class="module-box" x="1370" y="135" width="200" height="110" rx="4"/>
+  <text class="module-title" x="1470" y="157" text-anchor="middle">档案文档数据</text>
+  <text class="data-text" x="1470" y="175" text-anchor="middle">· 规范标准文件</text>
+  <text class="data-text" x="1470" y="190" text-anchor="middle">· 应急预案</text>
+  <text class="data-text" x="1470" y="205" text-anchor="middle">· 管理制度</text>
+  <text class="data-text" x="1470" y="220" text-anchor="middle">· 证照资质</text>
+  <text class="data-text" x="1470" y="235" text-anchor="middle">· 历史报表</text>
+  
+  <!-- 第二层:数据处理层 -->
+  <rect class="layer2" x="50" y="280" width="1700" height="35" rx="5"/>
+  <text class="layer-title" x="900" y="303" text-anchor="middle">数据处理层 (Data Processing Layer)</text>
+  
+  <rect class="module-box" x="50" y="325" width="280" height="100" rx="4"/>
+  <text class="module-title" x="190" y="347" text-anchor="middle">实时流处理引擎</text>
+  <text class="data-text" x="190" y="365" text-anchor="middle">· 数据清洗与标准化</text>
+  <text class="data-text" x="190" y="380" text-anchor="middle">· 实时计算与分析</text>
+  <text class="data-text" x="190" y="395" text-anchor="middle">· 阈值检测与报警</text>
+  <text class="data-text" x="190" y="410" text-anchor="middle">· 数据质量监控</text>
+  
+  <rect class="module-box" x="350" y="325" width="280" height="100" rx="4"/>
+  <text class="module-title" x="490" y="347" text-anchor="middle">AI智能分析引擎</text>
+  <text class="data-text" x="490" y="365" text-anchor="middle">· 视频行为识别</text>
+  <text class="data-text" x="490" y="380" text-anchor="middle">· 异常模式检测</text>
+  <text class="data-text" x="490" y="395" text-anchor="middle">· 风险预测分析</text>
+  <text class="data-text" x="490" y="410" text-anchor="middle">· 趋势预测建模</text>
+  
+  <rect class="module-box" x="650" y="325" width="280" height="100" rx="4"/>
+  <text class="module-title" x="790" y="347" text-anchor="middle">数据融合引擎</text>
+  <text class="data-text" x="790" y="365" text-anchor="middle">· 多源数据关联</text>
+  <text class="data-text" x="790" y="380" text-anchor="middle">· 多灾种综合分析</text>
+  <text class="data-text" x="790" y="395" text-anchor="middle">· 时空数据整合</text>
+  <text class="data-text" x="790" y="410" text-anchor="middle">· 知识图谱构建</text>
+  
+  <rect class="module-box" x="950" y="325" width="280" height="100" rx="4"/>
+  <text class="module-title" x="1090" y="347" text-anchor="middle">业务规则引擎</text>
+  <text class="data-text" x="1090" y="365" text-anchor="middle">· 流程自动化</text>
+  <text class="data-text" x="1090" y="380" text-anchor="middle">· 权限控制</text>
+  <text class="data-text" x="1090" y="395" text-anchor="middle">· 审批流转</text>
+  <text class="data-text" x="1090" y="410" text-anchor="middle">· 消息推送</text>
+  
+  <rect class="module-box" x="1250" y="325" width="300" height="100" rx="4"/>
+  <text class="module-title" x="1400" y="347" text-anchor="middle">统计分析引擎</text>
+  <text class="data-text" x="1400" y="365" text-anchor="middle">· 多维统计分析</text>
+  <text class="data-text" x="1400" y="380" text-anchor="middle">· 报表自动生成</text>
+  <text class="data-text" x="1400" y="395" text-anchor="middle">· KPI指标计算</text>
+  <text class="data-text" x="1400" y="410" text-anchor="middle">· 数据可视化处理</text>
+  
+  <!-- 第三层:数据存储层 -->
+  <rect class="layer3" x="50" y="460" width="1700" height="35" rx="5"/>
+  <text class="layer-title" x="900" y="483" text-anchor="middle">数据存储层 (Data Storage Layer)</text>
+  
+  <rect class="module-box" x="50" y="505" width="320" height="95" rx="4"/>
+  <text class="module-title" x="210" y="527" text-anchor="middle">时序数据库</text>
+  <text class="data-text" x="210" y="545" text-anchor="middle">· 传感器历史数据</text>
+  <text class="data-text" x="210" y="560" text-anchor="middle">· 监测指标时序</text>
+  <text class="data-text" x="210" y="575" text-anchor="middle">· 设备运行日志</text>
+  <text class="data-text" x="210" y="590" text-anchor="middle">· 实时/历史查询优化</text>
+  
+  <rect class="module-box" x="390" y="505" width="320" height="95" rx="4"/>
+  <text class="module-title" x="550" y="527" text-anchor="middle">关系数据库</text>
+  <text class="data-text" x="550" y="545" text-anchor="middle">· 人员档案</text>
+  <text class="data-text" x="550" y="560" text-anchor="middle">· 业务流程数据</text>
+  <text class="data-text" x="550" y="575" text-anchor="middle">· 配置管理</text>
+  <text class="data-text" x="550" y="590" text-anchor="middle">· 事务性操作支持</text>
+  
+  <rect class="module-box" x="730" y="505" width="320" height="95" rx="4"/>
+  <text class="module-title" x="890" y="527" text-anchor="middle">文档数据库</text>
+  <text class="data-text" x="890" y="545" text-anchor="middle">· 规范标准文件</text>
+  <text class="data-text" x="890" y="560" text-anchor="middle">· 应急预案</text>
+  <text class="data-text" x="890" y="575" text-anchor="middle">· 管理制度</text>
+  <text class="data-text" x="890" y="590" text-anchor="middle">· 非结构化数据</text>
+  
+  <rect class="module-box" x="1070" y="505" width="320" height="95" rx="4"/>
+  <text class="module-title" x="1230" y="527" text-anchor="middle">对象存储</text>
+  <text class="data-text" x="1230" y="545" text-anchor="middle">· 视频录像</text>
+  <text class="data-text" x="1230" y="560" text-anchor="middle">· 图片资料</text>
+  <text class="data-text" x="1230" y="575" text-anchor="middle">· 大文件归档</text>
+  <text class="data-text" x="1230" y="590" text-anchor="middle">· 备份恢复</text>
+  
+  <rect class="module-box" x="1410" y="505" width="160" height="95" rx="4"/>
+  <text class="module-title" x="1490" y="527" text-anchor="middle">缓存层</text>
+  <text class="data-text" x="1490" y="545" text-anchor="middle">· 热点数据</text>
+  <text class="data-text" x="1490" y="560" text-anchor="middle">· 会话缓存</text>
+  <text class="data-text" x="1490" y="575" text-anchor="middle">· 实时状态</text>
+  <text class="data-text" x="1490" y="590" text-anchor="middle">· 性能优化</text>
+  
+  <!-- 第四层:业务应用层 -->
+  <rect class="layer4" x="50" y="635" width="1700" height="35" rx="5"/>
+  <text class="layer-title" x="900" y="658" text-anchor="middle">业务应用层 (Business Application Layer)</text>
+  
+  <rect class="module-box" x="50" y="680" width="180" height="110" rx="4"/>
+  <text class="module-title" x="140" y="702" text-anchor="middle">双重预防</text>
+  <text class="data-text" x="140" y="720" text-anchor="middle">· 风险管控</text>
+  <text class="data-text" x="140" y="735" text-anchor="middle">· 隐患排查</text>
+  <text class="data-text" x="140" y="750" text-anchor="middle">· 治理验收</text>
+  <text class="data-text" x="140" y="765" text-anchor="middle">· 四色图</text>
+  <text class="data-text" x="140" y="780" text-anchor="middle">· 闭环管理</text>
+  
+  <rect class="module-box" x="250" y="680" width="180" height="110" rx="4"/>
+  <text class="module-title" x="340" y="702" text-anchor="middle">监测监控</text>
+  <text class="data-text" x="340" y="720" text-anchor="middle">· 数字孪生</text>
+  <text class="data-text" x="340" y="735" text-anchor="middle">· 实时监控</text>
+  <text class="data-text" x="340" y="750" text-anchor="middle">· 视频融合</text>
+  <text class="data-text" x="340" y="765" text-anchor="middle">· 一张图</text>
+  <text class="data-text" x="340" y="780" text-anchor="middle">· 多灾预警</text>
+  
+  <rect class="module-box" x="450" y="680" width="180" height="110" rx="4"/>
+  <text class="module-title" x="540" y="702" text-anchor="middle">应急管理</text>
+  <text class="data-text" x="540" y="720" text-anchor="middle">· 预案管理</text>
+  <text class="data-text" x="540" y="735" text-anchor="middle">· 应急处置</text>
+  <text class="data-text" x="540" y="750" text-anchor="middle">· 物资调度</text>
+  <text class="data-text" x="540" y="765" text-anchor="middle">· 演练评估</text>
+  <text class="data-text" x="540" y="780" text-anchor="middle">· 融合通信</text>
+  
+  <rect class="module-box" x="650" y="680" width="180" height="110" rx="4"/>
+  <text class="module-title" x="740" y="702" text-anchor="middle">标准化考核</text>
+  <text class="data-text" x="740" y="720" text-anchor="middle">· 在线考核</text>
+  <text class="data-text" x="740" y="735" text-anchor="middle">· 自动汇总</text>
+  <text class="data-text" x="740" y="750" text-anchor="middle">· 问题转隐患</text>
+  <text class="data-text" x="740" y="765" text-anchor="middle">· 持续改进</text>
+  <text class="data-text" x="740" y="780" text-anchor="middle">· 体系建设</text>
+  
+  <rect class="module-box" x="850" y="680" width="180" height="110" rx="4"/>
+  <text class="module-title" x="940" y="702" text-anchor="middle">作业票证</text>
+  <text class="data-text" x="940" y="720" text-anchor="middle">· 票证申请</text>
+  <text class="data-text" x="940" y="735" text-anchor="middle">· 审批流转</text>
+  <text class="data-text" x="940" y="750" text-anchor="middle">· 现场执行</text>
+  <text class="data-text" x="940" y="765" text-anchor="middle">· 验收归档</text>
+  <text class="data-text" x="940" y="780" text-anchor="middle">· 模板管理</text>
+  
+  <rect class="module-box" x="1050" y="680" width="180" height="110" rx="4"/>
+  <text class="module-title" x="1140" y="702" text-anchor="middle">安全培训</text>
+  <text class="data-text" x="1140" y="720" text-anchor="middle">· 一人一档</text>
+  <text class="data-text" x="1140" y="735" text-anchor="middle">· 在线学习</text>
+  <text class="data-text" x="1140" y="750" text-anchor="middle">· 在线考试</text>
+  <text class="data-text" x="1140" y="765" text-anchor="middle">· 证照管理</text>
+  <text class="data-text" x="1140" y="780" text-anchor="middle">· 到期预警</text>
+  
+  <rect class="module-box" x="1250" y="680" width="180" height="110" rx="4"/>
+  <text class="module-title" x="1340" y="702" text-anchor="middle">职业健康</text>
+  <text class="data-text" x="1340" y="720" text-anchor="middle">· 健康档案</text>
+  <text class="data-text" x="1340" y="735" text-anchor="middle">· 体检管理</text>
+  <text class="data-text" x="1340" y="750" text-anchor="middle">· 异常预警</text>
+  <text class="data-text" x="1340" y="765" text-anchor="middle">· 劳保用品</text>
+  <text class="data-text" x="1340" y="780" text-anchor="middle">· 职业病防治</text>
+  
+  <rect class="module-box" x="1450" y="680" width="320" height="110" rx="4"/>
+  <text class="module-title" x="1610" y="702" text-anchor="middle">档案库 & 费用管理</text>
+  <text class="data-text" x="1610" y="720" text-anchor="middle">· 标准规范库 · 档案信息</text>
+  <text class="data-text" x="1610" y="735" text-anchor="middle">· 承包商管理 · 班组建设</text>
+  <text class="data-text" x="1610" y="750" text-anchor="middle">· 安全费用 · 分类管理</text>
+  <text class="data-text" x="1610" y="765" text-anchor="middle">· 预算执行 · 统计分析</text>
+  <text class="data-text" x="1610" y="780" text-anchor="middle">· 财务对接 · 报表生成</text>
+  
+  <!-- 第五层:展示交互层 -->
+  <rect class="layer5" x="50" y="825" width="1700" height="35" rx="5"/>
+  <text class="layer-title" x="900" y="848" text-anchor="middle">展示交互层 (Presentation Layer)</text>
+  
+  <rect class="module-box" x="50" y="870" width="400" height="95" rx="4"/>
+  <text class="module-title" x="250" y="892" text-anchor="middle">Web管理端</text>
+  <text class="data-text" x="250" y="910" text-anchor="middle">· 管理员后台</text>
+  <text class="data-text" x="250" y="925" text-anchor="middle">· PC端业务操作</text>
+  <text class="data-text" x="250" y="940" text-anchor="middle">· 数据看板</text>
+  <text class="data-text" x="250" y="955" text-anchor="middle">· 报表导出</text>
+  
+  <rect class="module-box" x="470" y="870" width="400" height="95" rx="4"/>
+  <text class="module-title" x="670" y="892" text-anchor="middle">移动APP</text>
+  <text class="data-text" x="670" y="910" text-anchor="middle">· 隐患上报</text>
+  <text class="data-text" x="670" y="925" text-anchor="middle">· 在线培训考试</text>
+  <text class="data-text" x="670" y="940" text-anchor="middle">· 作业票证申请</text>
+  <text class="data-text" x="670" y="955" text-anchor="middle">· 消息推送接收</text>
+  
+  <rect class="module-box" x="890" y="870" width="400" height="95" rx="4"/>
+  <text class="module-title" x="1090" y="892" text-anchor="middle">大屏展示</text>
+  <text class="data-text" x="1090" y="910" text-anchor="middle">· 数字孪生三维展示</text>
+  <text class="data-text" x="1090" y="925" text-anchor="middle">· 实时监控一张图</text>
+  <text class="data-text" x="1090" y="940" text-anchor="middle">· 应急指挥调度</text>
+  <text class="data-text" x="1090" y="955" text-anchor="middle">· KPI综合看板</text>
+  
+  <rect class="module-box" x="1310" y="870" width="460" height="95" rx="4"/>
+  <text class="module-title" x="1540" y="892" text-anchor="middle">API接口服务</text>
+  <text class="data-text" x="1540" y="910" text-anchor="middle">· RESTful API · WebSocket推送</text>
+  <text class="data-text" x="1540" y="925" text-anchor="middle">· 第三方系统集成 · 数据交换</text>
+  <text class="data-text" x="1540" y="940" text-anchor="middle">· 微服务调用 · 消息队列</text>
+  <text class="data-text" x="1540" y="955" text-anchor="middle">· 开放平台 · SDK支持</text>
+  
+  <!-- 第六层:外部系统集成 -->
+  <rect class="layer6" x="50" y="1000" width="1700" height="35" rx="5"/>
+  <text class="layer-title" x="900" y="1023" text-anchor="middle">外部系统集成层 (External Integration Layer)</text>
+  
+  <rect class="module-box" x="50" y="1045" width="240" height="90" rx="4"/>
+  <text class="module-title" x="170" y="1067" text-anchor="middle">HR系统</text>
+  <text class="data-text" x="170" y="1085" text-anchor="middle">人员信息</text>
+  <text class="data-text" x="170" y="1100" text-anchor="middle">组织架构</text>
+  <text class="data-text" x="170" y="1115" text-anchor="middle">考勤数据</text>
+  <text class="data-text" x="170" y="1130" text-anchor="middle">人事变动</text>
+  
+  <rect class="module-box" x="310" y="1045" width="240" height="90" rx="4"/>
+  <text class="module-title" x="430" y="1067" text-anchor="middle">财务系统</text>
+  <text class="data-text" x="430" y="1085" text-anchor="middle">费用申请</text>
+  <text class="data-text" x="430" y="1100" text-anchor="middle">预算管理</text>
+  <text class="data-text" x="430" y="1115" text-anchor="middle">核销审批</text>
+  <text class="data-text" x="430" y="1130" text-anchor="middle">财务报表</text>
+  
+  <rect class="module-box" x="570" y="1045" width="240" height="90" rx="4"/>
+  <text class="module-title" x="690" y="1067" text-anchor="middle">设备管理系统</text>
+  <text class="data-text" x="690" y="1085" text-anchor="middle">设备台账</text>
+  <text class="data-text" x="690" y="1100" text-anchor="middle">维保记录</text>
+  <text class="data-text" x="690" y="1115" text-anchor="middle">故障管理</text>
+  <text class="data-text" x="690" y="1130" text-anchor="middle">证照管理</text>
+  
+  <rect class="module-box" x="830" y="1045" width="240" height="90" rx="4"/>
+  <text class="module-title" x="950" y="1067" text-anchor="middle">智能访客系统</text>
+  <text class="data-text" x="950" y="1085" text-anchor="middle">访客登记</text>
+  <text class="data-text" x="950" y="1100" text-anchor="middle">承包商信息</text>
+  <text class="data-text" x="950" y="1115" text-anchor="middle">准入管理</text>
+  <text class="data-text" x="950" y="1130" text-anchor="middle">培训同步</text>
+  
+  <rect class="module-box" x="1090" y="1045" width="240" height="90" rx="4"/>
+  <text class="module-title" x="1210" y="1067" text-anchor="middle">第三方培训平台</text>
+  <text class="data-text" x="1210" y="1085" text-anchor="middle">课程资源</text>
+  <text class="data-text" x="1210" y="1100" text-anchor="middle">考试题库</text>
+  <text class="data-text" x="1210" y="1115" text-anchor="middle">证书管理</text>
+  <text class="data-text" x="1210" y="1130" text-anchor="middle">学习记录</text>
+  
+  <rect class="module-box" x="1350" y="1045" width="200" height="90" rx="4"/>
+  <text class="module-title" x="1450" y="1067" text-anchor="middle">政府监管平台</text>
+  <text class="data-text" x="1450" y="1085" text-anchor="middle">事故上报</text>
+  <text class="data-text" x="1450" y="1100" text-anchor="middle">数据报送</text>
+  <text class="data-text" x="1450" y="1115" text-anchor="middle">监管要求</text>
+  <text class="data-text" x="1450" y="1130" text-anchor="middle">合规审查</text>
+  
+  <rect class="module-box" x="1570" y="1045" width="200" height="90" rx="4"/>
+  <text class="module-title" x="1670" y="1067" text-anchor="middle">通信融合平台</text>
+  <text class="data-text" x="1670" y="1085" text-anchor="middle">对讲机</text>
+  <text class="data-text" x="1670" y="1100" text-anchor="middle">电话会议</text>
+  <text class="data-text" x="1670" y="1115" text-anchor="middle">视频会议</text>
+  <text class="data-text" x="1670" y="1130" text-anchor="middle">短信推送</text>
+  
+  <!-- 关键数据流向标注 -->
+  <!-- 采集层到处理层 -->
+  <path class="data-flow" d="M 150 245 L 150 325"/>
+  <path class="data-flow" d="M 370 245 L 370 325"/>
+  <path class="data-flow" d="M 590 245 L 590 325"/>
+  <path class="data-flow" d="M 810 245 L 810 325"/>
+  <path class="data-flow" d="M 1030 245 L 1030 325"/>
+  
+  <!-- 处理层到存储层 -->
+  <path class="data-flow" d="M 190 425 L 190 505"/>
+  <path class="data-flow" d="M 490 425 L 490 505"/>
+  <path class="data-flow" d="M 790 425 L 790 505"/>
+  <path class="data-flow" d="M 1090 425 L 1090 505"/>
+  <path class="data-flow" d="M 1400 425 L 1400 505"/>
+  
+  <!-- 存储层到应用层 -->
+  <path class="data-flow" d="M 210 600 L 210 680"/>
+  <path class="data-flow" d="M 550 600 L 550 680"/>
+  <path class="data-flow" d="M 890 600 L 890 680"/>
+  <path class="data-flow" d="M 1230 600 L 1230 680"/>
+  
+  <!-- 应用层到展示层 -->
+  <path class="data-flow" d="M 140 790 L 140 870"/>
+  <path class="data-flow" d="M 540 790 L 540 870"/>
+  <path class="data-flow" d="M 940 790 L 940 870"/>
+  <path class="data-flow" d="M 1340 790 L 1340 870"/>
+  
+  <!-- 展示层到外部系统 -->
+  <path class="integration-flow" d="M 250 965 L 170 1045"/>
+  <path class="integration-flow" d="M 1610 965 L 1610 1045"/>
+  
+  <!-- 关键业务数据流 -->
+  <!-- 监测到应急触发 -->
+  <path class="trigger-flow" d="M 340 790 L 340 810 L 540 810 L 540 790"/>
+  <text class="small-text" x="440" y="825" text-anchor="middle" fill="#e74c3c">监测预警→应急触发</text>
+  
+  <!-- 标准化到隐患 -->
+  <path class="trigger-flow" d="M 740 790 L 740 815 L 140 815 L 140 790"/>
+  <text class="small-text" x="440" y="830" text-anchor="middle" fill="#e74c3c">考核问题→转隐患</text>
+  
+  <!-- 双向数据流:人员档案 -->
+  <path class="bi-flow" d="M 1610 790 L 1610 820 L 1140 820 L 1140 790"/>
+  <text class="small-text" x="1375" y="835" text-anchor="middle" fill="#27ae60">档案↔培训↔健康</text>
+  
+  <!-- 外部系统双向集成 -->
+  <path class="bi-flow" d="M 170 1045 L 170 900 L 1610 900 L 1610 870"/>
+  <text class="small-text" x="890" y="915" text-anchor="middle" fill="#27ae60">外部系统数据双向同步</text>
+  
+  <!-- 图例说明 -->
+  <rect fill="#ffffff" stroke="#2c3e50" stroke-width="2" x="1550" y="280" width="220" height="140" rx="4"/>
+  <text class="module-title" x="1660" y="302" text-anchor="middle">数据流向图例</text>
+  
+  <path class="data-flow" d="M 1570 315 L 1620 315"/>
+  <text class="small-text" x="1635" y="320" text-anchor="start">数据采集流向</text>
+  
+  <path class="trigger-flow" d="M 1570 335 L 1620 335"/>
+  <text class="small-text" x="1635" y="340" text-anchor="start">触发/联动流向</text>
+  
+  <path class="bi-flow" d="M 1570 355 L 1620 355"/>
+  <text class="small-text" x="1635" y="360" text-anchor="start">双向同步流向</text>
+  
+  <path class="integration-flow" d="M 1570 375 L 1620 375"/>
+  <text class="small-text" x="1635" y="380" text-anchor="start">系统集成流向</text>
+  
+  <text class="small-text" x="1660" y="400" text-anchor="middle" fill="#666">关键数据流:</text>
+  <text class="small-text" x="1660" y="415" text-anchor="middle" fill="#666">1. 实时监测→预警→应急</text>
+  
+  <!-- 版本信息 -->
+  <text class="small-text" x="900" y="1180" text-anchor="middle" fill="#95a5a6">Version 1.0 | 2025-10-21 | 智慧矿山安全管理中心 - 数据流向图展示了从数据采集、处理、存储到应用展示的完整流程</text>
+  
+</svg>

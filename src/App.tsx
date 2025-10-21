@@ -65,6 +65,18 @@ import IocPlanning from './pages/ioc/IocPlanning';
 import IocProduction from './pages/ioc/IocProduction';
 import IocSafety from './pages/ioc/IocSafety';
 import IocOperation from './pages/ioc/IocOperation';
+import SafetyManagementHome from './pages/safety-management/SafetyManagementHome';
+import StandardArchives from './pages/safety-management/StandardArchives';
+import DualPreventionMechanism from './pages/safety-management/DualPreventionMechanism';
+import SafetyStandardization from './pages/safety-management/SafetyStandardization';
+import WorkPermit from './pages/safety-management/WorkPermit';
+import SafetyTraining from './pages/safety-management/SafetyTraining';
+import TeamBuilding from './pages/safety-management/TeamBuilding';
+import ContractorManagement from './pages/safety-management/ContractorManagement';
+import OccupationalHealth from './pages/safety-management/OccupationalHealth';
+import MonitoringControl from './pages/safety-management/MonitoringControl';
+import SafetyCost from './pages/safety-management/SafetyCost';
+import EmergencyManagement from './pages/safety-management/EmergencyManagement';
 import './App.css';
 
 const App: React.FC = () => {
@@ -114,6 +126,23 @@ const App: React.FC = () => {
               <Route path="ioc-production" element={<IocProduction />} />
               <Route path="ioc-safety" element={<IocSafety />} />
               <Route path="ioc-operation" element={<IocOperation />} />
+              
+              {/* 安全管理中心路由 */}
+              <Route path="safety-management">
+                <Route index element={<SafetyManagementHome />} />
+                <Route path="home" element={<SafetyManagementHome />} />
+                <Route path="standard-archives" element={<StandardArchives />} />
+                <Route path="safety-standardization" element={<SafetyStandardization />} />
+                <Route path="dual-prevention" element={<DualPreventionMechanism />} />
+                <Route path="work-permit" element={<WorkPermit />} />
+                <Route path="safety-training" element={<SafetyTraining />} />
+                <Route path="team-building" element={<TeamBuilding />} />
+                <Route path="contractor-management" element={<ContractorManagement />} />
+                <Route path="occupational-health" element={<OccupationalHealth />} />
+                <Route path="monitoring-control" element={<MonitoringControl />} />
+                <Route path="safety-cost" element={<SafetyCost />} />
+                <Route path="emergency-management" element={<EmergencyManagement />} />
+              </Route>
               
               {/* 生产执行系统路由 */}
               <Route path="production-execution/production-continuity" element={<ProductionContinuity />} />

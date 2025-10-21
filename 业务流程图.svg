@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1400" width="1600" height="1400">
+  <defs>
+    <style>
+      .title { font: bold 26px sans-serif; fill: #ffffff; }
+      .process-title { font: bold 16px sans-serif; fill: #ffffff; }
+      .step-title { font: bold 14px sans-serif; fill: #333333; }
+      .step-text { font: 12px sans-serif; fill: #555555; }
+      .header { fill: #34495e; }
+      .process1 { fill: #3498db; }
+      .process2 { fill: #e74c3c; }
+      .process3 { fill: #f39c12; }
+      .process4 { fill: #27ae60; }
+      .process5 { fill: #9b59b6; }
+      .step-box { fill: #ffffff; stroke: #2c3e50; stroke-width: 2; }
+      .decision-box { fill: #ffe6e6; stroke: #c0392b; stroke-width: 2; }
+      .arrow { stroke: #34495e; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .highlight-arrow { stroke: #e74c3c; stroke-width: 3; fill: none; marker-end: url(#arrowhead-red); }
+      .label-text { font: 11px sans-serif; fill: #34495e; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#34495e"/>
+    </marker>
+    <marker id="arrowhead-red" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#e74c3c"/>
+    </marker>
+  </defs>
+  
+  <!-- 主标题 -->
+  <rect class="header" x="0" y="0" width="1600" height="60" rx="5"/>
+  <text class="title" x="800" y="40" text-anchor="middle">智慧矿山安全管理中心 - 核心业务流程图</text>
+  
+  <!-- 流程1: 风险管控与隐患治理流程 -->
+  <rect class="process1" x="50" y="80" width="700" height="40" rx="5"/>
+  <text class="process-title" x="400" y="105" text-anchor="middle">① 双重预防机制 - 风险管控与隐患治理流程</text>
+  
+  <!-- 风险辨识 -->
+  <rect class="step-box" x="50" y="140" width="140" height="80" rx="5"/>
+  <text class="step-title" x="120" y="165" text-anchor="middle">风险辨识评估</text>
+  <text class="step-text" x="120" y="185" text-anchor="middle">· 年度/专项辨识</text>
+  <text class="step-text" x="120" y="200" text-anchor="middle">· 危险源识别</text>
+  <text class="step-text" x="120" y="215" text-anchor="middle">· 等级评定</text>
+  
+  <!-- 风险管控 -->
+  <rect class="step-box" x="210" y="140" width="140" height="80" rx="5"/>
+  <text class="step-title" x="280" y="165" text-anchor="middle">风险分级管控</text>
+  <text class="step-text" x="280" y="185" text-anchor="middle">· 四色图展示</text>
+  <text class="step-text" x="280" y="200" text-anchor="middle">· 管控措施制定</text>
+  <text class="step-text" x="280" y="215" text-anchor="middle">· 责任人分配</text>
+  
+  <!-- 隐患排查 -->
+  <rect class="step-box" x="370" y="140" width="140" height="80" rx="5"/>
+  <text class="step-title" x="440" y="165" text-anchor="middle">隐患排查</text>
+  <text class="step-text" x="440" y="185" text-anchor="middle">· 周期任务下发</text>
+  <text class="step-text" x="440" y="200" text-anchor="middle">· 现场巡检</text>
+  <text class="step-text" x="440" y="215" text-anchor="middle">· 隐患登记上报</text>
+  
+  <!-- 隐患治理 -->
+  <rect class="step-box" x="530" y="140" width="140" height="80" rx="5"/>
+  <text class="step-title" x="600" y="165" text-anchor="middle">治理验收</text>
+  <text class="step-text" x="600" y="185" text-anchor="middle">· 治理方案制定</text>
+  <text class="step-text" x="600" y="200" text-anchor="middle">· 整改实施</text>
+  <text class="step-text" x="600" y="215" text-anchor="middle">· 验收销号</text>
+  
+  <!-- 督办 -->
+  <polygon class="decision-box" points="710,180 750,150 790,180 750,210"/>
+  <text class="step-text" x="750" y="183" text-anchor="middle">逾期?</text>
+  
+  <!-- 连接箭头 -->
+  <path class="arrow" d="M 190 180 L 210 180"/>
+  <path class="arrow" d="M 350 180 L 370 180"/>
+  <path class="arrow" d="M 510 180 L 530 180"/>
+  <path class="arrow" d="M 670 180 L 710 180"/>
+  
+  <!-- 督办循环 -->
+  <path class="highlight-arrow" d="M 750 210 L 750 240 L 600 240 L 600 220"/>
+  <text class="label-text" x="675" y="235" text-anchor="middle">是-催办督办</text>
+  
+  <path class="arrow" d="M 790 180 L 810 180 L 810 100"/>
+  <text class="label-text" x="825" y="140" text-anchor="start">否-闭环完成</text>
+  
+  <!-- 流程2: 作业票证管理流程 -->
+  <rect class="process2" x="850" y="80" width="700" height="40" rx="5"/>
+  <text class="process-title" x="1200" y="105" text-anchor="middle">② 特殊作业票证管理流程</text>
+  
+  <!-- 申请 -->
+  <rect class="step-box" x="850" y="140" width="130" height="80" rx="5"/>
+  <text class="step-title" x="915" y="165" text-anchor="middle">作业申请</text>
+  <text class="step-text" x="915" y="185" text-anchor="middle">· 选择票证模板</text>
+  <text class="step-text" x="915" y="200" text-anchor="middle">· 填写作业信息</text>
+  <text class="step-text" x="915" y="215" text-anchor="middle">· 提交审批</text>
+  
+  <!-- 审批 -->
+  <rect class="step-box" x="1000" y="140" width="130" height="80" rx="5"/>
+  <text class="step-title" x="1065" y="165" text-anchor="middle">多级审批</text>
+  <text class="step-text" x="1065" y="185" text-anchor="middle">· 安全措施审核</text>
+  <text class="step-text" x="1065" y="200" text-anchor="middle">· 措施补充修改</text>
+  <text class="step-text" x="1065" y="215" text-anchor="middle">· 审批意见</text>
+  
+  <!-- 签发 -->
+  <rect class="step-box" x="1150" y="140" width="130" height="80" rx="5"/>
+  <text class="step-title" x="1215" y="165" text-anchor="middle">票证签发</text>
+  <text class="step-text" x="1215" y="185" text-anchor="middle">· 签发确认</text>
+  <text class="step-text" x="1215" y="200" text-anchor="middle">· 生成正式票证</text>
+  <text class="step-text" x="1215" y="215" text-anchor="middle">· 通知作业人</text>
+  
+  <!-- 执行 -->
+  <rect class="step-box" x="1300" y="140" width="130" height="80" rx="5"/>
+  <text class="step-title" x="1365" y="165" text-anchor="middle">现场作业</text>
+  <text class="step-text" x="1365" y="185" text-anchor="middle">· 安全措施落实</text>
+  <text class="step-text" x="1365" y="200" text-anchor="middle">· 现场监护</text>
+  <text class="step-text" x="1365" y="215" text-anchor="middle">· 照片/视频上传</text>
+  
+  <!-- 验收 -->
+  <rect class="step-box" x="1450" y="140" width="100" height="80" rx="5"/>
+  <text class="step-title" x="1500" y="165" text-anchor="middle">验收关闭</text>
+  <text class="step-text" x="1500" y="185" text-anchor="middle">· 验收确认</text>
+  <text class="step-text" x="1500" y="200" text-anchor="middle">· 票证归档</text>
+  
+  <!-- 连接箭头 -->
+  <path class="arrow" d="M 980 180 L 1000 180"/>
+  <path class="arrow" d="M 1130 180 L 1150 180"/>
+  <path class="arrow" d="M 1280 180 L 1300 180"/>
+  <path class="arrow" d="M 1430 180 L 1450 180"/>
+  
+  <!-- 流程3: 监测预警与应急响应流程 -->
+  <rect class="process3" x="50" y="280" width="1500" height="40" rx="5"/>
+  <text class="process-title" x="800" y="305" text-anchor="middle">③ 监测监控 → 预警 → 应急响应 联动流程</text>
+  
+  <!-- 实时监测 -->
+  <rect class="step-box" x="50" y="340" width="180" height="100" rx="5"/>
+  <text class="step-title" x="140" y="365" text-anchor="middle">实时监测</text>
+  <text class="step-text" x="140" y="385" text-anchor="middle">· 边坡/环境/人车监测</text>
+  <text class="step-text" x="140" y="400" text-anchor="middle">· AI视频识别</text>
+  <text class="step-text" x="140" y="415" text-anchor="middle">· 传感器数据采集</text>
+  <text class="step-text" x="140" y="430" text-anchor="middle">· 数据融合分析</text>
+  
+  <!-- 异常判断 -->
+  <polygon class="decision-box" points="280,390 340,350 400,390 340,430"/>
+  <text class="step-text" x="340" y="388" text-anchor="middle">超阈值</text>
+  <text class="step-text" x="340" y="403" text-anchor="middle">异常?</text>
+  
+  <!-- 预警触发 -->
+  <rect class="step-box" x="450" y="340" width="160" height="100" rx="5"/>
+  <text class="step-title" x="530" y="365" text-anchor="middle">预警触发</text>
+  <text class="step-text" x="530" y="385" text-anchor="middle">· 多灾融合分析</text>
+  <text class="step-text" x="530" y="400" text-anchor="middle">· 风险等级评估</text>
+  <text class="step-text" x="530" y="415" text-anchor="middle">· 地图标注报警点</text>
+  <text class="step-text" x="530" y="430" text-anchor="middle">· 推送预警信息</text>
+  
+  <!-- 应急启动 -->
+  <rect class="step-box" x="660" y="340" width="160" height="100" rx="5"/>
+  <text class="step-title" x="740" y="365" text-anchor="middle">应急启动</text>
+  <text class="step-text" x="740" y="385" text-anchor="middle">· 自动匹配预案</text>
+  <text class="step-text" x="740" y="400" text-anchor="middle">· 推送处置任务</text>
+  <text class="step-text" x="740" y="415" text-anchor="middle">· 启动融合通信</text>
+  <text class="step-text" x="740" y="430" text-anchor="middle">· 调度应急资源</text>
+  
+  <!-- 现场处置 -->
+  <rect class="step-box" x="870" y="340" width="160" height="100" rx="5"/>
+  <text class="step-title" x="950" y="365" text-anchor="middle">现场处置</text>
+  <text class="step-text" x="950" y="385" text-anchor="middle">· 人员撤离</text>
+  <text class="step-text" x="950" y="400" text-anchor="middle">· 物资调配</text>
+  <text class="step-text" x="950" y="415" text-anchor="middle">· 应急指挥</text>
+  <text class="step-text" x="950" y="430" text-anchor="middle">· 实时沟通协调</text>
+  
+  <!-- 效果评估 -->
+  <polygon class="decision-box" points="1080,390 1140,350 1200,390 1140,430"/>
+  <text class="step-text" x="1140" y="388" text-anchor="middle">险情</text>
+  <text class="step-text" x="1140" y="403" text-anchor="middle">解除?</text>
+  
+  <!-- 总结复盘 -->
+  <rect class="step-box" x="1250" y="340" width="160" height="100" rx="5"/>
+  <text class="step-title" x="1330" y="365" text-anchor="middle">总结复盘</text>
+  <text class="step-text" x="1330" y="385" text-anchor="middle">· 事故记录</text>
+  <text class="step-text" x="1330" y="400" text-anchor="middle">· 原因分析</text>
+  <text class="step-text" x="1330" y="415" text-anchor="middle">· 改进措施</text>
+  <text class="step-text" x="1330" y="430" text-anchor="middle">· 经验沉淀</text>
+  
+  <!-- 连接箭头 -->
+  <path class="arrow" d="M 230 390 L 280 390"/>
+  <path class="arrow" d="M 400 390 L 450 390"/>
+  <text class="label-text" x="425" y="375" text-anchor="middle">是</text>
+  
+  <path class="arrow" d="M 340 350 L 340 280"/>
+  <text class="label-text" x="355" y="315" text-anchor="start">否-持续监测</text>
+  
+  <path class="arrow" d="M 610 390 L 660 390"/>
+  <path class="arrow" d="M 820 390 L 870 390"/>
+  <path class="arrow" d="M 1030 390 L 1080 390"/>
+  
+  <path class="highlight-arrow" d="M 1140 430 L 1140 470 L 950 470 L 950 440"/>
+  <text class="label-text" x="1045" y="465" text-anchor="middle">否-持续处置</text>
+  
+  <path class="arrow" d="M 1200 390 L 1250 390"/>
+  <text class="label-text" x="1225" y="375" text-anchor="middle">是</text>
+  
+  <!-- 流程4: 安全培训管理流程 -->
+  <rect class="process4" x="50" y="500" width="700" height="40" rx="5"/>
+  <text class="process-title" x="400" y="525" text-anchor="middle">④ 安全培训管理流程</text>
+  
+  <!-- 计划 -->
+  <rect class="step-box" x="50" y="560" width="130" height="80" rx="5"/>
+  <text class="step-title" x="115" y="585" text-anchor="middle">培训计划</text>
+  <text class="step-text" x="115" y="605" text-anchor="middle">· 制定计划</text>
+  <text class="step-text" x="115" y="620" text-anchor="middle">· 课件准备</text>
+  <text class="step-text" x="115" y="635" text-anchor="middle">· 讲师指定</text>
+  
+  <!-- 实施 -->
+  <rect class="step-box" x="200" y="560" width="130" height="80" rx="5"/>
+  <text class="step-title" x="265" y="585" text-anchor="middle">培训实施</text>
+  <text class="step-text" x="265" y="605" text-anchor="middle">· 线上/线下培训</text>
+  <text class="step-text" x="265" y="620" text-anchor="middle">· 签到记录</text>
+  <text class="step-text" x="265" y="635" text-anchor="middle">· 课件学习</text>
+  
+  <!-- 考核 -->
+  <rect class="step-box" x="350" y="560" width="130" height="80" rx="5"/>
+  <text class="step-title" x="415" y="585" text-anchor="middle">在线考试</text>
+  <text class="step-text" x="415" y="605" text-anchor="middle">· APP端答题</text>
+  <text class="step-text" x="415" y="620" text-anchor="middle">· 自动评分</text>
+  <text class="step-text" x="415" y="635" text-anchor="middle">· 错题本</text>
+  
+  <!-- 合格判断 -->
+  <polygon class="decision-box" points="510,600 550,570 590,600 550,630"/>
+  <text class="step-text" x="550" y="603" text-anchor="middle">合格?</text>
+  
+  <!-- 归档 -->
+  <rect class="step-box" x="620" y="560" width="130" height="80" rx="5"/>
+  <text class="step-title" x="685" y="585" text-anchor="middle">档案归档</text>
+  <text class="step-text" x="685" y="605" text-anchor="middle">· 一人一档更新</text>
+  <text class="step-text" x="685" y="620" text-anchor="middle">· 成绩记录</text>
+  <text class="step-text" x="685" y="635" text-anchor="middle">· 证书发放</text>
+  
+  <!-- 连接箭头 -->
+  <path class="arrow" d="M 180 600 L 200 600"/>
+  <path class="arrow" d="M 330 600 L 350 600"/>
+  <path class="arrow" d="M 480 600 L 510 600"/>
+  <path class="arrow" d="M 590 600 L 620 600"/>
+  <text class="label-text" x="605" y="590" text-anchor="middle">是</text>
+  
+  <path class="highlight-arrow" d="M 550 630 L 550 660 L 415 660 L 415 640"/>
+  <text class="label-text" x="482" y="675" text-anchor="middle">否-补考</text>
+  
+  <!-- 流程5: 安全生产标准化考核流程 -->
+  <rect class="process5" x="850" y="500" width="700" height="40" rx="5"/>
+  <text class="process-title" x="1200" y="525" text-anchor="middle">⑤ 安全生产标准化考核流程</text>
+  
+  <!-- 自评 -->
+  <rect class="step-box" x="850" y="560" width="150" height="80" rx="5"/>
+  <text class="step-title" x="925" y="585" text-anchor="middle">自评</text>
+  <text class="step-text" x="925" y="605" text-anchor="middle">· 在线考核表填写</text>
+  <text class="step-text" x="925" y="620" text-anchor="middle">· 上传佐证材料</text>
+  <text class="step-text" x="925" y="635" text-anchor="middle">· 发现问题转隐患</text>
+  
+  <!-- 检查 -->
+  <rect class="step-box" x="1020" y="560" width="150" height="80" rx="5"/>
+  <text class="step-title" x="1095" y="585" text-anchor="middle">现场检查</text>
+  <text class="step-text" x="1095" y="605" text-anchor="middle">· 专家评审</text>
+  <text class="step-text" x="1095" y="620" text-anchor="middle">· 打分修正</text>
+  <text class="step-text" x="1095" y="635" text-anchor="middle">· 形成检查报告</text>
+  
+  <!-- 汇总 -->
+  <rect class="step-box" x="1190" y="560" width="150" height="80" rx="5"/>
+  <text class="step-title" x="1265" y="585" text-anchor="middle">自动汇总</text>
+  <text class="step-text" x="1265" y="605" text-anchor="middle">· 权重计算</text>
+  <text class="step-text" x="1265" y="620" text-anchor="middle">· 得分统计</text>
+  <text class="step-text" x="1265" y="635" text-anchor="middle">· 等级评定</text>
+  
+  <!-- 整改 -->
+  <rect class="step-box" x="1360" y="560" width="190" height="80" rx="5"/>
+  <text class="step-title" x="1455" y="585" text-anchor="middle">持续改进</text>
+  <text class="step-text" x="1455" y="605" text-anchor="middle">· 问题整改</text>
+  <text class="step-text" x="1455" y="620" text-anchor="middle">· 体系优化</text>
+  <text class="step-text" x="1455" y="635" text-anchor="middle">· 闭环验证 → 下一轮考核</text>
+  
+  <!-- 连接箭头 -->
+  <path class="arrow" d="M 1000 600 L 1020 600"/>
+  <path class="arrow" d="M 1170 600 L 1190 600"/>
+  <path class="arrow" d="M 1340 600 L 1360 600"/>
+  
+  <!-- 流程6: 职业健康体检管理流程 -->
+  <rect class="process4" x="50" y="700" width="700" height="40" rx="5"/>
+  <text class="process-title" x="400" y="725" text-anchor="middle">⑥ 职业健康体检管理流程</text>
+  
+  <rect class="step-box" x="50" y="760" width="130" height="80" rx="5"/>
+  <text class="step-title" x="115" y="785" text-anchor="middle">体检计划</text>
+  <text class="step-text" x="115" y="805" text-anchor="middle">· 制定计划</text>
+  <text class="step-text" x="115" y="820" text-anchor="middle">· 人员通知</text>
+  <text class="step-text" x="115" y="835" text-anchor="middle">· 机构对接</text>
+  
+  <rect class="step-box" x="200" y="760" width="130" height="80" rx="5"/>
+  <text class="step-title" x="265" y="785" text-anchor="middle">体检实施</text>
+  <text class="step-text" x="265" y="805" text-anchor="middle">· 现场体检</text>
+  <text class="step-text" x="265" y="820" text-anchor="middle">· 数据采集</text>
+  <text class="step-text" x="265" y="835" text-anchor="middle">· 报告生成</text>
+  
+  <rect class="step-box" x="350" y="760" width="130" height="80" rx="5"/>
+  <text class="step-title" x="415" y="785" text-anchor="middle">结果分析</text>
+  <text class="step-text" x="415" y="805" text-anchor="middle">· 数据录入系统</text>
+  <text class="step-text" x="415" y="820" text-anchor="middle">· 异常标识</text>
+  <text class="step-text" x="415" y="835" text-anchor="middle">· 统计分析</text>
+  
+  <polygon class="decision-box" points="510,800 550,770 590,800 550,830"/>
+  <text class="step-text" x="550" y="803" text-anchor="middle">异常?</text>
+  
+  <rect class="step-box" x="620" y="760" width="130" height="80" rx="5"/>
+  <text class="step-title" x="685" y="785" text-anchor="middle">档案归档</text>
+  <text class="step-text" x="685" y="805" text-anchor="middle">· 健康档案更新</text>
+  <text class="step-text" x="685" y="820" text-anchor="middle">· 趋势分析</text>
+  <text class="step-text" x="685" y="835" text-anchor="middle">· 预警推送</text>
+  
+  <!-- 异常处理 -->
+  <rect class="step-box" x="500" y="870" width="100" height="60" rx="5"/>
+  <text class="step-title" x="550" y="895" text-anchor="middle">异常处理</text>
+  <text class="step-text" x="550" y="915" text-anchor="middle">· 岗位调整</text>
+  <text class="step-text" x="550" y="925" text-anchor="middle">· 复查跟踪</text>
+  
+  <path class="arrow" d="M 180 800 L 200 800"/>
+  <path class="arrow" d="M 330 800 L 350 800"/>
+  <path class="arrow" d="M 480 800 L 510 800"/>
+  <path class="arrow" d="M 590 800 L 620 800"/>
+  <text class="label-text" x="605" y="790" text-anchor="middle">否</text>
+  
+  <path class="highlight-arrow" d="M 550 830 L 550 870"/>
+  <text class="label-text" x="565" y="850" text-anchor="start">是</text>
+  
+  <path class="arrow" d="M 600 900 L 685 900 L 685 840"/>
+  
+  <!-- 流程7: 安全费用管理流程 -->
+  <rect class="process5" x="850" y="700" width="700" height="40" rx="5"/>
+  <text class="process-title" x="1200" y="725" text-anchor="middle">⑦ 安全费用管理流程</text>
+  
+  <rect class="step-box" x="850" y="760" width="120" height="80" rx="5"/>
+  <text class="step-title" x="910" y="785" text-anchor="middle">年度计划</text>
+  <text class="step-text" x="910" y="805" text-anchor="middle">· 费用规划</text>
+  <text class="step-text" x="910" y="820" text-anchor="middle">· 预算编制</text>
+  <text class="step-text" x="910" y="835" text-anchor="middle">· 分类管理</text>
+  
+  <rect class="step-box" x="990" y="760" width="120" height="80" rx="5"/>
+  <text class="step-title" x="1050" y="785" text-anchor="middle">费用申请</text>
+  <text class="step-text" x="1050" y="805" text-anchor="middle">· 在线申请</text>
+  <text class="step-text" x="1050" y="820" text-anchor="middle">· 附件上传</text>
+  <text class="step-text" x="1050" y="835" text-anchor="middle">· 提交审批</text>
+  
+  <rect class="step-box" x="1130" y="760" width="120" height="80" rx="5"/>
+  <text class="step-title" x="1190" y="785" text-anchor="middle">审批流程</text>
+  <text class="step-text" x="1190" y="805" text-anchor="middle">· 多级审批</text>
+  <text class="step-text" x="1190" y="820" text-anchor="middle">· 预算检查</text>
+  <text class="step-text" x="1190" y="835" text-anchor="middle">· 财务对接</text>
+  
+  <rect class="step-box" x="1270" y="760" width="120" height="80" rx="5"/>
+  <text class="step-title" x="1330" y="785" text-anchor="middle">使用登记</text>
+  <text class="step-text" x="1330" y="805" text-anchor="middle">· 费用核销</text>
+  <text class="step-text" x="1330" y="820" text-anchor="middle">· 票据上传</text>
+  <text class="step-text" x="1330" y="835" text-anchor="middle">· 验收确认</text>
+  
+  <rect class="step-box" x="1410" y="760" width="140" height="80" rx="5"/>
+  <text class="step-title" x="1480" y="785" text-anchor="middle">统计分析</text>
+  <text class="step-text" x="1480" y="805" text-anchor="middle">· 执行率分析</text>
+  <text class="step-text" x="1480" y="820" text-anchor="middle">· 使用结构</text>
+  <text class="step-text" x="1480" y="835" text-anchor="middle">· 报表生成</text>
+  
+  <path class="arrow" d="M 970 800 L 990 800"/>
+  <path class="arrow" d="M 1110 800 L 1130 800"/>
+  <path class="arrow" d="M 1250 800 L 1270 800"/>
+  <path class="arrow" d="M 1390 800 L 1410 800"/>
+  
+  <!-- 流程8: 承包商管理流程 -->
+  <rect class="process1" x="50" y="980" width="1500" height="40" rx="5"/>
+  <text class="process-title" x="800" y="1005" text-anchor="middle">⑧ 承包商全生命周期管理流程</text>
+  
+  <rect class="step-box" x="50" y="1040" width="140" height="90" rx="5"/>
+  <text class="step-title" x="120" y="1065" text-anchor="middle">入场准备</text>
+  <text class="step-text" x="120" y="1085" text-anchor="middle">· 资质审核</text>
+  <text class="step-text" x="120" y="1100" text-anchor="middle">· 人员信息登记</text>
+  <text class="step-text" x="120" y="1115" text-anchor="middle">· 设备档案建立</text>
+  
+  <rect class="step-box" x="210" y="1040" width="140" height="90" rx="5"/>
+  <text class="step-title" x="280" y="1065" text-anchor="middle">培训教育</text>
+  <text class="step-text" x="280" y="1085" text-anchor="middle">· 三级安全教育</text>
+  <text class="step-text" x="280" y="1100" text-anchor="middle">· 在线考核</text>
+  <text class="step-text" x="280" y="1115" text-anchor="middle">· 培训档案同步</text>
+  
+  <rect class="step-box" x="370" y="1040" width="140" height="90" rx="5"/>
+  <text class="step-title" x="440" y="1065" text-anchor="middle">作业管理</text>
+  <text class="step-text" x="440" y="1085" text-anchor="middle">· 票证申请</text>
+  <text class="step-text" x="440" y="1100" text-anchor="middle">· 隐患上报</text>
+  <text class="step-text" x="440" y="1115" text-anchor="middle">· 三违记录</text>
+  
+  <rect class="step-box" x="530" y="1040" width="140" height="90" rx="5"/>
+  <text class="step-title" x="600" y="1065" text-anchor="middle">日常监督</text>
+  <text class="step-text" x="600" y="1085" text-anchor="middle">· 现场检查</text>
+  <text class="step-text" x="600" y="1100" text-anchor="middle">· 安全绩效评价</text>
+  <text class="step-text" x="600" y="1115" text-anchor="middle">· 违规处罚</text>
+  
+  <rect class="step-box" x="690" y="1040" width="140" height="90" rx="5"/>
+  <text class="step-title" x="760" y="1065" text-anchor="middle">退场管理</text>
+  <text class="step-text" x="760" y="1085" text-anchor="middle">· 工作验收</text>
+  <text class="step-text" x="760" y="1100" text-anchor="middle">· 安全评价</text>
+  <text class="step-text" x="760" y="1115" text-anchor="middle">· 档案归档</text>
+  
+  <path class="arrow" d="M 190 1085 L 210 1085"/>
+  <path class="arrow" d="M 350 1085 L 370 1085"/>
+  <path class="arrow" d="M 510 1085 L 530 1085"/>
+  <path class="arrow" d="M 670 1085 L 690 1085"/>
+  
+  <!-- 承包商门户 -->
+  <rect class="step-box" x="900" y="1040" width="200" height="90" rx="5" stroke="#e74c3c" stroke-width="3"/>
+  <text class="step-title" x="1000" y="1065" text-anchor="middle" fill="#e74c3c">承包商门户(独立)</text>
+  <text class="step-text" x="1000" y="1085" text-anchor="middle">· 自主维护人员信息</text>
+  <text class="step-text" x="1000" y="1100" text-anchor="middle">· 在线学习/考试</text>
+  <text class="step-text" x="1000" y="1115" text-anchor="middle">· 隐患上报/查询</text>
+  
+  <path class="arrow" d="M 280 1040 L 280 1010 L 1000 1010 L 1000 1040" stroke-dasharray="5,5"/>
+  <path class="arrow" d="M 440 1040 L 440 1000 L 1000 1000 L 1000 1040" stroke-dasharray="5,5"/>
+  
+  <!-- 数据流向说明区域 -->
+  <rect class="header" x="50" y="1180" width="1500" height="40" rx="5"/>
+  <text class="process-title" x="800" y="1205" text-anchor="middle">关键数据流向与系统集成说明</text>
+  
+  <rect class="step-box" x="50" y="1240" width="280" height="120" rx="5"/>
+  <text class="step-title" x="190" y="1265" text-anchor="middle">监测数据 → 应急系统</text>
+  <text class="step-text" x="190" y="1285" text-anchor="middle">· 传感器/视频数据实时推送</text>
+  <text class="step-text" x="190" y="1300" text-anchor="middle">· 超阈值自动触发应急预案</text>
+  <text class="step-text" x="190" y="1315" text-anchor="middle">· 边坡预警联动运输撤离</text>
+  <text class="step-text" x="190" y="1330" text-anchor="middle">· 多灾融合综合预警</text>
+  <text class="step-text" x="190" y="1345" text-anchor="middle">· 应急物资智能调度</text>
+  
+  <rect class="step-box" x="360" y="1240" width="280" height="120" rx="5"/>
+  <text class="step-title" x="500" y="1265" text-anchor="middle">标准化考核 → 隐患排查</text>
+  <text class="step-text" x="500" y="1285" text-anchor="middle">· 考核中发现问题自动转隐患</text>
+  <text class="step-text" x="500" y="1300" text-anchor="middle">· 一键推送到双重预防模块</text>
+  <text class="step-text" x="500" y="1315" text-anchor="middle">· 形成闭环管理</text>
+  <text class="step-text" x="500" y="1330" text-anchor="middle">· 问题追踪与验证</text>
+  
+  <rect class="step-box" x="670" y="1240" width="280" height="120" rx="5"/>
+  <text class="step-title" x="810" y="1265" text-anchor="middle">人员档案 → 多系统共享</text>
+  <text class="step-text" x="810" y="1285" text-anchor="middle">· 档案库 ↔ 培训系统</text>
+  <text class="step-text" x="810" y="1300" text-anchor="middle">· 档案库 ↔ 职业健康</text>
+  <text class="step-text" x="810" y="1315" text-anchor="middle">· 档案库 ↔ HR系统</text>
+  <text class="step-text" x="810" y="1330" text-anchor="middle">· 档案库 ↔ 智能访客</text>
+  <text class="step-text" x="810" y="1345" text-anchor="middle">· 证件过期预警联动</text>
+  
+  <rect class="step-box" x="980" y="1240" width="280" height="120" rx="5"/>
+  <text class="step-title" x="1120" y="1265" text-anchor="middle">安全费用 → 财务系统</text>
+  <text class="step-text" x="1120" y="1285" text-anchor="middle">· 费用申请数据对接</text>
+  <text class="step-text" x="1120" y="1300" text-anchor="middle">· 审批流程互通</text>
+  <text class="step-text" x="1120" y="1315" text-anchor="middle">· 预算与实际核销同步</text>
+  <text class="step-text" x="1120" y="1330" text-anchor="middle">· 财务报表自动生成</text>
+  
+  <rect class="step-box" x="1290" y="1240" width="260" height="120" rx="5"/>
+  <text class="step-title" x="1420" y="1265" text-anchor="middle">设备档案 → 设备管理</text>
+  <text class="step-text" x="1420" y="1285" text-anchor="middle">· 设备信息双向同步</text>
+  <text class="step-text" x="1420" y="1300" text-anchor="middle">· 维保记录关联</text>
+  <text class="step-text" x="1420" y="1315" text-anchor="middle">· 故障与隐患联动</text>
+  <text class="step-text" x="1420" y="1330" text-anchor="middle">· 特种设备证照预警</text>
+  
+  <!-- 版本信息 -->
+  <text class="label-text" x="800" y="1390" text-anchor="middle" fill="#95a5a6">Version 1.0 | 2025-10-21 | 智慧矿山安全管理中心</text>
+  
+</svg>

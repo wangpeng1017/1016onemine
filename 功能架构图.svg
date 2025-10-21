@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100" width="1400" height="1100">
+  <defs>
+    <style>
+      .title { font: bold 28px sans-serif; fill: #1a1a1a; }
+      .module-title { font: bold 18px sans-serif; fill: #ffffff; }
+      .func-text { font: 14px sans-serif; fill: #333333; }
+      .header { fill: #2c5aa0; }
+      .module1 { fill: #3498db; }
+      .module2 { fill: #e74c3c; }
+      .module3 { fill: #f39c12; }
+      .module4 { fill: #27ae60; }
+      .module5 { fill: #9b59b6; }
+      .func-box { fill: #ecf0f1; stroke: #95a5a6; stroke-width: 1.5; }
+      .line { stroke: #7f8c8d; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+  
+  <!-- 标题 -->
+  <rect class="header" x="0" y="0" width="1400" height="70" rx="5"/>
+  <text class="title" x="700" y="45" text-anchor="middle">智慧矿山 · 安全管理中心 - 功能架构图</text>
+  
+  <!-- 第一层:标准规范档案库 -->
+  <rect class="module1" x="50" y="100" width="300" height="50" rx="5"/>
+  <text class="module-title" x="200" y="132" text-anchor="middle">标准规范档案库</text>
+  
+  <rect class="func-box" x="50" y="160" width="140" height="100" rx="3"/>
+  <text class="func-text" x="120" y="185" text-anchor="middle">类别管理</text>
+  <text class="func-text" x="120" y="205" text-anchor="middle">规范管理</text>
+  <text class="func-text" x="120" y="225" text-anchor="middle">在线预览</text>
+  <text class="func-text" x="120" y="245" text-anchor="middle">文档标记</text>
+  
+  <rect class="func-box" x="210" y="160" width="140" height="100" rx="3"/>
+  <text class="func-text" x="280" y="185" text-anchor="middle">档案信息管理</text>
+  <text class="func-text" x="280" y="205" text-anchor="middle">人员/设备档案</text>
+  <text class="func-text" x="280" y="225" text-anchor="middle">制度/预案库</text>
+  <text class="func-text" x="280" y="245" text-anchor="middle">数据分析</text>
+  
+  <!-- 第二层:安全生产标准化 -->
+  <rect class="module2" x="400" y="100" width="350" height="50" rx="5"/>
+  <text class="module-title" x="575" y="132" text-anchor="middle">安全生产标准化</text>
+  
+  <rect class="func-box" x="400" y="160" width="110" height="140" rx="3"/>
+  <text class="func-text" x="455" y="185" text-anchor="middle" font-weight="bold">安全基础</text>
+  <text class="func-text" x="455" y="210" text-anchor="middle">安全目标</text>
+  <text class="func-text" x="455" y="230" text-anchor="middle">组织保障</text>
+  <text class="func-text" x="455" y="250" text-anchor="middle">安全制度</text>
+  <text class="func-text" x="455" y="270" text-anchor="middle">安全培训</text>
+  <text class="func-text" x="455" y="290" text-anchor="middle">风险管控</text>
+  
+  <rect class="func-box" x="520" y="160" width="110" height="140" rx="3"/>
+  <text class="func-text" x="575" y="185" text-anchor="middle" font-weight="bold">灾害防治</text>
+  <text class="func-text" x="575" y="210" text-anchor="middle">调度指挥</text>
+  <text class="func-text" x="575" y="230" text-anchor="middle">应急管理</text>
+  <text class="func-text" x="575" y="250" text-anchor="middle">事故管理</text>
+  <text class="func-text" x="575" y="270" text-anchor="middle">职业健康</text>
+  <text class="func-text" x="575" y="290" text-anchor="middle">持续改进</text>
+  
+  <rect class="func-box" x="640" y="160" width="110" height="140" rx="3"/>
+  <text class="func-text" x="695" y="185" text-anchor="middle" font-weight="bold">专业管理</text>
+  <text class="func-text" x="695" y="210" text-anchor="middle">通风管理</text>
+  <text class="func-text" x="695" y="230" text-anchor="middle">防灭火</text>
+  <text class="func-text" x="695" y="250" text-anchor="middle">防排水</text>
+  <text class="func-text" x="695" y="270" text-anchor="middle">设备管理</text>
+  <text class="func-text" x="695" y="290" text-anchor="middle">模板签章</text>
+  
+  <!-- 第三层:双重预防机制 -->
+  <rect class="module3" x="800" y="100" width="300" height="50" rx="5"/>
+  <text class="module-title" x="950" y="132" text-anchor="middle">双重预防机制</text>
+  
+  <rect class="func-box" x="800" y="160" width="140" height="140" rx="3"/>
+  <text class="func-text" x="870" y="185" text-anchor="middle" font-weight="bold">风险分级管控</text>
+  <text class="func-text" x="870" y="210" text-anchor="middle">辨识评估</text>
+  <text class="func-text" x="870" y="230" text-anchor="middle">风险四色图</text>
+  <text class="func-text" x="870" y="250" text-anchor="middle">管控措施</text>
+  <text class="func-text" x="870" y="270" text-anchor="middle">公示报告</text>
+  <text class="func-text" x="870" y="290" text-anchor="middle">统计分析</text>
+  
+  <rect class="func-box" x="960" y="160" width="140" height="140" rx="3"/>
+  <text class="func-text" x="1030" y="185" text-anchor="middle" font-weight="bold">隐患排查治理</text>
+  <text class="func-text" x="1030" y="210" text-anchor="middle">排查任务</text>
+  <text class="func-text" x="1030" y="230" text-anchor="middle">隐患登记</text>
+  <text class="func-text" x="1030" y="250" text-anchor="middle">治理验收</text>
+  <text class="func-text" x="1030" y="270" text-anchor="middle">闭环销号</text>
+  <text class="func-text" x="1030" y="290" text-anchor="middle">督办预警</text>
+  
+  <!-- 第四层:专项管理 -->
+  <rect class="module4" x="1150" y="100" width="200" height="50" rx="5"/>
+  <text class="module-title" x="1250" y="132" text-anchor="middle">专项管理</text>
+  
+  <rect class="func-box" x="1150" y="160" width="200" height="140" rx="3"/>
+  <text class="func-text" x="1250" y="185" text-anchor="middle">作业票证管理</text>
+  <text class="func-text" x="1250" y="205" text-anchor="middle">安全培训</text>
+  <text class="func-text" x="1250" y="225" text-anchor="middle">班组建设</text>
+  <text class="func-text" x="1250" y="245" text-anchor="middle">承包商管理</text>
+  <text class="func-text" x="1250" y="265" text-anchor="middle">职业健康</text>
+  <text class="func-text" x="1250" y="285" text-anchor="middle">安全费用</text>
+  
+  <!-- 第五层:监测监控与应急 -->
+  <rect class="module5" x="50" y="350" width="650" height="50" rx="5"/>
+  <text class="module-title" x="375" y="382" text-anchor="middle">监测监控 (一张图)</text>
+  
+  <rect class="func-box" x="50" y="410" width="150" height="200" rx="3"/>
+  <text class="func-text" x="125" y="435" text-anchor="middle" font-weight="bold">数字孪生</text>
+  <text class="func-text" x="125" y="460" text-anchor="middle">三维实景</text>
+  <text class="func-text" x="125" y="480" text-anchor="middle">图层控制</text>
+  <text class="func-text" x="125" y="500" text-anchor="middle">实时数据</text>
+  <text class="func-text" x="125" y="520" text-anchor="middle">点位标注</text>
+  <text class="func-text" x="125" y="540" text-anchor="middle">报警一致性</text>
+  <text class="func-text" x="125" y="560" text-anchor="middle">视频融合</text>
+  <text class="func-text" x="125" y="580" text-anchor="middle">轨迹回放</text>
+  
+  <rect class="func-box" x="220" y="410" width="120" height="200" rx="3"/>
+  <text class="func-text" x="280" y="435" text-anchor="middle" font-weight="bold">边坡监测</text>
+  <text class="func-text" x="280" y="460" text-anchor="middle">雷达点云</text>
+  <text class="func-text" x="280" y="480" text-anchor="middle">位移曲线</text>
+  <text class="func-text" x="280" y="500" text-anchor="middle">预警联动</text>
+  <line class="line" x1="280" y1="515" x2="280" y2="525"/>
+  <text class="func-text" x="280" y="540" text-anchor="middle" font-weight="bold">运输安全</text>
+  <text class="func-text" x="280" y="560" text-anchor="middle">人员定位</text>
+  <text class="func-text" x="280" y="580" text-anchor="middle">车辆监控</text>
+  <text class="func-text" x="280" y="600" text-anchor="middle">实时状态</text>
+  
+  <rect class="func-box" x="360" y="410" width="120" height="200" rx="3"/>
+  <text class="func-text" x="420" y="435" text-anchor="middle" font-weight="bold">环境监测</text>
+  <text class="func-text" x="420" y="460" text-anchor="middle">防灭火</text>
+  <text class="func-text" x="420" y="480" text-anchor="middle">气体浓度</text>
+  <text class="func-text" x="420" y="500" text-anchor="middle">粉尘监测</text>
+  <text class="func-text" x="420" y="520" text-anchor="middle">防排水</text>
+  <text class="func-text" x="420" y="540" text-anchor="middle">阈值预警</text>
+  <line class="line" x1="420" y1="550" x2="420" y2="560"/>
+  <text class="func-text" x="420" y="575" text-anchor="middle" font-weight="bold">AI视频监控</text>
+  <text class="func-text" x="420" y="595" text-anchor="middle">行为识别</text>
+  
+  <rect class="func-box" x="500" y="410" width="120" height="200" rx="3"/>
+  <text class="func-text" x="560" y="435" text-anchor="middle" font-weight="bold">多灾融合</text>
+  <text class="func-text" x="560" y="460" text-anchor="middle">综合预警</text>
+  <text class="func-text" x="560" y="480" text-anchor="middle">阈值管理</text>
+  <text class="func-text" x="560" y="500" text-anchor="middle">风险评估</text>
+  <text class="func-text" x="560" y="520" text-anchor="middle">数据融合</text>
+  <text class="func-text" x="560" y="540" text-anchor="middle">智能分析</text>
+  <text class="func-text" x="560" y="560" text-anchor="middle">应急触发</text>
+  
+  <rect class="func-box" x="640" y="410" width="60" height="200" rx="3"/>
+  <text class="func-text" x="670" y="435" text-anchor="middle" transform="rotate(-90 670 505)" font-weight="bold">传感器网络</text>
+  
+  <!-- 应急管理模块 -->
+  <rect class="module5" x="750" y="350" width="600" height="50" rx="5"/>
+  <text class="module-title" x="1050" y="382" text-anchor="middle">应急管理</text>
+  
+  <rect class="func-box" x="750" y="410" width="140" height="200" rx="3"/>
+  <text class="func-text" x="820" y="435" text-anchor="middle" font-weight="bold">基础保障</text>
+  <text class="func-text" x="820" y="460" text-anchor="middle">应急资料库</text>
+  <text class="func-text" x="820" y="480" text-anchor="middle">预案管理</text>
+  <text class="func-text" x="820" y="500" text-anchor="middle">演练管理</text>
+  <text class="func-text" x="820" y="520" text-anchor="middle">物资检查</text>
+  <text class="func-text" x="820" y="540" text-anchor="middle">通讯录</text>
+  <text class="func-text" x="820" y="560" text-anchor="middle">制度库</text>
+  <text class="func-text" x="820" y="580" text-anchor="middle">评估总结</text>
+  
+  <rect class="func-box" x="910" y="410" width="140" height="200" rx="3"/>
+  <text class="func-text" x="980" y="435" text-anchor="middle" font-weight="bold">应急处置</text>
+  <text class="func-text" x="980" y="460" text-anchor="middle">自动触发</text>
+  <text class="func-text" x="980" y="480" text-anchor="middle">任务推送</text>
+  <text class="func-text" x="980" y="500" text-anchor="middle">融合通信</text>
+  <text class="func-text" x="980" y="520" text-anchor="middle">对讲/电话</text>
+  <text class="func-text" x="980" y="540" text-anchor="middle">视频会议</text>
+  <text class="func-text" x="980" y="560" text-anchor="middle">处置流程</text>
+  <text class="func-text" x="980" y="580" text-anchor="middle">应急指挥</text>
+  
+  <rect class="func-box" x="1070" y="410" width="140" height="200" rx="3"/>
+  <text class="func-text" x="1140" y="435" text-anchor="middle" font-weight="bold">物资管理</text>
+  <text class="func-text" x="1140" y="460" text-anchor="middle">地图标注</text>
+  <text class="func-text" x="1140" y="480" text-anchor="middle">库存管理</text>
+  <text class="func-text" x="1140" y="500" text-anchor="middle">阈值预警</text>
+  <text class="func-text" x="1140" y="520" text-anchor="middle">智能调度</text>
+  <text class="func-text" x="1140" y="540" text-anchor="middle">最近推荐</text>
+  <text class="func-text" x="1140" y="560" text-anchor="middle">领用记录</text>
+  <text class="func-text" x="1140" y="580" text-anchor="middle">维护保养</text>
+  
+  <rect class="func-box" x="1230" y="410" width="120" height="200" rx="3"/>
+  <text class="func-text" x="1290" y="435" text-anchor="middle" font-weight="bold">可视化</text>
+  <text class="func-text" x="1290" y="460" text-anchor="middle">物资点位</text>
+  <text class="func-text" x="1290" y="480" text-anchor="middle">事故圈选</text>
+  <text class="func-text" x="1290" y="500" text-anchor="middle">路径规划</text>
+  <text class="func-text" x="1290" y="520" text-anchor="middle">实时态势</text>
+  <text class="func-text" x="1290" y="540" text-anchor="middle">资源分布</text>
+  
+  <!-- 底层支撑平台 -->
+  <rect class="header" x="50" y="660" width="1300" height="50" rx="5"/>
+  <text class="module-title" x="700" y="692" text-anchor="middle">数据支撑与集成平台</text>
+  
+  <rect class="func-box" x="50" y="720" width="180" height="120" rx="3"/>
+  <text class="func-text" x="140" y="745" text-anchor="middle" font-weight="bold">数据采集层</text>
+  <text class="func-text" x="140" y="770" text-anchor="middle">传感器数据</text>
+  <text class="func-text" x="140" y="790" text-anchor="middle">视频流数据</text>
+  <text class="func-text" x="140" y="810" text-anchor="middle">业务系统数据</text>
+  <text class="func-text" x="140" y="830" text-anchor="middle">IoT设备数据</text>
+  
+  <rect class="func-box" x="250" y="720" width="180" height="120" rx="3"/>
+  <text class="func-text" x="340" y="745" text-anchor="middle" font-weight="bold">数据处理层</text>
+  <text class="func-text" x="340" y="770" text-anchor="middle">数据清洗</text>
+  <text class="func-text" x="340" y="790" text-anchor="middle">数据融合</text>
+  <text class="func-text" x="340" y="810" text-anchor="middle">实时计算</text>
+  <text class="func-text" x="340" y="830" text-anchor="middle">AI分析</text>
+  
+  <rect class="func-box" x="450" y="720" width="180" height="120" rx="3"/>
+  <text class="func-text" x="540" y="745" text-anchor="middle" font-weight="bold">数据存储层</text>
+  <text class="func-text" x="540" y="770" text-anchor="middle">时序数据库</text>
+  <text class="func-text" x="540" y="790" text-anchor="middle">关系数据库</text>
+  <text class="func-text" x="540" y="810" text-anchor="middle">文档数据库</text>
+  <text class="func-text" x="540" y="830" text-anchor="middle">对象存储</text>
+  
+  <rect class="func-box" x="650" y="720" width="180" height="120" rx="3"/>
+  <text class="func-text" x="740" y="745" text-anchor="middle" font-weight="bold">系统集成层</text>
+  <text class="func-text" x="740" y="770" text-anchor="middle">HR系统</text>
+  <text class="func-text" x="740" y="790" text-anchor="middle">财务系统</text>
+  <text class="func-text" x="740" y="810" text-anchor="middle">设备管理</text>
+  <text class="func-text" x="740" y="830" text-anchor="middle">培训系统</text>
+  
+  <rect class="func-box" x="850" y="720" width="180" height="120" rx="3"/>
+  <text class="func-text" x="940" y="745" text-anchor="middle" font-weight="bold">安全保障层</text>
+  <text class="func-text" x="940" y="770" text-anchor="middle">身份认证</text>
+  <text class="func-text" x="940" y="790" text-anchor="middle">权限控制</text>
+  <text class="func-text" x="940" y="810" text-anchor="middle">数据加密</text>
+  <text class="func-text" x="940" y="830" text-anchor="middle">审计日志</text>
+  
+  <rect class="func-box" x="1050" y="720" width="180" height="120" rx="3"/>
+  <text class="func-text" x="1140" y="745" text-anchor="middle" font-weight="bold">展示交互层</text>
+  <text class="func-text" x="1140" y="770" text-anchor="middle">Web端</text>
+  <text class="func-text" x="1140" y="790" text-anchor="middle">移动端</text>
+  <text class="func-text" x="1140" y="810" text-anchor="middle">大屏展示</text>
+  <text class="func-text" x="1140" y="830" text-anchor="middle">API接口</text>
+  
+  <!-- 连接线 -->
+  <path class="line" d="M 700 650 L 700 720" marker-end="url(#arrowhead)"/>
+  <path class="line" d="M 125 610 L 125 660" marker-end="url(#arrowhead)"/>
+  <path class="line" d="M 1050 610 L 1050 660" marker-end="url(#arrowhead)"/>
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#7f8c8d"/>
+    </marker>
+  </defs>
+  
+  <!-- 版本信息 -->
+  <text class="func-text" x="700" y="1080" text-anchor="middle" fill="#95a5a6">Version 1.0 | 2025-10-21 | 智慧矿山安全管理中心</text>
+  
+</svg>

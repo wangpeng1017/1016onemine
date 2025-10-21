@@ -55,6 +55,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
       key: 'smart-safety',
       label: '智慧安全保障',
       children: [
+        { key: 'safety-management', label: '安全管理中心' },
         { key: 'slope-monitoring', label: '边坡监测管理' },
         { key: 'personnel-safety', label: '人员定位安全' },
       ],
