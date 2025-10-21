@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Table, Button, Select, DatePicker, Space, Tag, Statistic, message, Tabs } from 'antd';
 import { DownloadOutlined, FileExcelOutlined, FilePdfOutlined, BarChartOutlined, LineChartOutlined, DatabaseOutlined } from '@ant-design/icons';
 import ReactECharts from 'echarts-for-react';
-import { salesPlanService, inventoryService, dashboardService } from '../../services/productionSalesMockService';
-import type { SalesPlan, Inventory, SalesDashboard } from '../../types/productionSales';
+import { salesPlanService, siloService, tempPileService, dashboardService } from '../../services/productionSalesMockService';
+import type { SalesPlan, Silo, TemporaryCoalPile, SalesDashboard } from '../../types/productionSales';
 import dayjs from 'dayjs';
 
 const { Option } = Select;
@@ -20,7 +20,8 @@ interface ReportData {
 
 const ReportPageEnhanced: React.FC = () => {
   const [salesPlans, setSalesPlans] = useState<SalesPlan[]>([]);
-  const [inventories, setInventories] = useState<Inventory[]>([]);
+  const [silos, setSilos] = useState<Silo[]>([]);
+  const [tempPiles, setTempPiles] = useState<TemporaryCoalPile[]>([]);
   const [dashboard, setDashboard] = useState<SalesDashboard | null>(null);
   const [reportType, setReportType] = useState<'daily' | 'weekly' | 'monthly'>('monthly');
   const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs]>([
@@ -35,7 +36,8 @@ const ReportPageEnhanced: React.FC = () => {
 
   const loadData = () => {
     setSalesPlans(salesPlanService.getAll());
-    setInventories(inventoryService.getAll());
+    setSilos(siloService.getAll());
+    setTempPiles(tempPileService.getAll());
     setDashboard(dashboardService.getDashboard());
   };
 
@@ -72,12 +74,12 @@ const ReportPageEnhanced: React.FC = () => {
       const salesVolume = filteredSales.reduce((sum, s) => sum + s.plannedVolume, 0);
       const salesRevenue = filteredSales.reduce((sum, s) => sum + s.estimatedRevenue, 0);
 
-      // 获取该周期末的库存数据
-      const periodInventories = inventories.filter(i => 
-        selectedCoalType === 'all' || i.coalType === selectedCoalType
-      );
-      const inventoryVolume = periodInventories.reduce((sum, i) => sum + i.currentVolume, 0);
-      const inventoryValue = periodInventories.reduce((sum, i) => sum + i.estimatedValue, 0);
+      // 获取该周期末的库存数据（筒仓 + 临时堆煤）
+      const siloVolume = silos.reduce((sum, s) => sum + s.currentVolume, 0);
+      const tempPileVolume = tempPiles.reduce((sum, p) => sum + p.volume, 0);
+      const inventoryVolume = siloVolume + tempPileVolume;
+      // 假设平均单价500元/吨
+      const inventoryValue = inventoryVolume * 500;
 
       data.push({
         period,
@@ -103,30 +105,57 @@ const ReportPageEnhanced: React.FC = () => {
 
   const reportData = generateReportData();
 
-  // 存量报表列定义
-  const inventoryReportColumns = [
-    { title: '煤种', dataIndex: 'coalType', key: 'coalType', width: 120 },
-    { title: '堆场', dataIndex: 'location', key: 'location', width: 120 },
-    { title: '当前库存(吨)', dataIndex: 'currentVolume', key: 'currentVolume', width: 120, render: (v: number) => v.toLocaleString() },
-    { title: '最大容量(吨)', dataIndex: 'maxCapacity', key: 'maxCapacity', width: 120, render: (v: number) => v.toLocaleString() },
+  // 存量报表列定义（筒仓）
+  const siloReportColumns = [
+    { title: '筒仓名称', dataIndex: 'name', key: 'name', width: 120 },
+    { title: '当前料位(m)', dataIndex: 'currentLevel', key: 'currentLevel', width: 120, render: (v: number) => v.toFixed(2) },
+    { title: '当前存煤(吨)', dataIndex: 'currentVolume', key: 'currentVolume', width: 120, render: (v: number) => v.toLocaleString() },
+    { title: '总容量(吨)', dataIndex: 'capacity', key: 'capacity', width: 120, render: (v: number) => v.toLocaleString() },
     { 
       title: '容量使用率', 
       key: 'utilizationRate', 
       width: 120,
-      render: (_: any, record: Inventory) => {
-        const rate = (record.currentVolume / record.maxCapacity * 100).toFixed(1);
+      render: (_: any, record: Silo) => {
+        const rate = (record.currentVolume / record.capacity * 100).toFixed(1);
         return <Tag color={parseFloat(rate) > 90 ? 'red' : parseFloat(rate) > 70 ? 'orange' : 'green'}>{rate}%</Tag>;
       }
     },
-    { title: '预估价值(元)', dataIndex: 'estimatedValue', key: 'estimatedValue', width: 150, render: (v: number) => '¥' + v.toLocaleString() },
     { 
-      title: '堆放天数', 
-      dataIndex: 'storageDate', 
-      key: 'storageDays', 
+      title: '状态', 
+      dataIndex: 'status', 
+      key: 'status', 
       width: 100,
-      render: (date: string) => {
-        const days = dayjs().diff(dayjs(date), 'day');
-        return <Tag color={days > 30 ? 'red' : days > 15 ? 'orange' : 'blue'}>{days}天</Tag>;
+      render: (status: Silo['status']) => {
+        const colorMap = { normal: 'green', high_warning: 'red', low_warning: 'orange' };
+        const textMap = { normal: '正常', high_warning: '高位预警', low_warning: '低位预警' };
+        return <Tag color={colorMap[status]}>{textMap[status]}</Tag>;
+      }
+    },
+    { title: '更新时间', dataIndex: 'lastUpdate', key: 'lastUpdate', width: 150 }
+  ];
+
+  // 临时堆煤报表列定义
+  const tempPileReportColumns = [
+    { title: '煤堆编号', dataIndex: 'pileNumber', key: 'pileNumber', width: 120 },
+    { title: '位置', dataIndex: 'location', key: 'location', width: 120 },
+    { title: '数量(吨)', dataIndex: 'volume', key: 'volume', width: 100, render: (v: number) => v.toLocaleString() },
+    { title: '盘点日期', dataIndex: 'inventoryDate', key: 'inventoryDate', width: 120 },
+    { title: '盘点人', dataIndex: 'inspector', key: 'inspector', width: 100 },
+    { 
+      title: '预计出场', 
+      dataIndex: 'expectedOutbound', 
+      key: 'expectedOutbound', 
+      width: 120,
+      render: (date: string) => date || '-'
+    },
+    {
+      title: '状态',
+      key: 'status',
+      width: 100,
+      render: (_: any, record: TemporaryCoalPile) => {
+        if (!record.expectedOutbound) return <Tag>待定</Tag>;
+        const isOverdue = dayjs().isAfter(dayjs(record.expectedOutbound));
+        return <Tag color={isOverdue ? 'red' : 'green'}>{isOverdue ? '超期' : '正常'}</Tag>;
       }
     }
   ];
@@ -254,7 +283,22 @@ const ReportPageEnhanced: React.FC = () => {
     let filename = '';
     
     if (type === 'inventory') {
-      data = inventories;
+      // 合并筒仓和临时堆煤数据
+      const siloData = silos.map(s => ({
+        type: '筒仓',
+        name: s.name,
+        volume: s.currentVolume,
+        capacity: s.capacity,
+        status: s.status
+      }));
+      const tempPileData = tempPiles.map(p => ({
+        type: '临时堆煤',
+        name: p.pileNumber,
+        location: p.location,
+        volume: p.volume,
+        inspector: p.inspector
+      }));
+      data = [...siloData, ...tempPileData];
       filename = `存量报表_${dayjs().format('YYYYMMDD')}.csv`;
     } else if (type === 'sales') {
       data = reportData;
@@ -296,11 +340,15 @@ const ReportPageEnhanced: React.FC = () => {
   };
 
   // 计算汇总统计
+  const totalSiloVolume = silos.reduce((sum, s) => sum + s.currentVolume, 0);
+  const totalTempPileVolume = tempPiles.reduce((sum, p) => sum + p.volume, 0);
+  const totalInventory = totalSiloVolume + totalTempPileVolume;
+  
   const summaryStats = {
     totalSales: reportData.reduce((sum, d) => sum + d.salesVolume, 0),
     totalRevenue: reportData.reduce((sum, d) => sum + d.salesRevenue, 0),
-    totalInventory: inventories.reduce((sum, i) => sum + i.currentVolume, 0),
-    totalInventoryValue: inventories.reduce((sum, i) => sum + i.estimatedValue, 0),
+    totalInventory,
+    totalInventoryValue: totalInventory * 500, // 假设平均单价500元/吨
     avgSalesVolume: reportData.length > 0 ? reportData.reduce((sum, d) => sum + d.salesVolume, 0) / reportData.length : 0,
     avgRevenue: reportData.length > 0 ? reportData.reduce((sum, d) => sum + d.salesRevenue, 0) / reportData.length : 0
   };
@@ -392,50 +440,79 @@ const ReportPageEnhanced: React.FC = () => {
               </span>
             ),
             children: (
-              <Card
-                title="库存明细报表"
-                extra={
-                  <Space>
-                    <Button icon={<FileExcelOutlined />} onClick={() => handleExportExcel('inventory')}>
-                      导出Excel
-                    </Button>
-                    <Button icon={<FilePdfOutlined />} onClick={handleExportPDF}>
-                      导出PDF
-                    </Button>
-                  </Space>
-                }
-              >
-                <Table 
-                  columns={inventoryReportColumns} 
-                  dataSource={inventories.filter(i => selectedCoalType === 'all' || i.coalType === selectedCoalType)} 
-                  rowKey="id" 
-                  pagination={{ pageSize: 10 }}
-                  summary={() => (
-                    <Table.Summary>
-                      <Table.Summary.Row style={{ background: '#fafafa', fontWeight: 'bold' }}>
-                        <Table.Summary.Cell index={0} colSpan={2}>合计</Table.Summary.Cell>
-                        <Table.Summary.Cell index={2}>
-                          {inventories.filter(i => selectedCoalType === 'all' || i.coalType === selectedCoalType)
-                            .reduce((sum, i) => sum + i.currentVolume, 0).toLocaleString()}
-                        </Table.Summary.Cell>
-                        <Table.Summary.Cell index={3}>
-                          {inventories.filter(i => selectedCoalType === 'all' || i.coalType === selectedCoalType)
-                            .reduce((sum, i) => sum + i.maxCapacity, 0).toLocaleString()}
-                        </Table.Summary.Cell>
-                        <Table.Summary.Cell index={4}>-</Table.Summary.Cell>
-                        <Table.Summary.Cell index={5}>
-                          ¥{inventories.filter(i => selectedCoalType === 'all' || i.coalType === selectedCoalType)
-                            .reduce((sum, i) => sum + i.estimatedValue, 0).toLocaleString()}
-                        </Table.Summary.Cell>
-                        <Table.Summary.Cell index={6}>-</Table.Summary.Cell>
-                      </Table.Summary.Row>
-                    </Table.Summary>
-                  )}
-                />
-                <div style={{ marginTop: 24 }}>
+              <Space direction="vertical" size="large" style={{ width: '100%' }}>
+                <Card
+                  title="筒仓库存报表"
+                  extra={
+                    <Space>
+                      <Button icon={<FileExcelOutlined />} onClick={() => handleExportExcel('inventory')}>
+                        导出Excel
+                      </Button>
+                      <Button icon={<FilePdfOutlined />} onClick={handleExportPDF}>
+                        导出PDF
+                      </Button>
+                    </Space>
+                  }
+                >
+                  <Table 
+                    columns={siloReportColumns} 
+                    dataSource={silos} 
+                    rowKey="id" 
+                    pagination={false}
+                    summary={() => (
+                      <Table.Summary>
+                        <Table.Summary.Row style={{ background: '#fafafa', fontWeight: 'bold' }}>
+                          <Table.Summary.Cell index={0}>合计</Table.Summary.Cell>
+                          <Table.Summary.Cell index={1}>-</Table.Summary.Cell>
+                          <Table.Summary.Cell index={2}>
+                            {silos.reduce((sum, s) => sum + s.currentVolume, 0).toFixed(1)}
+                          </Table.Summary.Cell>
+                          <Table.Summary.Cell index={3}>
+                            {silos.reduce((sum, s) => sum + s.capacity, 0).toLocaleString()}
+                          </Table.Summary.Cell>
+                          <Table.Summary.Cell index={4}>-</Table.Summary.Cell>
+                          <Table.Summary.Cell index={5}>-</Table.Summary.Cell>
+                          <Table.Summary.Cell index={6}>-</Table.Summary.Cell>
+                        </Table.Summary.Row>
+                      </Table.Summary>
+                    )}
+                  />
+                </Card>
+                <Card
+                  title="临时堆煤报表"
+                  extra={
+                    <Space>
+                      <Button icon={<FileExcelOutlined />} onClick={() => handleExportExcel('inventory')}>
+                        导出Excel
+                      </Button>
+                    </Space>
+                  }
+                >
+                  <Table 
+                    columns={tempPileReportColumns} 
+                    dataSource={tempPiles} 
+                    rowKey="id" 
+                    pagination={false}
+                    summary={() => (
+                      <Table.Summary>
+                        <Table.Summary.Row style={{ background: '#fafafa', fontWeight: 'bold' }}>
+                          <Table.Summary.Cell index={0} colSpan={2}>合计</Table.Summary.Cell>
+                          <Table.Summary.Cell index={2}>
+                            {tempPiles.reduce((sum, p) => sum + p.volume, 0).toFixed(1)}
+                          </Table.Summary.Cell>
+                          <Table.Summary.Cell index={3}>-</Table.Summary.Cell>
+                          <Table.Summary.Cell index={4}>-</Table.Summary.Cell>
+                          <Table.Summary.Cell index={5}>-</Table.Summary.Cell>
+                          <Table.Summary.Cell index={6}>-</Table.Summary.Cell>
+                        </Table.Summary.Row>
+                      </Table.Summary>
+                    )}
+                  />
+                </Card>
+                <Card>
                   <ReactECharts option={inventoryTrendChart} style={{ height: 350 }} />
-                </div>
-              </Card>
+                </Card>
+              </Space>
             )
           },
           {
