@@ -65,6 +65,332 @@ const SEED_PLANS: SalesPlan[] = [
     executionRecords: [
       { id: 'EXE-001', date: '2024-01-15', completedVolume: 15000, completedAmount: 7500000, progress: 30, reporter: '张三' }
     ]
+  },
+  {
+    id: 'PLAN-002',
+    name: '2024年第二季度销售计划',
+    startDate: '2024-04-01',
+    endDate: '2024-06-30',
+    salesVolume: 60000,
+    coalQuality: { calorificValue: 5800, sulfurContent: 0.7 },
+    estimatedAmount: 32000000,
+    channel: '分销',
+    responsiblePerson: '李四',
+    status: 'approved',
+    createdAt: '2024-02-10',
+    createdBy: '李经理',
+    approvalHistory: [
+      { id: 'APR-002', approver: '王总', action: 'approve', opinion: '同意', timestamp: '2024-02-15 14:30:00' }
+    ]
+  },
+  {
+    id: 'PLAN-003',
+    name: 'XX电力公司月度供应计划',
+    startDate: '2024-03-01',
+    endDate: '2024-03-31',
+    salesVolume: 15000,
+    coalQuality: { calorificValue: 5600, sulfurContent: 0.75 },
+    estimatedAmount: 7800000,
+    channel: '直销',
+    responsiblePerson: '王五',
+    status: 'executing',
+    createdAt: '2024-02-20',
+    createdBy: '张主管',
+    approvalHistory: [
+      { id: 'APR-003', approver: '王总', action: 'approve', opinion: '重要客户，优先保障', timestamp: '2024-02-22 09:00:00' }
+    ],
+    executionRecords: [
+      { id: 'EXE-003', date: '2024-03-10', completedVolume: 8500, completedAmount: 4420000, progress: 57, reporter: '王五' }
+    ]
+  },
+  {
+    id: 'PLAN-004',
+    name: '南方市场拓展计划',
+    startDate: '2024-05-01',
+    endDate: '2024-12-31',
+    salesVolume: 120000,
+    coalQuality: { calorificValue: 5400, sulfurContent: 0.9 },
+    estimatedAmount: 60000000,
+    channel: '分销',
+    responsiblePerson: '赵六',
+    status: 'pending',
+    createdAt: '2024-03-01',
+    createdBy: '李经理'
+  },
+  {
+    id: 'PLAN-005',
+    name: '上半年线上销售计划',
+    startDate: '2024-01-01',
+    endDate: '2024-06-30',
+    salesVolume: 35000,
+    estimatedAmount: 17500000,
+    channel: '线上',
+    responsiblePerson: '孙七',
+    status: 'executing',
+    createdAt: '2023-12-25',
+    createdBy: '张主管',
+    approvalHistory: [
+      { id: 'APR-005', approver: '王总', action: 'approve', opinion: '支持新渠道尝试', timestamp: '2024-01-02 11:00:00' }
+    ],
+    executionRecords: [
+      { id: 'EXE-005', date: '2024-02-01', completedVolume: 12000, completedAmount: 6000000, progress: 34, reporter: '孙七' }
+    ]
+  },
+  {
+    id: 'PLAN-006',
+    name: '周边矿区合作计划',
+    startDate: '2024-02-15',
+    endDate: '2024-05-15',
+    salesVolume: 28000,
+    coalQuality: { calorificValue: 5300, sulfurContent: 1.0 },
+    estimatedAmount: 13000000,
+    channel: '直销',
+    responsiblePerson: '张三',
+    status: 'completed',
+    createdAt: '2024-01-20',
+    createdBy: '李经理',
+    approvalHistory: [
+      { id: 'APR-006', approver: '王总', action: 'approve', opinion: '同意', timestamp: '2024-01-25 15:00:00' }
+    ],
+    summary: {
+      actualVolume: 29500,
+      actualAmount: 13725000,
+      completionRate: 105,
+      analysis: '超额完成，客户满意度高',
+      improvements: '继续保持合作'
+    }
+  },
+  {
+    id: 'PLAN-007',
+    name: 'Q1出口计划',
+    startDate: '2024-01-10',
+    endDate: '2024-03-31',
+    salesVolume: 42000,
+    coalQuality: { calorificValue: 6000, sulfurContent: 0.6 },
+    estimatedAmount: 25200000,
+    channel: '分销',
+    responsiblePerson: '李四',
+    status: 'executing',
+    createdAt: '2023-12-18',
+    createdBy: '李经理',
+    approvalHistory: [
+      { id: 'APR-007', approver: '王总', action: 'approve', opinion: '高品质煤炭，优先保障', timestamp: '2023-12-22 10:30:00' }
+    ],
+    executionRecords: [
+      { id: 'EXE-007', date: '2024-02-15', completedVolume: 28000, completedAmount: 16800000, progress: 67, reporter: '李四' }
+    ]
+  },
+  {
+    id: 'PLAN-008',
+    name: '北方区域专供计划',
+    startDate: '2024-03-01',
+    endDate: '2024-08-31',
+    salesVolume: 95000,
+    coalQuality: { calorificValue: 5500, sulfurContent: 0.85 },
+    estimatedAmount: 48000000,
+    channel: '直销',
+    responsiblePerson: '赵六',
+    status: 'approved',
+    createdAt: '2024-02-05',
+    createdBy: '张主管',
+    approvalHistory: [
+      { id: 'APR-008', approver: '王总', action: 'approve', opinion: '同意执行', timestamp: '2024-02-12 16:00:00' }
+    ]
+  },
+  {
+    id: 'PLAN-009',
+    name: '工业园区配套供应',
+    startDate: '2024-04-01',
+    endDate: '2024-09-30',
+    salesVolume: 72000,
+    estimatedAmount: 35000000,
+    channel: '直销',
+    responsiblePerson: '孙七',
+    status: 'draft',
+    createdAt: '2024-03-10',
+    createdBy: '李经理',
+    remark: '待合同签署后提交审批'
+  },
+  {
+    id: 'PLAN-010',
+    name: '三季度分销渠道计划',
+    startDate: '2024-07-01',
+    endDate: '2024-09-30',
+    salesVolume: 55000,
+    coalQuality: { calorificValue: 5700, sulfurContent: 0.75 },
+    estimatedAmount: 29000000,
+    channel: '分销',
+    responsiblePerson: '张三',
+    status: 'draft',
+    createdAt: '2024-03-15',
+    createdBy: '李经理'
+  },
+  {
+    id: 'PLAN-011',
+    name: '煤化工企业供应计划',
+    startDate: '2024-02-01',
+    endDate: '2024-12-31',
+    salesVolume: 150000,
+    coalQuality: { calorificValue: 5900, sulfurContent: 0.65 },
+    estimatedAmount: 82500000,
+    channel: '直销',
+    responsiblePerson: '李四',
+    status: 'executing',
+    createdAt: '2024-01-10',
+    createdBy: '张主管',
+    approvalHistory: [
+      { id: 'APR-011', approver: '王总', action: 'approve', opinion: '长期大客户，重点保障', timestamp: '2024-01-15 09:30:00' }
+    ],
+    executionRecords: [
+      { id: 'EXE-011', date: '2024-03-01', completedVolume: 45000, completedAmount: 24750000, progress: 30, reporter: '李四' }
+    ]
+  },
+  {
+    id: 'PLAN-012',
+    name: '春节前应急供应',
+    startDate: '2024-01-20',
+    endDate: '2024-02-10',
+    salesVolume: 8000,
+    estimatedAmount: 4200000,
+    channel: '直销',
+    responsiblePerson: '王五',
+    status: 'completed',
+    createdAt: '2024-01-05',
+    createdBy: '李经理',
+    approvalHistory: [
+      { id: 'APR-012', approver: '王总', action: 'approve', opinion: '加急，立即执行', timestamp: '2024-01-06 08:00:00' }
+    ],
+    summary: {
+      actualVolume: 8200,
+      actualAmount: 4305000,
+      completionRate: 103,
+      analysis: '提前完成，保障了节前需求',
+      improvements: '应急机制运作良好'
+    }
+  },
+  {
+    id: 'PLAN-013',
+    name: '中小企业集采计划',
+    startDate: '2024-03-15',
+    endDate: '2024-06-15',
+    salesVolume: 32000,
+    coalQuality: { calorificValue: 5400, sulfurContent: 0.9 },
+    estimatedAmount: 15000000,
+    channel: '分销',
+    responsiblePerson: '赵六',
+    status: 'pending',
+    createdAt: '2024-02-28',
+    createdBy: '张主管'
+  },
+  {
+    id: 'PLAN-014',
+    name: '南部省份进驻项目',
+    startDate: '2024-06-01',
+    endDate: '2024-12-31',
+    salesVolume: 88000,
+    coalQuality: { calorificValue: 5650, sulfurContent: 0.8 },
+    estimatedAmount: 46000000,
+    channel: '直销',
+    responsiblePerson: '孙七',
+    status: 'draft',
+    createdAt: '2024-03-20',
+    createdBy: '李经理',
+    remark: '新市场开拓，需详细调研'
+  },
+  {
+    id: 'PLAN-015',
+    name: 'Q2线上平台促销',
+    startDate: '2024-04-01',
+    endDate: '2024-06-30',
+    salesVolume: 25000,
+    estimatedAmount: 12000000,
+    channel: '线上',
+    responsiblePerson: '张三',
+    status: 'approved',
+    createdAt: '2024-03-05',
+    createdBy: '张主管',
+    approvalHistory: [
+      { id: 'APR-015', approver: '王总', action: 'approve', opinion: '支持线上业务发展', timestamp: '2024-03-08 14:00:00' }
+    ]
+  },
+  {
+    id: 'PLAN-016',
+    name: '四季度常规销售',
+    startDate: '2024-10-01',
+    endDate: '2024-12-31',
+    salesVolume: 65000,
+    coalQuality: { calorificValue: 5500, sulfurContent: 0.85 },
+    estimatedAmount: 33000000,
+    channel: '直销',
+    responsiblePerson: '李四',
+    status: 'draft',
+    createdAt: '2024-03-22',
+    createdBy: '李经理'
+  },
+  {
+    id: 'PLAN-017',
+    name: '建筑行业专项供应',
+    startDate: '2024-05-01',
+    endDate: '2024-10-31',
+    salesVolume: 78000,
+    estimatedAmount: 38000000,
+    channel: '分销',
+    responsiblePerson: '王五',
+    status: 'pending',
+    createdAt: '2024-03-12',
+    createdBy: '张主管'
+  },
+  {
+    id: 'PLAN-018',
+    name: '冬季供暖备货计划',
+    startDate: '2024-09-01',
+    endDate: '2024-11-30',
+    salesVolume: 120000,
+    coalQuality: { calorificValue: 5800, sulfurContent: 0.7 },
+    estimatedAmount: 66000000,
+    channel: '直销',
+    responsiblePerson: '赵六',
+    status: 'draft',
+    createdAt: '2024-03-25',
+    createdBy: '李经理',
+    remark: '提前筹划，保障冬季供应'
+  },
+  {
+    id: 'PLAN-019',
+    name: '上半年总部直属客户',
+    startDate: '2024-01-01',
+    endDate: '2024-06-30',
+    salesVolume: 105000,
+    coalQuality: { calorificValue: 5700, sulfurContent: 0.75 },
+    estimatedAmount: 56000000,
+    channel: '直销',
+    responsiblePerson: '孙七',
+    status: 'executing',
+    createdAt: '2023-12-20',
+    createdBy: '李经理',
+    approvalHistory: [
+      { id: 'APR-019', approver: '王总', action: 'approve', opinion: '重点项目', timestamp: '2023-12-25 10:00:00' }
+    ],
+    executionRecords: [
+      { id: 'EXE-019', date: '2024-03-01', completedVolume: 52000, completedAmount: 27800000, progress: 50, reporter: '孙七' }
+    ]
+  },
+  {
+    id: 'PLAN-020',
+    name: '海外市场试水项目',
+    startDate: '2024-08-01',
+    endDate: '2024-12-31',
+    salesVolume: 45000,
+    coalQuality: { calorificValue: 6200, sulfurContent: 0.5 },
+    estimatedAmount: 27000000,
+    channel: '分销',
+    responsiblePerson: '张三',
+    status: 'rejected',
+    createdAt: '2024-02-15',
+    createdBy: '张主管',
+    approvalHistory: [
+      { id: 'APR-020', approver: '王总', action: 'reject', opinion: '暂不具备条件，建议明年再议', timestamp: '2024-02-20 15:30:00' }
+    ]
   }
 ];
 
@@ -137,19 +463,39 @@ export const salesPlanService = {
 };
 
 // 地磅房数据
-const SEED_WEIGHBRIDGE: WeighbridgeRecord[] = [
-  {
-    id: 'WB-001',
-    timestamp: dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
-    plateNumber: '京A12345',
-    vehicleType: '重卡',
-    grossWeight: 45.5,
-    tareWeight: 15.0,
-    netWeight: 30.5,
-    videoUrl: '/videos/wb-001.mp4',
-    planId: 'PLAN-001'
+const SEED_WEIGHBRIDGE: WeighbridgeRecord[] = Array.from({ length: 20 }, (_, i) => {
+  const hours = i + 1;
+  const random = Math.random();
+  const plates = ['京A12345', '京B88888', '津C99999', '冀D77777', '晋E66666'];
+  const vehicles = ['重卡', '中型货车', '大型货车'];
+  
+  const record: WeighbridgeRecord = {
+    id: `WB-${String(i + 1).padStart(3, '0')}`,
+    timestamp: dayjs().subtract(hours, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+    plateNumber: plates[i % plates.length],
+    vehicleType: vehicles[i % vehicles.length],
+    grossWeight: 40 + Math.random() * 15,
+    tareWeight: 12 + Math.random() * 5,
+    netWeight: 25 + Math.random() * 10,
+    videoUrl: `/videos/wb-${String(i + 1).padStart(3, '0')}.mp4`,
+    planId: `PLAN-${String((i % 10) + 1).padStart(3, '0')}`
+  };
+  
+  // 添加异常情况
+  if (random > 0.85) {
+    record.abnormal = {
+      type: 'plate_mismatch',
+      message: '车牌识别与系统登记不符'
+    };
+  } else if (random > 0.75) {
+    record.abnormal = {
+      type: 'weight_abnormal',
+      message: '皮重与历史记录偏差过大'
+    };
   }
-];
+  
+  return record;
+});
 
 export const weighbridgeService = {
   getAll: (): WeighbridgeRecord[] => getFromStorage(STORAGE_KEYS.WEIGHBRIDGE, SEED_WEIGHBRIDGE),
@@ -259,17 +605,30 @@ export const siloService = {
   }
 };
 
-const SEED_TEMP_PILES: TemporaryCoalPile[] = [
-  {
-    id: 'PILE-001',
-    pileNumber: 'A-01',
-    location: '北区堆场',
-    inventoryDate: dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
-    volume: 500,
-    inspector: '王五',
-    expectedOutbound: dayjs().add(3, 'day').format('YYYY-MM-DD')
+const SEED_TEMP_PILES: TemporaryCoalPile[] = Array.from({ length: 20 }, (_, i) => {
+  const daysAgo = Math.floor(i / 2) + 1;
+  const locations = ['北区堆场', '南区堆场', '东区堆场', '西区堆场'];
+  const inspectors = ['王五', '赵六', '张三', '李四'];
+  const daysUntilOut = i % 3 === 0 ? -2 : (i % 5 === 0 ? 1 : 5 + i % 10);
+  
+  const pile: TemporaryCoalPile = {
+    id: `PILE-${String(i + 1).padStart(3, '0')}`,
+    pileNumber: `${String.fromCharCode(65 + Math.floor(i / 5))}-${String((i % 5) + 1).padStart(2, '0')}`,
+    location: locations[i % locations.length],
+    inventoryDate: dayjs().subtract(daysAgo, 'day').format('YYYY-MM-DD'),
+    volume: 300 + Math.random() * 500,
+    inspector: inspectors[i % inspectors.length],
+    expectedInbound: i % 3 === 0 ? dayjs().subtract(daysAgo + 2, 'day').format('YYYY-MM-DD') : undefined,
+    expectedOutbound: dayjs().add(daysUntilOut, 'day').format('YYYY-MM-DD'),
+    remark: i % 7 === 0 ? '需要尽快出场' : undefined
+  };
+  
+  if (daysUntilOut < 0) {
+    pile.overdueWarning = true;
   }
-];
+  
+  return pile;
+});
 
 export const tempPileService = {
   getAll: (): TemporaryCoalPile[] => getFromStorage(STORAGE_KEYS.TEMP_PILES, SEED_TEMP_PILES),
@@ -293,18 +652,40 @@ export const tempPileService = {
   }
 };
 
-const SEED_LOSS: LossRecord[] = [
-  {
-    id: 'LOSS-001',
-    date: dayjs().format('YYYY-MM-DD'),
-    category: 'external_coal',
-    categoryName: '外协用煤',
-    volume: 50,
-    department: '生产部',
-    responsible: '李四',
-    reason: '协作单位借用'
-  }
-];
+const SEED_LOSS: LossRecord[] = Array.from({ length: 20 }, (_, i) => {
+  const categories = [
+    { key: 'external_coal', name: '外协用煤' },
+    { key: 'ash', name: '煤灰' },
+    { key: 'fire_coal', name: '火煤' },
+    { key: 'dirty_coal', name: '杂脏煤' },
+    { key: 'natural_loss', name: '自然损耗' }
+  ];
+  const departments = ['生产部', '运输部', '储存部', '质检部'];
+  const responsibles = ['李四', '王五', '赵六', '张三'];
+  const reasons = [
+    '协作单位借用',
+    '生产正常排弃',
+    '自燃损失',
+    '风吹损耗',
+    '运输过程损耗',
+    '分检损耗',
+    '雨水浸泡损失'
+  ];
+  
+  const category = categories[i % categories.length];
+  const daysAgo = Math.floor(i / 2);
+  
+  return {
+    id: `LOSS-${String(i + 1).padStart(3, '0')}`,
+    date: dayjs().subtract(daysAgo, 'day').format('YYYY-MM-DD'),
+    category: category.key,
+    categoryName: category.name,
+    volume: 20 + Math.random() * 80,
+    department: departments[i % departments.length],
+    responsible: responsibles[i % responsibles.length],
+    reason: reasons[i % reasons.length]
+  };
+});
 
 export const lossService = {
   getAll: (): LossRecord[] => getFromStorage(STORAGE_KEYS.LOSS_RECORDS, SEED_LOSS),
@@ -379,19 +760,31 @@ export const dashboardService = {
   })
 };
 
-const SEED_CUSTOMERS: Customer[] = [
-  {
-    id: 'CUST-001',
-    name: 'XX电力公司',
-    contact: '张经理',
-    phone: '138****0001',
-    totalPurchase: 50000,
-    totalAmount: 25000000,
-    purchaseHistory: [
-      { date: '2024-01-15', volume: 1000, amount: 500000 }
-    ]
-  }
-];
+const SEED_CUSTOMERS: Customer[] = Array.from({ length: 20 }, (_, i) => {
+  const companies = [
+    'XX电力公司', 'XX煤化工集团', 'XX建材公司', 'XX钢铁集团', 
+    'XX热力公司', 'XX水泥公司', 'XX工业园区', 'XX能源集团',
+    'XX省电力', 'XX市供暖公司'
+  ];
+  const contacts = ['张经理', '李总', '王主管', '赵部长', '刘总监'];
+  
+  const totalPurchase = 20000 + Math.random() * 80000;
+  const totalAmount = totalPurchase * (480 + Math.random() * 80);
+  
+  return {
+    id: `CUST-${String(i + 1).padStart(3, '0')}`,
+    name: `${companies[i % companies.length]}${i > 9 ? i - 9 : ''}`,
+    contact: contacts[i % contacts.length],
+    phone: `138****${String(i + 1).padStart(4, '0')}`,
+    totalPurchase: parseFloat(totalPurchase.toFixed(1)),
+    totalAmount: parseFloat(totalAmount.toFixed(0)),
+    purchaseHistory: Array.from({ length: Math.min(i + 1, 5) }, (_, j) => ({
+      date: dayjs().subtract((j + 1) * 30, 'day').format('YYYY-MM-DD'),
+      volume: 500 + Math.random() * 1500,
+      amount: (500 + Math.random() * 1500) * 500
+    }))
+  };
+});
 
 export const customerService = {
   getAll: (): Customer[] => getFromStorage(STORAGE_KEYS.CUSTOMERS, SEED_CUSTOMERS),
@@ -403,21 +796,52 @@ export const customerService = {
   }
 };
 
-const SEED_FEEDBACKS: CustomerFeedback[] = [
-  {
-    id: 'FB-001',
-    customerName: 'XX电力公司',
-    customerId: 'CUST-001',
-    feedbackDate: dayjs().format('YYYY-MM-DD'),
-    type: 'quality',
-    content: '煤质较好,热值稳定',
-    status: 'resolved',
-    responsible: '张三',
-    processingHistory: [
-      { id: 'PH-001', processor: '张三', timestamp: dayjs().format('YYYY-MM-DD HH:mm:ss'), action: '已记录并反馈', result: '客户满意' }
-    ]
+const SEED_FEEDBACKS: CustomerFeedback[] = Array.from({ length: 20 }, (_, i) => {
+  const types: CustomerFeedback['type'][] = ['quality', 'service', 'delivery', 'price', 'other'];
+  const statuses: CustomerFeedback['status'][] = ['pending', 'processing', 'resolved'];
+  const contents = [
+    '煤质较好,热值稳定',
+    '交货及时，服务周到',
+    '希望能提供更多优惠',
+    '部分批次含灰量较高',
+    '运输过程有损耗',
+    '建议增加配送频次',
+    '对产品和服务非常满意',
+    '希望能签订长期合同',
+    '价格合理，质量稳定',
+    '建议优化装车流程'
+  ];
+  const responsibles = ['张三', '李四', '王五', '赵六'];
+  
+  const daysAgo = Math.floor(i / 2);
+  const status = statuses[i % statuses.length];
+  const hasProcessing = status !== 'pending';
+  
+  const feedback: CustomerFeedback = {
+    id: `FB-${String(i + 1).padStart(3, '0')}`,
+    customerName: `CUST-${String((i % 20) + 1).padStart(3, '0')}`,
+    customerId: `CUST-${String((i % 20) + 1).padStart(3, '0')}`,
+    feedbackDate: dayjs().subtract(daysAgo, 'day').format('YYYY-MM-DD'),
+    type: types[i % types.length],
+    content: contents[i % contents.length],
+    status,
+    responsible: responsibles[i % responsibles.length]
+  };
+  
+  if (hasProcessing) {
+    feedback.processingHistory = [
+      {
+        id: `PH-${String(i + 1).padStart(3, '0')}`,
+        processor: responsibles[i % responsibles.length],
+        timestamp: dayjs().subtract(daysAgo - 1, 'day').format('YYYY-MM-DD HH:mm:ss'),
+        action: status === 'resolved' ? '已解决问题并反馈' : '正在处理中',
+        result: status === 'resolved' ? '客户满意' : undefined
+      }
+    ];
   }
-];
+  
+  return feedback;
+});
 
 export const feedbackService = {
   getAll: (): CustomerFeedback[] => getFromStorage(STORAGE_KEYS.FEEDBACKS, SEED_FEEDBACKS),

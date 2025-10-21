@@ -284,7 +284,7 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   ],
   'comprehensive-env-monitoring': [], // 综合环境监测使用内嵌菜单
   'production-sales-center': [], // 产运销管理使用内嵌菜单
-  'smart-prod-ops-sales': defaultLeftMenu,
+  'smart-prod-ops-sales': [], // 产运销管理使用内嵌Tab菜单，不需要左侧菜单
 };
 
 export const getLeftMenuForSubMenu = (subMenuKey: string): LeftMenuItem[] => {
