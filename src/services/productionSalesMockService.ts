@@ -656,11 +656,11 @@ export const tempPileService = {
 
 const SEED_LOSS: LossRecord[] = Array.from({ length: 20 }, (_, i) => {
   const categories = [
-    { key: 'external_coal', name: '外协用煤' },
-    { key: 'ash', name: '煤灰' },
-    { key: 'fire_coal', name: '火煤' },
-    { key: 'dirty_coal', name: '杂脏煤' },
-    { key: 'natural_loss', name: '自然损耗' }
+    { key: 'external_coal' as const, name: '外协用煤' },
+    { key: 'ash' as const, name: '煤灰' },
+    { key: 'fire_coal' as const, name: '火煤' },
+    { key: 'dirty_coal' as const, name: '杂脏煤' },
+    { key: 'natural_loss' as const, name: '自然损耗' }
   ];
   const departments = ['生产部', '运输部', '储存部', '质检部'];
   const responsibles = ['李四', '王五', '赵六', '张三'];
