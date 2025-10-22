@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, Table, Button, Space, Tabs, Tag, Progress, Row, Col, Statistic, Modal, Form, Input, Select, InputNumber, DatePicker, message } from 'antd';
 import { DollarOutlined, FileTextOutlined, BarChartOutlined, AuditOutlined, PlusOutlined } from '@ant-design/icons';
+import ReactECharts from 'echarts-for-react';
 
 const { TextArea } = Input;
 const { Option } = Select;
-import ReactECharts from 'echarts-for-react';
 
 const SafetyCost: React.FC = () => {
   const expenses = [
