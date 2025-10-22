@@ -1,215 +1,367 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1150">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 900">
   <defs>
     <style>
-      .arch-title { font-size: 32px; font-weight: bold; fill: #722ed1; }
-      .layer-title { font-size: 20px; font-weight: bold; fill: #fff; }
-      .module-title { font-size: 15px; font-weight: bold; fill: #262626; }
-      .feature-text { font-size: 12px; fill: #595959; }
-      .layer-bg1 { fill: #722ed1; opacity: 0.9; }
-      .layer-bg2 { fill: #1890ff; opacity: 0.9; }
-      .layer-bg3 { fill: #fa8c16; opacity: 0.9; }
-      .layer-bg4 { fill: #52c41a; opacity: 0.9; }
-      .module-box { fill: #ffffff; stroke: #d9d9d9; stroke-width: 2; rx: 6; }
-      .module-box-highlight { fill: #f9f0ff; stroke: #722ed1; stroke-width: 2; rx: 6; }
-      .connector { stroke: #8c8c8c; stroke-width: 2; fill: none; stroke-dasharray: 5,5; }
+      .arch-title { font-size: 28px; font-weight: bold; fill: #fff; }
+      .category-title { font-size: 16px; font-weight: bold; fill: #fff; }
+      .module-title { font-size: 14px; font-weight: bold; fill: #1890ff; }
+      .function-item { font-size: 11px; fill: #262626; text-anchor: middle; }
+      .function-box { fill: #ffffff; stroke: #d9d9d9; stroke-width: 1.5; rx: 4; }
+      .module-box { fill: #f0f5ff; stroke: #1890ff; stroke-width: 2; rx: 8; }
+      .header-bg { fill: #1890ff; }
+      .category-bg1 { fill: #1890ff; opacity: 0.9; }
+      .category-bg2 { fill: #52c41a; opacity: 0.9; }
+      .category-bg3 { fill: #fa8c16; opacity: 0.9; }
+      .category-bg4 { fill: #722ed1; opacity: 0.9; }
+      .category-bg5 { fill: #13c2c2; opacity: 0.9; }
     </style>
   </defs>
 
-  <text x="800" y="50" class="arch-title" text-anchor="middle">智慧设备管理 - 功能架构图</text>
+  <!-- 顶部标题栏 -->
+  <rect x="0" y="0" width="2400" height="60" class="header-bg" rx="0"/>
+  <text x="1200" y="40" class="arch-title" text-anchor="middle">智慧设备管理系统 - 三级功能架构</text>
 
-  <!-- 第一层：展示层 -->
-  <rect x="50" y="90" width="1500" height="200" class="layer-bg1" rx="8"/>
-  <text x="800" y="120" class="layer-title" text-anchor="middle">展示层 - 用户交互界面</text>
-
-  <rect x="80" y="145" width="280" height="130" class="module-box-highlight"/>
-  <text x="220" y="170" class="module-title" text-anchor="middle">设备健康总览</text>
-  <text x="220" y="192" class="feature-text" text-anchor="middle">• KPI指标卡展示</text>
-  <text x="220" y="210" class="feature-text" text-anchor="middle">• 设备状态分布图</text>
-  <text x="220" y="228" class="feature-text" text-anchor="middle">• 待办任务列表</text>
-  <text x="220" y="246" class="feature-text" text-anchor="middle">• 紧急告警通知</text>
-  <text x="220" y="264" class="feature-text" text-anchor="middle">• 维修趋势图表</text>
-
-  <rect x="390" y="145" width="280" height="130" class="module-box"/>
-  <text x="530" y="170" class="module-title" text-anchor="middle">设备档案管理</text>
-  <text x="530" y="192" class="feature-text" text-anchor="middle">• 设备台账列表</text>
-  <text x="530" y="210" class="feature-text" text-anchor="middle">• 一机一档详情页</text>
-  <text x="530" y="228" class="feature-text" text-anchor="middle">• 二维码生成打印</text>
-  <text x="530" y="246" class="feature-text" text-anchor="middle">• 多维度筛选搜索</text>
-  <text x="530" y="264" class="feature-text" text-anchor="middle">• AI风险评估展示</text>
-
-  <rect x="700" y="145" width="280" height="130" class="module-box"/>
-  <text x="840" y="170" class="module-title" text-anchor="middle">任务管理看板</text>
-  <text x="840" y="192" class="feature-text" text-anchor="middle">• Kanban看板视图</text>
-  <text x="840" y="210" class="feature-text" text-anchor="middle">• 点检/保养/检修任务</text>
-  <text x="840" y="228" class="feature-text" text-anchor="middle">• 任务流转可视化</text>
-  <text x="840" y="246" class="feature-text" text-anchor="middle">• 逾期任务高亮</text>
-  <text x="840" y="264" class="feature-text" text-anchor="middle">• 移动端清单执行</text>
-
-  <rect x="1010" y="145" width="270" height="130" class="module-box"/>
-  <text x="1145" y="170" class="module-title" text-anchor="middle">维修工单管理</text>
-  <text x="1145" y="192" class="feature-text" text-anchor="middle">• 工单看板</text>
-  <text x="1145" y="210" class="feature-text" text-anchor="middle">• 一键报修</text>
-  <text x="1145" y="228" class="feature-text" text-anchor="middle">• 进度跟踪</text>
-  <text x="1145" y="246" class="feature-text" text-anchor="middle">• 费用管理</text>
-  <text x="1145" y="264" class="feature-text" text-anchor="middle">• 维修报告</text>
-
-  <rect x="1310" y="145" width="220" height="130" class="module-box"/>
-  <text x="1420" y="170" class="module-title" text-anchor="middle">备件库存</text>
-  <text x="1420" y="192" class="feature-text" text-anchor="middle">• 库存监控</text>
-  <text x="1420" y="210" class="feature-text" text-anchor="middle">• 出入库</text>
-  <text x="1420" y="228" class="feature-text" text-anchor="middle">• 预警提示</text>
-  <text x="1420" y="246" class="feature-text" text-anchor="middle">• 统计分析</text>
-  <text x="1420" y="264" class="feature-text" text-anchor="middle">• 盘点管理</text>
-
-  <!-- 第二层：业务层 -->
-  <rect x="50" y="320" width="1500" height="230" class="layer-bg2" rx="8"/>
-  <text x="800" y="350" class="layer-title" text-anchor="middle">业务层 - 核心业务逻辑</text>
-
-  <rect x="80" y="375" width="350" height="160" class="module-box"/>
-  <text x="255" y="400" class="module-title" text-anchor="middle">预防性维护管理</text>
-  <text x="100" y="425" class="feature-text" text-anchor="start">• 点检计划制定与审批</text>
-  <text x="100" y="443" class="feature-text" text-anchor="start">• 保养计划制定与审批</text>
-  <text x="100" y="461" class="feature-text" text-anchor="start">• 检修计划制定与审批</text>
-  <text x="100" y="479" class="feature-text" text-anchor="start">• 任务自动生成（周期触发）</text>
-  <text x="100" y="497" class="feature-text" text-anchor="start">• 任务派发与接收</text>
-  <text x="100" y="515" class="feature-text" text-anchor="start">• 执行记录与验收流程</text>
-
-  <rect x="460" y="375" width="350" height="160" class="module-box"/>
-  <text x="635" y="400" class="module-title" text-anchor="middle">维修管理</text>
-  <text x="480" y="425" class="feature-text" text-anchor="start">• 故障报修工单创建</text>
-  <text x="480" y="443" class="feature-text" text-anchor="start">• 工单优先级判定</text>
-  <text x="480" y="461" class="feature-text" text-anchor="start">• 维修人员派工</text>
-  <text x="480" y="479" class="feature-text" text-anchor="start">• 维修标准SOP关联</text>
-  <text x="480" y="497" class="feature-text" text-anchor="start">• 备件领用与费用核算</text>
-  <text x="480" y="515" class="feature-text" text-anchor="start">• 维修报告自动生成</text>
-
-  <rect x="840" y="375" width="350" height="160" class="module-box"/>
-  <text x="1015" y="400" class="module-title" text-anchor="middle">备件管理</text>
-  <text x="860" y="425" class="feature-text" text-anchor="start">• 备件入库/出库/盘点</text>
-  <text x="860" y="443" class="feature-text" text-anchor="start">• 安全库存预警（低库存/库龄）</text>
-  <text x="860" y="461" class="feature-text" text-anchor="start">• 关联设备查询</text>
-  <text x="860" y="479" class="feature-text" text-anchor="start">• 使用历史追溯</text>
-  <text x="860" y="497" class="feature-text" text-anchor="start">• 消耗统计与周转率分析</text>
-  <text x="860" y="515" class="feature-text" text-anchor="start">• 采购建议智能生成</text>
-
-  <rect x="1220" y="375" width="310" height="160" class="module-box"/>
-  <text x="1375" y="400" class="module-title" text-anchor="middle">设备档案管理</text>
-  <text x="1240" y="425" class="feature-text" text-anchor="start">• 设备全生命周期追溯</text>
-  <text x="1240" y="443" class="feature-text" text-anchor="start">• 点检/保养/检修记录</text>
-  <text x="1240" y="461" class="feature-text" text-anchor="start">• 维修历史查询</text>
-  <text x="1240" y="479" class="feature-text" text-anchor="start">• 关联备件管理</text>
-  <text x="1240" y="497" class="feature-text" text-anchor="start">• 二维码扫码交互</text>
-  <text x="1240" y="515" class="feature-text" text-anchor="start">• AI老化风险预警</text>
-
-  <!-- 第三层：数据层 -->
-  <rect x="50" y="580" width="1500" height="200" class="layer-bg3" rx="8"/>
-  <text x="800" y="610" class="layer-title" text-anchor="middle">数据层 - 数据处理与存储</text>
-
-  <rect x="80" y="635" width="280" height="130" class="module-box"/>
-  <text x="220" y="660" class="module-title" text-anchor="middle">数据采集</text>
-  <text x="220" y="682" class="feature-text" text-anchor="middle">• 设备档案数据</text>
-  <text x="220" y="700" class="feature-text" text-anchor="middle">• 任务执行数据</text>
-  <text x="220" y="718" class="feature-text" text-anchor="middle">• 维修工单数据</text>
-  <text x="220" y="736" class="feature-text" text-anchor="middle">• 备件流水数据</text>
-  <text x="220" y="754" class="feature-text" text-anchor="middle">• 移动端上传数据</text>
-
-  <rect x="390" y="635" width="280" height="130" class="module-box"/>
-  <text x="530" y="660" class="module-title" text-anchor="middle">数据处理</text>
-  <text x="530" y="682" class="feature-text" text-anchor="middle">• 任务状态自动更新</text>
-  <text x="530" y="700" class="feature-text" text-anchor="middle">• 完成率自动计算</text>
-  <text x="530" y="718" class="feature-text" text-anchor="middle">• 费用自动汇总</text>
-  <text x="530" y="736" class="feature-text" text-anchor="middle">• 预警规则引擎</text>
-  <text x="530" y="754" class="feature-text" text-anchor="middle">• 报表自动生成</text>
-
-  <rect x="700" y="635" width="280" height="130" class="module-box"/>
-  <text x="840" y="660" class="module-title" text-anchor="middle">数据存储</text>
-  <text x="840" y="682" class="feature-text" text-anchor="middle">• 设备档案库</text>
-  <text x="840" y="700" class="feature-text" text-anchor="middle">• 任务记录库</text>
-  <text x="840" y="718" class="feature-text" text-anchor="middle">• 维修历史库</text>
-  <text x="840" y="736" class="feature-text" text-anchor="middle">• 备件库存库</text>
-  <text x="840" y="754" class="feature-text" text-anchor="middle">• 文件对象存储</text>
-
-  <rect x="1010" y="635" width="280" height="130" class="module-box"/>
-  <text x="1150" y="660" class="module-title" text-anchor="middle">智能分析</text>
-  <text x="1150" y="682" class="feature-text" text-anchor="middle">• 设备健康度分析</text>
-  <text x="1150" y="700" class="feature-text" text-anchor="middle">• 故障模式识别</text>
-  <text x="1150" y="718" class="feature-text" text-anchor="middle">• 老化风险预测</text>
-  <text x="1150" y="736" class="feature-text" text-anchor="middle">• 备件消耗预测</text>
-  <text x="1150" y="754" class="feature-text" text-anchor="middle">• 优化建议生成</text>
-
-  <rect x="1320" y="635" width="210" height="130" class="module-box"/>
-  <text x="1425" y="660" class="module-title" text-anchor="middle">数据服务</text>
-  <text x="1425" y="682" class="feature-text" text-anchor="middle">• RESTful API</text>
-  <text x="1425" y="700" class="feature-text" text-anchor="middle">• 消息推送</text>
-  <text x="1425" y="718" class="feature-text" text-anchor="middle">• 数据导出</text>
-  <text x="1425" y="736" class="feature-text" text-anchor="middle">• 权限控制</text>
-  <text x="1425" y="754" class="feature-text" text-anchor="middle">• 移动端接口</text>
-
-  <!-- 第四层：设备与工具层 -->
-  <rect x="50" y="810" width="1500" height="160" class="layer-bg4" rx="8"/>
-  <text x="800" y="840" class="layer-title" text-anchor="middle">设备与工具层 - 感知与执行</text>
-
-  <rect x="80" y="865" width="230" height="90" class="module-box"/>
-  <text x="195" y="890" class="module-title" text-anchor="middle">监控设备</text>
-  <text x="195" y="910" class="feature-text" text-anchor="middle">设备传感器</text>
-  <text x="195" y="928" class="feature-text" text-anchor="middle">状态监测</text>
-  <text x="195" y="946" class="feature-text" text-anchor="middle">数据采集器</text>
-
-  <rect x="340" y="865" width="230" height="90" class="module-box"/>
-  <text x="455" y="890" class="module-title" text-anchor="middle">移动端工具</text>
-  <text x="455" y="910" class="feature-text" text-anchor="middle">扫码枪</text>
-  <text x="455" y="928" class="feature-text" text-anchor="middle">移动APP/平板</text>
-  <text x="455" y="946" class="feature-text" text-anchor="middle">现场拍照/录音</text>
-
-  <rect x="600" y="865" width="230" height="90" class="module-box"/>
-  <text x="715" y="890" class="module-title" text-anchor="middle">识别设备</text>
-  <text x="715" y="910" class="feature-text" text-anchor="middle">二维码标签</text>
-  <text x="715" y="928" class="feature-text" text-anchor="middle">RFID标签</text>
-  <text x="715" y="946" class="feature-text" text-anchor="middle">条码打印机</text>
-
-  <rect x="860" y="865" width="230" height="90" class="module-box"/>
-  <text x="975" y="890" class="module-title" text-anchor="middle">维修工具</text>
-  <text x="975" y="910" class="feature-text" text-anchor="middle">检测仪器</text>
-  <text x="975" y="928" class="feature-text" text-anchor="middle">维修工具包</text>
-  <text x="975" y="946" class="feature-text" text-anchor="middle">备件仓库系统</text>
-
-  <rect x="1120" y="865" width="180" height="90" class="module-box"/>
-  <text x="1210" y="890" class="module-title" text-anchor="middle">通信网络</text>
-  <text x="1210" y="910" class="feature-text" text-anchor="middle">WiFi/5G</text>
-  <text x="1210" y="928" class="feature-text" text-anchor="middle">工业以太网</text>
-  <text x="1210" y="946" class="feature-text" text-anchor="middle">蓝牙</text>
-
-  <rect x="1330" y="865" width="200" height="90" class="module-box"/>
-  <text x="1430" y="890" class="module-title" text-anchor="middle">集成系统</text>
-  <text x="1430" y="910" class="feature-text" text-anchor="middle">ERP系统</text>
-  <text x="1430" y="928" class="feature-text" text-anchor="middle">采购系统</text>
-  <text x="1430" y="946" class="feature-text" text-anchor="middle">财务系统</text>
-
-  <!-- 连接线 -->
-  <path d="M 800 290 L 800 320" class="connector"/>
-  <path d="M 800 550 L 800 580" class="connector"/>
-  <path d="M 800 780 L 800 810" class="connector"/>
-
-  <!-- 底部说明 -->
-  <rect x="50" y="1000" width="1500" height="120" fill="#fafafa" stroke="#d9d9d9" stroke-width="2" rx="8"/>
-  <text x="800" y="1030" class="module-title" text-anchor="middle" font-size="18">核心技术特点</text>
+  <!-- ==================== 一级分类 ==================== -->
   
-  <text x="120" y="1055" class="feature-text" text-anchor="start" font-weight="bold">🔹 全生命周期：</text>
-  <text x="280" y="1055" class="feature-text" text-anchor="start">从采购入库到报废全程数字化追溯</text>
+  <!-- 1. 设备档案管理 -->
+  <rect x="30" y="80" width="450" height="45" class="category-bg1" rx="8"/>
+  <text x="255" y="108" class="category-title" text-anchor="middle">设备档案管理</text>
   
-  <text x="120" y="1075" class="feature-text" text-anchor="start" font-weight="bold">🔹 预防性维护：</text>
-  <text x="280" y="1075" class="feature-text" text-anchor="start">计划化点检/保养/检修，降低故障率</text>
+  <!-- 2. 预防性维护 -->
+  <rect x="500" y="80" width="450" height="45" class="category-bg2" rx="8"/>
+  <text x="725" y="108" class="category-title" text-anchor="middle">预防性维护</text>
   
-  <text x="120" y="1095" class="feature-text" text-anchor="start" font-weight="bold">🔹 移动化操作：</text>
-  <text x="280" y="1095" class="feature-text" text-anchor="start">扫码查档案，现场执行任务，即时上传</text>
+  <!-- 3. 维修管理 -->
+  <rect x="970" y="80" width="450" height="45" class="category-bg3" rx="8"/>
+  <text x="1195" y="108" class="category-title" text-anchor="middle">维修管理</text>
+  
+  <!-- 4. 报表分析 -->
+  <rect x="1440" y="80" width="450" height="45" class="category-bg4" rx="8"/>
+  <text x="1665" y="108" class="category-title" text-anchor="middle">报表分析</text>
+  
+  <!-- 5. 基础数据 -->
+  <rect x="1910" y="80" width="450" height="45" class="category-bg5" rx="8"/>
+  <text x="2135" y="108" class="category-title" text-anchor="middle">基础数据</text>
 
-  <text x="800" y="1055" class="feature-text" text-anchor="start" font-weight="bold">🔹 看板式管理：</text>
-  <text x="960" y="1055" class="feature-text" text-anchor="start">Kanban可视化任务流转，进度一目了然</text>
+  <!-- ==================== 设备档案管理 - 二级模块 ==================== -->
   
-  <text x="800" y="1075" class="feature-text" text-anchor="start" font-weight="bold">🔹 智能预警：</text>
-  <text x="960" y="1075" class="feature-text" text-anchor="start">AI风险评估、备件库存预警、逾期提醒</text>
+  <!-- 模块1: 设备信息管理 -->
+  <rect x="40" y="145" width="140" height="355" class="module-box"/>
+  <text x="110" y="165" class="module-title" text-anchor="middle">设备信息管理</text>
   
-  <text x="800" y="1095" class="feature-text" text-anchor="start" font-weight="bold">🔹 闭环管理：</text>
-  <text x="960" y="1095" class="feature-text" text-anchor="start">从计划到执行到验收的完整业务闭环</text>
+  <rect x="45" y="175" width="130" height="28" class="function-box"/>
+  <text x="110" y="192" class="function-item">创建设备档案</text>
+  
+  <rect x="45" y="208" width="130" height="28" class="function-box"/>
+  <text x="110" y="225" class="function-item">设备档案查询</text>
+  
+  <rect x="45" y="241" width="130" height="28" class="function-box"/>
+  <text x="110" y="258" class="function-item">设备档案编辑</text>
+  
+  <rect x="45" y="274" width="130" height="28" class="function-box"/>
+  <text x="110" y="291" class="function-item">设备分类管理</text>
+  
+  <rect x="45" y="307" width="130" height="28" class="function-box"/>
+  <text x="110" y="324" class="function-item">设备状态管理</text>
+  
+  <rect x="45" y="340" width="130" height="28" class="function-box"/>
+  <text x="110" y="357" class="function-item">设备历史记录</text>
+  
+  <rect x="45" y="373" width="130" height="28" class="function-box"/>
+  <text x="110" y="390" class="function-item">设备报废处理</text>
+  
+  <rect x="45" y="406" width="130" height="28" class="function-box"/>
+  <text x="110" y="423" class="function-item">设备转移调拨</text>
+  
+  <rect x="45" y="439" width="130" height="28" class="function-box"/>
+  <text x="110" y="456" class="function-item">设备健康度评估</text>
+
+  <!-- 模块2: 设备看板 -->
+  <rect x="190" y="145" width="140" height="190" class="module-box"/>
+  <text x="260" y="165" class="module-title" text-anchor="middle">设备看板</text>
+  
+  <rect x="195" y="175" width="130" height="28" class="function-box"/>
+  <text x="260" y="192" class="function-item">设备总览看板</text>
+  
+  <rect x="195" y="208" width="130" height="28" class="function-box"/>
+  <text x="260" y="225" class="function-item">设备状态统计</text>
+  
+  <rect x="195" y="241" width="130" height="28" class="function-box"/>
+  <text x="260" y="258" class="function-item">设备在线率监控</text>
+  
+  <rect x="195" y="274" width="130" height="28" class="function-box"/>
+  <text x="260" y="291" class="function-item">待办任务提醒</text>
+  
+  <rect x="195" y="307" width="130" height="28" class="function-box"/>
+  <text x="260" y="324" class="function-item">紧急告警通知</text>
+
+  <!-- 模块3: 合同管理 -->
+  <rect x="340" y="145" width="140" height="190" class="module-box"/>
+  <text x="410" y="165" class="module-title" text-anchor="middle">合同管理</text>
+  
+  <rect x="345" y="175" width="130" height="28" class="function-box"/>
+  <text x="410" y="192" class="function-item">合同查询</text>
+  
+  <rect x="345" y="208" width="130" height="28" class="function-box"/>
+  <text x="410" y="225" class="function-item">合同打印</text>
+  
+  <rect x="345" y="241" width="130" height="28" class="function-box"/>
+  <text x="410" y="258" class="function-item">合同模版管理</text>
+  
+  <rect x="345" y="274" width="130" height="28" class="function-box"/>
+  <text x="410" y="291" class="function-item">二维码生成打印</text>
+  
+  <rect x="345" y="307" width="130" height="28" class="function-box"/>
+  <text x="410" y="324" class="function-item">扫码查询档案</text>
+
+  <!-- ==================== 预防性维护 - 二级模块 ==================== -->
+  
+  <!-- 模块4: 点检管理 -->
+  <rect x="510" y="145" width="140" height="290" class="module-box"/>
+  <text x="580" y="165" class="module-title" text-anchor="middle">点检管理</text>
+  
+  <rect x="515" y="175" width="130" height="28" class="function-box"/>
+  <text x="580" y="192" class="function-item">创建点检计划</text>
+  
+  <rect x="515" y="208" width="130" height="28" class="function-box"/>
+  <text x="580" y="225" class="function-item">点检计划审批</text>
+  
+  <rect x="515" y="241" width="130" height="28" class="function-box"/>
+  <text x="580" y="258" class="function-item">点检任务生成</text>
+  
+  <rect x="515" y="274" width="130" height="28" class="function-box"/>
+  <text x="580" y="291" class="function-item">点检任务分配</text>
+  
+  <rect x="515" y="307" width="130" height="28" class="function-box"/>
+  <text x="580" y="324" class="function-item">点检任务执行</text>
+  
+  <rect x="515" y="340" width="130" height="28" class="function-box"/>
+  <text x="580" y="357" class="function-item">点检任务验收</text>
+  
+  <rect x="515" y="373" width="130" height="28" class="function-box"/>
+  <text x="580" y="390" class="function-item">点检计划调整</text>
+  
+  <rect x="515" y="406" width="130" height="28" class="function-box"/>
+  <text x="580" y="423" class="function-item">历史计划查询</text>
+
+  <!-- 模块5: 保养管理 -->
+  <rect x="660" y="145" width="140" height="290" class="module-box"/>
+  <text x="730" y="165" class="module-title" text-anchor="middle">保养管理</text>
+  
+  <rect x="665" y="175" width="130" height="28" class="function-box"/>
+  <text x="730" y="192" class="function-item">创建保养计划</text>
+  
+  <rect x="665" y="208" width="130" height="28" class="function-box"/>
+  <text x="730" y="225" class="function-item">保养计划审批</text>
+  
+  <rect x="665" y="241" width="130" height="28" class="function-box"/>
+  <text x="730" y="258" class="function-item">保养任务生成</text>
+  
+  <rect x="665" y="274" width="130" height="28" class="function-box"/>
+  <text x="730" y="291" class="function-item">保养任务分配</text>
+  
+  <rect x="665" y="307" width="130" height="28" class="function-box"/>
+  <text x="730" y="324" class="function-item">保养任务执行</text>
+  
+  <rect x="665" y="340" width="130" height="28" class="function-box"/>
+  <text x="730" y="357" class="function-item">保养任务验收</text>
+  
+  <rect x="665" y="373" width="130" height="28" class="function-box"/>
+  <text x="730" y="390" class="function-item">保养效果评估</text>
+  
+  <rect x="665" y="406" width="130" height="28" class="function-box"/>
+  <text x="730" y="423" class="function-item">保养记录查询</text>
+
+  <!-- 模块6: 任务看板 -->
+  <rect x="810" y="145" width="140" height="157" class="module-box"/>
+  <text x="880" y="165" class="module-title" text-anchor="middle">任务看板</text>
+  
+  <rect x="815" y="175" width="130" height="28" class="function-box"/>
+  <text x="880" y="192" class="function-item">任务看板管理</text>
+  
+  <rect x="815" y="208" width="130" height="28" class="function-box"/>
+  <text x="880" y="225" class="function-item">任务提醒通知</text>
+  
+  <rect x="815" y="241" width="130" height="28" class="function-box"/>
+  <text x="880" y="258" class="function-item">移动端任务执行</text>
+  
+  <rect x="815" y="274" width="130" height="28" class="function-box"/>
+  <text x="880" y="291" class="function-item">离线数据同步</text>
+
+  <!-- ==================== 维修管理 - 二级模块 ==================== -->
+  
+  <!-- 模块7: 维修工单 -->
+  <rect x="980" y="145" width="140" height="323" class="module-box"/>
+  <text x="1050" y="165" class="module-title" text-anchor="middle">维修工单</text>
+  
+  <rect x="985" y="175" width="130" height="28" class="function-box"/>
+  <text x="1050" y="192" class="function-item">创建维修工单</text>
+  
+  <rect x="985" y="208" width="130" height="28" class="function-box"/>
+  <text x="1050" y="225" class="function-item">工单审批流程</text>
+  
+  <rect x="985" y="241" width="130" height="28" class="function-box"/>
+  <text x="1050" y="258" class="function-item">工单派工管理</text>
+  
+  <rect x="985" y="274" width="130" height="28" class="function-box"/>
+  <text x="1050" y="291" class="function-item">工单查询跟踪</text>
+  
+  <rect x="985" y="307" width="130" height="28" class="function-box"/>
+  <text x="1050" y="324" class="function-item">工单进度更新</text>
+  
+  <rect x="985" y="340" width="130" height="28" class="function-box"/>
+  <text x="1050" y="357" class="function-item">工单验收关闭</text>
+  
+  <rect x="985" y="373" width="130" height="28" class="function-box"/>
+  <text x="1050" y="390" class="function-item">工单评价反馈</text>
+  
+  <rect x="985" y="406" width="130" height="28" class="function-box"/>
+  <text x="1050" y="423" class="function-item">紧急工单处理</text>
+  
+  <rect x="985" y="439" width="130" height="28" class="function-box"/>
+  <text x="1050" y="456" class="function-item">维修报告生成</text>
+
+  <!-- 模块8: 备件管理 -->
+  <rect x="1130" y="145" width="140" height="290" class="module-box"/>
+  <text x="1200" y="165" class="module-title" text-anchor="middle">备件管理</text>
+  
+  <rect x="1135" y="175" width="130" height="28" class="function-box"/>
+  <text x="1200" y="192" class="function-item">备件入库管理</text>
+  
+  <rect x="1135" y="208" width="130" height="28" class="function-box"/>
+  <text x="1200" y="225" class="function-item">备件出库领用</text>
+  
+  <rect x="1135" y="241" width="130" height="28" class="function-box"/>
+  <text x="1200" y="258" class="function-item">备件库存盘点</text>
+  
+  <rect x="1135" y="274" width="130" height="28" class="function-box"/>
+  <text x="1200" y="291" class="function-item">备件库存预警</text>
+  
+  <rect x="1135" y="307" width="130" height="28" class="function-box"/>
+  <text x="1200" y="324" class="function-item">备件采购申请</text>
+  
+  <rect x="1135" y="340" width="130" height="28" class="function-box"/>
+  <text x="1200" y="357" class="function-item">备件使用记录</text>
+  
+  <rect x="1135" y="373" width="130" height="28" class="function-box"/>
+  <text x="1200" y="390" class="function-item">备件消耗统计</text>
+  
+  <rect x="1135" y="406" width="130" height="28" class="function-box"/>
+  <text x="1200" y="423" class="function-item">备件供应商管理</text>
+
+  <!-- 模块9: 维修资源 -->
+  <rect x="1280" y="145" width="140" height="125" class="module-box"/>
+  <text x="1350" y="165" class="module-title" text-anchor="middle">维修资源</text>
+  
+  <rect x="1285" y="175" width="130" height="28" class="function-box"/>
+  <text x="1350" y="192" class="function-item">维修SOP管理</text>
+  
+  <rect x="1285" y="208" width="130" height="28" class="function-box"/>
+  <text x="1350" y="225" class="function-item">维修费用核算</text>
+  
+  <rect x="1285" y="241" width="130" height="28" class="function-box"/>
+  <text x="1350" y="258" class="function-item">维修人员管理</text>
+
+  <!-- ==================== 报表分析 - 二级模块 ==================== -->
+  
+  <!-- 模块10: 设备报表 -->
+  <rect x="1450" y="145" width="140" height="223" class="module-box"/>
+  <text x="1520" y="165" class="module-title" text-anchor="middle">设备报表</text>
+  
+  <rect x="1455" y="175" width="130" height="28" class="function-box"/>
+  <text x="1520" y="192" class="function-item">设备健康度报表</text>
+  
+  <rect x="1455" y="208" width="130" height="28" class="function-box"/>
+  <text x="1520" y="225" class="function-item">设备在线率报表</text>
+  
+  <rect x="1455" y="241" width="130" height="28" class="function-box"/>
+  <text x="1520" y="258" class="function-item">设备故障统计</text>
+  
+  <rect x="1455" y="274" width="130" height="28" class="function-box"/>
+  <text x="1520" y="291" class="function-item">设备运行分析</text>
+  
+  <rect x="1455" y="307" width="130" height="28" class="function-box"/>
+  <text x="1520" y="324" class="function-item">设备寿命预测</text>
+
+  <!-- 模块11: 维护报表 -->
+  <rect x="1600" y="145" width="140" height="223" class="module-box"/>
+  <text x="1670" y="165" class="module-title" text-anchor="middle">维护报表</text>
+  
+  <rect x="1605" y="175" width="130" height="28" class="function-box"/>
+  <text x="1670" y="192" class="function-item">任务执行报表</text>
+  
+  <rect x="1605" y="208" width="130" height="28" class="function-box"/>
+  <text x="1670" y="225" class="function-item">任务完成率统计</text>
+  
+  <rect x="1605" y="241" width="130" height="28" class="function-box"/>
+  <text x="1670" y="258" class="function-item">维修成本分析</text>
+  
+  <rect x="1605" y="274" width="130" height="28" class="function-box"/>
+  <text x="1670" y="291" class="function-item">备件消耗分析</text>
+  
+  <rect x="1605" y="307" width="130" height="28" class="function-box"/>
+  <text x="1670" y="324" class="function-item">故障模式统计</text>
+
+  <!-- 模块12: 绩效报表 -->
+  <rect x="1750" y="145" width="140" height="223" class="module-box"/>
+  <text x="1820" y="165" class="module-title" text-anchor="middle">绩效报表</text>
+  
+  <rect x="1755" y="175" width="130" height="28" class="function-box"/>
+  <text x="1820" y="192" class="function-item">KPI绩效报表</text>
+  
+  <rect x="1755" y="208" width="130" height="28" class="function-box"/>
+  <text x="1820" y="225" class="function-item">趋势对比分析</text>
+  
+  <rect x="1755" y="241" width="130" height="28" class="function-box"/>
+  <text x="1820" y="258" class="function-item">自定义报表</text>
+  
+  <rect x="1755" y="274" width="130" height="28" class="function-box"/>
+  <text x="1820" y="291" class="function-item">报表定时生成</text>
+  
+  <rect x="1755" y="307" width="130" height="28" class="function-box"/>
+  <text x="1820" y="324" class="function-item">报表导出订阅</text>
+
+  <!-- ==================== 基础数据 - 二级模块 ==================== -->
+  
+  <!-- 模块13: 基础数据 -->
+  <rect x="1920" y="145" width="290" height="355" class="module-box"/>
+  <text x="2065" y="165" class="module-title" text-anchor="middle">基础数据管理</text>
+  
+  <rect x="1925" y="175" width="130" height="28" class="function-box"/>
+  <text x="1990" y="192" class="function-item">设备型号数据</text>
+  
+  <rect x="2075" y="175" width="130" height="28" class="function-box"/>
+  <text x="2140" y="192" class="function-item">供应商数据</text>
+  
+  <rect x="1925" y="208" width="130" height="28" class="function-box"/>
+  <text x="1990" y="225" class="function-item">人员组织数据</text>
+  
+  <rect x="2075" y="208" width="130" height="28" class="function-box"/>
+  <text x="2140" y="225" class="function-item">权限角色管理</text>
+  
+  <rect x="1925" y="241" width="130" height="28" class="function-box"/>
+  <text x="1990" y="258" class="function-item">系统配置管理</text>
+  
+  <rect x="2075" y="241" width="130" height="28" class="function-box"/>
+  <text x="2140" y="258" class="function-item">数据字典管理</text>
+  
+  <rect x="1925" y="274" width="130" height="28" class="function-box"/>
+  <text x="1990" y="291" class="function-item">操作日志管理</text>
+  
+  <rect x="2075" y="274" width="130" height="28" class="function-box"/>
+  <text x="2140" y="291" class="function-item">数据备份恢复</text>
+  
+  <rect x="1925" y="307" width="130" height="28" class="function-box"/>
+  <text x="1990" y="324" class="function-item">数据导入导出</text>
+  
+  <rect x="2075" y="307" width="130" height="28" class="function-box"/>
+  <text x="2140" y="324" class="function-item">接口配置管理</text>
+
+  <!-- ==================== 底部说明 ==================== -->
+  <rect x="40" y="520" width="2320" height="100" fill="#f0f5ff" stroke="#1890ff" stroke-width="2" rx="10"/>
+  <text x="1200" y="555" class="module-title" text-anchor="middle" fill="#1890ff" font-size="16px">三级功能架构说明</text>
+  
+  <text x="70" y="580" class="function-item" text-anchor="start" font-size="12px">• <tspan font-weight="bold">一级分类</tspan>（5个）：设备档案管理、预防性维护、维修管理、报表分析、基础数据 - 顶层业务领域</text>
+  <text x="70" y="597" class="function-item" text-anchor="start" font-size="12px">• <tspan font-weight="bold">二级模块</tspan>（13个）：设备信息管理、点检管理、维修工单、备件管理等 - 具体业务模块</text>
+  <text x="70" y="614" class="function-item" text-anchor="start" font-size="12px">• <tspan font-weight="bold">三级功能点</tspan>（80+个）：创建设备档案、工单派工管理、备件入库管理等 - 最小功能单元（每个代表一个可执行的具体操作）</text>
 
 </svg>

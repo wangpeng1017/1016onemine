@@ -55,6 +55,9 @@ const GlobalLayout: React.FC = () => {
     } else if (path.startsWith('/ioc-operation')) {
       topMenu = 'ioc-center';
       subMenu = 'ioc-operation';
+    } else if (path.startsWith('/safety-management')) {
+      topMenu = 'smart-safety';
+      subMenu = 'safety-management';
     } else if (path === '/home' || path === '/') {
       topMenu = 'home';
       subMenu = 'home';
@@ -100,6 +103,8 @@ const GlobalLayout: React.FC = () => {
       navigate('/env-monitoring/env-home');
     } else if (subMenu === 'smart-prod-ops-sales') {
       navigate('/smart-prod-ops-sales');
+    } else if (subMenu === 'safety-management') {
+      navigate('/safety-management/home');
     } else {
       navigate('/home'); // 默认跳转到首页
     }
@@ -127,6 +132,13 @@ const GlobalLayout: React.FC = () => {
     } else if (currentPath.startsWith('/env-monitoring')) {
       // 在综合环境监测模块下
       navigate(`/env-monitoring/${key}`);
+    } else if (currentPath.startsWith('/safety-management')) {
+      // 在安全管理中心模块下
+      if (key === 'safety-management-home') {
+        navigate('/safety-management/home');
+      } else {
+        navigate(`/safety-management/${key}`);
+      }
     } else {
       // 其他模块或默认
       navigate(`/${key}`);

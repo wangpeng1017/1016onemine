@@ -1,0 +1,397 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2600 1000">
+  <defs>
+    <style>
+      .arch-title { font-size: 28px; font-weight: bold; fill: #fff; }
+      .category-title { font-size: 16px; font-weight: bold; fill: #fff; }
+      .module-title { font-size: 14px; font-weight: bold; fill: #2c5aa0; }
+      .function-item { font-size: 11px; fill: #262626; text-anchor: middle; }
+      .function-box { fill: #ffffff; stroke: #d9d9d9; stroke-width: 1.5; rx: 4; }
+      .module-box { fill: #ecf5ff; stroke: #2c5aa0; stroke-width: 2; rx: 8; }
+      .header-bg { fill: #2c5aa0; }
+      .category-bg1 { fill: #3498db; opacity: 0.9; }
+      .category-bg2 { fill: #e74c3c; opacity: 0.9; }
+      .category-bg3 { fill: #f39c12; opacity: 0.9; }
+      .category-bg4 { fill: #27ae60; opacity: 0.9; }
+      .category-bg5 { fill: #9b59b6; opacity: 0.9; }
+    </style>
+  </defs>
+
+  <!-- 顶部标题栏 -->
+  <rect x="0" y="0" width="2600" height="60" class="header-bg" rx="0"/>
+  <text x="1300" y="40" class="arch-title" text-anchor="middle">智慧矿山 · 安全管理中心 - 三级功能架构</text>
+
+  <!-- ==================== 一级分类 ==================== -->
+  
+  <!-- 1. 标准规范 -->
+  <rect x="30" y="80" width="480" height="45" class="category-bg1" rx="8"/>
+  <text x="270" y="108" class="category-title" text-anchor="middle">标准规范</text>
+  
+  <!-- 2. 安全标准化 -->
+  <rect x="530" y="80" width="480" height="45" class="category-bg2" rx="8"/>
+  <text x="770" y="108" class="category-title" text-anchor="middle">安全标准化</text>
+  
+  <!-- 3. 双重预防 -->
+  <rect x="1030" y="80" width="480" height="45" class="category-bg3" rx="8"/>
+  <text x="1270" y="108" class="category-title" text-anchor="middle">双重预防</text>
+  
+  <!-- 4. 监测监控 -->
+  <rect x="1530" y="80" width="480" height="45" class="category-bg4" rx="8"/>
+  <text x="1770" y="108" class="category-title" text-anchor="middle">监测监控</text>
+  
+  <!-- 5. 应急管理 -->
+  <rect x="2030" y="80" width="540" height="45" class="category-bg5" rx="8"/>
+  <text x="2300" y="108" class="category-title" text-anchor="middle">应急管理</text>
+
+  <!-- ==================== 标准规范 - 二级模块 ==================== -->
+  
+  <!-- 模块1: 规范档案库 -->
+  <rect x="40" y="145" width="220" height="223" class="module-box"/>
+  <text x="150" y="165" class="module-title" text-anchor="middle">规范档案库</text>
+  
+  <rect x="45" y="175" width="100" height="28" class="function-box"/>
+  <text x="95" y="192" class="function-item">类别管理</text>
+  
+  <rect x="155" y="175" width="100" height="28" class="function-box"/>
+  <text x="205" y="192" class="function-item">规范管理</text>
+  
+  <rect x="45" y="208" width="100" height="28" class="function-box"/>
+  <text x="95" y="225" class="function-item">在线预览</text>
+  
+  <rect x="155" y="208" width="100" height="28" class="function-box"/>
+  <text x="205" y="225" class="function-item">文档标记</text>
+  
+  <rect x="45" y="241" width="100" height="28" class="function-box"/>
+  <text x="95" y="258" class="function-item">版本管理</text>
+  
+  <rect x="155" y="241" width="100" height="28" class="function-box"/>
+  <text x="205" y="258" class="function-item">智能搜索</text>
+  
+  <rect x="45" y="274" width="100" height="28" class="function-box"/>
+  <text x="95" y="291" class="function-item">分类统计</text>
+  
+  <rect x="155" y="274" width="100" height="28" class="function-box"/>
+  <text x="205" y="291" class="function-item">下载打印</text>
+  
+  <rect x="45" y="307" width="100" height="28" class="function-box"/>
+  <text x="95" y="324" class="function-item">规范库维护</text>
+  
+  <rect x="155" y="307" width="100" height="28" class="function-box"/>
+  <text x="205" y="324" class="function-item">权限设置</text>
+
+  <!-- 模块2: 档案管理 -->
+  <rect x="280" y="145" width="220" height="223" class="module-box"/>
+  <text x="390" y="165" class="module-title" text-anchor="middle">档案管理</text>
+  
+  <rect x="285" y="175" width="100" height="28" class="function-box"/>
+  <text x="335" y="192" class="function-item">人员档案管理</text>
+  
+  <rect x="395" y="175" width="100" height="28" class="function-box"/>
+  <text x="445" y="192" class="function-item">设备档案管理</text>
+  
+  <rect x="285" y="208" width="100" height="28" class="function-box"/>
+  <text x="335" y="225" class="function-item">制度库管理</text>
+  
+  <rect x="395" y="208" width="100" height="28" class="function-box"/>
+  <text x="445" y="225" class="function-item">预案库管理</text>
+  
+  <rect x="285" y="241" width="100" height="28" class="function-box"/>
+  <text x="335" y="258" class="function-item">培训记录</text>
+  
+  <rect x="395" y="241" width="100" height="28" class="function-box"/>
+  <text x="445" y="258" class="function-item">证书管理</text>
+  
+  <rect x="285" y="274" width="100" height="28" class="function-box"/>
+  <text x="335" y="291" class="function-item">档案查询</text>
+  
+  <rect x="395" y="274" width="100" height="28" class="function-box"/>
+  <text x="445" y="291" class="function-item">数据统计</text>
+
+  <!-- ==================== 安全标准化 - 二级模块 ==================== -->
+  
+  <!-- 模块3: 安全基础 -->
+  <rect x="540" y="145" width="140" height="223" class="module-box"/>
+  <text x="610" y="165" class="module-title" text-anchor="middle">安全基础</text>
+  
+  <rect x="545" y="175" width="130" height="28" class="function-box"/>
+  <text x="610" y="192" class="function-item">安全目标管理</text>
+  
+  <rect x="545" y="208" width="130" height="28" class="function-box"/>
+  <text x="610" y="225" class="function-item">组织保障管理</text>
+  
+  <rect x="545" y="241" width="130" height="28" class="function-box"/>
+  <text x="610" y="258" class="function-item">安全制度管理</text>
+  
+  <rect x="545" y="274" width="130" height="28" class="function-box"/>
+  <text x="610" y="291" class="function-item">安全培训管理</text>
+  
+  <rect x="545" y="307" width="130" height="28" class="function-box"/>
+  <text x="610" y="324" class="function-item">风险管控</text>
+  
+  <rect x="545" y="340" width="130" height="28" class="function-box"/>
+  <text x="610" y="357" class="function-item">持续改进</text>
+
+  <!-- 模块4: 专业管理 -->
+  <rect x="690" y="145" width="140" height="223" class="module-box"/>
+  <text x="760" y="165" class="module-title" text-anchor="middle">专业管理</text>
+  
+  <rect x="695" y="175" width="130" height="28" class="function-box"/>
+  <text x="760" y="192" class="function-item">通风管理</text>
+  
+  <rect x="695" y="208" width="130" height="28" class="function-box"/>
+  <text x="760" y="225" class="function-item">防灭火管理</text>
+  
+  <rect x="695" y="241" width="130" height="28" class="function-box"/>
+  <text x="760" y="258" class="function-item">防排水管理</text>
+  
+  <rect x="695" y="274" width="130" height="28" class="function-box"/>
+  <text x="760" y="291" class="function-item">设备管理</text>
+  
+  <rect x="695" y="307" width="130" height="28" class="function-box"/>
+  <text x="760" y="324" class="function-item">模板签章</text>
+  
+  <rect x="695" y="340" width="130" height="28" class="function-box"/>
+  <text x="760" y="357" class="function-item">专项检查</text>
+
+  <!-- 模块5: 事故管理 -->
+  <rect x="840" y="145" width="140" height="190" class="module-box"/>
+  <text x="910" y="165" class="module-title" text-anchor="middle">事故管理</text>
+  
+  <rect x="845" y="175" width="130" height="28" class="function-box"/>
+  <text x="910" y="192" class="function-item">调度指挥</text>
+  
+  <rect x="845" y="208" width="130" height="28" class="function-box"/>
+  <text x="910" y="225" class="function-item">应急管理</text>
+  
+  <rect x="845" y="241" width="130" height="28" class="function-box"/>
+  <text x="910" y="258" class="function-item">事故管理</text>
+  
+  <rect x="845" y="274" width="130" height="28" class="function-box"/>
+  <text x="910" y="291" class="function-item">职业健康</text>
+  
+  <rect x="845" y="307" width="130" height="28" class="function-box"/>
+  <text x="910" y="324" class="function-item">班组建设</text>
+
+  <!-- ==================== 双重预防 - 二级模块 ==================== -->
+  
+  <!-- 模块6: 风险管控 -->
+  <rect x="1040" y="145" width="220" height="223" class="module-box"/>
+  <text x="1150" y="165" class="module-title" text-anchor="middle">风险分级管控</text>
+  
+  <rect x="1045" y="175" width="100" height="28" class="function-box"/>
+  <text x="1095" y="192" class="function-item">辨识评估</text>
+  
+  <rect x="1155" y="175" width="100" height="28" class="function-box"/>
+  <text x="1205" y="192" class="function-item">风险四色图</text>
+  
+  <rect x="1045" y="208" width="100" height="28" class="function-box"/>
+  <text x="1095" y="225" class="function-item">管控措施</text>
+  
+  <rect x="1155" y="208" width="100" height="28" class="function-box"/>
+  <text x="1205" y="225" class="function-item">风险告知</text>
+  
+  <rect x="1045" y="241" width="100" height="28" class="function-box"/>
+  <text x="1095" y="258" class="function-item">公示报告</text>
+  
+  <rect x="1155" y="241" width="100" height="28" class="function-box"/>
+  <text x="1205" y="258" class="function-item">统计分析</text>
+  
+  <rect x="1045" y="274" width="100" height="28" class="function-box"/>
+  <text x="1095" y="291" class="function-item">风险清单</text>
+  
+  <rect x="1155" y="274" width="100" height="28" class="function-box"/>
+  <text x="1205" y="291" class="function-item">任务管理</text>
+  
+  <rect x="1045" y="307" width="100" height="28" class="function-box"/>
+  <text x="1095" y="324" class="function-item">风险点检查</text>
+  
+  <rect x="1155" y="307" width="100" height="28" class="function-box"/>
+  <text x="1205" y="324" class="function-item">效果评估</text>
+
+  <!-- 模块7: 隐患治理 -->
+  <rect x="1280" y="145" width="220" height="223" class="module-box"/>
+  <text x="1390" y="165" class="module-title" text-anchor="middle">隐患排查治理</text>
+  
+  <rect x="1285" y="175" width="100" height="28" class="function-box"/>
+  <text x="1335" y="192" class="function-item">排查任务</text>
+  
+  <rect x="1395" y="175" width="100" height="28" class="function-box"/>
+  <text x="1445" y="192" class="function-item">隐患登记</text>
+  
+  <rect x="1285" y="208" width="100" height="28" class="function-box"/>
+  <text x="1335" y="225" class="function-item">隐患分析</text>
+  
+  <rect x="1395" y="208" width="100" height="28" class="function-box"/>
+  <text x="1445" y="225" class="function-item">治理方案</text>
+  
+  <rect x="1285" y="241" width="100" height="28" class="function-box"/>
+  <text x="1335" y="258" class="function-item">治理验收</text>
+  
+  <rect x="1395" y="241" width="100" height="28" class="function-box"/>
+  <text x="1445" y="258" class="function-item">闭环销号</text>
+  
+  <rect x="1285" y="274" width="100" height="28" class="function-box"/>
+  <text x="1335" y="291" class="function-item">督办预警</text>
+  
+  <rect x="1395" y="274" width="100" height="28" class="function-box"/>
+  <text x="1445" y="291" class="function-item">统计分析</text>
+  
+  <rect x="1285" y="307" width="100" height="28" class="function-box"/>
+  <text x="1335" y="324" class="function-item">台账管理</text>
+  
+  <rect x="1395" y="307" width="100" height="28" class="function-box"/>
+  <text x="1445" y="324" class="function-item">报表生成</text>
+
+  <!-- ==================== 监测监控 - 二级模块 ==================== -->
+  
+  <!-- 模块8: 数字孪生 -->
+  <rect x="1540" y="145" width="140" height="223" class="module-box"/>
+  <text x="1610" y="165" class="module-title" text-anchor="middle">数字孪生</text>
+  
+  <rect x="1545" y="175" width="130" height="28" class="function-box"/>
+  <text x="1610" y="192" class="function-item">三维实景展示</text>
+  
+  <rect x="1545" y="208" width="130" height="28" class="function-box"/>
+  <text x="1610" y="225" class="function-item">图层控制</text>
+  
+  <rect x="1545" y="241" width="130" height="28" class="function-box"/>
+  <text x="1610" y="258" class="function-item">实时数据标注</text>
+  
+  <rect x="1545" y="274" width="130" height="28" class="function-box"/>
+  <text x="1610" y="291" class="function-item">点位标注</text>
+  
+  <rect x="1545" y="307" width="130" height="28" class="function-box"/>
+  <text x="1610" y="324" class="function-item">报警一致性</text>
+  
+  <rect x="1545" y="340" width="130" height="28" class="function-box"/>
+  <text x="1610" y="357" class="function-item">轨迹回放</text>
+
+  <!-- 模块9: 环境监测 -->
+  <rect x="1690" y="145" width="140" height="223" class="module-box"/>
+  <text x="1760" y="165" class="module-title" text-anchor="middle">环境监测</text>
+  
+  <rect x="1695" y="175" width="130" height="28" class="function-box"/>
+  <text x="1760" y="192" class="function-item">边坡监测</text>
+  
+  <rect x="1695" y="208" width="130" height="28" class="function-box"/>
+  <text x="1760" y="225" class="function-item">防灭火监测</text>
+  
+  <rect x="1695" y="241" width="130" height="28" class="function-box"/>
+  <text x="1760" y="258" class="function-item">气体监测</text>
+  
+  <rect x="1695" y="274" width="130" height="28" class="function-box"/>
+  <text x="1760" y="291" class="function-item">粉尘监测</text>
+  
+  <rect x="1695" y="307" width="130" height="28" class="function-box"/>
+  <text x="1760" y="324" class="function-item">防排水监测</text>
+  
+  <rect x="1695" y="340" width="130" height="28" class="function-box"/>
+  <text x="1760" y="357" class="function-item">阈值预警</text>
+
+  <!-- 模块10: 智能监控 -->
+  <rect x="1840" y="145" width="140" height="190" class="module-box"/>
+  <text x="1910" y="165" class="module-title" text-anchor="middle">智能监控</text>
+  
+  <rect x="1845" y="175" width="130" height="28" class="function-box"/>
+  <text x="1910" y="192" class="function-item">人员定位</text>
+  
+  <rect x="1845" y="208" width="130" height="28" class="function-box"/>
+  <text x="1910" y="225" class="function-item">车辆监控</text>
+  
+  <rect x="1845" y="241" width="130" height="28" class="function-box"/>
+  <text x="1910" y="258" class="function-item">AI视频监控</text>
+  
+  <rect x="1845" y="274" width="130" height="28" class="function-box"/>
+  <text x="1910" y="291" class="function-item">行为识别</text>
+  
+  <rect x="1845" y="307" width="130" height="28" class="function-box"/>
+  <text x="1910" y="324" class="function-item">综合预警</text>
+
+  <!-- ==================== 应急管理 - 二级模块 ==================== -->
+  
+  <!-- 模块11: 应急保障 -->
+  <rect x="2040" y="145" width="140" height="257" class="module-box"/>
+  <text x="2110" y="165" class="module-title" text-anchor="middle">应急保障</text>
+  
+  <rect x="2045" y="175" width="130" height="28" class="function-box"/>
+  <text x="2110" y="192" class="function-item">应急资料库</text>
+  
+  <rect x="2045" y="208" width="130" height="28" class="function-box"/>
+  <text x="2110" y="225" class="function-item">预案管理</text>
+  
+  <rect x="2045" y="241" width="130" height="28" class="function-box"/>
+  <text x="2110" y="258" class="function-item">演练管理</text>
+  
+  <rect x="2045" y="274" width="130" height="28" class="function-box"/>
+  <text x="2110" y="291" class="function-item">物资管理</text>
+  
+  <rect x="2045" y="307" width="130" height="28" class="function-box"/>
+  <text x="2110" y="324" class="function-item">物资检查</text>
+  
+  <rect x="2045" y="340" width="130" height="28" class="function-box"/>
+  <text x="2110" y="357" class="function-item">通讯录管理</text>
+  
+  <rect x="2045" y="373" width="130" height="28" class="function-box"/>
+  <text x="2110" y="390" class="function-item">评估总结</text>
+
+  <!-- 模块12: 应急处置 -->
+  <rect x="2190" y="145" width="140" height="257" class="module-box"/>
+  <text x="2260" y="165" class="module-title" text-anchor="middle">应急处置</text>
+  
+  <rect x="2195" y="175" width="130" height="28" class="function-box"/>
+  <text x="2260" y="192" class="function-item">自动触发</text>
+  
+  <rect x="2195" y="208" width="130" height="28" class="function-box"/>
+  <text x="2260" y="225" class="function-item">任务推送</text>
+  
+  <rect x="2195" y="241" width="130" height="28" class="function-box"/>
+  <text x="2260" y="258" class="function-item">融合通信</text>
+  
+  <rect x="2195" y="274" width="130" height="28" class="function-box"/>
+  <text x="2260" y="291" class="function-item">对讲电话</text>
+  
+  <rect x="2195" y="307" width="130" height="28" class="function-box"/>
+  <text x="2260" y="324" class="function-item">视频会议</text>
+  
+  <rect x="2195" y="340" width="130" height="28" class="function-box"/>
+  <text x="2260" y="357" class="function-item">处置流程</text>
+  
+  <rect x="2195" y="373" width="130" height="28" class="function-box"/>
+  <text x="2260" y="390" class="function-item">应急指挥</text>
+
+  <!-- 模块13: 可视化 -->
+  <rect x="2340" y="145" width="220" height="190" class="module-box"/>
+  <text x="2450" y="165" class="module-title" text-anchor="middle">可视化调度</text>
+  
+  <rect x="2345" y="175" width="100" height="28" class="function-box"/>
+  <text x="2395" y="192" class="function-item">物资点位</text>
+  
+  <rect x="2455" y="175" width="100" height="28" class="function-box"/>
+  <text x="2505" y="192" class="function-item">事故圈选</text>
+  
+  <rect x="2345" y="208" width="100" height="28" class="function-box"/>
+  <text x="2395" y="225" class="function-item">路径规划</text>
+  
+  <rect x="2455" y="208" width="100" height="28" class="function-box"/>
+  <text x="2505" y="225" class="function-item">实时态势</text>
+  
+  <rect x="2345" y="241" width="100" height="28" class="function-box"/>
+  <text x="2395" y="258" class="function-item">资源分布</text>
+  
+  <rect x="2455" y="241" width="100" height="28" class="function-box"/>
+  <text x="2505" y="258" class="function-item">智能调度</text>
+  
+  <rect x="2345" y="274" width="100" height="28" class="function-box"/>
+  <text x="2395" y="291" class="function-item">最近推荐</text>
+  
+  <rect x="2455" y="274" width="100" height="28" class="function-box"/>
+  <text x="2505" y="291" class="function-item">领用记录</text>
+
+  <!-- ==================== 底部说明 ==================== -->
+  <rect x="40" y="420" width="2520" height="100" fill="#ecf5ff" stroke="#2c5aa0" stroke-width="2" rx="10"/>
+  <text x="1300" y="455" class="module-title" text-anchor="middle" fill="#2c5aa0" font-size="16px">三级功能架构说明</text>
+  
+  <text x="70" y="480" class="function-item" text-anchor="start" font-size="12px">• <tspan font-weight="bold">一级分类</tspan>（5个）：标准规范、安全标准化、双重预防、监测监控、应急管理 - 安全管理全领域覆盖</text>
+  <text x="70" y="497" class="function-item" text-anchor="start" font-size="12px">• <tspan font-weight="bold">二级模块</tspan>（13个）：规范档案库、风险分级管控、隐患排查治理、数字孪生、应急保障等 - 具体业务模块</text>
+  <text x="70" y="514" class="function-item" text-anchor="start" font-size="12px">• <tspan font-weight="bold">三级功能点</tspan>（100+个）：类别管理、辨识评估、排查任务、三维实景展示等 - 最小功能单元（每个代表一个可执行的具体操作）</text>
+
+</svg>

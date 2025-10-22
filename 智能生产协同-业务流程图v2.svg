@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200">
+  <defs>
+    <style>
+      .flow-title { font-size: 32px; font-weight: bold; fill: #1890ff; }
+      .phase-title { font-size: 20px; font-weight: bold; fill: #262626; }
+      .process-box { fill: #e6f7ff; stroke: #1890ff; stroke-width: 3; rx: 8; }
+      .decision-box { fill: #fff7e6; stroke: #fa8c16; stroke-width: 3; rx: 8; }
+      .action-box { fill: #f6ffed; stroke: #52c41a; stroke-width: 3; rx: 8; }
+      .alert-box { fill: #fff1f0; stroke: #ff4d4f; stroke-width: 3; rx: 8; }
+      .text { font-size: 15px; fill: #262626; text-anchor: middle; font-weight: bold; }
+      .small-text { font-size: 13px; fill: #595959; text-anchor: middle; }
+      .arrow { stroke: #595959; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .alert-arrow { stroke: #ff4d4f; stroke-width: 3; fill: none; marker-end: url(#arrowhead-red); }
+      .success-arrow { stroke: #52c41a; stroke-width: 3; fill: none; marker-end: url(#arrowhead-green); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#595959" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff4d4f" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#52c41a" />
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="800" y="50" class="flow-title" text-anchor="middle">智慧生产协同 - 核心业务流程图</text>
+  <text x="800" y="80" class="small-text" text-anchor="middle">（聚焦业务操作流程与决策节点）</text>
+
+  <!-- 阶段一：生产计划制定 -->
+  <text x="100" y="130" class="phase-title" text-anchor="start">阶段一：生产计划制定</text>
+  
+  <rect x="80" y="150" width="200" height="80" class="process-box"/>
+  <text x="180" y="180" class="text">年度/月度</text>
+  <text x="180" y="200" class="text">生产计划编制</text>
+  <text x="180" y="220" class="small-text">目标产量、煤质要求</text>
+
+  <path d="M 280 190 L 340 190" class="arrow"/>
+
+  <rect x="340" y="150" width="200" height="80" class="decision-box"/>
+  <text x="440" y="180" class="text">计划审批</text>
+  <text x="440" y="200" class="small-text">技术可行性</text>
+  <text x="440" y="217" class="small-text">资源配置评估</text>
+
+  <path d="M 540 190 L 600 190" class="success-arrow"/>
+  <text x="570" y="180" class="small-text" fill="#52c41a">✓通过</text>
+
+  <rect x="600" y="150" width="200" height="80" class="action-box"/>
+  <text x="700" y="180" class="text">计划发布</text>
+  <text x="700" y="200" class="small-text">下发至各生产单位</text>
+  <text x="700" y="217" class="small-text">进入执行阶段</text>
+
+  <!-- 驳回流程 -->
+  <path d="M 440 230 L 440 280 L 180 280 L 180 230" class="alert-arrow"/>
+  <text x="310" y="270" class="small-text" fill="#ff4d4f">✗驳回修改</text>
+
+  <!-- 阶段二：生产准备与调度 -->
+  <text x="100" y="350" class="phase-title" text-anchor="start">阶段二：生产准备与调度</text>
+
+  <path d="M 700 230 L 700 370" class="arrow"/>
+
+  <rect x="600" y="370" width="200" height="80" class="process-box"/>
+  <text x="700" y="395" class="text">生产资源调度</text>
+  <text x="700" y="415" class="small-text">采剥设备调配</text>
+  <text x="700" y="432" class="small-text">人员班组排班</text>
+
+  <path d="M 600 410 L 380 410" class="arrow"/>
+
+  <rect x="180" y="370" width="200" height="80" class="process-box"/>
+  <text x="280" y="395" class="text">安全条件确认</text>
+  <text x="280" y="415" class="small-text">隐患排查</text>
+  <text x="280" y="432" class="small-text">作业票证办理</text>
+
+  <path d="M 280 450 L 280 510" class="arrow"/>
+
+  <!-- 阶段三：现场作业执行 -->
+  <text x="100" y="490" class="phase-title" text-anchor="start">阶段三：现场作业执行</text>
+
+  <rect x="180" y="510" width="200" height="100" class="action-box"/>
+  <text x="280" y="540" class="text">采剥作业</text>
+  <text x="280" y="560" class="small-text">电铲/挖掘机作业</text>
+  <text x="280" y="577" class="small-text">爆破作业</text>
+  <text x="280" y="594" class="small-text">实时数据上报</text>
+
+  <path d="M 380 560 L 460 560" class="arrow"/>
+
+  <rect x="460" y="510" width="200" height="100" class="action-box"/>
+  <text x="560" y="540" class="text">运输作业</text>
+  <text x="560" y="560" class="small-text">矿卡/皮带运输</text>
+  <text x="560" y="577" class="small-text">无人驾驶调度</text>
+  <text x="560" y="594" class="small-text">路径优化</text>
+
+  <path d="M 660 560 L 740 560" class="arrow"/>
+
+  <rect x="740" y="510" width="200" height="100" class="action-box"/>
+  <text x="840" y="540" class="text">排土作业</text>
+  <text x="840" y="560" class="small-text">排土机作业</text>
+  <text x="840" y="577" class="small-text">土场管理</text>
+  <text x="840" y="594" class="small-text">进度记录</text>
+
+  <!-- 并行监控 -->
+  <rect x="1050" y="370" width="220" height="240" class="alert-box"/>
+  <text x="1160" y="400" class="text">实时监控与预警</text>
+  <text x="1080" y="430" class="small-text" text-anchor="start">• 设备状态监控</text>
+  <text x="1080" y="455" class="small-text" text-anchor="start">• 人员定位追踪</text>
+  <text x="1080" y="480" class="small-text" text-anchor="start">• 环境参数监测</text>
+  <text x="1080" y="505" class="small-text" text-anchor="start">• 产量实时统计</text>
+  <text x="1080" y="530" class="small-text" text-anchor="start">• 异常自动预警</text>
+  <text x="1080" y="555" class="small-text" text-anchor="start">• 调度指令下发</text>
+  <text x="1080" y="580" class="small-text" text-anchor="start">• 应急联动响应</text>
+
+  <path d="M 940 560 L 1050 560" class="alert-arrow"/>
+  <path d="M 700 450 L 700 490 L 1160 490 L 1160 460" class="alert-arrow" stroke-dasharray="5,5"/>
+
+  <!-- 阶段四：异常处置 -->
+  <text x="100" y="660" class="phase-title" text-anchor="start">阶段四：异常处置（触发条件）</text>
+
+  <rect x="1050" y="680" width="220" height="90" class="alert-box"/>
+  <text x="1160" y="710" class="text">异常/事故发生</text>
+  <text x="1160" y="730" class="small-text">设备故障/安全事故</text>
+  <text x="1160" y="747" class="small-text">环境超标/生产异常</text>
+
+  <path d="M 1160 610 L 1160 680" class="alert-arrow"/>
+
+  <path d="M 1050 725 L 940 725" class="alert-arrow"/>
+
+  <rect x="740" y="680" width="200" height="90" class="decision-box"/>
+  <text x="840" y="710" class="text">应急响应</text>
+  <text x="840" y="730" class="small-text">启动应急预案</text>
+  <text x="840" y="747" class="small-text">现场处置指挥</text>
+
+  <path d="M 740 725 L 660 725" class="arrow"/>
+
+  <rect x="460" y="680" width="200" height="90" class="action-box"/>
+  <text x="560" y="710" class="text">问题处理</text>
+  <text x="560" y="730" class="small-text">设备抢修/人员救援</text>
+  <text x="560" y="747" class="small-text">生产调整</text>
+
+  <path d="M 560 770 L 560 820" class="success-arrow"/>
+  <text x="590" y="795" class="small-text" fill="#52c41a">处理完成</text>
+
+  <rect x="460" y="820" width="200" height="70" class="process-box"/>
+  <text x="560" y="845" class="text">恢复生产</text>
+  <text x="560" y="865" class="small-text">验收确认后继续作业</text>
+
+  <!-- 阶段五：班次总结 -->
+  <text x="100" y="800" class="phase-title" text-anchor="start">阶段五：班次/日度总结</text>
+
+  <path d="M 280 610 L 280 820" class="arrow"/>
+
+  <rect x="180" y="820" width="200" height="90" class="process-box"/>
+  <text x="280" y="850" class="text">产量验收</text>
+  <text x="280" y="870" class="small-text">地测部门验收</text>
+  <text x="280" y="887" class="small-text">产量确认登记</text>
+
+  <path d="M 280 910 L 280 960" class="arrow"/>
+
+  <rect x="180" y="960" width="200" height="90" class="process-box"/>
+  <text x="280" y="990" class="text">班次报表</text>
+  <text x="280" y="1010" class="small-text">完成情况统计</text>
+  <text x="280" y="1027" class="small-text">问题记录汇总</text>
+
+  <path d="M 380 1005 L 460 1005" class="arrow"/>
+
+  <!-- 阶段六：分析优化 -->
+  <text x="100" y="940" class="phase-title" text-anchor="start">阶段六：分析与持续优化</text>
+
+  <rect x="460" y="960" width="200" height="90" class="decision-box"/>
+  <text x="560" y="990" class="text">数据分析</text>
+  <text x="560" y="1010" class="small-text">完成率/效率分析</text>
+  <text x="560" y="1027" class="small-text">成本/能耗分析</text>
+
+  <path d="M 660 1005 L 740 1005" class="arrow"/>
+
+  <rect x="740" y="960" width="200" height="90" class="action-box"/>
+  <text x="840" y="990" class="text">优化改进</text>
+  <text x="840" y="1010" class="small-text">调整生产计划</text>
+  <text x="840" y="1027" class="small-text">优化调度策略</text>
+
+  <!-- 反馈闭环 -->
+  <path d="M 840 1050 L 840 1100 L 180 1100 L 180 230" class="success-arrow" stroke-dasharray="8,8"/>
+  <text x="500" y="1090" class="small-text" fill="#52c41a">持续改进闭环</text>
+
+  <!-- 右侧关键节点说明 -->
+  <rect x="1330" y="150" width="240" height="500" fill="#fafafa" stroke="#d9d9d9" stroke-width="2" rx="6"/>
+  <text x="1450" y="180" class="text" text-anchor="middle">关键控制节点</text>
+  
+  <text x="1345" y="215" class="small-text" text-anchor="start" font-weight="bold">1. 计划审批</text>
+  <text x="1360" y="235" class="small-text" text-anchor="start">确保生产计划科学合理</text>
+  
+  <text x="1345" y="270" class="small-text" text-anchor="start" font-weight="bold">2. 安全确认</text>
+  <text x="1360" y="290" class="small-text" text-anchor="start">作业前必须完成安全检查</text>
+  
+  <text x="1345" y="325" class="small-text" text-anchor="start" font-weight="bold">3. 实时监控</text>
+  <text x="1360" y="345" class="small-text" text-anchor="start">全过程动态监控与预警</text>
+  
+  <text x="1345" y="380" class="small-text" text-anchor="start" font-weight="bold">4. 异常响应</text>
+  <text x="1360" y="400" class="small-text" text-anchor="start">快速处置，最小化影响</text>
+  
+  <text x="1345" y="435" class="small-text" text-anchor="start" font-weight="bold">5. 产量验收</text>
+  <text x="1360" y="455" class="small-text" text-anchor="start">确保数据准确可靠</text>
+  
+  <text x="1345" y="490" class="small-text" text-anchor="start" font-weight="bold">6. 分析优化</text>
+  <text x="1360" y="510" class="small-text" text-anchor="start">持续改进生产效率</text>
+
+  <rect x="1345" y="540" width="210" height="95" fill="#fff7e6" stroke="#fa8c16" stroke-width="1" rx="4"/>
+  <text x="1450" y="560" class="small-text" text-anchor="middle" font-weight="bold">业务特点</text>
+  <text x="1360" y="580" class="small-text" text-anchor="start">• 计划驱动，有序执行</text>
+  <text x="1360" y="598" class="small-text" text-anchor="start">• 多工序协同联动</text>
+  <text x="1360" y="616" class="small-text" text-anchor="start">• 安全生产双保障</text>
+
+  <!-- 底部流程说明 -->
+  <rect x="50" y="1130" width="1300" height="50" fill="#e6f7ff" stroke="#1890ff" stroke-width="2" rx="6"/>
+  <text x="700" y="1160" class="text" text-anchor="middle">完整业务闭环：计划编制 → 审批发布 → 资源调度 → 安全确认 → 现场作业 → 实时监控 → 异常处置 → 产量验收 → 数据分析 → 持续优化</text>
+
+</svg>

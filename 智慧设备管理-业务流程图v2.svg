@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1150">
+  <defs>
+    <style>
+      .flow-title { font-size: 32px; font-weight: bold; fill: #722ed1; }
+      .phase-title { font-size: 20px; font-weight: bold; fill: #262626; }
+      .process-box { fill: #f9f0ff; stroke: #722ed1; stroke-width: 3; rx: 8; }
+      .decision-box { fill: #fff7e6; stroke: #fa8c16; stroke-width: 3; rx: 8; }
+      .action-box { fill: #e6f7ff; stroke: #1890ff; stroke-width: 3; rx: 8; }
+      .alert-box { fill: #fff1f0; stroke: #ff4d4f; stroke-width: 3; rx: 8; }
+      .text { font-size: 15px; fill: #262626; text-anchor: middle; font-weight: bold; }
+      .small-text { font-size: 13px; fill: #595959; text-anchor: middle; }
+      .arrow { stroke: #595959; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .alert-arrow { stroke: #ff4d4f; stroke-width: 3; fill: none; marker-end: url(#arrowhead-red); }
+      .success-arrow { stroke: #722ed1; stroke-width: 3; fill: none; marker-end: url(#arrowhead-purple); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#595959" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff4d4f" />
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#722ed1" />
+    </marker>
+  </defs>
+
+  <text x="800" y="50" class="flow-title" text-anchor="middle">智慧设备管理 - 核心业务流程图</text>
+  <text x="800" y="80" class="small-text" text-anchor="middle">（设备全生命周期管理流程）</text>
+
+  <!-- 阶段一：设备建档 -->
+  <text x="100" y="130" class="phase-title" text-anchor="start">阶段一：设备档案建立</text>
+  
+  <rect x="80" y="150" width="200" height="80" class="process-box"/>
+  <text x="180" y="180" class="text">设备入库登记</text>
+  <text x="180" y="200" class="small-text">基本信息录入</text>
+  <text x="180" y="217" class="small-text">生成设备编号</text>
+
+  <path d="M 280 190 L 340 190" class="arrow"/>
+
+  <rect x="340" y="150" width="200" height="80" class="action-box"/>
+  <text x="440" y="180" class="text">生成二维码</text>
+  <text x="440" y="200" class="small-text">打印标签</text>
+  <text x="440" y="217" class="small-text">张贴到设备</text>
+
+  <path d="M 540 190 L 600 190" class="arrow"/>
+
+  <rect x="600" y="150" width="200" height="80" class="process-box"/>
+  <text x="700" y="180" class="text">建立电子档案</text>
+  <text x="700" y="200" class="small-text">说明书/图纸归档</text>
+  <text x="700" y="217" class="small-text">关联备件清单</text>
+
+  <!-- 阶段二：预防性维护计划 -->
+  <text x="100" y="280" class="phase-title" text-anchor="start">阶段二：预防性维护计划制定</text>
+
+  <path d="M 700 230 L 700 300" class="arrow"/>
+
+  <rect x="600" y="300" width="200" height="90" class="process-box"/>
+  <text x="700" y="330" class="text">制定维护计划</text>
+  <text x="700" y="350" class="small-text">点检/保养/检修</text>
+  <text x="700" y="367" class="small-text">设定周期频率</text>
+
+  <path d="M 700 390 L 700 450" class="arrow"/>
+
+  <rect x="600" y="450" width="200" height="80" class="decision-box"/>
+  <text x="700" y="480" class="text">计划审批</text>
+  <text x="700" y="500" class="small-text">技术可行性</text>
+  <text x="700" y="517" class="small-text">资源配置</text>
+
+  <path d="M 600 490 L 440 490" class="alert-arrow"/>
+  <text x="520" y="480" class="small-text" fill="#ff4d4f">✗驳回</text>
+
+  <rect x="240" y="450" width="200" height="80" class="process-box"/>
+  <text x="340" y="480" class="text">计划修改</text>
+  <text x="340" y="500" class="small-text">调整方案</text>
+
+  <path d="M 340 450 L 340 350 L 600 350" class="arrow"/>
+
+  <path d="M 700 530 L 700 590" class="success-arrow"/>
+  <text x="730" y="560" class="small-text" fill="#722ed1">✓通过</text>
+
+  <!-- 阶段三：任务生成与执行 -->
+  <text x="100" y="570" class="phase-title" text-anchor="start">阶段三：任务自动生成与执行</text>
+
+  <rect x="600" y="590" width="200" height="80" class="action-box"/>
+  <text x="700" y="620" class="text">自动生成任务</text>
+  <text x="700" y="640" class="small-text">按周期触发</text>
+  <text x="700" y="657" class="small-text">任务派发</text>
+
+  <path d="M 600 630 L 380 630" class="arrow"/>
+
+  <rect x="180" y="590" width="200" height="80" class="action-box"/>
+  <text x="280" y="620" class="text">执行人接收</text>
+  <text x="280" y="640" class="small-text">移动端/扫码</text>
+  <text x="280" y="657" class="small-text">开始执行</text>
+
+  <path d="M 280 670 L 280 730" class="arrow"/>
+
+  <rect x="180" y="730" width="200" height="100" class="action-box"/>
+  <text x="280" y="760" class="text">现场执行</text>
+  <text x="280" y="780" class="small-text">清单式点检/保养</text>
+  <text x="280" y="797" class="small-text">上传照片/视频</text>
+  <text x="280" y="814" class="small-text">异常情况记录</text>
+
+  <path d="M 280 830 L 280 890" class="arrow"/>
+
+  <rect x="180" y="890" width="200" height="80" class="decision-box"/>
+  <text x="280" y="920" class="text">任务验收</text>
+  <text x="280" y="940" class="small-text">验收人员审核</text>
+
+  <path d="M 180 930 L 100 930 L 100 780 L 180 780" class="alert-arrow"/>
+  <text x="140" y="860" class="small-text" fill="#ff4d4f">✗退回</text>
+
+  <path d="M 280 970 L 280 1020" class="success-arrow"/>
+  <text x="310" y="995" class="small-text" fill="#722ed1">✓通过</text>
+
+  <rect x="180" y="1020" width="200" height="70" class="process-box"/>
+  <text x="280" y="1045" class="text">任务完成</text>
+  <text x="280" y="1065" class="small-text">记录归档到设备档案</text>
+
+  <!-- 并行：故障维修流程 -->
+  <text x="950" y="280" class="phase-title" text-anchor="start">并行：设备故障维修流程</text>
+
+  <rect x="950" y="300" width="200" height="80" class="alert-box"/>
+  <text x="1050" y="330" class="text">设备故障发生</text>
+  <text x="1050" y="350" class="small-text">现场人员发现</text>
+  <text x="1050" y="367" class="small-text">监控系统预警</text>
+
+  <path d="M 1050 380 L 1050 440" class="alert-arrow"/>
+
+  <rect x="950" y="440" width="200" height="80" class="alert-box"/>
+  <text x="1050" y="470" class="text">一键报修</text>
+  <text x="1050" y="490" class="small-text">扫码/选择设备</text>
+  <text x="1050" y="507" class="small-text">上传故障现场</text>
+
+  <path d="M 1050 520 L 1050 580" class="arrow"/>
+
+  <rect x="950" y="580" width="200" height="90" class="decision-box"/>
+  <text x="1050" y="610" class="text">工单派发</text>
+  <text x="1050" y="630" class="small-text">优先级判定</text>
+  <text x="1050" y="647" class="small-text">维修人员指派</text>
+
+  <path d="M 1050 670 L 1050 730" class="arrow"/>
+
+  <rect x="950" y="730" width="200" height="100" class="action-box"/>
+  <text x="1050" y="760" class="text">维修执行</text>
+  <text x="1050" y="780" class="small-text">故障诊断</text>
+  <text x="1050" y="797" class="small-text">更换备件</text>
+  <text x="1050" y="814" class="small-text">记录工时费用</text>
+
+  <path d="M 1050 830 L 1050 890" class="arrow"/>
+
+  <rect x="950" y="890" width="200" height="80" class="decision-box"/>
+  <text x="1050" y="920" class="text">维修验收</text>
+  <text x="1050" y="940" class="small-text">确认故障解决</text>
+
+  <path d="M 950 930 L 870 930 L 870 780 L 950 780" class="alert-arrow"/>
+  <text x="910" y="860" class="small-text" fill="#ff4d4f">✗未解决</text>
+
+  <path d="M 1050 970 L 1050 1020" class="success-arrow"/>
+
+  <rect x="950" y="1020" width="200" height="70" class="process-box"/>
+  <text x="1050" y="1045" class="text">工单关闭</text>
+  <text x="1050" y="1065" class="small-text">生成维修报告</text>
+
+  <!-- 备件管理 -->
+  <rect x="1250" y="580" width="300" height="240" fill="#fffbe6" stroke="#faad14" stroke-width="2" rx="6"/>
+  <text x="1400" y="610" class="text" text-anchor="middle">备件管理支撑</text>
+  
+  <text x="1270" y="645" class="small-text" text-anchor="start" font-weight="bold">维修时领用备件：</text>
+  <text x="1285" y="665" class="small-text" text-anchor="start">1. 查询备件库存</text>
+  <text x="1285" y="685" class="small-text" text-anchor="start">2. 备件出库登记</text>
+  <text x="1285" y="705" class="small-text" text-anchor="start">3. 自动扣减库存</text>
+  
+  <text x="1270" y="740" class="small-text" text-anchor="start" font-weight="bold">智能预警：</text>
+  <text x="1285" y="760" class="small-text" text-anchor="start">• 低库存预警</text>
+  <text x="1285" y="780" class="small-text" text-anchor="start">• 库龄超长预警</text>
+  <text x="1285" y="800" class="small-text" text-anchor="start">• 采购建议生成</text>
+
+  <path d="M 1150 780 L 1250 780" class="arrow" stroke-dasharray="5,5"/>
+
+  <!-- 数据分析与反馈 -->
+  <path d="M 280 1090 L 280 1120 L 1050 1120 L 1050 1090" class="success-arrow" stroke-dasharray="8,8"/>
+  <text x="665" y="1110" class="small-text" fill="#722ed1">持续改进闭环</text>
+
+  <rect x="480" y="1020" width="300" height="70" class="process-box"/>
+  <text x="630" y="1045" class="text">数据统计分析</text>
+  <text x="630" y="1065" class="small-text">完好率/故障率/维修时长/成本</text>
+
+  <path d="M 480 1055 L 380 1055" class="arrow"/>
+  <path d="M 780 1055 L 950 1055" class="arrow"/>
+
+  <path d="M 630 1090 L 630 1130 L 700 1130 L 700 230" class="success-arrow" stroke-dasharray="8,8"/>
+
+  <!-- 右侧说明 -->
+  <rect x="1250" y="150" width="300" height="380" fill="#fafafa" stroke="#d9d9d9" stroke-width="2" rx="6"/>
+  <text x="1400" y="180" class="text" text-anchor="middle">关键管理节点</text>
+  
+  <text x="1270" y="215" class="small-text" text-anchor="start" font-weight="bold">1. 建档立卡</text>
+  <text x="1285" y="235" class="small-text" text-anchor="start">一机一档，二维码标识</text>
+  
+  <text x="1270" y="270" class="small-text" text-anchor="start" font-weight="bold">2. 计划审批</text>
+  <text x="1285" y="290" class="small-text" text-anchor="start">确保维护方案科学合理</text>
+  
+  <text x="1270" y="325" class="small-text" text-anchor="start" font-weight="bold">3. 自动触发</text>
+  <text x="1285" y="345" class="small-text" text-anchor="start">按周期自动生成任务</text>
+  
+  <text x="1270" y="380" class="small-text" text-anchor="start" font-weight="bold">4. 移动执行</text>
+  <text x="1285" y="400" class="small-text" text-anchor="start">扫码查档案，现场操作</text>
+  
+  <text x="1270" y="435" class="small-text" text-anchor="start" font-weight="bold">5. 验收把关</text>
+  <text x="1285" y="455" class="small-text" text-anchor="start">质量不合格可退回重做</text>
+  
+  <text x="1270" y="490" class="small-text" text-anchor="start" font-weight="bold">6. 故障快响</text>
+  <text x="1285" y="510" class="small-text" text-anchor="start">一键报修，快速派工处理</text>
+
+</svg>

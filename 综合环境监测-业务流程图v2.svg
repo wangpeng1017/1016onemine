@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100">
+  <defs>
+    <style>
+      .flow-title { font-size: 32px; font-weight: bold; fill: #52c41a; }
+      .phase-title { font-size: 20px; font-weight: bold; fill: #262626; }
+      .process-box { fill: #f6ffed; stroke: #52c41a; stroke-width: 3; rx: 8; }
+      .decision-box { fill: #fff7e6; stroke: #fa8c16; stroke-width: 3; rx: 8; }
+      .action-box { fill: #e6f7ff; stroke: #1890ff; stroke-width: 3; rx: 8; }
+      .alert-box { fill: #fff1f0; stroke: #ff4d4f; stroke-width: 3; rx: 8; }
+      .text { font-size: 15px; fill: #262626; text-anchor: middle; font-weight: bold; }
+      .small-text { font-size: 13px; fill: #595959; text-anchor: middle; }
+      .arrow { stroke: #595959; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .alert-arrow { stroke: #ff4d4f; stroke-width: 3; fill: none; marker-end: url(#arrowhead-red); }
+      .success-arrow { stroke: #52c41a; stroke-width: 3; fill: none; marker-end: url(#arrowhead-green); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#595959" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff4d4f" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#52c41a" />
+    </marker>
+  </defs>
+
+  <text x="800" y="50" class="flow-title" text-anchor="middle">综合环境监测 - 核心业务流程图</text>
+  <text x="800" y="80" class="small-text" text-anchor="middle">（环保合规与监测预警全流程）</text>
+
+  <!-- 阶段一：环保手续管理 -->
+  <text x="100" y="130" class="phase-title" text-anchor="start">阶段一：环保合规手续管理</text>
+  
+  <rect x="80" y="150" width="200" height="80" class="process-box"/>
+  <text x="180" y="180" class="text">环保批复文件</text>
+  <text x="180" y="200" class="text">归档上传</text>
+  <text x="180" y="220" class="small-text">建立电子档案库</text>
+
+  <path d="M 280 190 L 340 190" class="arrow"/>
+
+  <rect x="340" y="150" width="200" height="80" class="decision-box"/>
+  <text x="440" y="180" class="text">合规性检查</text>
+  <text x="440" y="200" class="small-text">手续完整性审核</text>
+  <text x="440" y="217" class="small-text">有效期监控</text>
+
+  <path d="M 540 190 L 600 190" class="success-arrow"/>
+  <text x="570" y="180" class="small-text" fill="#52c41a">✓合规</text>
+
+  <rect x="600" y="150" width="200" height="80" class="action-box"/>
+  <text x="700" y="180" class="text">在线查阅</text>
+  <text x="700" y="200" class="small-text">随时调阅审查</text>
+  <text x="700" y="217" class="small-text">政府核查准备</text>
+
+  <!-- 预警流程 -->
+  <path d="M 440 230 L 440 280 L 950 280" class="alert-arrow"/>
+  <text x="695" y="270" class="small-text" fill="#ff4d4f">✗即将到期/缺失</text>
+
+  <rect x="950" y="250" width="180" height="60" class="alert-box"/>
+  <text x="1040" y="275" class="text">补办提醒</text>
+  <text x="1040" y="295" class="small-text">通知相关部门办理</text>
+
+  <!-- 阶段二：日常监测 -->
+  <text x="100" y="370" class="phase-title" text-anchor="start">阶段二：环境实时监测</text>
+
+  <path d="M 180 230 L 180 390" class="arrow"/>
+
+  <rect x="80" y="390" width="160" height="90" class="action-box"/>
+  <text x="160" y="420" class="text">水务监测</text>
+  <text x="160" y="440" class="small-text">水泵状态</text>
+  <text x="160" y="457" class="small-text">压力/液位/流量</text>
+
+  <rect x="270" y="390" width="160" height="90" class="action-box"/>
+  <text x="350" y="420" class="text">大气监测</text>
+  <text x="350" y="440" class="small-text">PM2.5/PM10</text>
+  <text x="350" y="457" class="small-text">TSP实时数据</text>
+
+  <rect x="460" y="390" width="160" height="90" class="action-box"/>
+  <text x="540" y="420" class="text">噪声监测</text>
+  <text x="540" y="440" class="small-text">分贝监测</text>
+  <text x="540" y="457" class="small-text">噪声等级判定</text>
+
+  <rect x="650" y="390" width="160" height="90" class="action-box"/>
+  <text x="730" y="420" class="text">第三方检测</text>
+  <text x="730" y="440" class="small-text">定期委托检测</text>
+  <text x="730" y="457" class="small-text">报告录入归档</text>
+
+  <path d="M 160 480 L 160 540" class="arrow"/>
+  <path d="M 350 480 L 350 540" class="arrow"/>
+  <path d="M 540 480 L 540 540" class="arrow"/>
+  <path d="M 730 480 L 730 540" class="arrow"/>
+
+  <!-- 阶段三：数据判断 -->
+  <text x="100" y="520" class="phase-title" text-anchor="start">阶段三：数据分析与预警</text>
+
+  <rect x="250" y="540" width="300" height="80" class="decision-box"/>
+  <text x="400" y="570" class="text">监测数据分析</text>
+  <text x="400" y="590" class="small-text">与阈值对比判断</text>
+  <text x="400" y="607" class="small-text">超标/异常识别</text>
+
+  <!-- 正常流程 -->
+  <path d="M 250 580 L 100 580 L 100 720" class="success-arrow"/>
+  <text x="175" y="570" class="small-text" fill="#52c41a">正常</text>
+
+  <rect x="20" y="720" width="160" height="70" class="process-box"/>
+  <text x="100" y="745" class="text">数据记录</text>
+  <text x="100" y="765" class="small-text">归档存储</text>
+
+  <!-- 超标预警流程 -->
+  <path d="M 550 580 L 700 580 L 700 650" class="alert-arrow"/>
+  <text x="625" y="570" class="small-text" fill="#ff4d4f">超标/异常</text>
+
+  <rect x="600" y="650" width="200" height="90" class="alert-box"/>
+  <text x="700" y="680" class="text">自动预警</text>
+  <text x="700" y="700" class="small-text">多级推送通知</text>
+  <text x="700" y="717" class="small-text">相关人员/部门</text>
+
+  <path d="M 700 740 L 700 800" class="alert-arrow"/>
+
+  <!-- 阶段四：应急处置 -->
+  <text x="100" y="780" class="phase-title" text-anchor="start">阶段四：应急处置与整改</text>
+
+  <rect x="600" y="800" width="200" height="90" class="decision-box"/>
+  <text x="700" y="830" class="text">启动应急预案</text>
+  <text x="700" y="850" class="small-text">环保应急响应</text>
+  <text x="700" y="867" class="small-text">现场处置指挥</text>
+
+  <path d="M 600 845 L 450 845" class="arrow"/>
+
+  <rect x="250" y="800" width="200" height="90" class="action-box"/>
+  <text x="350" y="830" class="text">问题处理</text>
+  <text x="350" y="850" class="small-text">设备抢修</text>
+  <text x="350" y="867" class="small-text">污染控制</text>
+
+  <path d="M 250 845 L 100 845 L 100 890" class="arrow"/>
+
+  <rect x="20" y="890" width="160" height="70" class="process-box"/>
+  <text x="100" y="915" class="text">整改验收</text>
+  <text x="100" y="935" class="small-text">确认恢复正常</text>
+
+  <!-- 阶段五：施工监管 -->
+  <text x="950" y="370" class="phase-title" text-anchor="start">并行：施工单位监管</text>
+
+  <rect x="950" y="390" width="220" height="90" class="process-box"/>
+  <text x="1060" y="420" class="text">作业信息登记</text>
+  <text x="1060" y="440" class="small-text">施工单位/设备</text>
+  <text x="1060" y="457" class="small-text">作业范围记录</text>
+
+  <path d="M 1060 480 L 1060 540" class="arrow"/>
+
+  <rect x="950" y="540" width="220" height="80" class="decision-box"/>
+  <text x="1060" y="570" class="text">环保符合性校验</text>
+  <text x="1060" y="590" class="small-text">设备清单比对</text>
+  <text x="1060" y="607" class="small-text">不合规设备识别</text>
+
+  <path d="M 950 580 L 860 580 L 860 670" class="alert-arrow"/>
+  <text x="905" y="570" class="small-text" fill="#ff4d4f">不合规</text>
+
+  <rect x="860" y="670" width="140" height="70" class="alert-box"/>
+  <text x="930" y="695" class="text">预警提示</text>
+  <text x="930" y="715" class="small-text">禁止使用</text>
+
+  <path d="M 1170 580 L 1280 580" class="success-arrow"/>
+  <text x="1225" y="570" class="small-text" fill="#52c41a">✓合规</text>
+
+  <rect x="1280" y="550" width="140" height="60" class="action-box"/>
+  <text x="1350" y="575" class="text">允许作业</text>
+  <text x="1350" y="595" class="small-text">持续监督</text>
+
+  <!-- 阶段六：绿色矿山建设 -->
+  <text x="100" y="990" class="phase-title" text-anchor="start">阶段六：绿色矿山建设管理</text>
+
+  <rect x="250" y="1010" width="180" height="70" class="process-box"/>
+  <text x="340" y="1035" class="text">指标对标</text>
+  <text x="340" y="1055" class="small-text">自评与差距分析</text>
+
+  <path d="M 430 1045 L 500 1045" class="arrow"/>
+
+  <rect x="500" y="1010" width="180" height="70" class="action-box"/>
+  <text x="590" y="1035" class="text">巩固建设</text>
+  <text x="590" y="1055" class="small-text">方案实施跟踪</text>
+
+  <path d="M 680 1045 L 750 1045" class="arrow"/>
+
+  <rect x="750" y="1010" width="180" height="70" class="decision-box"/>
+  <text x="840" y="1035" class="text">考核评估</text>
+  <text x="840" y="1055" class="small-text">得分统计分析</text>
+
+  <path d="M 930 1045 L 1000 1045" class="arrow"/>
+
+  <rect x="1000" y="1010" width="180" height="70" class="process-box"/>
+  <text x="1090" y="1035" class="text">政府核查</text>
+  <text x="1090" y="1055" class="small-text">记录与整改跟踪</text>
+
+  <!-- 反馈闭环 -->
+  <path d="M 100 790 L 100 1000 L 250 1000 L 250 1010" class="success-arrow" stroke-dasharray="8,8"/>
+  <path d="M 1090 1080 L 1090 1100 L 180 1100 L 180 230" class="success-arrow" stroke-dasharray="8,8"/>
+  <text x="640" y="1090" class="small-text" fill="#52c41a">持续改进闭环</text>
+
+  <!-- 右侧关键节点 -->
+  <rect x="1230" y="720" width="340" height="340" fill="#fafafa" stroke="#d9d9d9" stroke-width="2" rx="6"/>
+  <text x="1400" y="750" class="text" text-anchor="middle">环保管理关键节点</text>
+  
+  <text x="1250" y="785" class="small-text" text-anchor="start" font-weight="bold">1. 合规性保障</text>
+  <text x="1265" y="805" class="small-text" text-anchor="start">环保手续齐全有效，定期核查</text>
+  
+  <text x="1250" y="840" class="small-text" text-anchor="start" font-weight="bold">2. 实时监测</text>
+  <text x="1265" y="860" class="small-text" text-anchor="start">水气声全覆盖，24小时监控</text>
+  
+  <text x="1250" y="895" class="small-text" text-anchor="start" font-weight="bold">3. 超标预警</text>
+  <text x="1265" y="915" class="small-text" text-anchor="start">自动识别异常，及时预警推送</text>
+  
+  <text x="1250" y="950" class="small-text" text-anchor="start" font-weight="bold">4. 应急响应</text>
+  <text x="1265" y="970" class="small-text" text-anchor="start">快速处置，控制环境影响</text>
+  
+  <text x="1250" y="1005" class="small-text" text-anchor="start" font-weight="bold">5. 施工监管</text>
+  <text x="1265" y="1025" class="small-text" text-anchor="start">严格设备环保符合性检查</text>
+
+  <rect x="1250" y="1045" width="300" height="5" fill="#52c41a"/>
+
+</svg>
