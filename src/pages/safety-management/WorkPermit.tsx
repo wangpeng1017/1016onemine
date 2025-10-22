@@ -57,20 +57,30 @@ const WorkPermit: React.FC = () => {
           key: '2',
           label: <span><ToolOutlined /> 模板管理</span>,
           children: (
-            <Card title="票证模板库">
-              <Space direction="vertical" style={{ width: '100%' }}>
-                {['动火作业票', '高空作业票', '受限空间作业票', '临时用电作业票'].map(name => (
-                  <Card key={name} size="small">
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span><FileTextOutlined /> {name}</span>
-                      <Space>
-                        <Button type="link" size="small">查看</Button>
-                        <Button type="link" size="small">编辑</Button>
-                      </Space>
-                    </div>
-                  </Card>
-                ))}
-              </Space>
+            <Card title="票证模板库" extra={<Button type="primary" icon={<PlusOutlined />}>新增模板</Button>}>
+              <Table 
+                size="small"
+                columns={[
+                  { title: '模板名称', dataIndex: 'name', key: 'name' },
+                  { title: '作业类型', dataIndex: 'type', key: 'type', render: (t: string) => <Tag color="blue">{t}</Tag> },
+                  { title: '必填项', dataIndex: 'required', key: 'required' },
+                  { title: '审批流程', dataIndex: 'workflow', key: 'workflow' },
+                  { title: '使用次数', dataIndex: 'usage', key: 'usage' },
+                  { title: '操作', key: 'action', render: () => (
+                    <Space>
+                      <Button type="link" size="small">预览</Button>
+                      <Button type="link" size="small">编辑</Button>
+                      <Button type="link" size="small">下载</Button>
+                    </Space>
+                  )}
+                ]}
+                dataSource={[
+                  { key: '1', name: '动火作业票', type: '动火作业', required: 8, workflow: '三级审批', usage: 156 },
+                  { key: '2', name: '高空作业票', type: '高空作业', required: 7, workflow: '二级审批', usage: 98 },
+                  { key: '3', name: '受限空间作业票', type: '受限空间', required: 9, workflow: '三级审批', usage: 67 },
+                  { key: '4', name: '临时用电作业票', type: '临时用电', required: 6, workflow: '二级审批', usage: 45 }
+                ]}
+              />
             </Card>
           )
         },
