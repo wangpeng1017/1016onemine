@@ -13,9 +13,9 @@ const MiningEngineeringQuality: React.FC = () => {
             此处将集成专业的采矿工程质量管理软件
           </Text>
           <iframe
-            src="https://example.com/mining-engineering-quality-software" // 替换为实际的采矿工程质量管理软件URL
-            title="采矿工程质量管理软件"
-            style={{ width: '100%', height: '100%', border: 'none' }}
+            src="https://placeholder.com/mining-engineering-quality-software" // 占位符URL，实际部署时替换为采矿工程质量管理软件的URL
+            title="采矿工程质量管理软件集成界面"
+            style={{ width: '80%', height: '60%', border: '1px solid #ccc' }}
           />
         </div>
       </Card>

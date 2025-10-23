@@ -28,6 +28,18 @@ const IntelligentDrillingBlasting: React.FC = () => {
         closable
         style={{ marginBottom: 16 }}
       />
+      <Alert
+        message={
+          <Text strong>
+            <WarningOutlined style={{ marginRight: 8 }} />
+            风险预警: B区测孔机器人信号丢失，请检查！
+          </Text>
+        }
+        type="warning"
+        showIcon
+        closable
+        style={{ marginBottom: 16 }}
+      />
 
       <Row gutter={[16, 16]}>
         {/* 设备列表 */}
@@ -63,20 +75,31 @@ const IntelligentDrillingBlasting: React.FC = () => {
         {/* 矿区二维/三维地图占位 */}
         <Col span={12}>
           <Card style={{ height: '600px' }} title="矿区二维/三维地图 (占位)">
-            <div style={{ textAlign: 'center', lineHeight: '550px', fontSize: '24px', color: '#ccc' }}>
-              地图实时监控区域
+            <div style={{ textAlign: 'center', lineHeight: '300px', fontSize: '16px', color: '#ccc' }}>
+              <p>在地图上实时展示智能钻机、测孔机器人、智能装药车等设备的位置和状态。</p>
+              <p>设备图标颜色表示工作状态 (作业中、待机、故障)</p>
             </div>
           </Card>
         </Col>
 
-        {/* 设备详情面板占位 */}
+        {/* 设备详情面板 */}
         <Col span={6}>
-          <Card title="设备详情面板 (占位)">
-            <div style={{ minHeight: '600px', color: '#ccc' }}>
-              <p>基本信息</p>
-              <p>实时运行数据 (仪表盘/数字列表)</p>
-              <p>效率分析 (折线图/柱状图)</p>
-              <p>选中设备后显示详细信息</p>
+          <Card title="设备详情面板">
+            <div style={{ minHeight: '600px' }}>
+              <Title level={4}>智能钻机 A (DZ001)</Title>
+              <Text>型号: XYZ-2000</Text><br />
+              <Text>位置: A区</Text><br />
+              <Text>状态: 作业中</Text><br /><br />
+
+              <Title level={5}>实时运行数据</Title>
+              <Text>钻进深度: 15.8 米</Text><br />
+              <Text>钻进速度: 0.5 米/分钟</Text><br />
+              <Text>发动机转速: 1800 RPM</Text><br />
+              <Text>油压: 220 PSI</Text><br /><br />
+
+              <Title level={5}>效率分析</Title>
+              <Text>近期工作效率: 85%</Text><br />
+              <Text>平均故障间隔时间: 120 小时</Text>
             </div>
           </Card>
         </Col>

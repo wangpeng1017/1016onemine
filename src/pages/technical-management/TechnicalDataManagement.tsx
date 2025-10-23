@@ -33,9 +33,10 @@ const TechnicalDataManagement: React.FC = () => {
   ];
 
   const fileData = [
-    { key: '1', name: '地质模型_2023.gltf', type: 'GLTF', uploadDate: '2023-01-15', version: 'V1.0' },
-    { key: '2', name: '采矿设计图_A区.pdf', type: 'PDF', uploadDate: '2023-03-20', version: 'V2.1' },
-    { key: '3', name: '安全生产规范.docx', type: 'DOCX', uploadDate: '2022-11-01', version: 'V1.0' },
+    { key: '1', name: '地质模型_20241022.gltf', type: 'GLTF', uploadDate: '2024-10-22', version: 'V2.0' },
+    { key: '2', name: '采矿设计图_A矿区_V3.pdf', type: 'PDF', uploadDate: '2024-10-20', version: 'V3.1' },
+    { key: '3', name: '爆破参数设计方案.docx', type: 'DOCX', uploadDate: '2024-10-15', version: 'V1.2' },
+    { key: '4', name: '巷道支护设计图.dwg', type: 'DWG', uploadDate: '2024-10-10', version: 'V1.5' },
   ];
 
   return (

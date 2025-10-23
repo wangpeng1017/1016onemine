@@ -21,12 +21,15 @@ const GeologicalAssurance: React.FC = () => {
               </Link>
             }
           >
-            <div style={{ textAlign: 'center', lineHeight: '550px', fontSize: '24px', color: '#ccc' }}>
-              三维模型渲染区域
+            <div style={{ textAlign: 'center', lineHeight: '550px', fontSize: '24px', color: '#ccc', background: '#f0f2f5' }}>
+              <p>高性能Web 3D引擎渲染矿山开采境界、地形地貌、地质模型</p>
+              <p>支持旋转、平移、缩放等交互</p>
             </div>
-            {/* 时间轴滑块占位 */}
+            {/* 时间轴滑块 */}
             <div style={{ marginTop: 16, textAlign: 'center' }}>
-              <Text>时间轴滑块 (占位)</Text>
+              <Text>动态时空演化: 2020年 - 2024年</Text>
+              <input type="range" min="2020" max="2024" defaultValue="2022" style={{ width: '80%', display: 'block', margin: '8px auto' }} />
+              <Text>当前年份: 2022</Text>
             </div>
           </Card>
         </Col>
@@ -34,20 +37,19 @@ const GeologicalAssurance: React.FC = () => {
         {/* 图层与数据控制区 & 信息展示与分析区 */}
         <Col span={8}>
           <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-            {/* 图层控制占位 */}
-            <Card title="图层控制 (占位)">
-              <div style={{ minHeight: '200px', color: '#ccc' }}>
-                <p>复选框树状列表</p>
-                <p>台阶参数</p>
-                <p>钻孔信息</p>
-                <p>开拓运输系统</p>
-                <p>煤层信息</p>
-                <p>无人机三维模型</p>
+            {/* 图层控制 */}
+            <Card title="图层控制">
+              <div style={{ minHeight: '200px' }}>
+                <label><input type="checkbox" defaultChecked /> 台阶参数 (高度: 10m, 坡面角: 70°)</label><br />
+                <label><input type="checkbox" /> 钻孔信息 (孔号: ZK001, 坐标: 123,456)</label><br />
+                <label><input type="checkbox" defaultChecked /> 开拓运输系统 (运距: 5km, 坡度: 8%)</label><br />
+                <label><input type="checkbox" /> 煤层信息 (厚度: 3m, 倾角: 15°)</label><br />
+                <label><input type="checkbox" /> 无人机三维模型</label>
               </div>
             </Card>
 
-            {/* 储量管理概览占位 */}
-            <Card title="储量管理 - 概览 (占位)">
+            {/* 储量管理概览 */}
+            <Card title="储量管理 - 概览">
               <Row gutter={16}>
                 <Col span={12}>
                   <Statistic title="地质储量" value={1200} suffix="万吨" prefix={<AreaChartOutlined />} />
@@ -64,11 +66,15 @@ const GeologicalAssurance: React.FC = () => {
               </Row>
             </Card>
 
-            {/* 无人机数据占位 */}
-            <Card title="无人机数据 (占位)">
-              <div style={{ minHeight: '150px', color: '#ccc' }}>
-                <p>视频播放器</p>
-                <p>数据列表</p>
+            {/* 无人机数据 */}
+            <Card title="无人机数据">
+              <div style={{ minHeight: '150px' }}>
+                <p><strong>视频播放器:</strong> <a href="https://www.example.com/drone_video.mp4" target="_blank" rel="noopener noreferrer">查看最新航拍视频</a></p>
+                <p><strong>数据列表:</strong></p>
+                <ul>
+                  <li><a href="https://www.example.com/survey_data_2024.zip">2024年测绘数据.zip</a></li>
+                  <li><a href="https://www.example.com/point_cloud_2024.las">2024年点云数据.las</a></li>
+                </ul>
               </div>
             </Card>
           </Space>
