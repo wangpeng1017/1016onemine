@@ -363,7 +363,7 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'ioc-safety': iocSafetyLeftMenu,
   'ioc-operation': iocOperationLeftMenu,
   'home': [], // 首页不显示左侧菜单
-  'smart-mine-design': defaultLeftMenu,
+  'smart-mine-design': technicalManagementLeftMenu, // 智慧矿山设计使用技术管理中心菜单
   'intelligent-ore-blending': [], // 智能配矿管理使用自己的左侧菜单
   'production-execution': productionExecutionLeftMenu,
   'equipment-management': equipmentManagementLeftMenu,
