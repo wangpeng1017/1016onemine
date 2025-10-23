@@ -35,9 +35,13 @@ const GlobalLayout: React.FC = () => {
       topMenu = 'smart-production';
       subMenu = 'equipment-management';
     } else if (path.startsWith('/intelligent-ore-blending')) {
-      topMenu = 'smart-mine-design';
+      topMenu = 'smart-mine-design'; // 智能配矿管理仍属于智慧矿山设计
       subMenu = 'intelligent-ore-blending';
-    } else if (path.startsWith('/env-monitoring')) {
+    } else if (path.startsWith('/technical-management')) { // 添加技术管理中心的路径判断
+      topMenu = 'smart-mine-design';
+      subMenu = 'technical-management'; // 使用技术管理中心作为子菜单key
+    }
+    else if (path.startsWith('/env-monitoring')) {
       topMenu = 'env-monitoring';
       subMenu = 'env-monitoring';
     } else if (path.startsWith('/smart-prod-ops-sales')) {
@@ -99,7 +103,10 @@ const GlobalLayout: React.FC = () => {
       navigate('/equipment-management/equipment-ledger');
     } else if (subMenu === 'intelligent-ore-blending') {
       navigate('/intelligent-ore-blending');
-    } else if (subMenu === 'env-monitoring') {
+    } else if (subMenu === 'technical-management') { // 添加技术管理中心导航
+      navigate('/technical-management/geological-assurance'); // 默认跳转到地质保障
+    }
+    else if (subMenu === 'env-monitoring') {
       navigate('/env-monitoring/env-home');
     } else if (subMenu === 'smart-prod-ops-sales') {
       navigate('/smart-prod-ops-sales');
