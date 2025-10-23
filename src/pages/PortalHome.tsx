@@ -46,7 +46,7 @@ const PortalHome: React.FC = () => {
       icon: <ToolOutlined style={{ fontSize: 32 }} />,
       color: '#52c41a',
       subMenus: [
-        { key: 'intelligent-ore-blending', label: '智能配矿管理' },
+        { key: 'geological-assurance', label: '地质保障' }, // 修改为地质保障
       ],
     },
     {
@@ -95,6 +95,8 @@ const PortalHome: React.FC = () => {
         navigate('/slope-monitoring/slope-device-management');
       } else if (firstSubMenu.key === 'personnel-safety') {
         navigate('/personnel-safety/personnel-tracking');
+      } else if (firstSubMenu.key === 'geological-assurance') { // 添加地质保障导航
+        navigate('/technical-management/geological-assurance');
       } else {
         navigate('/home');
       }
@@ -119,6 +121,8 @@ const PortalHome: React.FC = () => {
       navigate('/equipment-management/equipment-ledger');
     } else if (subMenuKey === 'intelligent-ore-blending') {
       navigate('/intelligent-ore-blending');
+    } else if (subMenuKey === 'geological-assurance') { // 添加地质保障导航
+      navigate('/technical-management/geological-assurance');
     } else {
       navigate('/home');
     }
