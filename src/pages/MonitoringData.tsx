@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AlertTicker from '../components/Monitoring/AlertTicker';
 import {
   Card,
   Tabs,
@@ -208,6 +209,9 @@ const MonitoringData: React.FC = () => {
           </Card>
         </Col>
       </Row>
+
+      {/* 实时告警 */}
+      <AlertTicker />
 
       {/* 查询条件 */}
       <Card style={{ marginBottom: 16 }}>

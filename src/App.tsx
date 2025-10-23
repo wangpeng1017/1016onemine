@@ -77,6 +77,12 @@ import OccupationalHealth from './pages/safety-management/OccupationalHealth';
 import MonitoringControl from './pages/safety-management/MonitoringControl';
 import SafetyCost from './pages/safety-management/SafetyCost';
 import EmergencyManagement from './pages/safety-management/EmergencyManagement';
+import GeologicalAssurance from './pages/technical-management/GeologicalAssurance'; // 导入地质保障组件
+import GeologicalReports from './pages/technical-management/GeologicalReports'; // 导入地质报表组件
+import MiningDesign from './pages/technical-management/MiningDesign'; // 导入采矿设计组件
+import MiningEngineeringQuality from './pages/technical-management/MiningEngineeringQuality'; // 导入采矿工程质量组件
+import IntelligentDrillingBlasting from './pages/technical-management/IntelligentDrillingBlasting'; // 导入智能穿爆组件
+import TechnicalDataManagement from './pages/technical-management/TechnicalDataManagement'; // 导入技术资料管理组件
 import './App.css';
 
 const App: React.FC = () => {
@@ -193,6 +199,11 @@ const App: React.FC = () => {
               <Route path="system-config/project-info" element={<ProjectInfo />} />
               <Route path="system-config/region-management" element={<RegionManagement />} />
               <Route path="system-config/alarm-settings" element={<AlarmSettings />} />
+              <Route path="technical-management/geological-assurance" element={<GeologicalAssurance />} /> {/* 添加地质保障路由 */}
+              <Route path="technical-management/geological-reports" element={<GeologicalReports />} /> {/* 添加地质报表路由 */}
+              <Route path="technical-management/mining-design" element={<MiningDesign />} /> {/* 添加采矿设计路由 */}
+              <Route path="technical-management/mining-engineering-quality" element={<MiningEngineeringQuality />} /> {/* 添加采矿工程质量路由 */}
+              <Route path="technical-management/intelligent-drilling-blasting" element={<IntelligentDrillingBlasting />} /> {/* 添加智能穿爆路由 */}
               </Route>
               
               {/* 设置页面独立路由 */}

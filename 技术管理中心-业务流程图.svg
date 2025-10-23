@@ -1,0 +1,250 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200">
+  <defs>
+    <style>
+      .flow-title { font-size: 32px; font-weight: bold; fill: #1890ff; }
+      .phase-title { font-size: 20px; font-weight: bold; fill: #262626; }
+      .process-box { fill: #e6f7ff; stroke: #1890ff; stroke-width: 3; rx: 8; }
+      .decision-box { fill: #fff7e6; stroke: #fa8c16; stroke-width: 3; rx: 8; }
+      .action-box { fill: #f6ffed; stroke: #52c41a; stroke-width: 3; rx: 8; }
+      .alert-box { fill: #fff1f0; stroke: #ff4d4f; stroke-width: 3; rx: 8; }
+      .text { font-size: 15px; fill: #262626; text-anchor: middle; font-weight: bold; }
+      .small-text { font-size: 13px; fill: #595959; text-anchor: middle; }
+      .arrow { stroke: #595959; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .alert-arrow { stroke: #ff4d4f; stroke-width: 3; fill: none; marker-end: url(#arrowhead-red); }
+      .success-arrow { stroke: #52c41a; stroke-width: 3; fill: none; marker-end: url(#arrowhead-green); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#595959" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff4d4f" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#52c41a" />
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="800" y="50" class="flow-title" text-anchor="middle">技术管理中心 - 核心业务流程图</text>
+  <text x="800" y="80" class="small-text" text-anchor="middle">（地质保障、储量管理、采矿设计、测量管理全流程）</text>
+
+  <!-- 阶段一：地质勘探与建模 -->
+  <text x="100" y="130" class="phase-title" text-anchor="start">阶段一：地质勘探与建模</text>
+  
+  <rect x="80" y="150" width="200" height="80" class="process-box"/>
+  <text x="180" y="180" class="text">地质勘探</text>
+  <text x="180" y="200" class="small-text">钻孔取样</text>
+  <text x="180" y="217" class="small-text">地质测量</text>
+
+  <path d="M 280 190 L 340 190" class="arrow"/>
+
+  <rect x="340" y="150" width="200" height="80" class="action-box"/>
+  <text x="440" y="180" class="text">数据录入</text>
+  <text x="440" y="200" class="small-text">钻孔坐标录入</text>
+  <text x="440" y="217" class="small-text">煤层参数录入</text>
+
+  <path d="M 540 190 L 600 190" class="arrow"/>
+
+  <rect x="600" y="150" width="200" height="80" class="action-box"/>
+  <text x="700" y="180" class="text">三维建模</text>
+  <text x="700" y="200" class="small-text">地质模型构建</text>
+  <text x="700" y="217" class="small-text">煤层分布可视化</text>
+
+  <!-- 阶段二：储量评估与管理 -->
+  <text x="100" y="280" class="phase-title" text-anchor="start">阶段二：储量评估与管理</text>
+
+  <path d="M 700 230 L 700 300" class="arrow"/>
+
+  <rect x="600" y="300" width="200" height="80" class="process-box"/>
+  <text x="700" y="330" class="text">储量计算</text>
+  <text x="700" y="350" class="small-text">地质储量评估</text>
+  <text x="700" y="367" class="small-text">工业储量确认</text>
+
+  <path d="M 600 340 L 380 340" class="arrow"/>
+
+  <rect x="180" y="300" width="200" height="80" class="decision-box"/>
+  <text x="280" y="330" class="text">储量审批</text>
+  <text x="280" y="350" class="small-text">技术评审</text>
+  <text x="280" y="367" class="small-text">合规性确认</text>
+
+  <path d="M 280 380 L 280 440" class="success-arrow"/>
+  <text x="310" y="410" class="small-text" fill="#52c41a">✓审批通过</text>
+
+  <rect x="180" y="440" width="200" height="80" class="action-box"/>
+  <text x="280" y="470" class="text">储量发布</text>
+  <text x="280" y="490" class="small-text">形成储量报告</text>
+  <text x="280" y="507" class="small-text">纳入储量管理</text>
+
+  <!-- 动态更新分支 -->
+  <rect x="600" y="440" width="200" height="80" class="process-box"/>
+  <text x="700" y="470" class="text">动态更新</text>
+  <text x="700" y="490" class="small-text">月度采出量更新</text>
+  <text x="700" y="507" class="small-text">可采储量核算</text>
+
+  <path d="M 600 480 L 380 480" class="arrow"/>
+
+  <!-- 储量统计与展示 -->
+  <rect x="900" y="300" width="220" height="220" class="alert-box"/>
+  <text x="1010" y="330" class="text">储量实时展示</text>
+  <text x="920" y="360" class="small-text" text-anchor="start">• 三维储量可视化</text>
+  <text x="920" y="385" class="small-text" text-anchor="start">• 开拓煤量统计</text>
+  <text x="920" y="410" class="small-text" text-anchor="start">• 备采煤量统计</text>
+  <text x="920" y="435" class="small-text" text-anchor="start">• 控制/推断资源量</text>
+  <text x="920" y="460" class="small-text" text-anchor="start">• 累计采出量展示</text>
+  <text x="920" y="485" class="small-text" text-anchor="start">• 储量报表生成</text>
+
+  <path d="M 800 340 L 900 340" class="arrow"/>
+  <path d="M 800 480 L 870 480 L 870 390 L 900 390" class="arrow" stroke-dasharray="5,5"/>
+
+  <!-- 阶段三：采矿设计 -->
+  <text x="100" y="570" class="phase-title" text-anchor="start">阶段三：采矿设计与工程质量</text>
+
+  <path d="M 280 520 L 280 590" class="arrow"/>
+
+  <rect x="180" y="590" width="200" height="90" class="process-box"/>
+  <text x="280" y="620" class="text">年度设计</text>
+  <text x="280" y="640" class="small-text">开采境界设计</text>
+  <text x="280" y="657" class="small-text">台阶参数设计</text>
+
+  <path d="M 380 635 L 460 635" class="arrow"/>
+
+  <rect x="460" y="590" width="200" height="90" class="action-box"/>
+  <text x="560" y="620" class="text">专业设计系统</text>
+  <text x="560" y="640" class="small-text">调用采矿设计软件</text>
+  <text x="560" y="657" class="small-text">生成设计图纸</text>
+
+  <path d="M 660 635 L 740 635" class="arrow"/>
+
+  <rect x="740" y="590" width="200" height="90" class="decision-box"/>
+  <text x="840" y="620" class="text">设计审核</text>
+  <text x="840" y="640" class="small-text">技术可行性审核</text>
+  <text x="840" y="657" class="small-text">安全性审核</text>
+
+  <path d="M 940 635 L 1020 635" class="success-arrow"/>
+  <text x="980" y="625" class="small-text" fill="#52c41a">✓通过</text>
+
+  <rect x="1020" y="590" width="200" height="90" class="action-box"/>
+  <text x="1120" y="620" class="text">设计发布</text>
+  <text x="1120" y="640" class="small-text">归档设计文件</text>
+  <text x="1120" y="657" class="small-text">指导现场施工</text>
+
+  <!-- 驳回修改 -->
+  <path d="M 840 680 L 840 730 L 560 730 L 560 680" class="alert-arrow"/>
+  <text x="700" y="720" class="small-text" fill="#ff4d4f">✗修改设计</text>
+
+  <!-- 阶段四：智能穿爆管理 -->
+  <text x="100" y="790" class="phase-title" text-anchor="start">阶段四：智能穿爆作业</text>
+
+  <rect x="80" y="810" width="200" height="90" class="process-box"/>
+  <text x="180" y="840" class="text">穿爆设计</text>
+  <text x="180" y="860" class="small-text">爆破孔位设计</text>
+  <text x="180" y="877" class="small-text">装药量设计</text>
+
+  <path d="M 280 855 L 340 855" class="arrow"/>
+
+  <rect x="340" y="810" width="200" height="90" class="action-box"/>
+  <text x="440" y="840" class="text">智能钻机作业</text>
+  <text x="440" y="860" class="small-text">自动钻孔定位</text>
+  <text x="440" y="877" class="small-text">实时监测钻进深度</text>
+
+  <path d="M 540 855 L 600 855" class="arrow"/>
+
+  <rect x="600" y="810" width="200" height="90" class="action-box"/>
+  <text x="700" y="840" class="text">测孔与装药</text>
+  <text x="700" y="860" class="small-text">测孔机器人检测</text>
+  <text x="700" y="877" class="small-text">智能装药车装药</text>
+
+  <path d="M 800 855 L 860 855" class="arrow"/>
+
+  <rect x="860" y="810" width="200" height="90" class="action-box"/>
+  <text x="960" y="840" class="text">爆破实施</text>
+  <text x="960" y="860" class="small-text">安全确认</text>
+  <text x="960" y="877" class="small-text">爆破效果评估</text>
+
+  <!-- 穿爆监控 -->
+  <rect x="1150" y="810" width="220" height="90" class="alert-box"/>
+  <text x="1260" y="840" class="text">实时监控</text>
+  <text x="1170" y="863" class="small-text" text-anchor="start">• 设备位置与状态</text>
+  <text x="1170" y="885" class="small-text" text-anchor="start">• 风险预警响应</text>
+
+  <path d="M 1060 855 L 1150 855" class="alert-arrow"/>
+
+  <!-- 阶段五：三维测绘 -->
+  <text x="100" y="950" class="phase-title" text-anchor="start">阶段五：三维测绘与验收</text>
+
+  <rect x="80" y="970" width="200" height="90" class="process-box"/>
+  <text x="180" y="1000" class="text">无人机测绘</text>
+  <text x="180" y="1020" class="small-text">实景三维采集</text>
+  <text x="180" y="1037" class="small-text">倾斜摄影建模</text>
+
+  <path d="M 280 1015 L 340 1015" class="arrow"/>
+
+  <rect x="340" y="970" width="200" height="90" class="action-box"/>
+  <text x="440" y="1000" class="text">数据处理</text>
+  <text x="440" y="1020" class="small-text">点云数据处理</text>
+  <text x="440" y="1037" class="small-text">三维模型生成</text>
+
+  <path d="M 540 1015 L 600 1015" class="arrow"/>
+
+  <rect x="600" y="970" width="200" height="90" class="action-box"/>
+  <text x="700" y="1000" class="text">产量验收</text>
+  <text x="700" y="1020" class="small-text">体积测算</text>
+  <text x="700" y="1037" class="small-text">收方量确认</text>
+
+  <path d="M 800 1015 L 860 1015" class="arrow"/>
+
+  <rect x="860" y="970" width="200" height="90" class="action-box"/>
+  <text x="960" y="1000" class="text">模型归档</text>
+  <text x="960" y="1020" class="small-text">历史版本管理</text>
+  <text x="960" y="1037" class="small-text">对比分析</text>
+
+  <!-- 阶段六：技术资料管理 -->
+  <text x="100" y="1110" class="phase-title" text-anchor="start">阶段六：技术资料归档与分析</text>
+
+  <rect x="80" y="1130" width="280" height="60" class="process-box"/>
+  <text x="220" y="1155" class="text">资料归档</text>
+  <text x="90" y="1177" class="small-text" text-anchor="start">地质模型、设计图纸、测绘数据统一归档</text>
+
+  <path d="M 360 1160 L 460 1160" class="arrow"/>
+
+  <rect x="460" y="1130" width="280" height="60" class="action-box"/>
+  <text x="600" y="1155" class="text">在线查阅与分析</text>
+  <text x="470" y="1177" class="small-text" text-anchor="start">支持标记、下载、历史回放与对比分析</text>
+
+  <!-- 持续优化闭环 -->
+  <path d="M 1120 1060 L 1120 1110 L 1260 1110 L 1260 350 L 1120 350" class="success-arrow" stroke-dasharray="8,8"/>
+  <text x="1260" y="730" class="small-text" fill="#52c41a" text-anchor="start" transform="rotate(-90 1270 730)">数据反馈与持续优化</text>
+
+  <!-- 右侧关键功能说明 -->
+  <rect x="1330" y="150" width="240" height="600" fill="#fafafa" stroke="#d9d9d9" stroke-width="2" rx="6"/>
+  <text x="1450" y="180" class="text" text-anchor="middle">核心技术能力</text>
+  
+  <text x="1345" y="215" class="small-text" text-anchor="start" font-weight="bold">1. 三维可视化</text>
+  <text x="1360" y="235" class="small-text" text-anchor="start">地质模型实景展示</text>
+  <text x="1360" y="255" class="small-text" text-anchor="start">动态时空演化推演</text>
+  
+  <text x="1345" y="290" class="small-text" text-anchor="start" font-weight="bold">2. 储量动态管理</text>
+  <text x="1360" y="310" class="small-text" text-anchor="start">实时更新可采储量</text>
+  <text x="1360" y="330" class="small-text" text-anchor="start">多维度统计分析</text>
+  
+  <text x="1345" y="365" class="small-text" text-anchor="start" font-weight="bold">3. 设计系统集成</text>
+  <text x="1360" y="385" class="small-text" text-anchor="start">专业软件无缝对接</text>
+  <text x="1360" y="405" class="small-text" text-anchor="start">在线审批与归档</text>
+  
+  <text x="1345" y="440" class="small-text" text-anchor="start" font-weight="bold">4. 智能穿爆</text>
+  <text x="1360" y="460" class="small-text" text-anchor="start">设备实时监控预警</text>
+  <text x="1360" y="480" class="small-text" text-anchor="start">作业数据自动采集</text>
+  
+  <text x="1345" y="515" class="small-text" text-anchor="start" font-weight="bold">5. 三维测绘对接</text>
+  <text x="1360" y="535" class="small-text" text-anchor="start">无人机数据融合</text>
+  <text x="1360" y="555" class="small-text" text-anchor="start">实景模型叠加展示</text>
+  
+  <text x="1345" y="590" class="small-text" text-anchor="start" font-weight="bold">6. 资料全生命周期</text>
+  <text x="1360" y="610" class="small-text" text-anchor="start">归档、检索、标记</text>
+  <text x="1360" y="630" class="small-text" text-anchor="start">历史回放与对比</text>
+  
+  <text x="1345" y="665" class="small-text" text-anchor="start" font-weight="bold">7. 数据联动</text>
+  <text x="1360" y="685" class="small-text" text-anchor="start">与生产系统协同</text>
+  <text x="1360" y="705" class="small-text" text-anchor="start">与安全系统联动</text>
+
+</svg>

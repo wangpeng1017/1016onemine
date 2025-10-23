@@ -325,6 +325,35 @@ export const safetyManagementLeftMenu: LeftMenuItem[] = [
   },
 ];
 
+// 技术管理中心的左侧菜单
+export const technicalManagementLeftMenu: LeftMenuItem[] = [
+  {
+    key: 'geological-assurance',
+    icon: <DatabaseOutlined />,
+    label: '地质保障',
+  },
+  {
+    key: 'mining-design',
+    icon: <FileTextOutlined />,
+    label: '采矿设计',
+  },
+  {
+    key: 'mining-engineering-quality',
+    icon: <FileProtectOutlined />,
+    label: '采矿工程质量',
+  },
+  {
+    key: 'intelligent-drilling-blasting',
+    icon: <RadarChartOutlined />,
+    label: '智能穿爆',
+  },
+  {
+    key: 'technical-data-management',
+    icon: <SolutionOutlined />,
+    label: '技术资料管理',
+  },
+];
+
 // 左侧菜单配置映射
 export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'slope-monitoring': slopeMonitoringLeftMenu,
@@ -359,6 +388,7 @@ export const leftMenuConfigMap: Record<string, LeftMenuItem[]> = {
   'production-sales-center': [], // 产运销管理使用内嵌菜单
   'smart-prod-ops-sales': [], // 产运销管理使用内嵌Tab菜单，不需要左侧菜单
   'safety-management': safetyManagementLeftMenu, // 安全管理中心
+  'technical-management': technicalManagementLeftMenu, // 技术管理中心
 };
 
 export const getLeftMenuForSubMenu = (subMenuKey: string): LeftMenuItem[] => {

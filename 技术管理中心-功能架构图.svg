@@ -1,0 +1,393 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2600 900">
+  <defs>
+    <style>
+      .arch-title { font-size: 28px; font-weight: bold; fill: #fff; }
+      .category-title { font-size: 16px; font-weight: bold; fill: #fff; }
+      .module-title { font-size: 14px; font-weight: bold; fill: #1890ff; }
+      .function-item { font-size: 11px; fill: #262626; text-anchor: middle; }
+      .function-box { fill: #ffffff; stroke: #d9d9d9; stroke-width: 1.5; rx: 4; }
+      .module-box { fill: #e6f7ff; stroke: #1890ff; stroke-width: 2; rx: 8; }
+      .header-bg { fill: #1890ff; }
+      .category-bg1 { fill: #1890ff; opacity: 0.9; }
+      .category-bg2 { fill: #52c41a; opacity: 0.9; }
+      .category-bg3 { fill: #fa8c16; opacity: 0.9; }
+      .category-bg4 { fill: #722ed1; opacity: 0.9; }
+      .category-bg5 { fill: #13c2c2; opacity: 0.9; }
+    </style>
+  </defs>
+
+  <!-- 顶部标题栏 -->
+  <rect x="0" y="0" width="2600" height="60" class="header-bg" rx="0"/>
+  <text x="1300" y="40" class="arch-title" text-anchor="middle">技术管理中心 - 三级功能架构</text>
+
+  <!-- ==================== 一级分类 ==================== -->
+  
+  <!-- 1. 地质保障 -->
+  <rect x="30" y="80" width="500" height="45" class="category-bg1" rx="8"/>
+  <text x="280" y="108" class="category-title" text-anchor="middle">地质保障</text>
+  
+  <!-- 2. 储量管理 -->
+  <rect x="550" y="80" width="500" height="45" class="category-bg2" rx="8"/>
+  <text x="800" y="108" class="category-title" text-anchor="middle">储量管理</text>
+  
+  <!-- 3. 采矿设计 -->
+  <rect x="1070" y="80" width="500" height="45" class="category-bg3" rx="8"/>
+  <text x="1320" y="108" class="category-title" text-anchor="middle">采矿设计</text>
+  
+  <!-- 4. 智能穿爆 -->
+  <rect x="1590" y="80" width="500" height="45" class="category-bg4" rx="8"/>
+  <text x="1840" y="108" class="category-title" text-anchor="middle">智能穿爆</text>
+  
+  <!-- 5. 资料管理 -->
+  <rect x="2110" y="80" width="460" height="45" class="category-bg5" rx="8"/>
+  <text x="2340" y="108" class="category-title" text-anchor="middle">资料管理</text>
+
+  <!-- ==================== 地质保障 - 二级模块 ==================== -->
+  
+  <!-- 模块1: 三维展示 -->
+  <rect x="40" y="145" width="150" height="323" class="module-box"/>
+  <text x="115" y="165" class="module-title" text-anchor="middle">三维展示</text>
+  
+  <rect x="45" y="175" width="140" height="28" class="function-box"/>
+  <text x="115" y="192" class="function-item">三维场景加载</text>
+  
+  <rect x="45" y="208" width="140" height="28" class="function-box"/>
+  <text x="115" y="225" class="function-item">开采境界展示</text>
+  
+  <rect x="45" y="241" width="140" height="28" class="function-box"/>
+  <text x="115" y="258" class="function-item">台阶参数标注</text>
+  
+  <rect x="45" y="274" width="140" height="28" class="function-box"/>
+  <text x="115" y="291" class="function-item">钻孔信息展示</text>
+  
+  <rect x="45" y="307" width="140" height="28" class="function-box"/>
+  <text x="115" y="324" class="function-item">煤层分布云图</text>
+  
+  <rect x="45" y="340" width="140" height="28" class="function-box"/>
+  <text x="115" y="357" class="function-item">道路网络展示</text>
+  
+  <rect x="45" y="373" width="140" height="28" class="function-box"/>
+  <text x="115" y="390" class="function-item">图层控制管理</text>
+  
+  <rect x="45" y="406" width="140" height="28" class="function-box"/>
+  <text x="115" y="423" class="function-item">视角旋转缩放</text>
+  
+  <rect x="45" y="439" width="140" height="28" class="function-box"/>
+  <text x="115" y="456" class="function-item">时间轴演化</text>
+
+  <!-- 模块2: 地质数据 -->
+  <rect x="200" y="145" width="150" height="257" class="module-box"/>
+  <text x="275" y="165" class="module-title" text-anchor="middle">地质数据</text>
+  
+  <rect x="205" y="175" width="140" height="28" class="function-box"/>
+  <text x="275" y="192" class="function-item">钻孔数据管理</text>
+  
+  <rect x="205" y="208" width="140" height="28" class="function-box"/>
+  <text x="275" y="225" class="function-item">煤层参数管理</text>
+  
+  <rect x="205" y="241" width="140" height="28" class="function-box"/>
+  <text x="275" y="258" class="function-item">地质模型管理</text>
+  
+  <rect x="205" y="274" width="140" height="28" class="function-box"/>
+  <text x="275" y="291" class="function-item">模型版本管理</text>
+  
+  <rect x="205" y="307" width="140" height="28" class="function-box"/>
+  <text x="275" y="324" class="function-item">历史模型回放</text>
+  
+  <rect x="205" y="340" width="140" height="28" class="function-box"/>
+  <text x="275" y="357" class="function-item">模型对比分析</text>
+  
+  <rect x="205" y="373" width="140" height="28" class="function-box"/>
+  <text x="275" y="390" class="function-item">数据导入导出</text>
+
+  <!-- 模块3: 三维测绘 -->
+  <rect x="360" y="145" width="150" height="224" class="module-box"/>
+  <text x="435" y="165" class="module-title" text-anchor="middle">三维测绘</text>
+  
+  <rect x="365" y="175" width="140" height="28" class="function-box"/>
+  <text x="435" y="192" class="function-item">无人机数据接入</text>
+  
+  <rect x="365" y="208" width="140" height="28" class="function-box"/>
+  <text x="435" y="225" class="function-item">点云数据处理</text>
+  
+  <rect x="365" y="241" width="140" height="28" class="function-box"/>
+  <text x="435" y="258" class="function-item">实景模型生成</text>
+  
+  <rect x="365" y="274" width="140" height="28" class="function-box"/>
+  <text x="435" y="291" class="function-item">模型叠加展示</text>
+  
+  <rect x="365" y="307" width="140" height="28" class="function-box"/>
+  <text x="435" y="324" class="function-item">测绘视频管理</text>
+  
+  <rect x="365" y="340" width="140" height="28" class="function-box"/>
+  <text x="435" y="357" class="function-item">测绘数据下载</text>
+
+  <!-- ==================== 储量管理 - 二级模块 ==================== -->
+  
+  <!-- 模块4: 储量概览 -->
+  <rect x="560" y="145" width="150" height="257" class="module-box"/>
+  <text x="635" y="165" class="module-title" text-anchor="middle">储量概览</text>
+  
+  <rect x="565" y="175" width="140" height="28" class="function-box"/>
+  <text x="635" y="192" class="function-item">地质储量展示</text>
+  
+  <rect x="565" y="208" width="140" height="28" class="function-box"/>
+  <text x="635" y="225" class="function-item">工业储量展示</text>
+  
+  <rect x="565" y="241" width="140" height="28" class="function-box"/>
+  <text x="635" y="258" class="function-item">可采储量展示</text>
+  
+  <rect x="565" y="274" width="140" height="28" class="function-box"/>
+  <text x="635" y="291" class="function-item">累计采出量</text>
+  
+  <rect x="565" y="307" width="140" height="28" class="function-box"/>
+  <text x="635" y="324" class="function-item">储量KPI指标</text>
+  
+  <rect x="565" y="340" width="140" height="28" class="function-box"/>
+  <text x="635" y="357" class="function-item">三维储量展示</text>
+  
+  <rect x="565" y="373" width="140" height="28" class="function-box"/>
+  <text x="635" y="390" class="function-item">储量趋势分析</text>
+
+  <!-- 模块5: 储量详情 -->
+  <rect x="720" y="145" width="150" height="257" class="module-box"/>
+  <text x="795" y="165" class="module-title" text-anchor="middle">储量详情</text>
+  
+  <rect x="725" y="175" width="140" height="28" class="function-box"/>
+  <text x="795" y="192" class="function-item">开拓煤量管理</text>
+  
+  <rect x="725" y="208" width="140" height="28" class="function-box"/>
+  <text x="795" y="225" class="function-item">备采煤量管理</text>
+  
+  <rect x="725" y="241" width="140" height="28" class="function-box"/>
+  <text x="795" y="258" class="function-item">控制资源量</text>
+  
+  <rect x="725" y="274" width="140" height="28" class="function-box"/>
+  <text x="795" y="291" class="function-item">推断资源量</text>
+  
+  <rect x="725" y="307" width="140" height="28" class="function-box"/>
+  <text x="795" y="324" class="function-item">按月查看</text>
+  
+  <rect x="725" y="340" width="140" height="28" class="function-box"/>
+  <text x="795" y="357" class="function-item">累计查看</text>
+  
+  <rect x="725" y="373" width="140" height="28" class="function-box"/>
+  <text x="795" y="390" class="function-item">储量动态更新</text>
+
+  <!-- 模块6: 统计报表 -->
+  <rect x="880" y="145" width="150" height="190" class="module-box"/>
+  <text x="955" y="165" class="module-title" text-anchor="middle">统计报表</text>
+  
+  <rect x="885" y="175" width="140" height="28" class="function-box"/>
+  <text x="955" y="192" class="function-item">报表类型选择</text>
+  
+  <rect x="885" y="208" width="140" height="28" class="function-box"/>
+  <text x="955" y="225" class="function-item">时间范围筛选</text>
+  
+  <rect x="885" y="241" width="140" height="28" class="function-box"/>
+  <text x="955" y="258" class="function-item">报表自动生成</text>
+  
+  <rect x="885" y="274" width="140" height="28" class="function-box"/>
+  <text x="955" y="291" class="function-item">报表在线查看</text>
+  
+  <rect x="885" y="307" width="140" height="28" class="function-box"/>
+  <text x="955" y="324" class="function-item">Excel导出</text>
+
+  <!-- ==================== 采矿设计 - 二级模块 ==================== -->
+  
+  <!-- 模块7: 设计系统 -->
+  <rect x="1080" y="145" width="150" height="224" class="module-box"/>
+  <text x="1155" y="165" class="module-title" text-anchor="middle">设计系统</text>
+  
+  <rect x="1085" y="175" width="140" height="28" class="function-box"/>
+  <text x="1155" y="192" class="function-item">设计系统入口</text>
+  
+  <rect x="1085" y="208" width="140" height="28" class="function-box"/>
+  <text x="1155" y="225" class="function-item">iframe集成</text>
+  
+  <rect x="1085" y="241" width="140" height="28" class="function-box"/>
+  <text x="1155" y="258" class="function-item">单点登录SSO</text>
+  
+  <rect x="1085" y="274" width="140" height="28" class="function-box"/>
+  <text x="1155" y="291" class="function-item">自适应容器</text>
+  
+  <rect x="1085" y="307" width="140" height="28" class="function-box"/>
+  <text x="1155" y="324" class="function-item">设计软件调用</text>
+  
+  <rect x="1085" y="340" width="140" height="28" class="function-box"/>
+  <text x="1155" y="357" class="function-item">设计文件导出</text>
+
+  <!-- 模块8: 工程质量 -->
+  <rect x="1240" y="145" width="150" height="224" class="module-box"/>
+  <text x="1315" y="165" class="module-title" text-anchor="middle">工程质量</text>
+  
+  <rect x="1245" y="175" width="140" height="28" class="function-box"/>
+  <text x="1315" y="192" class="function-item">质量系统入口</text>
+  
+  <rect x="1245" y="208" width="140" height="28" class="function-box"/>
+  <text x="1315" y="225" class="function-item">iframe集成</text>
+  
+  <rect x="1245" y="241" width="140" height="28" class="function-box"/>
+  <text x="1315" y="258" class="function-item">质量检查管理</text>
+  
+  <rect x="1245" y="274" width="140" height="28" class="function-box"/>
+  <text x="1315" y="291" class="function-item">验收标准管理</text>
+  
+  <rect x="1245" y="307" width="140" height="28" class="function-box"/>
+  <text x="1315" y="324" class="function-item">质量报告生成</text>
+  
+  <rect x="1245" y="340" width="140" height="28" class="function-box"/>
+  <text x="1315" y="357" class="function-item">问题跟踪管理</text>
+
+  <!-- 模块9: 设计审批 -->
+  <rect x="1400" y="145" width="150" height="190" class="module-box"/>
+  <text x="1475" y="165" class="module-title" text-anchor="middle">设计审批</text>
+  
+  <rect x="1405" y="175" width="140" height="28" class="function-box"/>
+  <text x="1475" y="192" class="function-item">设计方案提交</text>
+  
+  <rect x="1405" y="208" width="140" height="28" class="function-box"/>
+  <text x="1475" y="225" class="function-item">在线审批流程</text>
+  
+  <rect x="1405" y="241" width="140" height="28" class="function-box"/>
+  <text x="1475" y="258" class="function-item">审批意见记录</text>
+  
+  <rect x="1405" y="274" width="140" height="28" class="function-box"/>
+  <text x="1475" y="291" class="function-item">设计文件归档</text>
+  
+  <rect x="1405" y="307" width="140" height="28" class="function-box"/>
+  <text x="1475" y="324" class="function-item">历史版本管理</text>
+
+  <!-- ==================== 智能穿爆 - 二级模块 ==================== -->
+  
+  <!-- 模块10: 设备监控 -->
+  <rect x="1600" y="145" width="150" height="290" class="module-box"/>
+  <text x="1675" y="165" class="module-title" text-anchor="middle">设备监控</text>
+  
+  <rect x="1605" y="175" width="140" height="28" class="function-box"/>
+  <text x="1675" y="192" class="function-item">智能钻机定位</text>
+  
+  <rect x="1605" y="208" width="140" height="28" class="function-box"/>
+  <text x="1675" y="225" class="function-item">测孔机器人监控</text>
+  
+  <rect x="1605" y="241" width="140" height="28" class="function-box"/>
+  <text x="1675" y="258" class="function-item">装药车监控</text>
+  
+  <rect x="1605" y="274" width="140" height="28" class="function-box"/>
+  <text x="1675" y="291" class="function-item">设备状态展示</text>
+  
+  <rect x="1605" y="307" width="140" height="28" class="function-box"/>
+  <text x="1675" y="324" class="function-item">地图实时标注</text>
+  
+  <rect x="1605" y="340" width="140" height="28" class="function-box"/>
+  <text x="1675" y="357" class="function-item">作业轨迹查看</text>
+  
+  <rect x="1605" y="373" width="140" height="28" class="function-box"/>
+  <text x="1675" y="390" class="function-item">视频监控融合</text>
+  
+  <rect x="1605" y="406" width="140" height="28" class="function-box"/>
+  <text x="1675" y="423" class="function-item">设备图标闪烁</text>
+
+  <!-- 模块11: 运行数据 -->
+  <rect x="1760" y="145" width="150" height="257" class="module-box"/>
+  <text x="1835" y="165" class="module-title" text-anchor="middle">运行数据</text>
+  
+  <rect x="1765" y="175" width="140" height="28" class="function-box"/>
+  <text x="1835" y="192" class="function-item">钻进深度显示</text>
+  
+  <rect x="1765" y="208" width="140" height="28" class="function-box"/>
+  <text x="1835" y="225" class="function-item">装药量显示</text>
+  
+  <rect x="1765" y="241" width="140" height="28" class="function-box"/>
+  <text x="1835" y="258" class="function-item">发动机转速</text>
+  
+  <rect x="1765" y="274" width="140" height="28" class="function-box"/>
+  <text x="1835" y="291" class="function-item">液压参数</text>
+  
+  <rect x="1765" y="307" width="140" height="28" class="function-box"/>
+  <text x="1835" y="324" class="function-item">效率分析图表</text>
+  
+  <rect x="1765" y="340" width="140" height="28" class="function-box"/>
+  <text x="1835" y="357" class="function-item">性能趋势分析</text>
+  
+  <rect x="1765" y="373" width="140" height="28" class="function-box"/>
+  <text x="1835" y="390" class="function-item">数据实时更新</text>
+
+  <!-- 模块12: 风险预警 -->
+  <rect x="1920" y="145" width="150" height="190" class="module-box"/>
+  <text x="1995" y="165" class="module-title" text-anchor="middle">风险预警</text>
+  
+  <rect x="1925" y="175" width="140" height="28" class="function-box"/>
+  <text x="1995" y="192" class="function-item">告警信息栏</text>
+  
+  <rect x="1925" y="208" width="140" height="28" class="function-box"/>
+  <text x="1995" y="225" class="function-item">边坡失稳预警</text>
+  
+  <rect x="1925" y="241" width="140" height="28" class="function-box"/>
+  <text x="1995" y="258" class="function-item">设备异常预警</text>
+  
+  <rect x="1925" y="274" width="140" height="28" class="function-box"/>
+  <text x="1995" y="291" class="function-item">安全风险提示</text>
+  
+  <rect x="1925" y="307" width="140" height="28" class="function-box"/>
+  <text x="1995" y="324" class="function-item">应急响应联动</text>
+
+  <!-- ==================== 资料管理 - 二级模块 ==================== -->
+  
+  <!-- 模块13: 资料分类 -->
+  <rect x="2120" y="145" width="150" height="290" class="module-box"/>
+  <text x="2195" y="165" class="module-title" text-anchor="middle">资料分类</text>
+  
+  <rect x="2125" y="175" width="140" height="28" class="function-box"/>
+  <text x="2195" y="192" class="function-item">数据库及模型</text>
+  
+  <rect x="2125" y="208" width="140" height="28" class="function-box"/>
+  <text x="2195" y="225" class="function-item">技术文件图纸</text>
+  
+  <rect x="2125" y="241" width="140" height="28" class="function-box"/>
+  <text x="2195" y="258" class="function-item">管理文件</text>
+  
+  <rect x="2125" y="274" width="140" height="28" class="function-box"/>
+  <text x="2195" y="291" class="function-item">分类树展示</text>
+  
+  <rect x="2125" y="307" width="140" height="28" class="function-box"/>
+  <text x="2195" y="324" class="function-item">文件列表查看</text>
+  
+  <rect x="2125" y="340" width="140" height="28" class="function-box"/>
+  <text x="2195" y="357" class="function-item">版本号管理</text>
+  
+  <rect x="2125" y="373" width="140" height="28" class="function-box"/>
+  <text x="2195" y="390" class="function-item">元数据管理</text>
+  
+  <rect x="2125" y="406" width="140" height="28" class="function-box"/>
+  <text x="2195" y="423" class="function-item">三栏式布局</text>
+
+  <!-- 模块14: 资料操作 -->
+  <rect x="2280" y="145" width="150" height="290" class="module-box"/>
+  <text x="2355" y="165" class="module-title" text-anchor="middle">资料操作</text>
+  
+  <rect x="2285" y="175" width="140" height="28" class="function-box"/>
+  <text x="2355" y="192" class="function-item">文件上传</text>
+  
+  <rect x="2285" y="208" width="140" height="28" class="function-box"/>
+  <text x="2355" y="225" class="function-item">文件下载</text>
+  
+  <rect x="2285" y="241" width="140" height="28" class="function-box"/>
+  <text x="2355" y="258" class="function-item">在线预览</text>
+  
+  <rect x="2285" y="274" width="140" height="28" class="function-box"/>
+  <text x="2355" y="291" class="function-item">在线标记</text>
+  
+  <rect x="2285" y="307" width="140" height="28" class="function-box"/>
+  <text x="2355" y="324" class="function-item">关键词检索</text>
+  
+  <rect x="2285" y="340" width="140" height="28" class="function-box"/>
+  <text x="2355" y="357" class="function-item">模型历史对比</text>
+  
+  <rect x="2285" y="373" width="140" height="28" class="function-box"/>
+  <text x="2355" y="390" class="function-item">统计分析</text>
+  
+  <rect x="2285" y="406" width="140" height="28" class="function-box"/>
+  <text x="2355" y="423" class="function-item">数量占比图</text>
+
+</svg>

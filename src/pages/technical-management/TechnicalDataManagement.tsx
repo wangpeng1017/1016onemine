@@ -1,0 +1,101 @@
+import React from 'react';
+import { Layout, Menu, Input, Button, Table, Typography, Card, Row, Col, Select, Space } from 'antd';
+import { UploadOutlined, SearchOutlined, DownloadOutlined, EyeOutlined, HistoryOutlined } from '@ant-design/icons';
+
+const { Header, Content, Sider } = Layout;
+const { Title } = Typography;
+const { Search } = Input;
+const { Option } = Select;
+
+const TechnicalDataManagement: React.FC = () => {
+  const categories = [
+    { key: '1', label: '数据库及模型归档', children: [{ key: '1-1', label: '地质模型' }, { key: '1-2', label: '采矿模型' }] },
+    { key: '2', label: '技术文件及图纸归档', children: [{ key: '2-1', label: '设计图纸' }, { key: '2-2', label: '勘探报告' }] },
+    { key: '3', label: '管理文件归档', children: [{ key: '3-1', label: '规章制度' }, { key: '3-2', label: '安全规范' }] },
+  ];
+
+  const fileColumns = [
+    { title: '文件名', dataIndex: 'name', key: 'name' },
+    { title: '文件类型', dataIndex: 'type', key: 'type' },
+    { title: '上传日期', dataIndex: 'uploadDate', key: 'uploadDate' },
+    { title: '版本号', dataIndex: 'version', key: 'version' },
+    {
+      title: '操作',
+      key: 'action',
+      render: () => (
+        <Space size="middle">
+          <Button icon={<EyeOutlined />} size="small">预览</Button>
+          <Button icon={<DownloadOutlined />} size="small">下载</Button>
+          <Button icon={<HistoryOutlined />} size="small">历史对比</Button>
+        </Space>
+      ),
+    },
+  ];
+
+  const fileData = [
+    { key: '1', name: '地质模型_2023.gltf', type: 'GLTF', uploadDate: '2023-01-15', version: 'V1.0' },
+    { key: '2', name: '采矿设计图_A区.pdf', type: 'PDF', uploadDate: '2023-03-20', version: 'V2.1' },
+    { key: '3', name: '安全生产规范.docx', type: 'DOCX', uploadDate: '2022-11-01', version: 'V1.0' },
+  ];
+
+  return (
+    <Layout style={{ minHeight: '100vh' }}>
+      <Sider width={250} style={{ background: '#fff' }}>
+        <Menu
+          mode="inline"
+          defaultOpenKeys={['1', '2', '3']}
+          style={{ height: '100%', borderRight: 0 }}
+          items={categories.map((cat) => ({
+            key: cat.key,
+            label: cat.label,
+            children: cat.children?.map((subCat) => ({
+              key: subCat.key,
+              label: subCat.label,
+            })),
+          }))}
+        />
+      </Sider>
+      <Layout style={{ padding: '0 24px 24px' }}>
+        <Content
+          style={{
+            background: '#fff',
+            padding: 24,
+            margin: 0,
+            minHeight: 280,
+          }}
+        >
+          <Title level={2}>技术资料管理</Title>
+          <Row gutter={[16, 16]}>
+            <Col span={16}>
+              <Card title="文件列表">
+                <div style={{ marginBottom: 16 }}>
+                  <Button type="primary" icon={<UploadOutlined />} style={{ marginRight: 8 }}>上传</Button>
+                  <Search placeholder="按名称搜索" style={{ width: 200 }} />
+                </div>
+                <Table columns={fileColumns} dataSource={fileData} pagination={false} />
+              </Card>
+            </Col>
+            <Col span={8}>
+              <Card title="预览与详情区 (占位)">
+                <div style={{ minHeight: '300px', color: '#ccc', textAlign: 'center', lineHeight: '300px' }}>
+                  文件预览和元数据
+                </div>
+              </Card>
+              <Card title="统计分析 (占位)" style={{ marginTop: 16 }}>
+                <div style={{ minHeight: '200px', color: '#ccc', textAlign: 'center', lineHeight: '200px' }}>
+                  饼图、柱状图等统计信息
+                </div>
+              </Card>
+              {/* 模型历史回放与对比模态框占位 */}
+              <Card title="模型历史回放与对比 (占位)" style={{ marginTop: 16 }}>
+                <Button icon={<HistoryOutlined />}>历史对比模态框</Button>
+              </Card>
+            </Col>
+          </Row>
+        </Content>
+      </Layout>
+    </Layout>
+  );
+};
+
+export default TechnicalDataManagement;
