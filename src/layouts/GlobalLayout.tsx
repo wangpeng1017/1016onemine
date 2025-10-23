@@ -136,7 +136,11 @@ const GlobalLayout: React.FC = () => {
     } else if (currentPath.startsWith('/intelligent-ore-blending')) {
       // 在智能配矿管理模块下，保持在同一页面内切换左侧菜单
       return; // IntelligentOreBlendingLayout 组件内部处理菜单切换
-    } else if (currentPath.startsWith('/env-monitoring')) {
+    } else if (currentPath.startsWith('/technical-management')) {
+      // 在技术管理中心模块下
+      navigate(`/technical-management/${key}`);
+    }
+    else if (currentPath.startsWith('/env-monitoring')) {
       // 在综合环境监测模块下
       navigate(`/env-monitoring/${key}`);
     } else if (currentPath.startsWith('/safety-management')) {
