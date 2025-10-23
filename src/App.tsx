@@ -199,11 +199,15 @@ const App: React.FC = () => {
               <Route path="system-config/project-info" element={<ProjectInfo />} />
               <Route path="system-config/region-management" element={<RegionManagement />} />
               <Route path="system-config/alarm-settings" element={<AlarmSettings />} />
-              <Route path="technical-management/geological-assurance" element={<GeologicalAssurance />} /> {/* 添加地质保障路由 */}
-              <Route path="technical-management/geological-reports" element={<GeologicalReports />} /> {/* 添加地质报表路由 */}
-              <Route path="technical-management/mining-design" element={<MiningDesign />} /> {/* 添加采矿设计路由 */}
-              <Route path="technical-management/mining-engineering-quality" element={<MiningEngineeringQuality />} /> {/* 添加采矿工程质量路由 */}
-              <Route path="technical-management/intelligent-drilling-blasting" element={<IntelligentDrillingBlasting />} /> {/* 添加智能穿爆路由 */}
+              {/* 技术管理中心路由 */}
+              <Route path="technical-management">
+                <Route path="geological-assurance" element={<GeologicalAssurance />} /> {/* 添加地质保障路由 */}
+                <Route path="geological-reports" element={<GeologicalReports />} /> {/* 添加地质报表路由 */}
+                <Route path="mining-design" element={<MiningDesign />} /> {/* 添加采矿设计路由 */}
+                <Route path="mining-engineering-quality" element={<MiningEngineeringQuality />} /> {/* 添加采矿工程质量路由 */}
+                <Route path="intelligent-drilling-blasting" element={<IntelligentDrillingBlasting />} /> {/* 添加智能穿爆路由 */}
+                <Route path="technical-data-management" element={<TechnicalDataManagement />} /> {/* 添加技术资料管理路由 */}
+              </Route>
               </Route>
               
               {/* 设置页面独立路由 */}
