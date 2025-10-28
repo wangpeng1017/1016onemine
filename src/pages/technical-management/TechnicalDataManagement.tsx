@@ -119,8 +119,6 @@ const TechnicalDataManagement: React.FC = () => {
                 <Text>模型历史回放与对比功能正在开发中，敬请期待！</Text>
               </Card>
             </Col>
-            </Col>
-          </Row>
           </Row>
         </Content>
       </Layout>
