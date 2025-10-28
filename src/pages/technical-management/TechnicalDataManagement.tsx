@@ -3,7 +3,7 @@ import { Layout, Menu, Input, Button, Table, Typography, Card, Row, Col, Select,
 import { UploadOutlined, SearchOutlined, DownloadOutlined, EyeOutlined, HistoryOutlined } from '@ant-design/icons';
 
 const { Header, Content, Sider } = Layout;
-const { Title } = Typography;
+const { Title, Text } = Typography;
 const { Search } = Input;
 const { Option } = Select;
 
