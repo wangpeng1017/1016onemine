@@ -164,7 +164,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ onMenuSelect, onSettingsC
             fontWeight: 700,
             color: '#1890ff'
           }}>
-            智慧矿山平台
+            智慧矿山综管平台
           </div>
           <div>{renderTopMenu()}</div>
         </div>

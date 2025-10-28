@@ -1,7 +1,7 @@
 {
   "name": "smart-mining-platform",
   "version": "1.0.0",
-  "description": "智慧矿山平台",
+  "description": "智慧矿山综管平台",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.2.6",

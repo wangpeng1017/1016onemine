@@ -227,7 +227,7 @@ const MainLayout: React.FC = () => {
             borderBottom: '1px solid #f0f0f0',
           }}
         >
-          {collapsed ? '智慧矿山' : '智慧矿山平台'}
+          {collapsed ? '智慧矿山' : '智慧矿山综管平台'}
         </div>
         <Menu
           theme="light"
